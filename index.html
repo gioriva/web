@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giorgio R.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0E0E0E;
+  --surface:#151515;
+  --line:rgba(255,255,255,0.07);
+  --text:#E8E2D9;
+  --muted:#6B6560;
+  --accent:#C8A97E;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Montserrat',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;min-height:100vh;overflow-x:hidden}
+
+
+
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 3.5rem;gap:4rem}
+.hero-left{display:flex;flex-direction:column;gap:2rem}
+.hero-eyebrow{font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted)}
+.hero-name{font-family:var(--serif);font-size:clamp(3.5rem,7vw,7rem);font-weight:300;line-height:0.95;color:var(--text)}
+.hero-name em{font-style:italic;color:var(--accent)}
+.hero-rule{width:40px;height:1px;background:var(--accent);opacity:0.6}
+.hero-tagline{font-family:var(--serif);font-size:clamp(1rem,1.5vw,1.25rem);font-style:italic;font-weight:300;color:var(--muted);line-height:1.7;max-width:380px}
+.hero-cta{display:inline-flex;align-items:center;gap:1rem;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);text-decoration:none;transition:gap .3s}
+.hero-cta:hover{gap:1.6rem}
+.hero-right{display:flex;align-items:center;justify-content:center}
+#globe-wrap{position:relative;width:min(44vw,520px);height:min(44vw,520px)}
+#globe-wrap svg{width:100%;height:100%}
+
+
+
+footer{border-top:1px solid var(--line);padding:2rem 3.5rem;display:flex;justify-content:flex-end;align-items:center}
+.footer-links{display:flex;gap:2.5rem;list-style:none}
+.footer-links a{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--accent)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{animation:fadeUp .6s ease both .1s}
+.hero-name{animation:fadeUp .7s ease both .25s}
+.hero-rule{animation:fadeUp .5s ease both .4s}
+.hero-tagline{animation:fadeUp .7s ease both .5s}
+.hero-cta{animation:fadeUp .6s ease both .65s}
+.hero-right{animation:fadeUp 1s ease both .3s}
+
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;padding:2rem 1.5rem;gap:2rem}
+  #globe-wrap{width:70vw;height:70vw}
+  footer{padding:1.5rem;flex-direction:column;gap:1rem;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-left">
+    <h1 class="hero-name">Giorgio<br><em>Riva</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-tagline">Freedom is a state of mind.</p>
+  </div>
+  <div class="hero-right">
+    <div id="globe-wrap">
+      <svg id="globe" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" fill="none"></svg>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <ul class="footer-links">
+    <li><a href="https://www.instagram.com/gioriva" target="_blank">Instagram</a></li>
+    <li><a href="https://www.linkedin.com/in/giorgioriva/" target="_blank">LinkedIn</a></li>
+  </ul>
+</footer>
+
+<script>
+const svg = document.getElementById('globe');
+const cx = 250, cy = 250, R = 210;
+
+// Radial gradient background for sphere
+const defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
+defs.innerHTML = `
+  <radialGradient id="sg" cx="38%" cy="35%" r="65%">
+    <stop offset="0%" stop-color="#2a2520"/>
+    <stop offset="100%" stop-color="#0a0a0a"/>
+  </radialGradient>
+  <clipPath id="gc"><circle cx="250" cy="250" r="210"/></clipPath>
+`;
+svg.appendChild(defs);
+
+const sphere = document.createElementNS('http://www.w3.org/2000/svg','circle');
+sphere.setAttribute('cx',cx);sphere.setAttribute('cy',cy);sphere.setAttribute('r',R);
+sphere.setAttribute('fill','url(#sg)');svg.appendChild(sphere);
+
+const gratG = document.createElementNS('http://www.w3.org/2000/svg','g');
+gratG.setAttribute('clip-path','url(#gc)');svg.appendChild(gratG);
+const dotsG = document.createElementNS('http://www.w3.org/2000/svg','g');
+dotsG.setAttribute('clip-path','url(#gc)');svg.appendChild(dotsG);
+
+const ring = document.createElementNS('http://www.w3.org/2000/svg','circle');
+ring.setAttribute('cx',cx);ring.setAttribute('cy',cy);ring.setAttribute('r',R);
+ring.setAttribute('stroke','rgba(200,169,126,0.3)');ring.setAttribute('stroke-width','1');
+ring.setAttribute('fill','none');svg.appendChild(ring);
+
+// Tick marks
+const ticks = document.createElementNS('http://www.w3.org/2000/svg','g');
+for(let a=0;a<360;a+=10){
+  const rad=a*Math.PI/180,r1=R,r2=R+(a%30===0?9:5);
+  const x1=cx+r1*Math.cos(rad),y1=cy+r1*Math.sin(rad);
+  const x2=cx+r2*Math.cos(rad),y2=cy+r2*Math.sin(rad);
+  const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+  l.setAttribute('x1',x1.toFixed(1));l.setAttribute('y1',y1.toFixed(1));
+  l.setAttribute('x2',x2.toFixed(1));l.setAttribute('y2',y2.toFixed(1));
+  l.setAttribute('stroke',a%30===0?'rgba(200,169,126,0.5)':'rgba(255,255,255,0.12)');
+  l.setAttribute('stroke-width','1');ticks.appendChild(l);
+}
+svg.appendChild(ticks);
+
+const cities=[
+  {name:'Como',lat:45.81,lon:9.09},
+  {name:'Tokyo',lat:35.7,lon:139.7},
+  {name:'Osaka',lat:34.69,lon:135.50},
+  {name:'Sanur',lat:-8.7,lon:115.26},
+  {name:'Hong Kong',lat:22.32,lon:114.17},
+  {name:'Singapore',lat:1.35,lon:103.82},
+  {name:'Los Angeles',lat:34.05,lon:-118.24},
+  {name:'San Francisco',lat:37.77,lon:-122.42},
+  {name:'Las Vegas',lat:36.17,lon:-115.14},
+  {name:'Washington',lat:38.91,lon:-77.04},
+  {name:'New York',lat:40.71,lon:-74.01},
+];
+
+function project(lat,lon,offset){
+  const phi=(90-lat)*Math.PI/180;
+  const lam=(lon+offset)*Math.PI/180;
+  const tR=15*Math.PI/180;
+  const x=R*Math.sin(phi)*Math.cos(lam);
+  const y=R*Math.sin(phi)*Math.sin(lam);
+  const z=R*Math.cos(phi);
+  return{x:cx+x,y:cy-(y*Math.cos(tR)-z*Math.sin(tR)),z:y*Math.sin(tR)+z*Math.cos(tR)};
+}
+
+let offset=0;
+function draw(){
+  gratG.innerHTML='';dotsG.innerHTML='';
+  // parallels
+  for(let lat=-75;lat<=75;lat+=15){
+    let d='',pen=false;
+    for(let lon=-180;lon<=181;lon+=3){
+      const p=project(lat,lon,offset);
+      if(p.z>-20){d+=(pen?'L':'M')+p.x.toFixed(1)+','+p.y.toFixed(1);pen=true;}
+      else pen=false;
+    }
+    if(d.length>4){
+      const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+      path.setAttribute('d',d);
+      path.setAttribute('stroke',lat===0?'rgba(200,169,126,0.45)':'rgba(255,255,255,0.07)');
+      path.setAttribute('stroke-width',lat===0?'1':'0.5');path.setAttribute('fill','none');
+      gratG.appendChild(path);
+    }
+  }
+  // meridians
+  for(let lon=-180;lon<180;lon+=15){
+    let d='',pen=false;
+    for(let lat=-90;lat<=90;lat+=3){
+      const p=project(lat,lon,offset);
+      if(p.z>-20){d+=(pen?'L':'M')+p.x.toFixed(1)+','+p.y.toFixed(1);pen=true;}
+      else pen=false;
+    }
+    if(d.length>4){
+      const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+      path.setAttribute('d',d);
+      path.setAttribute('stroke',lon===0?'rgba(200,169,126,0.45)':'rgba(255,255,255,0.07)');
+      path.setAttribute('stroke-width',lon===0?'1':'0.5');path.setAttribute('fill','none');
+      gratG.appendChild(path);
+    }
+  }
+  // cities
+  cities.forEach(c=>{
+    const p=project(c.lat,c.lon,offset);
+    if(p.z<=-20)return;
+    const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('cx',p.x.toFixed(1));dot.setAttribute('cy',p.y.toFixed(1));
+    dot.setAttribute('r','2.5');dot.setAttribute('fill','#C8A97E');dot.setAttribute('opacity','0.9');
+    dotsG.appendChild(dot);
+    const r=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    r.setAttribute('cx',p.x.toFixed(1));r.setAttribute('cy',p.y.toFixed(1));
+    r.setAttribute('r','5.5');r.setAttribute('fill','none');
+    r.setAttribute('stroke','#C8A97E');r.setAttribute('stroke-width','0.6');r.setAttribute('opacity','0.3');
+    dotsG.appendChild(r);
+    const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
+    txt.setAttribute('x',(p.x+10).toFixed(1));txt.setAttribute('y',(p.y+3).toFixed(1));
+    txt.setAttribute('font-family','Montserrat,sans-serif');txt.setAttribute('font-size','7.5');
+    txt.setAttribute('font-weight','400');txt.setAttribute('letter-spacing','2');
+    txt.setAttribute('fill','#C8A97E');txt.setAttribute('opacity','0.8');
+    txt.textContent=c.name.toUpperCase();dotsG.appendChild(txt);
+  });
+  offset+=0.07;
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>
