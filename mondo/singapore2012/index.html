@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roby a Singapore 2012</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦁</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1409;
+    --parchment: #f5f0e8;
+    --cream: #faf7f2;
+    --gold: #c8952a;
+    --gold-light: #e8c87a;
+    --rust: #b05a2a;
+    --teal: #2a6b6b;
+    --warm-grey: #8a7f72;
+    --line: #d8cfc0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    padding: 80px 40px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(200,149,42,.18) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 80% 20%, rgba(42,107,107,.14) 0%, transparent 60%);
+  }
+
+  .hero-map {
+    position: absolute;
+    inset: 0;
+    opacity: .04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='60' cy='60' r='50' fill='none' stroke='%23f5f0e8' stroke-width='.5'/%3E%3Ccircle cx='60' cy='60' r='30' fill='none' stroke='%23f5f0e8' stroke-width='.5'/%3E%3Cline x1='10' y1='60' x2='110' y2='60' stroke='%23f5f0e8' stroke-width='.3'/%3E%3Cline x1='60' y1='10' x2='60' y2='110' stroke='%23f5f0e8' stroke-width='.3'/%3E%3C/svg%3E");
+    background-size: 120px 120px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 32px;
+    opacity: .8;
+    position: relative;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 9vw, 110px);
+    font-weight: 700;
+    color: var(--parchment);
+    text-align: center;
+    line-height: 1.05;
+    position: relative;
+    letter-spacing: -.02em;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+    font-weight: 400;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(15px, 2vw, 19px);
+    color: var(--warm-grey);
+    text-align: center;
+    margin-top: 24px;
+    position: relative;
+    font-weight: 300;
+    letter-spacing: .08em;
+  }
+
+  .hero-divider {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 48px auto;
+    position: relative;
+  }
+
+  .hero-quote {
+    max-width: 680px;
+    text-align: center;
+    color: var(--parchment);
+    font-style: italic;
+    font-size: clamp(16px, 2.2vw, 21px);
+    line-height: 1.7;
+    opacity: .88;
+    position: relative;
+  }
+
+  .hero-quote-attr {
+    margin-top: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .25em;
+    color: var(--gold-light);
+    font-style: normal;
+    opacity: .65;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--warm-grey);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: var(--warm-grey);
+    animation: scrollLine 1.8s ease-in-out infinite;
+  }
+
+  @keyframes scrollLine {
+    0%,100% { opacity: .3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    background: var(--ink);
+    border-bottom: 1px solid rgba(200,149,42,.2);
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar { display: none; }
+
+  .nav-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .25em;
+    color: var(--gold);
+    white-space: nowrap;
+    margin-right: 24px;
+    opacity: .7;
+    padding: 16px 0;
+    flex-shrink: 0;
+  }
+
+  .nav-items {
+    display: flex;
+    gap: 0;
+    align-items: center;
+  }
+
+  .nav-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .15em;
+    color: var(--warm-grey);
+    text-decoration: none;
+    padding: 16px 14px;
+    white-space: nowrap;
+    transition: color .2s;
+    flex-shrink: 0;
+  }
+
+  .nav-item:hover { color: var(--gold-light); }
+
+  .nav-home {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .2em;
+    color: var(--gold);
+    text-decoration: none;
+    padding: 16px 20px 16px 0;
+    white-space: nowrap;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-right: 20px;
+    border-right: 1px solid rgba(200,149,42,.2);
+    transition: color .2s, opacity .2s;
+    flex-shrink: 0;
+    opacity: .85;
+  }
+
+  .nav-home:hover { color: var(--gold-light); opacity: 1; }
+
+  /* ─── LAYOUT ─── */
+  .site-body {
+    display: grid;
+    grid-template-columns: 1fr min(760px, 90%) 1fr;
+    gap: 0;
+  }
+
+  .main-column {
+    grid-column: 2;
+    padding: 0 0 120px;
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline-section {
+    position: relative;
+  }
+
+  .timeline-section::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--line) 10%, var(--line) 90%, transparent);
+  }
+
+  /* ─── POST ─── */
+  .post {
+    padding: 80px 0 80px 48px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    animation: fadeUp .6s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .post::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 88px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 3px var(--cream);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .post-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .post-location {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .15em;
+    color: var(--warm-grey);
+    text-transform: uppercase;
+    opacity: .7;
+  }
+
+  .post-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 32px;
+    color: var(--ink);
+  }
+
+  .post-title em {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .post-body {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #2a2218;
+  }
+
+  .post-body p {
+    margin-bottom: 22px;
+  }
+
+  .post-body p:last-child { margin-bottom: 0; }
+
+  .post-body strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ─── IMAGES ─── */
+  .post-images {
+    margin: 36px 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .post-images.single { grid-template-columns: 1fr; }
+  .post-images.double { grid-template-columns: 1fr 1fr; }
+  .post-images.triple { grid-template-columns: 1fr 1fr 1fr; }
+
+  .post-images img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 2px;
+    transition: transform .4s ease, box-shadow .4s ease;
+    cursor: zoom-in;
+  }
+
+  .post-images img:hover {
+    transform: scale(1.015);
+    box-shadow: 0 16px 48px rgba(26,20,9,.18);
+  }
+
+  .post-images.single img { max-height: 480px; object-fit: cover; }
+  .post-images.double img { height: 260px; }
+  .post-images.triple img { height: 200px; }
+
+  /* ─── CHAPTER HEADERS ─── */
+  .chapter-header {
+    padding: 100px 0 20px 48px;
+    position: relative;
+  }
+
+  .chapter-header::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 108px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 0 4px var(--cream), 0 0 0 6px rgba(42,107,107,.3);
+  }
+
+  .chapter-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .35em;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  .chapter-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--teal);
+  }
+
+  /* ─── PULL QUOTE ─── */
+  .pull-quote {
+    margin: 40px 0;
+    padding: 32px 40px;
+    border-left: 3px solid var(--gold);
+    background: rgba(200,149,42,.04);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.6;
+    color: var(--rust);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    padding: 80px 40px;
+    text-align: center;
+  }
+
+  .footer-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--parchment);
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+
+  .footer-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .2em;
+    color: var(--warm-grey);
+    text-transform: uppercase;
+  }
+
+  .footer-line {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 32px auto;
+  }
+
+  /* ─── LIGHTBOX ─── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    cursor: zoom-out;
+  }
+
+  .lightbox.active { display: flex; }
+
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 2px;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    color: white;
+    font-size: 32px;
+    cursor: pointer;
+    opacity: .6;
+    font-family: sans-serif;
+    line-height: 1;
+  }
+
+  .lightbox-close:hover { opacity: 1; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    .post { padding: 60px 0 60px 28px; }
+    .post-images.double, .post-images.triple { grid-template-columns: 1fr; }
+    .post-images.double img, .post-images.triple img { height: auto; max-height: 260px; }
+    nav { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-map"></div>
+  <p class="hero-eyebrow">Agosto 2012 — Dicembre 2012</p>
+  <h1 class="hero-title">Roberta<br><em>Riva</em></h1>
+  <p class="hero-subtitle">Diario di un'avventura in Asia</p>
+  <div class="hero-divider"></div>
+  <blockquote class="hero-quote">
+    «Curiosità non è se non vanità. Quasi sempre, si vuol sapere solo per discorrerne. Non si affronterebbero viaggi per mare, se non si dovesse mai dirne nulla, e per il solo piacere di veder cose nuove, senza la speranza di poter mai parlarne con altri.»
+    <p class="hero-quote-attr">— Blaise Pascal</p>
+  </blockquote>
+  <div class="scroll-hint">Scorri</div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-home" href="https://gioriva.github.io/mondo/">
+    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 5.5L6 1L11 5.5V11H8V8H4V11H1V5.5Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+    </svg>
+    Home
+  </a>
+  <span class="nav-label">Tappe →</span>
+  <div class="nav-items">
+    <a class="nav-item" href="#singapore">Singapore</a>
+    <a class="nav-item" href="#bintan">Bintan</a>
+    <a class="nav-item" href="#kualalumpur">Kuala Lumpur</a>
+    <a class="nav-item" href="#hongkong">Hong Kong</a>
+    <a class="nav-item" href="#bali">Bali &amp; Gili</a>
+    <a class="nav-item" href="#malacca">Malacca</a>
+    <a class="nav-item" href="#phuket">Phuket</a>
+    <a class="nav-item" href="#fine-corsi">Fine Corsi</a>
+    <a class="nav-item" href="#vietnam">Vietnam</a>
+    <a class="nav-item" href="#cambogia">Cambogia</a>
+  </div>
+</nav>
+
+<!-- BODY -->
+<div class="site-body">
+<main class="main-column">
+
+  <!-- ═══ CAPITOLO 1: SINGAPORE ═══ -->
+  <div id="singapore" class="chapter-header">
+    <p class="chapter-eyebrow">Capitolo I</p>
+    <h2 class="chapter-title">Singapore<br><em>The Lion City</em></h2>
+  </div>
+
+  <div class="timeline-section">
+
+    <!-- POST 1: Mi presento -->
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">14 agosto 2012</span>
+        <span class="post-location">📍 Como → Singapore</span>
+      </div>
+      <h3 class="post-title">Mi presento</h3>
+      <div class="post-body">
+        <p>Brevemente: mi chiamo <strong>Roberta</strong>, ho 23 anni, una splendida famiglia e una vita di cui non posso lamentarmi. Amo lo sport, l'aria aperta, il sole, il mare, le fotografie, e come capirete da questo blog, amo viaggiare.</p>
+      </div>
+    </article>
+
+    <!-- POST 2: La mia avventura -->
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">16 agosto 2012</span>
+        <span class="post-location">📍 Singapore</span>
+      </div>
+      <h3 class="post-title">La mia avventura a Singapore, <em>the Lion City</em></h3>
+      <div class="post-body">
+        <p>Già l'appellativo indica una certa affinità tra me e la città. Il mio segno zodiacale e una "certa" somiglianza con Lyon, città dove ho vissuto 4 mesi, città che ho adorato. Questa città nasconde qualcosa di magico, che ho sentito dentro di me ancora prima di partire.</p>
+        <p>Mattina della partenza: dormo circa due ore. Parto sapendo di avere 5 coinquilini, ma non una casa, un ostello prenotato il pomeriggio prima, e zero dollari locali.</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/img_0093.jpg" alt="In partenza" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Arrivo a Singapore: dopo aver congelato in aereo, la calura afosa della città si sente con piacere per i primi 5 minuti. Arrivo in ostello, tempo di fare il check in… <strong>Doriana!</strong> Doriana è la mia coinquilina mezza italiana e mezza francese che mi riconosce e mi dice di sbrigarmi che abbiamo un appuntamento per vedere due case. Arrivata giusto in tempo. Non faccio nemmeno in tempo a fare pipì.</p>
+        <p>Uno dopo l'altro siamo arrivati tutti: Laurynas (lituano), Violaine (francese di Lione, mia compagna di stanza), Rosario (originaria dell'Argentina, vive in Svezia) e Vashi (afgano, studia ingegneria in Svezia). Dopo due ore passate tutti assieme, sembrava ci conoscessimo da molto più tempo.</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/img_4712.jpg" alt="Marina Bay di notte" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Abbiamo girato la zona di Marina Bay e siamo saliti sulle torri: sembra di essere nel futuro! Abbiamo visitato spesso China Town, dove si mangia con pochissimo. La cucina qui è ottima; alcuni piatti molto spicy, altri fritti, altri sanissimi come il chicken rice, tipico per tutti i pranzi.</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-13-52-49.png" alt="China Town" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-13-58-01.png" alt="Panorama da Mt. Faber" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Siamo poi andati per la prima volta in università per la riunione di benvenuto. La <em>Nanyang Technological University</em> è enorme: ci sono taxi, free shuttle, bus per spostarsi. Talmente grande che mi sono persa una decina di volte e sono entrata 20 minuti dopo alle prime due lezioni perché non trovavo la classe!</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-13-55-46.png" alt="Università NTU" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-13-59-15.png" alt="Quartieri di Singapore" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Abbiamo visto 3 bellissimi quartieri: Chinatown, Little India (dove abbiamo chiesto alla polizia indicazioni per il mercato delle cose rubate!) e Arab Street, un piccolo paradiso colorato di negozi carinissimi.</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-13-59-52.png" alt="Little India" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-14-01-11.png" alt="Vecchia a China Town" loading="lazy">
+      </div>
+      <div class="pull-quote">
+        Riassumendo, quali sensazioni ho provato a Singapore? Non so se è davvero la città, ma io sono felice. E lo sono veramente dopo (tanto) tempo.
+      </div>
+    </article>
+
+    <!-- POST 3: Chinese Garden -->
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">18 agosto 2012</span>
+        <span class="post-location">📍 Chinese & Japanese Garden</span>
+      </div>
+      <h3 class="post-title">Chinese and Japanese Garden</h3>
+      <div class="post-body">
+        <p>Il nostro week end fuori porta è saltato; non siamo riusciti a partire perché non c'erano più posti né sui bus né sui treni per arrivare a Kuala Lumpur.</p>
+        <p>Oggi abbiamo optato per una giornata all'insegna della natura. Direzione: Chinese Garden and Japanese Garden!</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-14-56-22.png" alt="Meditazione al Japanese Garden" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-14-58-17.png" alt="Trova l'intruso!" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Abbiamo passeggiato in lungo e in largo, goduto un po' di pace in angoli tranquilli e siamo andati a vedere il museo delle tartarughe, che in realtà ci hanno fatto molta pena. Inoltre, molte di loro erano proprio brutte!</p>
+      </div>
+    </article>
+
+    <!-- POST 4: Pulau Ubin -->
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">20 agosto 2012</span>
+        <span class="post-location">📍 Pulau Ubin · Sentosa</span>
+      </div>
+      <h3 class="post-title">Pulau Ubin, Sentosa e hamburger</h3>
+      <div class="post-body">
+        <p>Due giorni all'insegna del mare! Domenica: sveglia presto (le 8.30!), colazione abbondante, MRT, bus, boat e arriviamo a Pulau Ubin.</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456160-alle-20-09-17.png" alt="Pulau Ubin" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456160-alle-20-18-36.png" alt="Sull'isola" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Abbiamo noleggiato le biciclette, una più sgangherata dell'altra, e pedalato tutto il giorno per l'isola, per poi rilassarci verso sera in spiaggia. Al ritorno in metro è stato infinitamente lungo, ma divertente: c'era un ragazzo che indossava due paia di jeans... rubati! Lo sappiamo per certo perché si è dimenticato di togliere l'etichetta!</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456160-alle-20-15-23.png" alt="In bicicletta" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456160-alle-20-16-41.png" alt="Spiaggia" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Oggi pomeriggio siamo andati a Sentosa, l'isola con la spiaggia più popolare a Singapore. Non c'è nulla di naturale. La spiaggia è molto bella, quasi caraibica, ma completamente artificiale! Stasera invece è stata la nostra flat dinner… <strong>cheeseburger and chips!!</strong></p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456160-alle-20-24-18.png" alt="Sentosa" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456160-alle-20-24-35.png" alt="Flat dinner" loading="lazy">
+      </div>
+    </article>
+
+    <!-- POST 5: Cani coltelli tovaglioli -->
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">26 agosto 2012</span>
+        <span class="post-location">📍 Singapore</span>
+      </div>
+      <h3 class="post-title">A Singapore è difficile vedere cani, coltelli e tovaglioli</h3>
+      <div class="post-body">
+        <p>In questa grande metropoli c'è tutto, o quasi. In qualsiasi posto si vada a mangiare è pressoché impossibile trovare coltelli e tovaglioli. Non ci sono cani: credo che mi basti una mano per contare quelli che ho visto. E le metro sono pulitissime perché è vietato sia bere che mangiare una volta varcata la soglia della stazione. Pena? Multa di <strong>500 SGD</strong>!</p>
+        <p>Le persone dormono ovunque: in classe, sulle panchine, in metro. In metro è particolarmente divertente, perché ondeggiano da una parte all'altra, e a volte si addormentano sulla spalla del vicino!</p>
+        <p>Venerdì abbiamo festeggiato il nostro <em>"flat warming party"</em>, ovvero l'inaugurazione del nostro appartamento. A una certa ora è arrivata la polizia a fermare la festa. Molte persone sono state contentissime della nuova esperienza!</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456166-alle-11-42-19.png" alt="La nostra family" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Ecco la mia stupenda "family": Laurynas, Violaine, Rosario, Io, Doriana, Vashi.</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456166-alle-11-42-48.png" alt="Festa in casa" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456166-alle-11-43-45.png" alt="La casa si popola" loading="lazy">
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456166-alle-11-45-10.png" alt="Festa a Sentosa" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456166-alle-11-45-20.png" alt="Pool party universitario" loading="lazy">
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456166-alle-11-45-531.png" alt="Sentosa party" loading="lazy">
+      </div>
+    </article>
+
+    <!-- POST 6: Coraggiosa -->
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">31 agosto 2012</span>
+        <span class="post-location">📍 Singapore</span>
+      </div>
+      <h3 class="post-title">Alla fine posso definirmi coraggiosa!</h3>
+      <div class="post-body">
+        <p>Sapete qual è l'esperienza che mi permette di autodefinirmi coraggiosa? L'essere entrata in una bettola, ovvero un parrucchiere low cost della stazione di Boon Lay, per tagliare i capelli e uscirne soddisfatta! Mi è costato <strong>3,90 SGD</strong>, ovvero due euro e ottanta centesimi. Sarà il mio nuovo appuntamento mensile!</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/img_0249.jpg" alt="Orchard Road" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Continuo raccontando che la settimana universitaria è andata bene, così come la prima presentazione alla classe mia e di Marghe. Ora anche a Singapore conoscono la Rivauto, contento papi?</p>
+        <p>Questo simpatico cicciottello è Erik (ovviamente non è il suo vero nome). Lui trova le lezioni poco interessanti, credo:</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/img_02341.jpg" alt="Erik dorme in classe" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Per concludere in bellezza, finalmente ho visto <em>Orchard Road</em>, la via più "negoziosa" e mondana di Singapore! Ora passo e chiudo perché parto per il mio primo week end fuori porta!</p>
+      </div>
+    </article>
+
+  </div><!-- /timeline-section -->
+
+  <!-- ═══ CAPITOLO 2: BINTAN ═══ -->
+  <div id="bintan" class="chapter-header">
+    <p class="chapter-eyebrow">Capitolo II</p>
+    <h2 class="chapter-title">Bintan<br><em>Indonesia</em></h2>
+  </div>
+  <div class="timeline-section">
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">3 settembre 2012</span>
+        <span class="post-location">📍 Bintan, Indonesia</span>
+      </div>
+      <h3 class="post-title">Bintan — mare, cibo, relax e divertimento</h3>
+      <div class="post-body">
+        <p>2 giorni di: mare, cibo, relax e divertimento. Ciliegina sulla torta il massaggio fronte mare, peccato solo che mi è venuto il mal di schiena che prima non avevo!</p>
+        <p>Il week end è stato organizzato benissimo: 208 studenti, 2 resort prenotati, pullman a disposizione e spiagge bellissime.</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456174-alle-18-09-08.png" alt="Bintan - resort" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/539095_457970214226255_1947372569_n.jpeg" alt="Bintan - spiaggia" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Venerdì sera cena su una terrazza sul mare e festa in piscina. Sabato mega colazione, isoletta (a cui siamo arrivati in barca – quasi all'avventura, ancora un po' e voliamo in mare!), pranzo/cena alle 5, festa in spiaggia!</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456174-alle-18-08-43.png" alt="Isola" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456174-alle-18-08-01.png" alt="Relax" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Domenica bis di mega colazione, spiaggia, relax e foto! La sera siamo arrivate a casa all'una e abbiamo trovato la cena pronta: pancakes con nutella, zucchero e marmellata!</p>
+      </div>
+    </article>
+
+    <!-- POST: Durian -->
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">9 settembre 2012</span>
+        <span class="post-location">📍 Singapore</span>
+      </div>
+      <h3 class="post-title">Sapete cos'è un Durian?</h3>
+      <div class="post-body">
+        <p>Venerdì sera optiamo per uscire a cena a Holland Park, pieno di ristorantini carini e molto "occidentale". La verità è che avevo una gran voglia di pizza. Passeggiando ci fermiamo davanti al ristorante "da Paolo", e scopriamo che un amico lavora proprio là. Ci fanno accomodare offrendoci <strong>Champagne dalle 9 alle 11 di sera!</strong> Qui a Singapore il peggiore dei vini costa più di 10 dollari a bicchiere. Per concludere in grande, 3 super porzioni di tiramisù arrivano al nostro tavolo!</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456180-alle-08-19-05.png" alt="Serata da Paolo" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Sabato, giornata di relax. Siamo io e Violaine. Ci buttiamo sui pancake, e solo un forte senso di educazione ci ha fatto ingoiare quello che abbiamo mangiato: <strong>Pancake ripieni alla crema di Durian</strong>. Sapete cos'è un Durian? È il frutto più orribile che si possa mangiare! L'odore è rimasto nelle nostre bocche per circa 5 ore, finché non ci siamo buttate da McDonald a mangiare patatine fritte!</p>
+        <p>Solo per averne un'idea… è vietato portarlo all'interno delle MRT:</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/421656_4501803302558_134187742_n3.jpeg" alt="Durian vietato in metro" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456180-alle-08-43-42.png" alt="Night safari" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Nel frattempo siamo andate allo zoo, che ovviamente aveva chiuso da 10 minuti, così abbiamo optato per il night safari. Nuova scoperta a Singapore: bagni versione baby!</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456180-alle-08-43-52.png" alt="Bagni baby" loading="lazy">
+      </div>
+    </article>
+  </div>
+
+  <!-- ═══ CAPITOLO 3: KUALA LUMPUR ═══ -->
+  <div id="kualalumpur" class="chapter-header">
+    <p class="chapter-eyebrow">Capitolo III</p>
+    <h2 class="chapter-title">Kuala Lumpur<br><em>Malesia</em></h2>
+  </div>
+  <div class="timeline-section">
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">17 settembre 2012</span>
+        <span class="post-location">📍 Kuala Lumpur, Malesia</span>
+      </div>
+      <h3 class="post-title">Week end quasi al femminile</h3>
+      <div class="post-body">
+        <p>Week end quasi al femminile: Io, Violaine, Rosario, Doriana e Mattia, beato tra le donne! Il nostro viaggio inizia venerdì sera alle 6, con questa successione di eventi: metro, bus, secondo bus, confine di uscita da Singapore, terzo bus, confine per entrare in Malesia, quarto bus, arrivo alla stazione dei bus a Larkin, McDonald, quinto bus. <strong>Arrivo a Kuala Lumpur: ore 4.20 am!</strong></p>
+        <p>La prima cosa che vediamo è un gran bel ratto che ci attraversa la strada. Questa città è ricchissima nel centro, ed estremamente povera a 200 metri di distanza. In poco tempo troviamo un ostello per la grande cifra di circa 5 euro a notte. La carta igienica non fa parte dell'essenziale: non sono andata in bagno per due giorni!</p>
+        <p>Prima tappa: <strong>Batu Caves</strong>, un santuario buddista costruito all'interno di un'enorme grotta.</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-22-29.png" alt="Kuala Lumpur" loading="lazy">
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-23-27.png" alt="Batu Caves" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-23-41.png" alt="Grotta" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>In lontananza si vedono anche le <em>Petronas Twin Towers</em> — due torri gemelle alte 452 metri, costruite dall'architetto argentino Cesar Pelli tra il 1995 e il 1998, diventate il simbolo del progresso economico della Malesia. Possiedono 32.000 finestre.</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-24-04.png" alt="Petronas Twin Towers" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-24-25.png" alt="KL di notte" loading="lazy">
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-24-44.png" alt="Vista dalla torre" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-24-55.png" alt="Serata a KL" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Domenica abbiamo scoperto il grande mercato del cibo di China Town: un odore irrespirabile, ma è il posto più bello che abbia visto in città. Il vecchio che vendeva la carne di pollo sul bancone, sotto il banco aveva le galline vive.</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-25-53.png" alt="Mercato di KL" loading="lazy">
+      </div>
+    </article>
+  </div>
+
+  <!-- ═══ CAPITOLO 4: HONG KONG ═══ -->
+  <div id="hongkong" class="chapter-header">
+    <p class="chapter-eyebrow">Capitolo IV</p>
+    <h2 class="chapter-title">Hong Kong<br><em>&amp; Macao</em></h2>
+  </div>
+  <div class="timeline-section">
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">25 settembre 2012</span>
+        <span class="post-location">📍 Hong Kong · Macao</span>
+      </div>
+      <h3 class="post-title">Hong Kong, migliaia di persone per le strade</h3>
+      <div class="post-body">
+        <p>Incomincio dicendo che questo viaggio a Hong Kong è stato bellissimo! Partiamo io e Tia giovedì pomeriggio. L'impressione è quella di arrivare in una città simile a Times Square di NY — c'è addirittura un quartiere che si chiama proprio così!</p>
+        <p>La giornata di venerdì inizia presto e finisce molto tardi: computer center a Sham Shui Po, poi il <strong>Victoria Peak</strong> per ammirare il panorama... ovviamente con una nebbia pazzesca.</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-12-48.png" alt="Victoria Peak nella nebbia" loading="lazy">
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-14-13.png" alt="Mercatini di Central" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-15-00.png" alt="Tempio Man Mo" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Alle 20 assistiamo al <em>Light Show</em>, lo spettacolo di luci sui grattacieli. 5 minuti prima dell'inizio inizia a piovere fastidiosamente, ma la pioggia non rovina lo spettacolo!</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-22-02.png" alt="Light Show Hong Kong" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Finito il tutto, corriamo ai taxi perché abbiamo la nave per <strong>Macao</strong> mezz'ora dopo. Macao è una sorta di Las Vegas: casino e prostitute, a eccezione del centro storico che è molto europeo, siccome l'isola era portoghese. All'una e 30 abbiamo la nave di ritorno, controlli, taxi e finalmente alle 3.30 siamo a letto.</p>
+        <p>Sabato mattina visitiamo il <em>Chi Lin Nunnery</em>, un monastero buddista totalmente in legno, con dei bonsai fantastici.</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-24-44.png" alt="Chi Lin Nunnery" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-24-22-1.png" alt="Giardino del monastero" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Giro in solitaria: Avenue of Stars con le statue, tra cui quella di Bruce Lee, e le stelle sul pavimento con gli autografi delle star. Non ne conoscevo mezzo. Verso le 6 faccio una pausa da Starbucks e bevo il primo cappuccino da quando sono in Asia. <em>Che bontà! Un dolce ricordo.</em></p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-28-42.png" alt="Avenue of Stars" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-15-41.png" alt="Cibo di strada" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Domenica mattina: Stanley Market, un mercatino molto tipico sul mare. Non sembra nemmeno di essere a Hong Kong.</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-30-44.png" alt="Stanley Market" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-30-23.png" alt="Stanley sul mare" loading="lazy">
+      </div>
+    </article>
+  </div>
+
+  <!-- ═══ CAPITOLO 5: BALI ═══ -->
+  <div id="bali" class="chapter-header">
+    <p class="chapter-eyebrow">Capitolo V</p>
+    <h2 class="chapter-title">Bali, Lombok<br><em>&amp; Gili Islands</em></h2>  </div>
+  <div class="timeline-section">
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">8 ottobre 2012</span>
+        <span class="post-location">📍 Bali · Lombok · Gili Islands</span>
+      </div>
+      <h3 class="post-title">Albe e tramonti meravigliosi, traffico selvaggio e paesaggi atipici</h3>
+      <div class="post-body">
+        <p>Come descriverei brevemente Bali: albe e tramonti meravigliosi, traffico selvaggio e paesaggi atipici. Per traffico selvaggio intendo l'inesistenza di regole: i semafori sono dei consigli, la gente supera sia a destra che a sinistra. È pieno zeppo di motorini. Vedere un motorino con una sola persona è l'eccezione: minimo tre è la regola.</p>
+        <p>La cosa più bella e inaspettata della vacanza è stata l'ospitalità ricevuta: siamo stati ospitati a casa di Ruben, un ragazzo che faceva scout con me e mio fratello. Komang, la signora che tiene la casa, mi ha insegnato a cucinare i <em>mi koreng</em>, un piatto tipico indonesiano gustosissimo!</p>
+        <p>Bali è il paradiso dei surfisti. Spiagge lunghissime e onde alte. Il primo giorno a Kuta abbiamo incontrato per caso un gruppo di francesi con cui abbiamo passato la serata: barbeque all you can eat e shisha al rooftop garden.</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-40-59.png" alt="Kuta beach" loading="lazy">
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-10-12-561.png" alt="Bali - tempio" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-46-24.png" alt="Rice terrace" loading="lazy">
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-46-51.png" alt="Bali - paesaggio" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-47-18.png" alt="Bali - natura" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>A Lombok abbiamo viaggiato in nave di notte. Appena saliti, ci siamo dovuti sistemare fuori, alzandoci alle 5 del mattino come dei cubetti di viaggio, ma con l'alba a darci il buongiorno. Lombok: molta più natura e molto meno turisti.</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-47-40.png" alt="Bali - tramonto" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-59-12.png" alt="Lombok" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Le <strong>Gili Islands</strong>: tre piccole isolette a meno di un'ora di barca da Lombok. Ostello a meno di 5 euro a notte, ma compensato con un'ottima cena di pesce in un bellissimo ristorante in riva al mare. Il giorno dopo abbiamo prenotato il giro con la barca col fondo di vetro e fatto snorkeling. <em>Abbiamo visto le tartarughe: magnifico!</em></p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-58-22.png" alt="Gili Islands" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-58-49.png" alt="Snorkeling" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Il penultimo giorno avevamo prenotato per vedere l'alba al vulcano: sveglia alle 2. Arriviamo al punto di partenza, prendiamo la guida e iniziamo a camminare che non sono nemmeno le tre del mattino. La scalata è stata ripida e anche un po' faticosa, ma lo spettacolo dell'alba vista dalla cima di un vulcano è stata <strong>indimenticabile</strong>.</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-59-28.png" alt="Gili - cena al tramonto" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-10-02-061.png" alt="Alba sul vulcano" loading="lazy">
+      </div>
+    </article>
+  </div>
+
+  <!-- ═══ CAPITOLO 6: SINGAPORE VITA ═══ -->
+  <div id="vita" class="chapter-header">
+    <p class="chapter-eyebrow">Capitolo VI</p>
+    <h2 class="chapter-title">La vita<br><em>a Singapore</em></h2>
+  </div>
+  <div class="timeline-section">
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">23 ottobre 2012</span>
+        <span class="post-location">📍 Singapore — NTU</span>
+      </div>
+      <h3 class="post-title">Tutto procede bene a Singapore!</h3>
+      <div class="post-body">
+        <p>Tornata da Bali, ho studiato per il primo parziale che dovrebbe essere andato bene. Finalmente ho speso un week end a Singapore, dopo circa un mese di assenza! L'università va bene, ormai la metà del semestre è stata abbondantemente superata, mancano 4 settimane di lezioni e poi gli esami.</p>
+        <p>Ci siamo buttati alla scoperta di tutte le 16 mense all'interno del campus. Le preferite: la canteen 2 e la food connection. Ho scoperto anche che nella canteen 1 fanno il gelato!</p>
+        <p>Il 17 ottobre è stato il compleanno di Violaine: abbiamo organizzato una festa a casa e poi siamo andati in centro!</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456229-alle-07-02-29.png" alt="Compleanno di Violaine" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Il week end successivo siamo andati all'<strong>Infinity Pool</strong>, la piscina al piano 55 del Marina Bay Sands. Godendoci piscina e idro-massaggio con vista della città a 360°!</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456229-alle-06-56-56.png" alt="Infinity Pool Marina Bay Sands" loading="lazy">
+      </div>
+    </article>
+  </div>
+
+  <!-- ═══ CAPITOLO 7: MALACCA ═══ -->
+  <div id="malacca" class="chapter-header">
+    <p class="chapter-eyebrow">Capitolo VII</p>
+    <h2 class="chapter-title">Malacca<br><em>Malesia</em></h2>
+  </div>
+  <div class="timeline-section">
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">29 ottobre 2012</span>
+        <span class="post-location">📍 Malacca, Malesia</span>
+      </div>
+      <h3 class="post-title">Allez, let's go: Malacca!</h3>
+      <div class="post-body">
+        <p>Decisione dell'ultimo minuto: giovedì sera si parte per Malacca, piccola città della Malesia, a metà strada tra Singapore e Kuala Lumpur. Coscienti che alle 8 di sera non partono più bus, decidiamo di tentare lo stesso. Chiudiamo la trattativa per partire con un taxi che del taxi ha ben poco: una macchina rossa sportiva e un autista un po' bizzarro. 240 km di strada, tre ore sul bolide rosso. Da non dimenticare il sottofondo di rutti consecutivi fatti da Schumacher versione asiatica!</p>
+        <p>Arriviamo sani, salvi ed esausti a Malacca alle 3.30 del mattino: deserto totale. Con un po' di fortuna troviamo posto in una guest house, e dormiamo fino alle 11.</p>
+        <p>In questa cittadina sembra di essere in un piccolo angolo d'Europa. È stata per secoli dominata da olandesi, inglesi, ecc. Chiese, piccole casette colorate, mercatini, e una marea di risciò pieni di fiori e con musica da discoteca per portare in giro le coppiette innamorate.</p>
+      </div>
+      <div class="pull-quote">
+        Il venerdì sera: escursione in bicicletta organizzata dall'ostello. Slalom nel traffico più selvaggio per arrivare a una moschea sul mare all'ora del tramonto. Meraviglioso!
+      </div>
+    </article>
+  </div>
+
+  <!-- ═══ CAPITOLO 8: PHUKET ═══ -->
+  <div id="phuket" class="chapter-header">
+    <p class="chapter-eyebrow">Capitolo VIII</p>
+    <h2 class="chapter-title">Phuket<br><em>Tailandia</em></h2>
+  </div>
+  <div class="timeline-section">
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">12 novembre 2012</span>
+        <span class="post-location">📍 Phuket, Tailandia</span>
+      </div>
+      <h3 class="post-title">Quattro meravigliosi giorni — <em>con la Mari</em></h3>
+      <div class="post-body">
+        <p>Grazie David e Mario per l'ospitalità e la calda accoglienza, e grazie David per averci fatto da guida dell'isola! Patong è un centro estremamente caotico, pieno di negozi e ristorantini. La cosa che salta all'occhio: la rete di distribuzione dell'energia elettrica è sospesa, con matasse di fili che si stendono sui pali, nelle vie, per poi attaccarsi alle case.</p>
+        <p>La giornata di sabato è stata interamente dedicata alla gita in barca all'arcipelago di <strong>Phi Phi Islands</strong>. Ko Phi Phi Leh, nota per essere stata il set del film <em>The Beach</em> con Leonardo DiCaprio, ospita una colonia di uccelli i cui nidi, ritenuti afrodisiaci, sono consumati come ingredienti di zuppe.</p>
+        <p>Domenica: visita al grande Buddha di Phuket, da cui si può godere un fantastico panorama sull'isola. Il Big Buddha deve ancora essere ultimato, e ai suoi piedi c'è un piccolo tempio dove i monaci raccolgono le offerte. Ci sono alberelli su cui sono appese delle banconote, altri su cui sono appese campanelle. Pare che i Tailandesi siano estremamente superstiziosi.</p>
+        <p>Il pranzo è stato memorabile: abbiamo acquistato il pesce al mercato dei pescatori e ce lo siamo fatto cucinare da alcuni ristoranti proprio di fronte al porticciolo — barracuda, granchio al curry, insalata di papaya, gamberi fritti. <em>Alcuni dei colori più belli che abbia mai visto.</em></p>
+      </div>
+    </article>
+
+    <!-- POST: La Mari -->
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">14 novembre 2012</span>
+        <span class="post-location">📍 Singapore — dal diario di Marianna</span>
+      </div>
+      <h3 class="post-title">La Mari a Singapore</h3>
+      <div class="post-body">
+        <p><em>Un racconto speciale: la settimana di Singapore vista dagli occhi della mia amica Marianna, venuta a trovarmi dall'Italia.</em></p>
+        <p>«Ieri ho lasciato Singapore. Tre valeriane e tredici ore di dormiveglia dopo sono arrivata a Malpensa, accompagnata da una certa quantità di merce umidiccia stipata in valigia, un diario scritto a metà e tenuto senza costanza, un mazzo di cartoline scritte ma non spedite, una chiavetta piena di fotografie scattate da altri e un quintale di souvenir per comprarmi l'affetto di chi ho lasciato a casa. Niente di nuovo sotto il sole, per chi mi conosce un pochino.</p>
+        <p>Singapore è una città molto strana, è tante città. Potrebbe sembrare un'osservazione banale, eppure è questa la sensazione che si percepisce girando a piedi da un quartiere all'altro. Uno modesto e uno lussuoso, uno affollato e uno deserto, uno pulito e uno sporco. Ma questi quartieri hanno tutti qualcosa in comune: il clima. Tropicale, umido da farti impazzire.»</p>
+        <p>— <strong>Marianna</strong></p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/11/schermata-11-2456253-alle-14-55-31.png" alt="ArtScience Museum - mostra fotografica" loading="lazy">
+      </div>
+    </article>
+  </div>
+
+  <!-- ═══ CAPITOLO 9: FINE CORSI ═══ -->
+  <div id="fine-corsi" class="chapter-header">
+    <p class="chapter-eyebrow">Capitolo IX</p>
+    <h2 class="chapter-title">La fine<br><em>di un'era</em></h2>
+  </div>
+  <div class="timeline-section">
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">17 novembre 2012</span>
+        <span class="post-location">📍 Singapore — NTU</span>
+      </div>
+      <h3 class="post-title">E così i corsi sono finiti</h3>
+      <div class="post-body">
+        <p>Ebbene sì, oggi è sabato 17 novembre e il semestre è finito: 10 giorni per studiare e poi 4 esami! Martedì compleanno di Marghe e Giacomo: super pizzata in centro a Singapore e birra a Chinatown!</p>
+        <p>Giovedì, invece, siamo stati invitati a festeggiare il <em>Deepavali</em> (festa delle luci, indiana) con un pranzo in università. Evento della settimana: "End of uni party". La polizia è arrivata due volte, e alla seconda ha cacciato tutti a casa!</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/11/schermata-11-2456249-alle-16-25-46.png" alt="Roberta" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/11/schermata-11-2456249-alle-16-26-05.png" alt="Compleanno" loading="lazy">
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/11/schermata-11-2456249-alle-16-26-34.png" alt="Ladies night" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/11/schermata-11-2456249-alle-16-26-19.png" alt="Università" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Per un po' basta feste e basta viaggi: il 7 dicembre finisco gli esami, e il 9 parto per il "grande viaggio": Vietnam – Cambogia – Tailandia e forse Laos! Strano da dire, ma la fine si avvicina. Ma vivo ogni giorno al massimo. <em>Che meraviglia!</em></p>
+      </div>
+    </article>
+
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">1 dicembre 2012</span>
+        <span class="post-location">📍 Singapore</span>
+      </div>
+      <h3 class="post-title">Che ogni fine sia un nuovo inizio</h3>
+      <div class="post-body">
+        <p>Mi trovo quasi a tirare le somme di questi quattro lunghi ed intensi mesi. Mi sembra ieri quando ho salutato il Ponzio a Malpensa e mi sono imbarcata sull'aereo direzione Singapore.</p>
+        <p>Cosa mi mancherà? Tutto. Mi mancheranno le mie coinquiline, le chiacchierate di sera con Violaine, il tragitto scuola–casa sullo shuttle bus con la Marghe, il cibo locale. Forse mi mancherà anche un pochino il clima.</p>
+        <p>Ho voglia di fare colazione col Ponzio e la Stefi la mattina presto, di fare la spesa della frutta il sabato mattina con la Cinziona. Ho voglia di dormire nel mio letto a castello. Ho voglia di andare a sciare e di giocare a tennis. La pizza mi manca da morire — penso che la prima settimana a casa me la mangerò anche a colazione!</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/foto3.jpg" alt="Prima dell'esame" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/foto1.jpg" alt="Pronta per l'esame" loading="lazy">
+      </div>
+      <div class="pull-quote">
+        Che ogni fine sia un nuovo inizio.
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/foto2.png" alt="Singapore ultima notte" loading="lazy">
+      </div>
+    </article>
+
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">8 dicembre 2012</span>
+        <span class="post-location">📍 Singapore — ore 12</span>
+      </div>
+      <h3 class="post-title">12 ore alla partenza</h3>
+      <div class="post-body">
+        <p>Questa ultima settimana è volata! Il professore ci ha detto di stare tranquilli e io l'ho preso in parola: la mattina prima dell'ultimo esame ci siamo rilassate in piscina!</p>
+        <p>L'ultimo giorno di università siamo andate a prendere un caffè con Chris (il professore di data mining). Per ringraziarlo gli abbiamo fatto un piccolo regalo di Natale: la foto della serata del teatro. La cosa che ci ha lasciate senza parole: <em>anche lui aveva pensato a un regalo di Natale per noi!</em></p>
+        <p>Ieri sera, abbiamo cenato a casa, fatto le ultime foto e siamo andati al ponte. Tanti saluti, niente pianti, e la speranza che i nostri destini si ri-incrocino in qualche città.</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/schermata-2012-12-08-alle-17-48-49.png" alt="Piscina pre-esame" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/schermata-2012-12-08-alle-17-50-08.png" alt="Ultima sera a Singapore" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p><strong>Tra 12 ore sarò imbarcata sul volo per Hanoi (Vietnam). Chissà!</strong></p>
+      </div>
+    </article>
+  </div>
+
+  <!-- ═══ CAPITOLO 10: VIETNAM ═══ -->
+  <div id="vietnam" class="chapter-header">
+    <p class="chapter-eyebrow">Capitolo X</p>
+    <h2 class="chapter-title">Vietnam<br><em>Da Nord a Sud</em></h2>
+  </div>
+  <div class="timeline-section">
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">11 dicembre 2012</span>
+        <span class="post-location">📍 Hanoi, Vietnam</span>
+      </div>
+      <h3 class="post-title">La strada va attraversata lentamente</h3>
+      <div class="post-body">
+        <p>Prima tappa del giro: <strong>Hanoi</strong>. Arriviamo in aeroporto e la prima cosa che si sente è la differenza di temperatura. La cosa più importante da imparare è attraversare la strada senza essere stirati dalle miriadi di motorini: si attraversa molto piano, facendo attenzione ai motorini che ti considerano un paletto da aggirare. <em>Nessuno si ferma!</em></p>
+        <p>Abbiamo visto il museo di Ho Chi Minh, il tempio della letteratura, diverse pagode, il lago, le trentasei strade. E abbiamo mangiato sempre in posti locali. Il piatto tipico si chiama <em>bun cha</em>: noodle di riso e brodo con pezzi di carne molto gustosi. Squisita! Costa pochissimo: poco più di un euro.</p>
+        <p>Domani ci sveglieremo presto e andremo ad <strong>Halong Bay</strong> per due giorni e una notte: un'area con circa 3000 piccole isole, patrimonio UNESCO.</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121211-232802.jpg" alt="Hanoi di notte" loading="lazy">
+      </div>
+    </article>
+
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">15 dicembre 2012</span>
+        <span class="post-location">📍 Halong Bay · Hué</span>
+      </div>
+      <h3 class="post-title">Halong Bay e Hué</h3>
+      <div class="post-body">
+        <p>Halong Bay in vietnamita significa "baia del dragone" proprio perché le miriadi di isolotti ricordano la schiena del drago metà sommerso dall'acqua. Ci siamo fermati a vedere due caverne, abbiamo navigato nella baia, e praticato kayaking. La notte in barca non è stata priva di sorprese: dei simpatici topi avevano mangiucchiato i dentifrici e un pezzettino di borsa di Violaine. Ma siccome abbiamo visto un posto meraviglioso, i dettagli meno piacevoli possiamo tralasciarli.</p>
+        <p>Poi 12 ore di treno nelle cuccette notturne e arriviamo a <strong>Hué</strong>, città imperiale nel centro del Vietnam. 3 dollari a notte a testa e la camera da 5 è nostra!</p>
+        <p>Abbiamo visitato la città imperiale tra le mura: un posto indescrivibilmente bello. Un cielo azzurro che faceva risaltare tutte le decorazioni orientali. In bici, su e giù per le colline vietnamite, abbiamo visitato tre siti storici — residenze imperiali con templi, teatri e giardini risalenti al 1800. Stanchi morti siamo tornati in ostello dopo 10 ore di visite. Abbiamo finito "all'italiana": pizza margherita al ristorante "little italy" di Hué.</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121215-221754.jpg" alt="Halong Bay" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121215-221846.jpg" alt="Hué - città imperiale" loading="lazy">
+      </div>
+    </article>
+
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">17 dicembre 2012</span>
+        <span class="post-location">📍 Hoi An · My Son</span>
+      </div>
+      <h3 class="post-title">Hoi An e My Son</h3>
+      <div class="post-body">
+        <p>Arrivo a Hoi An: entriamo nel primo ostello e troviamo un uomo nudo nel dormitorio. Proseguiamo. Nel secondo, scarafaggi nel bagno. La signora che sistema le stanze ha preso i piccoli animaletti per le cornine e li ha portati fuori!</p>
+        <p>Una volta sistemati siamo andati a girare il paesino: un lungofiume affascinante, acqua come olio e colori splendenti. Hoi An è famosa per i vestiti <em>"tailor made"</em>: abbiamo scelto tutto — modello, colore, forma, materiale, design. Dopo ore di trattative, i nostri acquisti sarebbero stati pronti per il giorno successivo.</p>
+        <p>Poi <strong>My Son</strong>, che in vietnamita significa "the beauty of the mountain": un sito archeologico simile ad Angkor Wat, patrimonio UNESCO dal '99. Pesantemente bombardato durante la guerra, non restano che le rovine. Apparentemente era stato costruito con una tecnica avanzata: nessun materiale collante tra un mattone e l'altro, e ancora non hanno capito come.</p>
+      </div>
+    </article>
+
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">19 dicembre 2012</span>
+        <span class="post-location">📍 Mekong Delta</span>
+      </div>
+      <h3 class="post-title">Benvenuti al Sud</h3>
+      <div class="post-body">
+        <p>Giornata di vero relax: spiaggia e sole, hamburger take away con consegna in spiaggia. Arrivati in aeroporto mi è preso un colpo: leggo che il volo per Ho Chi Minh è stato cancellato. Pensavo: la sfiga con i voli mi perseguita. Per una volta c'è un colpo di fortuna: è il volo di 10 minuti prima del nostro! Scampata!</p>
+        <p>Sveglia alle 5.30, direzione <em>Mekong Delta</em>: 4 ore di bus per fare probabilmente meno di 70 km. Arriviamo al fiume, prendiamo la moto taxi, poi la barca. Cielo blu, sole caldissimo e gente sorridente! Tutta la giornata in bicicletta sull'isola An Binh.</p>
+      </div>
+    </article>
+
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">21 dicembre 2012</span>
+        <span class="post-location">📍 Ho Chi Minh / Saigon</span>
+      </div>
+      <h3 class="post-title">Goodbye Vietnam</h3>
+      <div class="post-body">
+        <p>Ultima sera in Vietnam e più precisamente a <strong>Saigon</strong> — che ormai non si chiama più Saigon ma Ho Chi Minh, e voi tutti sapete il perché! Abbiamo visto il mercato galleggiante, le produzioni di riso soffiato, gallette di riso, caramelle al cocco, miele, pappa reale. La cosa più divertente: l'incontro col pitone e il viaggio in moto taxi.</p>
+        <p>La cosa più impressionante di Ho Chi Minh è il traffico. Avete presente via Vittorio Emanuele a Como sotto Natale? Immaginate strade larghe settanta metri, illuminate con decorazioni natalizie, e trafficate da fiumi di motorini. L'aria è irrespirabile.</p>
+        <p>Sto leggendo <em>"Niente e così sia"</em> di Oriana Fallaci: in questo viaggio in cui ho attraversato il Vietnam ho riconosciuto e dato un "volto" a tutti i posti citati nel suo capolavoro. Uno di questi è l'<em>Hotel Continental</em>, lussuoso albergo nel centro di Saigon, dove la Fallaci e altri giornalisti si trovavano per scambiare informazioni o più semplicemente per godere di momenti di "pace".</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121221-191536.jpg" alt="Mekong Delta" loading="lazy">
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121221-191607.jpg" alt="Mercato galleggiante" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121221-193509.jpg" alt="Hotel Continental Saigon" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Oggi il museo della guerra. Impressionante: tre piani di fotografie documentanti la guerra, i suoi orrori e suoi postumi. Domani la sveglia suona alle 5.45 — ore 6.30 bus direzione Phnom Penh, capitale della Cambogia. <strong>Goodbye Vietnam!</strong></p>
+      </div>
+    </article>
+  </div>
+
+  <!-- ═══ CAPITOLO 11: CAMBOGIA ═══ -->
+  <div id="cambogia" class="chapter-header">
+    <p class="chapter-eyebrow">Capitolo XI — Finale</p>
+    <h2 class="chapter-title">Natale<br><em>in Cambogia</em></h2>
+  </div>
+  <div class="timeline-section">
+    <article class="post">
+      <div class="post-meta">
+        <span class="post-date">26 dicembre 2012</span>
+        <span class="post-location">📍 Phnom Penh · Siem Reap</span>
+      </div>
+      <h3 class="post-title">Natale in Cambogia</h3>
+      <div class="post-body">
+        <p>5 giorni in un paese meraviglioso. Ottima meta per passare un natale che difficilmente dimenticherò, anche se il sapore del natale quest'anno è stato proprio diverso. La prima tappa è Phnom Penh: catapecchie circondate da grattacieli, un lussuosissimo palazzo reale nella cui piazza si riversano moltissime persone.</p>
+        <p>Abbiamo visitato il palazzo reale, il museo delle belle arti e la prigione <strong>S21</strong>, cioè una vecchia scuola trasformata in luogo di torture da parte dei khmer rossi dal 1976 al 1979. Pensando a quanto è piccolo il mondo, è proprio in questo orribile posto che incontro un barista del 101 di Noli! Incredibile!</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121227-005702.jpg" alt="Phnom Penh - palazzo reale" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121227-005909.jpg" alt="Angkor Wat" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>Decidiamo di passare il natale in un posto più tranquillo: <em>Siem Reap</em> e i templi di <strong>Angkor Wat</strong>, che visitiamo in bicicletta proprio il 25 di dicembre! Ma siccome è natale ci concediamo anche qualche vizio: 4 ore di spa alla vigilia, e una super cena con tanto di vino bianco la sera di natale.</p>
+      </div>
+      <div class="post-images double">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121227-010029.jpg" alt="Natale a Siem Reap" loading="lazy">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121227-010531.jpg" alt="Lago in Cambogia" loading="lazy">
+      </div>
+      <div class="post-body">
+        <p>S. Stefano: i ragazzi locali ci hanno portate al lago. Relax sulle amache, pollo alla griglia, pesce, bagno nel lago con ciambellone! Ora aspetto il bus per Bangkok per incontrare finalmente il Gio! Ma non lasciamo la Cambogia senza aver fatto prima un bel massaggio, con tanto di pesciolini mangia pellicine.</p>
+      </div>
+      <div class="post-images single">
+        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121227-010453.jpg" alt="Massaggio con pesciolini" loading="lazy">
+      </div>
+      <div class="pull-quote">
+        Bye bye, paese dai tramonti meravigliosi.
+      </div>
+    </article>
+  </div>
+
+</main>
+</div><!-- /site-body -->
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-title">Roberta Riva</p>
+  <div class="footer-line"></div>
+  <p class="footer-sub">Agosto — Dicembre 2012 &nbsp;·&nbsp; Singapore &amp; Sud-Est Asiatico</p>
+  <div style="margin-top:40px; font-family:'Cormorant Garamond',serif; font-style:italic; color:#8a7f72; font-size:16px; max-width:560px; margin-left:auto; margin-right:auto; line-height:1.7;">
+    «Curiosità non è se non vanità. Quasi sempre, si vuol sapere solo per discorrerne.»
+    <br><span style="font-style:normal; font-size:12px; font-family:'DM Mono',monospace; letter-spacing:.15em;">— Blaise Pascal</span>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  // Lightbox
+  document.querySelectorAll('.post-images img').forEach(img => {
+    img.addEventListener('click', () => {
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Staggered animation on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = (i * 0.08) + 's';
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('.post').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
