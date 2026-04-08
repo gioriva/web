@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARTEMIS II — TRAIETTORIA</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #04060a;
+    --deep: #070d1a;
+    --panel: #0a1220;
+    --grid: rgba(0,180,255,0.06);
+    --cyan: #00b4ff;
+    --cyan-dim: rgba(0,180,255,0.3);
+    --amber: #f5a623;
+    --amber-dim: rgba(245,166,35,0.4);
+    --green: #00ff88;
+    --green-dim: rgba(0,255,136,0.2);
+    --red: #ff4444;
+    --white: #e8f0ff;
+    --muted: #4a6080;
+    --font-mono: 'Share Tech Mono', monospace;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* STARFIELD */
+  #stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 20px 48px;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--cyan-dim);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    animation: fadeIn 0.8s ease both;
+  }
+
+  .header-left {}
+  .mission-id {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--cyan);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .mission-name {
+    font-family: var(--font-display);
+    font-size: 56px;
+    line-height: 0.9;
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+  .mission-name span {
+    color: var(--cyan);
+  }
+  .mission-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    letter-spacing: 1px;
+  }
+
+  .header-right {
+    text-align: right;
+  }
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,255,136,0.08);
+    border: 1px solid var(--green);
+    border-radius: 2px;
+    padding: 6px 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: blink 1.2s ease-in-out infinite;
+  }
+  .elapsed {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--amber);
+    letter-spacing: 1px;
+  }
+  .elapsed-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+    animation: fadeIn 0.8s 0.2s ease both;
+  }
+
+  .stat-card {
+    background: var(--panel);
+    border: 1px solid rgba(0,180,255,0.12);
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--cyan);
+    opacity: 0.4;
+  }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    color: var(--cyan);
+    line-height: 1;
+  }
+  .stat-unit {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .stat-card.amber .stat-value { color: var(--amber); }
+  .stat-card.amber::before { background: var(--amber); }
+  .stat-card.green .stat-value { color: var(--green); }
+  .stat-card.green::before { background: var(--green); }
+
+  /* MAIN LAYOUT */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 16px;
+    animation: fadeIn 0.8s 0.4s ease both;
+  }
+
+  /* TRAJECTORY SVG */
+  .trajectory-panel {
+    background: var(--deep);
+    border: 1px solid rgba(0,180,255,0.1);
+    padding: 20px;
+    position: relative;
+  }
+  .panel-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .panel-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0,180,255,0.1);
+  }
+
+  #trajectory-svg {
+    width: 100%;
+    height: 420px;
+  }
+
+  /* TIMELINE */
+  .timeline-panel {
+    background: var(--deep);
+    border: 1px solid rgba(0,180,255,0.1);
+    padding: 20px;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,180,255,0.06);
+    position: relative;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+
+  .timeline-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--muted);
+    margin-top: 4px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .timeline-dot.done {
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green-dim);
+  }
+  .timeline-dot.active {
+    background: var(--amber);
+    box-shadow: 0 0 12px var(--amber-dim);
+    animation: blink 1.2s ease-in-out infinite;
+  }
+  .timeline-dot.future {
+    background: transparent;
+    border: 1.5px solid var(--muted);
+  }
+
+  .timeline-content {}
+  .timeline-date {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .timeline-event {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+  .timeline-item.active-event .timeline-event {
+    color: var(--amber);
+  }
+  .timeline-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* CREW */
+  .crew-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+    animation: fadeIn 0.8s 0.6s ease both;
+  }
+  .crew-card {
+    background: var(--panel);
+    border: 1px solid rgba(0,180,255,0.1);
+    padding: 12px;
+    text-align: center;
+  }
+  .crew-flag {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  .crew-name {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  .crew-role {
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeIn 0.8s 0.8s ease both;
+  }
+  .footer-note {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .source-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  @keyframes orionMove {
+    0%, 100% { transform: translate(0,0); }
+    50% { transform: translate(1px, -1px); }
+  }
+
+  /* Scan line effect */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan-dim), transparent);
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+    z-index: 999;
+  }
+  @keyframes scan {
+    0% { top: 0; }
+    100% { top: 100%; }
+  }
+
+  @media (max-width: 700px) {
+    .main-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .crew-row { grid-template-columns: repeat(2, 1fr); }
+    .mission-name { font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="mission-id">NASA · CSA · ARTEMIS PROGRAM</div>
+      <div class="mission-name">ARTEMIS <span>II</span></div>
+      <div class="mission-sub">ORION "INTEGRITY" · PRIMO VOLO UMANO PROFONDO SPAZIO DAL 1972</div>
+    </div>
+    <div class="header-right">
+      <div class="status-badge"><span class="dot"></span>MISSIONE IN CORSO</div>
+      <div class="elapsed-label">T+ MISSIONE</div>
+      <div class="elapsed" id="elapsed-counter">+39:24:00</div>
+      <div class="elapsed-label" style="margin-top:4px">LANCIO: 1 APR 2026 · 00:35 UTC</div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Distanza dalla Terra</div>
+      <div class="stat-value" id="dist-earth">~320.000</div>
+      <div class="stat-unit">km · in rotta verso la Luna</div>
+    </div>
+    <div class="stat-card amber">
+      <div class="stat-label">Velocità attuale</div>
+      <div class="stat-value">~1,2</div>
+      <div class="stat-unit">km/s · crociera transunar</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-label">Flyby lunare</div>
+      <div class="stat-value">6 APR</div>
+      <div class="stat-unit">~8.000 km dalla superficie</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Durata missione</div>
+      <div class="stat-value">~10</div>
+      <div class="stat-unit">giorni · splashdown Pacifico</div>
+    </div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="main-grid">
+
+    <!-- TRAJECTORY -->
+    <div class="trajectory-panel">
+      <div class="panel-title">TRAIETTORIA MISSIONE · FREE-RETURN LUNAR FLYBY</div>
+      <svg id="trajectory-svg" viewBox="0 0 660 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- Grid lines -->
+        <defs>
+          <pattern id="grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0,180,255,0.04)" stroke-width="1"/>
+          </pattern>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <filter id="glow-strong">
+            <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <radialGradient id="earthGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#1a6bb5"/>
+            <stop offset="60%" stop-color="#0d4a8a"/>
+            <stop offset="100%" stop-color="#051a3a"/>
+          </radialGradient>
+          <radialGradient id="moonGrad" cx="40%" cy="35%" r="50%">
+            <stop offset="0%" stop-color="#8a9ab0"/>
+            <stop offset="100%" stop-color="#2a3545"/>
+          </radialGradient>
+          <radialGradient id="earthGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(26,107,181,0.15)"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+          <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="rgba(0,180,255,0.6)"/>
+          </marker>
+        </defs>
+
+        <rect width="660" height="400" fill="url(#grid)"/>
+
+        <!-- Earth glow -->
+        <circle cx="100" cy="200" r="80" fill="url(#earthGlow)"/>
+
+        <!-- Earth -->
+        <circle cx="100" cy="200" r="32" fill="url(#earthGrad)" filter="url(#glow)"/>
+        <!-- Earth continent hints -->
+        <ellipse cx="95" cy="190" rx="10" ry="14" fill="rgba(34,139,34,0.4)" transform="rotate(-20,95,190)"/>
+        <ellipse cx="110" cy="208" rx="6" ry="10" fill="rgba(34,139,34,0.3)" transform="rotate(10,110,208)"/>
+        <text x="100" y="244" text-anchor="middle" fill="rgba(0,180,255,0.7)" font-family="'Share Tech Mono',monospace" font-size="10" letter-spacing="1">TERRA</text>
+
+        <!-- Moon -->
+        <circle cx="560" cy="200" r="24" fill="url(#moonGrad)" filter="url(#glow)"/>
+        <!-- Moon craters -->
+        <circle cx="553" cy="193" r="4" fill="rgba(0,0,0,0.2)"/>
+        <circle cx="565" cy="208" r="3" fill="rgba(0,0,0,0.15)"/>
+        <circle cx="557" cy="210" r="2" fill="rgba(0,0,0,0.2)"/>
+        <text x="560" y="236" text-anchor="middle" fill="rgba(180,180,200,0.7)" font-family="'Share Tech Mono',monospace" font-size="10" letter-spacing="1">LUNA</text>
+        <text x="560" y="249" text-anchor="middle" fill="rgba(120,130,150,0.6)" font-family="'Share Tech Mono',monospace" font-size="9">6 APR · flyby</text>
+
+        <!-- FREE-RETURN TRAJECTORY -->
+        <!-- Outbound path: Earth orbit → TLI → Moon flyby -->
+        <!-- Phase 1: Earth parking orbit (circle around Earth) -->
+        <path d="M 100 168 
+                 C 100 168, 140 158, 155 170
+                 C 170 182, 132 232, 100 232" 
+              fill="none" stroke="rgba(0,180,255,0.25)" stroke-width="1.5" stroke-dasharray="4,4"/>
+        <text x="158" y="165" fill="rgba(0,180,255,0.5)" font-family="'Share Tech Mono',monospace" font-size="9">ORBITA PARCHEGGIO</text>
+        <text x="158" y="175" fill="rgba(0,180,255,0.4)" font-family="'Share Tech Mono',monospace" font-size="8">2 giri · TEST SISTEMI</text>
+
+        <!-- TLI arrow indicator -->
+        <line x1="155" y1="170" x2="200" y2="150" stroke="rgba(245,166,35,0.5)" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text x="202" y="148" fill="rgba(245,166,35,0.7)" font-family="'Share Tech Mono',monospace" font-size="9">TLI BURN</text>
+        <text x="202" y="158" fill="rgba(245,166,35,0.5)" font-family="'Share Tech Mono',monospace" font-size="8">2 APR</text>
+
+        <!-- Main outbound arc (Earth → Moon) -->
+        <!-- Curva: M 155 170 Q 350 60 536 176 (arriva tangente sul bordo nord della Luna) -->
+        <path d="M 155 170 Q 350 60 536 176" 
+              fill="none" stroke="rgba(0,180,255,0.5)" stroke-width="2"/>
+
+        <!-- Flyby arc: gira attorno alla Luna ESTERNAMENTE, raggio ~38 dal centro (560,200) -->
+        <!-- Entra da nord, curva a est, esce a sud. Luna r=24, flyby a ~38px = margine 14px -->
+        <path d="M 536 176 C 548 162 578 162 592 200 C 606 238 578 242 536 224"
+              fill="none" stroke="rgba(180,180,200,0.65)" stroke-width="2"/>
+
+        <!-- Return arc (Moon → Earth, lower) -->
+        <path d="M 536 224 Q 370 340 132 232" 
+              fill="none" stroke="rgba(0,180,255,0.3)" stroke-width="1.5" stroke-dasharray="6,3"/>
+
+        <!-- Direction arrows on outbound -->
+        <path d="M 295 108 L 307 103" stroke="rgba(0,180,255,0.6)" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <path d="M 430 137 L 441 142" stroke="rgba(0,180,255,0.6)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- Direction arrow on flyby -->
+        <path d="M 592 198 L 592 212" stroke="rgba(180,180,200,0.6)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- Direction arrows on return -->
+        <path d="M 400 308 L 388 312" stroke="rgba(0,180,255,0.4)" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <path d="M 250 278 L 238 268" stroke="rgba(0,180,255,0.4)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- Flyby label -->
+        <text x="608" y="196" fill="rgba(180,180,200,0.65)" font-family="'Share Tech Mono',monospace" font-size="9">FREE-RETURN</text>
+        <text x="608" y="207" fill="rgba(180,180,200,0.5)" font-family="'Share Tech Mono',monospace" font-size="9">FLYBY ~8.000 km</text>
+
+        <!-- ORION: punto matematico sulla curva Q 350 60 a t=0.40 -->
+        <!-- x = 0.36*155 + 0.48*350 + 0.16*536 = 55.8+168+85.8 = 309.6 -->
+        <!-- y = 0.36*170 + 0.48*60  + 0.16*176 = 61.2+28.8+28.2 = 118.2 -->
+        <g id="orion-pos" transform="translate(310, 118)">
+          <circle r="0" fill="none" stroke="rgba(245,166,35,0.18)" stroke-width="1.5">
+            <animate attributeName="r" values="14;26;14" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.7;0;0.7" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle r="0" fill="none" stroke="rgba(245,166,35,0.4)" stroke-width="1.5">
+            <animate attributeName="r" values="9;16;9" dur="2s" begin="0.35s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.9;0.1;0.9" dur="2s" begin="0.35s" repeatCount="indefinite"/>
+          </circle>
+          <circle r="8" fill="#f5a623" filter="url(#glow-strong)"/>
+          <circle r="4" fill="#fff8e0"/>
+        </g>
+
+        <!-- Leader line verticale → etichetta (posizione aggiornata via JS) -->
+        <line id="leader-v" x1="310" y1="109" x2="310" y2="68" stroke="rgba(245,166,35,0.55)" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <line id="leader-h" x1="310" y1="68" x2="502" y2="68" stroke="rgba(245,166,35,0.55)" stroke-width="1.2"/>
+        <rect id="label-box" x="310" y="52" width="192" height="32" fill="rgba(10,18,32,0.93)" stroke="rgba(245,166,35,0.75)" stroke-width="1" rx="1"/>
+        <text id="label-text1" x="320" y="66" fill="#f5a623" font-family="'Share Tech Mono',monospace" font-size="11" font-weight="bold" letter-spacing="1">ORION "INTEGRITY"</text>
+        <text id="label-text2" x="320" y="79" fill="rgba(245,166,35,0.75)" font-family="'Share Tech Mono',monospace" font-size="9" letter-spacing="0.5">POSIZIONE EST. · IN TEMPO REALE</text>
+
+        <!-- Splashdown marker -->
+        <circle cx="132" cy="232" r="5" fill="none" stroke="var(--green)" stroke-width="1.5"/>
+        <circle cx="132" cy="232" r="2" fill="var(--green)"/>
+        <text x="95" y="260" fill="rgba(0,255,136,0.7)" font-family="'Share Tech Mono',monospace" font-size="9">SPLASHDOWN</text>
+        <text x="95" y="270" fill="rgba(0,255,136,0.5)" font-family="'Share Tech Mono',monospace" font-size="8">~10 APR · PACIFICO</text>
+
+        <!-- Record distance label -->
+        <line x1="555" y1="172" x2="555" y2="100" stroke="rgba(255,68,68,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="470" y="96" fill="rgba(255,68,68,0.7)" font-family="'Share Tech Mono',monospace" font-size="9">RECORD UMANO: &gt;400.171 km</text>
+        <text x="470" y="107" fill="rgba(255,68,68,0.5)" font-family="'Share Tech Mono',monospace" font-size="8">PREV. APOLLO 13 · 1970</text>
+
+        <!-- Scale bar -->
+        <line x1="60" y1="375" x2="200" y2="375" stroke="rgba(0,180,255,0.3)" stroke-width="1"/>
+        <line x1="60" y1="370" x2="60" y2="380" stroke="rgba(0,180,255,0.3)" stroke-width="1"/>
+        <line x1="200" y1="370" x2="200" y2="380" stroke="rgba(0,180,255,0.3)" stroke-width="1"/>
+        <text x="130" y="390" text-anchor="middle" fill="rgba(0,180,255,0.4)" font-family="'Share Tech Mono',monospace" font-size="9">≈ 200.000 km (proporzionale)</text>
+
+        <!-- Legend -->
+        <line x1="380" y1="368" x2="410" y2="368" stroke="rgba(0,180,255,0.5)" stroke-width="2"/>
+        <text x="415" y="372" fill="rgba(0,180,255,0.6)" font-family="'Share Tech Mono',monospace" font-size="9">rotta andata</text>
+        <line x1="380" y1="382" x2="410" y2="382" stroke="rgba(0,180,255,0.3)" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <text x="415" y="386" fill="rgba(0,180,255,0.5)" font-family="'Share Tech Mono',monospace" font-size="9">rotta ritorno</text>
+      </svg>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="timeline-panel">
+      <div class="panel-title">CRONOLOGIA MISSIONE</div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot done"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">1 APR · 00:35 UTC</div>
+          <div class="timeline-event">Lancio SLS</div>
+          <div class="timeline-desc">Decollo da KSC 39B, Kennedy Space Center</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot done"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">1 APR · ore successive</div>
+          <div class="timeline-event">Separazione stadio ICPS</div>
+          <div class="timeline-desc">Demo prossimità manuale con stadio criogenico</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot done"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">1-2 APR</div>
+          <div class="timeline-event">Orbita di parcheggio</div>
+          <div class="timeline-desc">2 orbite terrestri, verifica sistemi e life support</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot done"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">2 APR · burn +43s</div>
+          <div class="timeline-event">TLI — Trans-Lunar Injection</div>
+          <div class="timeline-desc">Motore principale, rotta verso la Luna stabilita</div>
+        </div>
+      </div>
+
+      <div class="timeline-item active-event">
+        <div class="timeline-dot active"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">3 APR · ORA</div>
+          <div class="timeline-event">⟶ CROCIERA TRANSUNAR</div>
+          <div class="timeline-desc">Distanza stimata ~320.000 km dalla Terra. Il deep space ha cominciato.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot future"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">6 APR</div>
+          <div class="timeline-event">Flyby lunare</div>
+          <div class="timeline-desc">Avvicinamento max ~8.000 km. Record umano &gt; 400.171 km</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot future"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">6-10 APR</div>
+          <div class="timeline-event">Rientro free-return</div>
+          <div class="timeline-desc">4 giorni di rientro, correzioni di traiettoria</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot future"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~10 APR</div>
+          <div class="timeline-event">Splashdown</div>
+          <div class="timeline-desc">Oceano Pacifico, San Diego. Rientro a 40.000 km/h. Recupero US Navy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREW -->
+  <div class="crew-row">
+    <div class="crew-card">
+      <div class="crew-flag">🇺🇸</div>
+      <div class="crew-name">REID WISEMAN</div>
+      <div class="crew-role">Comandante</div>
+    </div>
+    <div class="crew-card">
+      <div class="crew-flag">🇺🇸</div>
+      <div class="crew-name">VICTOR GLOVER</div>
+      <div class="crew-role">Pilota</div>
+    </div>
+    <div class="crew-card">
+      <div class="crew-flag">🇺🇸</div>
+      <div class="crew-name">CHRISTINA KOCH</div>
+      <div class="crew-role">Specialista missione</div>
+    </div>
+    <div class="crew-card">
+      <div class="crew-flag">🇨🇦</div>
+      <div class="crew-name">JEREMY HANSEN</div>
+      <div class="crew-role">Specialista missione</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-note">Traiettoria schematica non in scala. Posizione stimata su dati pubblici NASA.</div>
+    <div class="source-tag">NASA.GOV · APR 2026</div>
+  </div>
+
+</div>
+
+<script>
+// STARFIELD
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const stars = Array.from({length: 280}, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  r: Math.random() * 1.4 + 0.2,
+  alpha: Math.random() * 0.7 + 0.1,
+  speed: Math.random() * 0.3 + 0.05
+}));
+
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(200,220,255,${s.alpha})`;
+    ctx.fill();
+    s.alpha += (Math.random() - 0.5) * 0.02;
+    s.alpha = Math.max(0.05, Math.min(0.85, s.alpha));
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+// ─── MISSIONE TIMELINE ───────────────────────────────────────────────────────
+// Tutte le date in UTC
+const LAUNCH     = new Date('2026-04-01T00:35:00Z'); // T+0
+const TLI        = new Date('2026-04-02T06:00:00Z'); // fine orbita parcheggio, TLI burn
+const FLYBY_IN   = new Date('2026-04-06T08:00:00Z'); // inizio flyby (avvicinamento Luna)
+const FLYBY_PEAK = new Date('2026-04-06T14:00:00Z'); // closest approach
+const FLYBY_OUT  = new Date('2026-04-06T20:00:00Z'); // fine flyby, rotta ritorno
+const SPLASHDOWN = new Date('2026-04-11T00:00:00Z'); // T+~240h
+
+// ─── CURVE SVG (devono specchiare esattamente il markup) ─────────────────────
+//
+// Segmento A – orbita parcheggio (arco attorno alla Terra, semplificato come
+//              interpolazione lineare tra due estremi della curva dashata)
+//   da: (100, 168) a: (155, 170)  — piccolo loop; lo modelliamo come quadratica
+//   P0=(100,168)  P1=(148,150)  P2=(155,170)
+//
+// Segmento B – transito Terra→Luna (outbound)
+//   M 155 170  Q 350 60  536 176
+//   P0=(155,170) P1=(350,60) P2=(536,176)
+//
+// Segmento C – flyby lunare (cubica)
+//   M 536 176  C 548 162  578 162  592 200  C 606 238  578 242  536 224
+//   Divisa in due cubiche: C1 e C2
+//   C1: P0=(536,176) P1=(548,162) P2=(578,162) P3=(592,200)
+//   C2: P0=(592,200) P1=(606,238) P2=(578,242) P3=(536,224)
+//
+// Segmento D – rientro (return arc)
+//   M 536 224  Q 370 340  132 232
+//   P0=(536,224) P1=(370,340) P2=(132,232)
+
+function quadBezier(t, p0, p1, p2) {
+  const u = 1 - t;
+  return {
+    x: u*u*p0.x + 2*u*t*p1.x + t*t*p2.x,
+    y: u*u*p0.y + 2*u*t*p1.y + t*t*p2.y
+  };
+}
+
+function cubicBezier(t, p0, p1, p2, p3) {
+  const u = 1 - t;
+  return {
+    x: u*u*u*p0.x + 3*u*u*t*p1.x + 3*u*t*t*p2.x + t*t*t*p3.x,
+    y: u*u*u*p0.y + 3*u*u*t*p1.y + 3*u*t*t*p2.y + t*t*t*p3.y
+  };
+}
+
+// Pesi temporali dei segmenti sulla durata totale
+// A: lancio → TLI
+// B: TLI → flyby_in
+// C: flyby_in → flyby_out  (flyby)
+// D: flyby_out → splashdown
+const SEG = {
+  A: { start: LAUNCH,    end: TLI },
+  B: { start: TLI,       end: FLYBY_IN },
+  C: { start: FLYBY_IN,  end: FLYBY_OUT },
+  D: { start: FLYBY_OUT, end: SPLASHDOWN }
+};
+
+function getOrionPosition(now) {
+  if (now < LAUNCH)     return quadBezier(0, {x:100,y:168}, {x:148,y:150}, {x:155,y:170});
+  if (now > SPLASHDOWN) return {x:132, y:232};
+
+  function segT(seg) {
+    return Math.min(1, Math.max(0,
+      (now - seg.start) / (seg.end - seg.start)
+    ));
+  }
+
+  if (now < TLI) {
+    // Segmento A: orbita parcheggio
+    const t = segT(SEG.A);
+    return quadBezier(t, {x:100,y:168}, {x:148,y:150}, {x:155,y:170});
+  }
+  if (now < FLYBY_IN) {
+    // Segmento B: transito outbound
+    const t = segT(SEG.B);
+    return quadBezier(t, {x:155,y:170}, {x:350,y:60}, {x:536,y:176});
+  }
+  if (now < FLYBY_OUT) {
+    // Segmento C: flyby (due cubiche concatenate, split a metà)
+    const t = segT(SEG.C);
+    if (t < 0.5) {
+      const t2 = t / 0.5;
+      return cubicBezier(t2, {x:536,y:176}, {x:548,y:162}, {x:578,y:162}, {x:592,y:200});
+    } else {
+      const t2 = (t - 0.5) / 0.5;
+      return cubicBezier(t2, {x:592,y:200}, {x:606,y:238}, {x:578,y:242}, {x:536,y:224});
+    }
+  }
+  // Segmento D: rientro
+  const t = segT(SEG.D);
+  return quadBezier(t, {x:536,y:224}, {x:370,y:340}, {x:132,y:232});
+}
+
+// ─── ELAPSED COUNTER ─────────────────────────────────────────────────────────
+function updateCounter() {
+  const now = new Date();
+  const diff = Math.floor((now - LAUNCH) / 1000);
+  if (diff < 0) return;
+  const h = Math.floor(diff / 3600);
+  const m = Math.floor((diff % 3600) / 60);
+  const s = diff % 60;
+  document.getElementById('elapsed-counter').textContent =
+    `+${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+// ─── DISTANCE ESTIMATE ───────────────────────────────────────────────────────
+function updateDistance() {
+  const now = new Date();
+  const diffH = (now - LAUNCH) / 3600000;
+  const tliH  = (TLI - LAUNCH) / 3600000;
+
+  let dist;
+  if (now < TLI) {
+    dist = 400; // parking orbit
+  } else if (now < FLYBY_IN) {
+    // outbound: 0→~395000 km in ~96h
+    const elapsed = (now - TLI) / 3600000;
+    const total   = (FLYBY_IN - TLI) / 3600000;
+    dist = Math.round((elapsed / total) * 395000);
+  } else if (now < FLYBY_PEAK) {
+    // avvicinamento: 395000→~8000 km
+    const elapsed = (now - FLYBY_IN) / 3600000;
+    const total   = (FLYBY_PEAK - FLYBY_IN) / 3600000;
+    dist = Math.round(395000 - (elapsed / total) * 387000);
+  } else if (now < FLYBY_OUT) {
+    // allontanamento: 8000→~395000
+    const elapsed = (now - FLYBY_PEAK) / 3600000;
+    const total   = (FLYBY_OUT - FLYBY_PEAK) / 3600000;
+    dist = Math.round(8000 + (elapsed / total) * 387000);
+  } else if (now < SPLASHDOWN) {
+    // rientro: 395000→0
+    const elapsed = (now - FLYBY_OUT) / 3600000;
+    const total   = (SPLASHDOWN - FLYBY_OUT) / 3600000;
+    dist = Math.round(395000 - (elapsed / total) * 395000);
+  } else {
+    dist = 0;
+  }
+
+  const formatted = dist > 1000
+    ? '~' + dist.toLocaleString('it-IT')
+    : dist;
+  document.getElementById('dist-earth').textContent = formatted;
+}
+
+// ─── PALLINO ORION: aggiornamento SVG ────────────────────────────────────────
+const orionGroup    = document.getElementById('orion-pos');
+const leaderV       = document.getElementById('leader-v');
+const leaderH       = document.getElementById('leader-h');
+const labelBox      = document.getElementById('label-box');
+const labelText1    = document.getElementById('label-text1');
+const labelText2    = document.getElementById('label-text2');
+
+function updateOrion() {
+  const now = new Date();
+  const pos = getOrionPosition(now);
+
+  // Sposta il gruppo
+  orionGroup.setAttribute('transform', `translate(${pos.x.toFixed(1)}, ${pos.y.toFixed(1)})`);
+
+  // Aggiorna leader line e label
+  // La label sta sempre sopra il pallino se c'è spazio, altrimenti sotto
+  const labelY = pos.y > 200 ? pos.y - 60 : pos.y - 55;
+  const labelX = Math.min(Math.max(pos.x - 96, 10), 460);
+
+  leaderV.setAttribute('x1', pos.x.toFixed(1));
+  leaderV.setAttribute('x2', pos.x.toFixed(1));
+  leaderV.setAttribute('y1', (pos.y - 9).toFixed(1));
+  leaderV.setAttribute('y2', (labelY + 32).toFixed(1));
+
+  leaderH.setAttribute('x1', pos.x.toFixed(1));
+  leaderH.setAttribute('x2', (labelX + 192).toFixed(1));
+  leaderH.setAttribute('y1', (labelY + 32).toFixed(1));
+  leaderH.setAttribute('y2', (labelY + 32).toFixed(1));
+
+  labelBox.setAttribute('x', labelX.toFixed(1));
+  labelBox.setAttribute('y', labelY.toFixed(1));
+  labelText1.setAttribute('x', (labelX + 10).toFixed(1));
+  labelText1.setAttribute('y', (labelY + 14).toFixed(1));
+  labelText2.setAttribute('x', (labelX + 10).toFixed(1));
+  labelText2.setAttribute('y', (labelY + 27).toFixed(1));
+}
+
+// ─── TICK PRINCIPALE ─────────────────────────────────────────────────────────
+function tick() {
+  updateCounter();
+  updateDistance();
+  updateOrion();
+}
+tick();
+setInterval(tick, 1000);
+</script>
+</body>
+</html>
