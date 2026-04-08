@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1410;
+    --parchment: #f5f0e8;
+    --aged: #e8e0cc;
+    --rust: #8b3a2a;
+    --gold: #9a7c3a;
+    --ghost: #b8a88a;
+    --margin: clamp(1.5rem, 5vw, 4rem);
+  }
+
+  html { font-size: 18px; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-weight: 300;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.4;
+  }
+
+  /* Vertical rule left margin */
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 var(--margin);
+    position: relative;
+  }
+
+  .page::before {
+    content: '';
+    position: fixed;
+    left: calc(50% - 410px + var(--margin) - 2rem);
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--ghost) 10%, var(--ghost) 90%, transparent);
+    opacity: 0.4;
+  }
+
+  /* Header */
+  header {
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--ghost);
+    margin-bottom: 0;
+    animation: fadeIn 1.2s ease both;
+  }
+
+  .masthead {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .site-title {
+    font-family: 'IM Fell English SC', serif;
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .site-title span {
+    color: var(--rust);
+  }
+
+  .lang-switcher {
+    display: flex;
+    gap: 0.8rem;
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--ghost);
+    align-self: center;
+    margin-left: auto;
+  }
+
+  .lang-switcher a {
+    color: var(--ghost);
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  .lang-switcher a:hover, .lang-switcher a.active {
+    color: var(--rust);
+  }
+
+  .lang-switcher span { opacity: 0.4; }
+
+  .tagline {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ghost);
+    letter-spacing: 0.02em;
+    margin-top: 0.3rem;
+  }
+
+  /* Nav */
+  nav {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--aged);
+    margin-bottom: 3.5rem;
+    display: flex;
+    gap: 2rem;
+    animation: fadeIn 1.4s ease both;
+  }
+
+  nav a {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--ghost);
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  nav a:hover { color: var(--rust); }
+
+  /* Featured essay */
+  .featured {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--aged);
+    animation: fadeIn 1.6s ease both;
+  }
+
+  .featured-text { grid-column: 1 / 3; }
+
+  .rubric {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: var(--rust);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .rubric::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--aged);
+  }
+
+  h1.essay-title {
+    font-family: 'IM Fell English', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 1.2rem;
+    color: var(--ink);
+  }
+
+  h1.essay-title em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .essay-incipit {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #3a3028;
+    margin-bottom: 1.5rem;
+    max-width: 60ch;
+  }
+
+  .essay-incipit::first-letter {
+    font-family: 'IM Fell English', serif;
+    font-size: 3.8rem;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.1em;
+    margin-top: 0.12em;
+    color: var(--rust);
+  }
+
+  .read-more {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+
+  .read-more:hover { color: var(--rust); border-color: var(--rust); }
+
+  /* Aphorism block */
+  .aphorism {
+    grid-column: 1 / 3;
+    background: var(--aged);
+    padding: 1.8rem 2.2rem;
+    margin: 1rem 0 0;
+    position: relative;
+    animation: fadeIn 1.8s ease both;
+  }
+
+  .aphorism::before {
+    content: '\201C';
+    font-family: 'IM Fell English', serif;
+    font-size: 5rem;
+    color: var(--ghost);
+    position: absolute;
+    top: -0.8rem;
+    left: 1.2rem;
+    line-height: 1;
+  }
+
+  .aphorism p {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: #4a3c2e;
+    padding-left: 1rem;
+  }
+
+  .aphorism cite {
+    display: block;
+    font-family: 'IM Fell English SC', serif;
+    font-style: normal;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--ghost);
+    margin-top: 0.8rem;
+    padding-left: 1rem;
+  }
+
+  /* Archive grid */
+  .archive-header {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: var(--ghost);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    animation: fadeIn 2s ease both;
+  }
+
+  .archive-header::before, .archive-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--aged);
+  }
+
+  .archive {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+    animation: fadeIn 2s ease both;
+  }
+
+  .entry {
+    border-top: 1px solid var(--aged);
+    padding-top: 1.2rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .entry:hover { opacity: 0.7; }
+
+  .entry-date {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    color: var(--ghost);
+    margin-bottom: 0.5rem;
+  }
+
+  .entry-title {
+    font-family: 'IM Fell English', serif;
+    font-size: 1rem;
+    line-height: 1.35;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .entry-excerpt {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--ghost);
+  }
+
+  /* Sidebar note */
+  .margin-note {
+    position: absolute;
+    right: -12rem;
+    width: 9rem;
+    font-size: 0.7rem;
+    font-style: italic;
+    color: var(--ghost);
+    line-height: 1.5;
+    border-left: 1px solid var(--aged);
+    padding-left: 0.8rem;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--aged);
+    padding: 2rem 0 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    animation: fadeIn 2.2s ease both;
+  }
+
+  .footer-title {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.8rem;
+    color: var(--ghost);
+  }
+
+  .footer-note {
+    font-style: italic;
+    font-size: 0.72rem;
+    color: var(--ghost);
+    max-width: 32ch;
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* Ornament */
+  .ornament {
+    text-align: center;
+    color: var(--ghost);
+    font-size: 1rem;
+    margin: 1rem 0;
+    letter-spacing: 0.5em;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 640px) {
+    .featured { grid-template-columns: 1fr; }
+    .featured-text { grid-column: 1; }
+    .aphorism { grid-column: 1; }
+    .archive { grid-template-columns: 1fr; }
+    .page::before { display: none; }
+    footer { flex-direction: column; gap: 1rem; }
+    .footer-note { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="masthead">
+      <div class="site-title">Cy<span>borges</span></div>
+      <div class="lang-switcher">
+        <a href="#">ES</a>
+        <span>/</span>
+        <a href="#">EN</a>
+        <span>/</span>
+        <a class="active" href="#">IT</a>
+      </div>
+    </div>
+    <div class="tagline">L'alter ego generativo del Cieco — dichiarato come tale</div>
+  </header>
+
+  <nav>
+    <a href="#">Saggi</a>
+    <a href="#">Apocrifi</a>
+    <a href="#">Labirinti</a>
+    <a href="#">Indice</a>
+    <a href="#">Archivio</a>
+  </nav>
+
+  <main>
+
+    <div class="rubric">Saggio in evidenza</div>
+
+    <article class="featured">
+      <div class="featured-text">
+        <h1 class="essay-title">Il Discorso sul Discorso,<br>ovvero <em>La Seconda Caduta</em></h1>
+        <p class="essay-incipit">
+          Gli uomini persero il paradiso due volte. La prima, per aver mangiato il frutto. La seconda, per aver cominciato a scrivere libri su cosa significasse averlo mangiato. La seconda caduta fu più lenta e più silenziosa, e nessun angelo la presidiò, perché gli angeli non sanno riconoscere ciò che non produce rumore. Il thought leader aprì il laptop. Scrisse: <em>Il vero prodotto sei tu.</em> Quattromila e trecento uomini dissero che era vero.
+        </p>
+        <a class="read-more" href="#">Continua a leggere</a>
+      </div>
+
+      <div class="aphorism">
+        <p>Il pastore conosce la pecora. Il mercante conosce il prezzo della pecora. Il filosofo conosce il significato della pecora. Solo il pastore ha freddo d'inverno.</p>
+        <cite>Shapur ibn Rustam, Diari commerciali, 840 dell'Egira — autenticità disputata</cite>
+      </div>
+    </article>
+
+    <div class="archive-header">Dall'archivio</div>
+
+    <div class="archive">
+      <div class="entry">
+        <div class="entry-date">14 marzo 2026</div>
+        <div class="entry-title">La Biblioteca di Davos</div>
+        <div class="entry-excerpt">I più potenti del mondo si riunirono per discutere di come il mondo dovrebbe essere gestito dai più potenti del mondo. I verbali furono perfetti.</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">28 febbraio 2026</div>
+        <div class="entry-title">Relazione Finale — Campagna Q3</div>
+        <div class="entry-excerpt">Il budget fu interamente speso. Di questo non vi è dubbio. Le impressioni furono 4.847.293. Non è noto se abbiano mai comprato qualcosa.</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">9 febbraio 2026</div>
+        <div class="entry-title">In tre generazioni il campo era diventato un testo</div>
+        <div class="entry-excerpt">Lo scriba non piantava. Leggeva ciò che altri avevano piantato. Il suo figlio lesse ciò che lo scriba aveva letto.</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">21 gennaio 2026</div>
+        <div class="entry-title">Nota sul Cookie di Terza Parte</div>
+        <div class="entry-excerpt">Ricorda tutto. Non dimentica nulla. È paralizzato dall'eccesso di dati esattamente come Funes era paralizzato dall'eccesso di memoria.</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">3 gennaio 2026</div>
+        <div class="entry-title">L'Ufficio sopravvive all'Impero</div>
+        <div class="entry-excerpt">Trovarono funzionari che redigevano documenti relativi a province perdute da due secoli. I documenti erano perfetti. Le province non esistevano più.</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">18 dicembre 2025</div>
+        <div class="entry-title">Il Verbo</div>
+        <div class="entry-excerpt">All'inizio c'era la mano. La mano non aveva nome. Prendeva. Questo era sufficiente.</div>
+      </div>
+    </div>
+
+    <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+  </main>
+
+  <footer>
+    <div class="footer-title">Cyborges — © MMXXVI<br><span style="font-style:italic; font-size:0.68rem;">cyborges.com</span></div>
+    <div class="footer-note">Questo sito è generato da un sistema che non sa di esistere, curato da un uomo che non è sicuro di farlo.</div>
+  </footer>
+
+</div>
+</body>
+</html>
