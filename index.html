@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giorgio Riva</title>
+<meta name="description" content="Freedom is a state of mind.">
+<meta property="og:title" content="Giorgio Riva">
+<meta property="og:description" content="Freedom is a state of mind.">
+<meta property="og:image" content="https://www.gioriva.it/logo_gr_home.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Giorgio Riva">
+<meta name="twitter:description" content="Freedom is a state of mind.">
+<meta name="twitter:image" content="https://www.gioriva.it/logo_gr_home.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0E0E0E;
+  --line: rgba(255,255,255,0.07);
+  --text: #E8E2D9;
+  --muted: #6B6560;
+  --accent: #C8A97E;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Montserrat', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='500' viewBox='0 0 900 500'%3E%3Cdefs%3E%3CradialGradient id='vignette' cx='50%25' cy='50%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='%230E0E0E' stop-opacity='0'/%3E%3Cstop offset='100%25' stop-color='%230E0E0E' stop-opacity='0.82'/%3E%3C/radialGradient%3E%3C/defs%3E%3C!-- Parallels --%3E%3Cellipse cx='450' cy='250' rx='420' ry='30' fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.07'/%3E%3Cellipse cx='450' cy='250' rx='400' ry='90' fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.07'/%3E%3Cellipse cx='450' cy='250' rx='360' ry='145' fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.07'/%3E%3Cellipse cx='450' cy='250' rx='300' ry='190' fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.07'/%3E%3Cellipse cx='450' cy='250' rx='230' ry='220' fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.07'/%3E%3Cellipse cx='450' cy='250' rx='150' ry='240' fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.07'/%3E%3Cellipse cx='450' cy='250' rx='70' ry='248' fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.07'/%3E%3C!-- Equator highlighted --%3E%3Cline x1='20' y1='250' x2='880' y2='250' stroke='%23C8A97E' stroke-width='0.5' stroke-opacity='0.12'/%3E%3C!-- Meridians --%3E%3Cellipse cx='450' cy='250' rx='15' ry='248' fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.06'/%3E%3Cellipse cx='450' cy='250' rx='80' ry='248' fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.06'/%3E%3Cellipse cx='450' cy='250' rx='160' ry='248' fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.06'/%3E%3Cellipse cx='450' cy='250' rx='240' ry='248' fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.06'/%3E%3Cellipse cx='450' cy='250' rx='320' ry='248' fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.06'/%3E%3Cellipse cx='450' cy='250' rx='390' ry='248' fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.06'/%3E%3C!-- Central meridian highlighted --%3E%3Cellipse cx='450' cy='250' rx='1' ry='248' fill='none' stroke='%23C8A97E' stroke-width='0.6' stroke-opacity='0.12'/%3E%3C!-- Vignette overlay --%3E%3Crect width='900' height='500' fill='url(%23vignette)'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  height: 100vh;
+  overflow: hidden;
+  cursor: none;
+}
+
+a, button { cursor: none; }
+
+/* CURSOR */
+#cur-dot {
+  position: fixed;
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width .2s, height .2s, background .2s;
+}
+#cur-ring {
+  position: fixed;
+  width: 32px; height: 32px;
+  border: 1px solid rgba(200,169,126,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width .25s, height .25s, border-color .25s;
+}
+body.hov #cur-dot { width: 10px; height: 10px; background: #fff; }
+body.hov #cur-ring { width: 50px; height: 50px; border-color: rgba(200,169,126,0.9); }
+
+/* HERO */
+.hero {
+  height: calc(100vh - 60px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 0 3.5rem;
+  gap: 4rem;
+}
+.hero-left { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(4rem, 7.5vw, 8.5rem);
+  font-weight: 300;
+  line-height: 0.95;
+  color: var(--text);
+}
+.hero-name em { font-style: italic; color: var(--accent); }
+
+.hero-rule { width: 36px; height: 1px; background: var(--accent); opacity: 0.6; }
+
+.hero-tagline {
+  font-family: var(--serif);
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 340px;
+}
+
+.hero-right { display: flex; align-items: center; justify-content: center; }
+
+#globe-wrap { width: min(48vw, 560px); height: min(48vw, 560px); position: relative; }
+#globe-wrap svg { width: 100%; height: 100%; display: block; }
+#city-overlay { position: absolute; inset: 0; pointer-events: none; }
+
+/* FOOTER */
+footer {
+  height: 60px;
+  border-top: 1px solid var(--line);
+  padding: 0 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.footer-links { display: flex; gap: 2.5rem; list-style: none; }
+.footer-links a {
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.footer-links a:hover { color: var(--accent); }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-name    { animation: fadeUp .7s ease both .25s; }
+.hero-rule    { animation: fadeUp .5s ease both .4s; }
+.hero-tagline { animation: fadeUp .7s ease both .5s; }
+.hero-right   { animation: fadeUp 1s  ease both .3s; }
+
+/* DRONE */
+#drone {
+  position: fixed;
+  pointer-events: auto;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  cursor: none;
+}
+#drone.visible { opacity: 1; }
+#drone svg { display: block; }
+#drone:hover svg { filter: brightness(1.4); }
+#drone a { display: block; text-decoration: none; }
+
+@media (max-width: 768px) {
+  body { overflow-y: auto; height: auto; }
+  .hero { height: auto; min-height: 100vh; grid-template-columns: 1fr; padding: 2rem 1.5rem; gap: 2rem; }
+  #globe-wrap { width: 75vw; height: 75vw; }
+  footer { height: auto; padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<!-- Drone -->
+<div id="drone">
+  <a href="https://www.gioriva.it/drone/" target="_blank">
+  <svg width="52" height="38" viewBox="0 0 52 38" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <!-- Arms -->
+    <line x1="10" y1="10" x2="26" y2="19" stroke="#C8A97E" stroke-width="1.2" stroke-opacity="0.7"/>
+    <line x1="42" y1="10" x2="26" y2="19" stroke="#C8A97E" stroke-width="1.2" stroke-opacity="0.7"/>
+    <line x1="10" y1="28" x2="26" y2="19" stroke="#C8A97E" stroke-width="1.2" stroke-opacity="0.7"/>
+    <line x1="42" y1="28" x2="26" y2="19" stroke="#C8A97E" stroke-width="1.2" stroke-opacity="0.7"/>
+    <!-- Motor hubs -->
+    <circle cx="10" cy="10" r="4" fill="#1a1a1a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.6"/>
+    <circle cx="42" cy="10" r="4" fill="#1a1a1a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.6"/>
+    <circle cx="10" cy="28" r="4" fill="#1a1a1a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.6"/>
+    <circle cx="42" cy="28" r="4" fill="#1a1a1a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.6"/>
+    <!-- Propellers TL -->
+    <ellipse id="p1" cx="10" cy="10" rx="8" ry="1.5" fill="#C8A97E" fill-opacity="0.25" stroke="#C8A97E" stroke-width="0.5" stroke-opacity="0.5"/>
+    <!-- Propellers TR -->
+    <ellipse id="p2" cx="42" cy="10" rx="8" ry="1.5" fill="#C8A97E" fill-opacity="0.25" stroke="#C8A97E" stroke-width="0.5" stroke-opacity="0.5"/>
+    <!-- Propellers BL -->
+    <ellipse id="p3" cx="10" cy="28" rx="8" ry="1.5" fill="#C8A97E" fill-opacity="0.25" stroke="#C8A97E" stroke-width="0.5" stroke-opacity="0.5"/>
+    <!-- Propellers BR -->
+    <ellipse id="p4" cx="42" cy="28" rx="8" ry="1.5" fill="#C8A97E" fill-opacity="0.25" stroke="#C8A97E" stroke-width="0.5" stroke-opacity="0.5"/>
+    <!-- Body -->
+    <rect x="21" y="15" width="10" height="8" rx="2" fill="#1a1a1a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.7"/>
+    <!-- Camera lens -->
+    <circle cx="26" cy="30" r="2" fill="#1a1a1a" stroke="#C8A97E" stroke-width="0.7" stroke-opacity="0.5"/>
+    <line x1="26" y1="23" x2="26" y2="28" stroke="#C8A97E" stroke-width="0.6" stroke-opacity="0.4"/>
+    <!-- LED dot -->
+    <circle cx="26" cy="19" r="1.2" fill="#C8A97E" fill-opacity="0.9"/>
+  </svg>
+  </a>
+</div>
+
+<section class="hero">
+  <div class="hero-left">
+    <h1 class="hero-name">Giorgio<br><em>Riva</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-tagline">Freedom is a state of mind.</p>
+  </div>
+  <div class="hero-right">
+    <div id="globe-wrap">
+      <svg id="globe" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div id="city-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <ul class="footer-links">
+    <li><a href="https://www.instagram.com/gioriva" target="_blank">Instagram</a></li>
+    <li><a href="https://www.linkedin.com/in/giorgioriva/" target="_blank">LinkedIn</a></li>
+  </ul>
+</footer>
+
+<script>
+/* ── CURSOR ── */
+var dot  = document.getElementById('cur-dot');
+var ring = document.getElementById('cur-ring');
+var mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', function(e) {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px';
+  dot.style.top  = my + 'px';
+});
+
+function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+document.querySelectorAll('a, button, #drone').forEach(function(el) {
+  el.addEventListener('mouseenter', function() { document.body.classList.add('hov'); });
+  el.addEventListener('mouseleave', function() { document.body.classList.remove('hov'); });
+});
+
+/* ── GLOBE ── */
+var svgEl = document.getElementById('globe');
+var NS = 'http://www.w3.org/2000/svg';
+var CX = 250, CY = 250, R = 210;
+var rotOffset = 20;
+
+// Defs
+var defs = document.createElementNS(NS, 'defs');
+defs.innerHTML =
+  '<radialGradient id="sg" cx="38%" cy="35%" r="65%">' +
+    '<stop offset="0%" stop-color="#2a2520"/>' +
+    '<stop offset="100%" stop-color="#0a0a0a"/>' +
+  '</radialGradient>' +
+  '<clipPath id="gc"><circle cx="250" cy="250" r="210"/></clipPath>';
+svgEl.appendChild(defs);
+
+// Sphere background
+var sphere = document.createElementNS(NS, 'circle');
+sphere.setAttribute('cx', CX); sphere.setAttribute('cy', CY); sphere.setAttribute('r', R);
+sphere.setAttribute('fill', 'url(#sg)');
+svgEl.appendChild(sphere);
+
+// Clipped graticule layer
+var gratG = document.createElementNS(NS, 'g');
+gratG.setAttribute('clip-path', 'url(#gc)');
+svgEl.appendChild(gratG);
+
+// Clipped dots/labels layer
+var dotsG = document.createElementNS(NS, 'g');
+dotsG.setAttribute('clip-path', 'url(#gc)');
+svgEl.appendChild(dotsG);
+
+// Rim
+var rim = document.createElementNS(NS, 'circle');
+rim.setAttribute('cx', CX); rim.setAttribute('cy', CY); rim.setAttribute('r', R);
+rim.setAttribute('stroke', 'rgba(200,169,126,0.28)');
+rim.setAttribute('stroke-width', '1'); rim.setAttribute('fill', 'none');
+svgEl.appendChild(rim);
+
+// Tick marks
+var tickG = document.createElementNS(NS, 'g');
+for (var a = 0; a < 360; a += 10) {
+  var rad = a * Math.PI / 180;
+  var r2 = R + (a % 30 === 0 ? 9 : 5);
+  var lx1 = CX + R  * Math.cos(rad), ly1 = CY + R  * Math.sin(rad);
+  var lx2 = CX + r2 * Math.cos(rad), ly2 = CY + r2 * Math.sin(rad);
+  var tick = document.createElementNS(NS, 'line');
+  tick.setAttribute('x1', lx1.toFixed(1)); tick.setAttribute('y1', ly1.toFixed(1));
+  tick.setAttribute('x2', lx2.toFixed(1)); tick.setAttribute('y2', ly2.toFixed(1));
+  tick.setAttribute('stroke', a % 30 === 0 ? 'rgba(200,169,126,0.45)' : 'rgba(255,255,255,0.1)');
+  tick.setAttribute('stroke-width', '1');
+  tickG.appendChild(tick);
+}
+svgEl.appendChild(tickG);
+
+// City data
+var cities = [
+  { name: 'Como',          lat:  45.81, lon:   9.09, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'Los Angeles',   lat:  34.05, lon: -118.24, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'Tokyo',         lat:  35.70, lon:  139.70, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'Hong Kong',     lat:  22.32, lon:  114.17, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'New York',      lat:  40.71, lon:  -74.01, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'Singapore',     lat:   1.35, lon:  103.82, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'Cancun',        lat:  21.16, lon:  -86.85, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'Bora Bora',     lat: -16.50, lon: -151.74, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'Buenos Aires',  lat: -34.61, lon:  -58.38, url: 'https://www.gioriva.it/mondo/' }
+];
+
+var TILT_Y = 10 * Math.PI / 180;  // slight aesthetic tilt (lon axis)
+var TILT_X = -35 * Math.PI / 180; // tilt south into view
+
+function project(lat, lon) {
+  var phi = (90 - lat) * Math.PI / 180;
+  var lam = (lon + rotOffset) * Math.PI / 180;
+  // Cartesian on sphere
+  var x0 = R * Math.sin(phi) * Math.cos(lam);
+  var y0 = R * Math.sin(phi) * Math.sin(lam);
+  var z0 = R * Math.cos(phi);
+  // Rotate around Z axis (lon tilt — cosmetic)
+  var x1 = x0 * Math.cos(TILT_Y) - y0 * Math.sin(TILT_Y);
+  var y1 = x0 * Math.sin(TILT_Y) + y0 * Math.cos(TILT_Y);
+  var z1 = z0;
+  // Rotate around X axis (lat tilt — brings south into view)
+  var x2 = x1;
+  var y2 = y1 * Math.cos(TILT_X) - z1 * Math.sin(TILT_X);
+  var z2 = y1 * Math.sin(TILT_X) + z1 * Math.cos(TILT_X);
+  return {
+    x: CX + x2,
+    y: CY - y2,
+    z: z2
+  };
+}
+
+function drawGlobe() {
+  gratG.innerHTML = '';
+  dotsG.innerHTML = '';
+
+  // Parallels
+  for (var lat = -75; lat <= 75; lat += 15) {
+    var d = '', pen = false;
+    for (var lon = -180; lon <= 181; lon += 3) {
+      var p = project(lat, lon);
+      if (p.z > -20) {
+        d += (pen ? 'L' : 'M') + p.x.toFixed(1) + ',' + p.y.toFixed(1);
+        pen = true;
+      } else { pen = false; }
+    }
+    if (d.length > 4) {
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('stroke', lat === 0 ? 'rgba(200,169,126,0.45)' : 'rgba(255,255,255,0.07)');
+      path.setAttribute('stroke-width', lat === 0 ? '1' : '0.5');
+      path.setAttribute('fill', 'none');
+      gratG.appendChild(path);
+    }
+  }
+
+  // Meridians
+  for (var mlon = -180; mlon < 180; mlon += 15) {
+    var md = '', mpen = false;
+    for (var mlat = -90; mlat <= 90; mlat += 3) {
+      var mp = project(mlat, mlon);
+      if (mp.z > -20) {
+        md += (mpen ? 'L' : 'M') + mp.x.toFixed(1) + ',' + mp.y.toFixed(1);
+        mpen = true;
+      } else { mpen = false; }
+    }
+    if (md.length > 4) {
+      var mpath = document.createElementNS(NS, 'path');
+      mpath.setAttribute('d', md);
+      mpath.setAttribute('stroke', mlon === 0 ? 'rgba(200,169,126,0.45)' : 'rgba(255,255,255,0.07)');
+      mpath.setAttribute('stroke-width', mlon === 0 ? '1' : '0.5');
+      mpath.setAttribute('fill', 'none');
+      gratG.appendChild(mpath);
+    }
+  }
+
+  // Cities — dots/rings in SVG, HTML links updated each frame
+  var overlay = document.getElementById('city-overlay');
+  var wrapW = svgEl.clientWidth  || svgEl.getBoundingClientRect().width  || 500;
+  var wrapH = svgEl.clientHeight || svgEl.getBoundingClientRect().height || 500;
+  var scaleX = wrapW / 500;
+  var scaleY = wrapH / 500;
+
+  for (var i = 0; i < cities.length; i++) {
+    var c = cities[i];
+    var cp = project(c.lat, c.lon);
+    var visible = cp.z > -60;
+
+    // SVG dot
+    var cdot = document.createElementNS(NS, 'circle');
+    cdot.setAttribute('cx', cp.x.toFixed(1)); cdot.setAttribute('cy', cp.y.toFixed(1));
+    cdot.setAttribute('r', '2.5'); cdot.setAttribute('fill', '#C8A97E');
+    cdot.setAttribute('opacity', visible ? '0.9' : '0');
+    dotsG.appendChild(cdot);
+
+    // SVG ring
+    var cring = document.createElementNS(NS, 'circle');
+    cring.setAttribute('cx', cp.x.toFixed(1)); cring.setAttribute('cy', cp.y.toFixed(1));
+    cring.setAttribute('r', '5.5'); cring.setAttribute('fill', 'none');
+    cring.setAttribute('stroke', '#C8A97E'); cring.setAttribute('stroke-width', '0.6');
+    cring.setAttribute('opacity', visible ? '0.3' : '0');
+    dotsG.appendChild(cring);
+
+    // HTML link — create once, reuse every frame
+    var a = overlay.querySelector('a[data-city="' + i + '"]');
+    if (!a) {
+      a = document.createElement('a');
+      a.dataset.city = String(i);
+      a.href = c.url;
+      a.target = '_blank';
+      a.style.cssText = 'position:absolute;pointer-events:auto;display:flex;align-items:center;text-decoration:none;white-space:nowrap;transform:translateY(-50%)';
+      var lbl = document.createElement('span');
+      lbl.style.cssText = 'font-family:Montserrat,sans-serif;font-size:8px;font-weight:400;letter-spacing:2px;color:#C8A97E;opacity:0.85;text-transform:uppercase;transition:color .2s,opacity .2s';
+      lbl.textContent = c.name.toUpperCase();
+      a.appendChild(lbl);
+      a.addEventListener('mouseenter', function(){ document.body.classList.add('hov'); this.querySelector('span').style.opacity='1'; this.querySelector('span').style.color='#fff'; });
+      a.addEventListener('mouseleave', function(){ document.body.classList.remove('hov'); this.querySelector('span').style.opacity='0.85'; this.querySelector('span').style.color='#C8A97E'; });
+      overlay.appendChild(a);
+    }
+
+    if (!visible) {
+      a.style.visibility = 'hidden';
+    } else {
+      a.style.visibility = 'visible';
+      a.style.left = (cp.x * scaleX + 10 * scaleX) + 'px';
+      a.style.top  = (cp.y * scaleY) + 'px';
+    }
+  }
+
+  rotOffset += 0.10;
+  requestAnimationFrame(drawGlobe);
+}
+
+drawGlobe();
+
+/* ── DRONE ── */
+(function() {
+  var drone = document.getElementById('drone');
+  var W = window.innerWidth, H = window.innerHeight;
+
+  // Waypoints for a slow, organic figure-8-ish path across the screen
+  // Each: [x%, y%, duration ms]
+  var waypoints = [
+    [0.15, 0.20],
+    [0.35, 0.12],
+    [0.55, 0.22],
+    [0.70, 0.10],
+    [0.85, 0.18],
+    [0.78, 0.35],
+    [0.60, 0.45],
+    [0.75, 0.60],
+    [0.55, 0.72],
+    [0.38, 0.65],
+    [0.20, 0.75],
+    [0.10, 0.55],
+    [0.22, 0.38],
+    [0.08, 0.28],
+  ];
+
+  var idx = 0;
+  var startX, startY, targetX, targetY;
+  var startTime = null;
+  var segDuration = 7000; // ms per segment — slow, dreamy
+
+  // Propeller spin angle
+  var propAngle = 0;
+
+  function setWaypoint(i) {
+    var wp = waypoints[i % waypoints.length];
+    return { x: wp[0] * W, y: wp[1] * H };
+  }
+
+  // Start off-screen left
+  var cur = { x: -60, y: H * 0.2 };
+  var next = setWaypoint(0);
+
+  // Fade in after a short delay
+  setTimeout(function() { drone.classList.add('visible'); }, 800);
+
+  function easeInOut(t) {
+    return t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+  }
+
+  function animDrone(ts) {
+    if (!startTime) startTime = ts;
+    var elapsed = ts - startTime;
+    var t = Math.min(elapsed / segDuration, 1);
+    var e = easeInOut(t);
+
+    var x = startX + (targetX - startX) * e;
+    var y = startY + (targetY - startY) * e;
+
+    // Gentle hover oscillation
+    var hover = Math.sin(ts * 0.0015) * 3;
+
+    // Tilt based on horizontal direction
+    var dx = targetX - startX;
+    var tilt = Math.max(-12, Math.min(12, dx * 0.015));
+
+    drone.style.left = (x - 26) + 'px';
+    drone.style.top  = (y - 19 + hover) + 'px';
+    drone.style.transform = 'rotate(' + tilt + 'deg)';
+
+    // Spin propellers
+    propAngle += 18;
+    var p = propAngle % 180;
+    ['p1','p2','p3','p4'].forEach(function(id, i) {
+      var el = document.getElementById(id);
+      var phase = (p + i * 45) % 180;
+      el.setAttribute('transform', 'rotate(' + phase + ' ' +
+        el.getAttribute('cx') + ' ' + el.getAttribute('cy') + ')');
+    });
+
+    if (t >= 1) {
+      // Advance to next waypoint
+      startX = x; startY = y + hover;
+      idx++;
+      var wp = setWaypoint(idx);
+      targetX = wp.x; targetY = wp.y;
+      startTime = ts;
+
+      // Vary speed slightly
+      segDuration = 5500 + Math.random() * 4000;
+    }
+
+    requestAnimationFrame(animDrone);
+  }
+
+  // Init
+  startX = cur.x; startY = cur.y;
+  targetX = next.x; targetY = next.y;
+  requestAnimationFrame(animDrone);
+
+  window.addEventListener('resize', function() { W = window.innerWidth; H = window.innerHeight; });
+})();
+</script>
+</body>
+</html>
