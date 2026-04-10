@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMDMwNDBhIi8+CiAgPCEtLSByb3RvcnMgLS0+CiAgPGNpcmNsZSBjeD0iNyIgY3k9IjciIHI9IjQuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDBkNGZmIiBzdHJva2Utd2lkdGg9IjEuMiIvPgogIDxjaXJjbGUgY3g9IjI1IiBjeT0iNyIgcj0iNC41IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMGQ0ZmYiIHN0cm9rZS13aWR0aD0iMS4yIi8+CiAgPGNpcmNsZSBjeD0iNyIgY3k9IjI1IiByPSI0LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwZDRmZiIgc3Ryb2tlLXdpZHRoPSIxLjIiLz4KICA8Y2lyY2xlIGN4PSIyNSIgY3k9IjI1IiByPSI0LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwZDRmZiIgc3Ryb2tlLXdpZHRoPSIxLjIiLz4KICA8IS0tIGFybXMgLS0+CiAgPGxpbmUgeDE9IjEwIiB5MT0iMTAiIHgyPSIxNCIgeTI9IjE0IiBzdHJva2U9IiMwMGQ0ZmYiIHN0cm9rZS13aWR0aD0iMS4yIi8+CiAgPGxpbmUgeDE9IjIyIiB5MT0iMTAiIHgyPSIxOCIgeTI9IjE0IiBzdHJva2U9IiMwMGQ0ZmYiIHN0cm9rZS13aWR0aD0iMS4yIi8+CiAgPGxpbmUgeDE9IjEwIiB5MT0iMjIiIHgyPSIxNCIgeTI9IjE4IiBzdHJva2U9IiMwMGQ0ZmYiIHN0cm9rZS13aWR0aD0iMS4yIi8+CiAgPGxpbmUgeDE9IjIyIiB5MT0iMjIiIHgyPSIxOCIgeTI9IjE4IiBzdHJva2U9IiMwMGQ0ZmYiIHN0cm9rZS13aWR0aD0iMS4yIi8+CiAgPCEtLSBib2R5IC0tPgogIDxyZWN0IHg9IjEzIiB5PSIxMyIgd2lkdGg9IjYiIGhlaWdodD0iNiIgcng9IjEiIGZpbGw9IiMwMGQ0ZmYiLz4KICA8IS0tIGNhbWVyYSAtLT4KICA8Y2lyY2xlIGN4PSIxNiIgY3k9IjE5LjUiIHI9IjEuNSIgZmlsbD0iI2ZmNmMyZiIvPgo8L3N2Zz4=">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Album — Above Ground</title>
+  <meta property="og:title" content="Album — Above Ground · Fotografia con Drone">
+  <meta property="og:description" content="Il mondo appare diverso a centinaia di metri di altezza. Paesaggi, coste, città, rivisti dall'alto.">
+  <meta property="og:image" content="https://www.gioriva.it/drone/logo_gr_drone.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.gioriva.it/drone/logo_gr_drone.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#03040a; --bg2:#07090f; --cyan:#00d4ff; --cyan-dim:#0089a8;
+      --white:#e8eef5; --muted:#4a5568; --border:rgba(0,212,255,0.12);
+    }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--bg); color:var(--white); font-family:'Barlow',sans-serif; font-weight:300; overflow-x:hidden; cursor:none; }
+
+    .cursor { position:fixed; width:8px; height:8px; background:var(--cyan); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); }
+    .cursor-ring { position:fixed; width:36px; height:36px; border:1px solid rgba(0,212,255,0.5); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all 0.15s ease; }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:20px 48px; background:rgba(3,4,10,0.97); border-bottom:1px solid var(--border); backdrop-filter:blur(12px); }
+    .nav-logo { font-family:'Orbitron',monospace; font-size:13px; font-weight:700; letter-spacing:0.3em; color:var(--cyan); text-transform:uppercase; text-decoration:none; }
+    .nav-links { display:flex; gap:40px; list-style:none; }
+    .nav-links a { font-family:'Barlow Condensed',sans-serif; font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(232,238,245,0.6); text-decoration:none; transition:color 0.2s; position:relative; }
+    .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; right:100%; height:1px; background:var(--cyan); transition:right 0.3s; }
+    .nav-links a:hover { color:var(--white); }
+    .nav-links a:hover::after { right:0; }
+    .nav-links a.active { color:var(--cyan); }
+
+    /* PAGE HEADER */
+    .page-header { position:relative; padding:140px 48px 80px; overflow:hidden; border-bottom:1px solid var(--border); }
+    .page-header-bg { position:absolute; inset:0; background:radial-gradient(ellipse at 70% 50%,rgba(0,80,100,0.15) 0%,transparent 65%); }
+    #header-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+    .page-header-label { position:relative; font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:0.4em; text-transform:uppercase; color:var(--cyan); margin-bottom:20px; display:flex; align-items:center; gap:16px; }
+    .page-header-label::before { content:''; display:block; width:40px; height:1px; background:var(--cyan); }
+    .page-header h1 { position:relative; font-family:'Orbitron',monospace; font-size:clamp(48px,8vw,100px); font-weight:900; line-height:0.95; text-transform:uppercase; }
+    .page-header h1 em { font-style:normal; color:transparent; -webkit-text-stroke:1px rgba(232,238,245,0.2); }
+    .page-header-meta { position:relative; margin-top:32px; font-size:14px; color:rgba(232,238,245,0.4); font-family:'Barlow Condensed',sans-serif; letter-spacing:0.15em; text-transform:uppercase; }
+
+    /* FILTER BAR */
+    .filter-bar { padding:24px 48px; background:var(--bg2); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; flex-wrap:wrap; position:sticky; top:77px; z-index:50; }
+    .filter-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--muted); margin-right:16px; }
+    .filter-btn { padding:8px 20px; background:transparent; border:1px solid rgba(232,238,245,0.08); color:rgba(232,238,245,0.45); font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; cursor:none; transition:all 0.2s; }
+    .filter-btn:hover, .filter-btn.active { border-color:var(--cyan); color:var(--cyan); background:rgba(0,212,255,0.05); }
+
+    /* ALBUMS */
+    .albums-wrap { padding:80px 48px; }
+    .album-section { margin-bottom:120px; }
+    .album-section.hidden { display:none; }
+    .album-head { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:40px; padding-bottom:24px; border-bottom:1px solid var(--border); }
+    .album-loc { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:0.4em; text-transform:uppercase; color:var(--cyan); margin-bottom:8px; }
+    .album-title { font-family:'Orbitron',monospace; font-size:clamp(28px,4vw,52px); font-weight:900; text-transform:uppercase; line-height:1; }
+    .album-info { text-align:right; }
+    .album-num { font-family:'Orbitron',monospace; font-size:36px; font-weight:900; color:transparent; -webkit-text-stroke:1px rgba(0,212,255,0.3); }
+    .album-num-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--muted); margin-top:4px; }
+
+    /* PHOTO GRID */
+    .photo-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; grid-auto-rows:220px; }
+    .photo-item { position:relative; overflow:hidden; cursor:none; background:var(--bg2); }
+    .photo-item.wide  { grid-column:span 2; }
+    .photo-item.tall  { grid-row:span 2; }
+    .photo-item.large { grid-column:span 2; grid-row:span 2; }
+    .photo-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94),filter 0.4s; filter:brightness(0.82) saturate(0.85); }
+    .photo-item:hover img { transform:scale(1.08); filter:brightness(0.6) saturate(1.15); }
+    .photo-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0); transition:background 0.3s; }
+    .photo-item:hover .photo-overlay { background:rgba(0,0,0,0.2); }
+    .zoom-icon { width:48px; height:48px; border:1px solid rgba(0,212,255,0.6); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--cyan); opacity:0; transform:scale(0.5); transition:all 0.3s; }
+    .photo-item:hover .zoom-icon { opacity:1; transform:scale(1); }
+    .photo-num { position:absolute; bottom:12px; right:12px; font-family:'Orbitron',monospace; font-size:10px; color:rgba(232,238,245,0.3); letter-spacing:0.1em; }
+
+    /* LIGHTBOX */
+    .lightbox { position:fixed; inset:0; background:rgba(3,4,10,0.97); z-index:1000; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.3s; }
+    .lightbox.open { opacity:1; pointer-events:all; }
+    .lb-wrap { position:relative; max-width:90vw; max-height:88vh; display:flex; align-items:center; justify-content:center; }
+    .lb-wrap img { max-width:90vw; max-height:85vh; object-fit:contain; transition:opacity 0.25s; }
+    .lb-close { position:absolute; top:24px; right:24px; width:44px; height:44px; border:1px solid rgba(0,212,255,0.3); background:transparent; color:var(--cyan); cursor:none; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+    .lb-close:hover { background:rgba(0,212,255,0.1); border-color:var(--cyan); }
+    .lb-nav { position:absolute; top:50%; transform:translateY(-50%); width:52px; height:52px; border:1px solid rgba(0,212,255,0.2); background:rgba(3,4,10,0.8); color:var(--cyan); cursor:none; display:flex; align-items:center; justify-content:center; transition:all 0.2s; z-index:10; }
+    .lb-nav:hover { border-color:var(--cyan); background:rgba(0,212,255,0.08); }
+    .lb-prev { left:16px; }
+    .lb-next { right:16px; }
+    .lb-counter { position:absolute; bottom:24px; left:50%; transform:translateX(-50%); font-family:'Orbitron',monospace; font-size:11px; letter-spacing:0.3em; color:rgba(232,238,245,0.35); }
+    .lb-album { position:absolute; bottom:24px; left:24px; font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--cyan-dim); }
+
+    /* FOOTER */
+    footer { border-top:1px solid var(--border); padding:48px; display:flex; justify-content:space-between; align-items:center; }
+    .footer-copy { font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:0.15em; color:var(--muted); }
+
+    /* REVEAL */
+    .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.7s ease,transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    @media (max-width:900px) {
+      nav { padding:16px 24px; }
+      .page-header { padding:120px 24px 60px; }
+      .filter-bar { padding:16px 24px; }
+      .albums-wrap { padding:60px 24px; }
+      .photo-grid { grid-template-columns:repeat(2,1fr); grid-auto-rows:180px; }
+      .photo-item.wide, .photo-item.large { grid-column:span 2; }
+      footer { flex-direction:column; gap:16px; padding:32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Giorgio Riva</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="works.html" class="active">Album</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-bg"></div>
+  <canvas id="header-canvas"></canvas>
+  <div class="page-header-label">Portfolio</div>
+  <h1>Lavori<br><em>Dall'Alto</em></h1>
+  <div class="page-header-meta">4 Album · 64 Fotografie · DJI Mini Pro 5</div>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">Filtra</span>
+  <button class="filter-btn active" data-filter="all">Tutti</button>
+  <button class="filter-btn" data-filter="como-lake">Como Lake</button>
+  <button class="filter-btn" data-filter="como-night">Como by Night</button>
+  <button class="filter-btn" data-filter="eze-sur-mer">Eze-sur-mer</button>
+  <button class="filter-btn" data-filter="cannes">Cannes</button>
+</div>
+
+<div class="albums-wrap" id="albumsWrap"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <button class="lb-nav lb-prev" id="lbPrev">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <div class="lb-wrap"><img id="lbImg" src="" alt=""></div>
+  <button class="lb-nav lb-next" id="lbNext">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+  <div class="lb-album" id="lbAlbum"></div>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<footer>
+  <div class="footer-copy">Giorgio Riva · Above Ground</div>
+  <div class="footer-copy">© 2026 · Fotografia Aerea · DJI Mini Pro 5</div>
+</footer>
+
+<script src="photos_data.js"></script>
+<script>
+// CURSOR
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top  = e.clientY + 'px';
+  setTimeout(() => { ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px'; }, 60);
+});
+
+// HEADER CANVAS — scanning grid
+const hc   = document.getElementById('header-canvas');
+const hctx = hc.getContext('2d');
+function resizeHC() { hc.width = hc.offsetWidth; hc.height = hc.offsetHeight; }
+resizeHC();
+window.addEventListener('resize', resizeHC);
+let scanY = 0;
+(function scanLoop() {
+  requestAnimationFrame(scanLoop);
+  hctx.clearRect(0, 0, hc.width, hc.height);
+  hctx.strokeStyle = 'rgba(0,212,255,0.04)';
+  hctx.lineWidth = 1;
+  for (let x = 0; x < hc.width; x += 60) { hctx.beginPath(); hctx.moveTo(x,0); hctx.lineTo(x,hc.height); hctx.stroke(); }
+  for (let y = 0; y < hc.height; y += 60) { hctx.beginPath(); hctx.moveTo(0,y); hctx.lineTo(hc.width,y); hctx.stroke(); }
+  scanY = (scanY + 1.5) % hc.height;
+  const sg = hctx.createLinearGradient(0, scanY - 40, 0, scanY + 40);
+  sg.addColorStop(0, 'transparent');
+  sg.addColorStop(0.5, 'rgba(0,212,255,0.08)');
+  sg.addColorStop(1, 'transparent');
+  hctx.fillStyle = sg;
+  hctx.fillRect(0, scanY - 40, hc.width, 80);
+})();
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.05 });
+
+// ALBUM DEFINITIONS
+const ALBUMS = [
+  { key: 'Como Lake',    loc: 'Lago · Como, Italia',       filter: 'como-lake' },
+  { key: 'Como by Night', loc: 'Lago · Notturno',          filter: 'como-night' },
+  { key: 'Eze-sur-mer',  loc: 'Costa · Costa Azzurra',     filter: 'eze-sur-mer' },
+  { key: 'Cannes',       loc: 'Città · Alpi Marittime',    filter: 'cannes' }
+];
+
+// Layout patterns per album
+const LAYOUTS = [
+  ['large','normal','normal','wide','normal','tall','normal','normal','wide','normal','normal','large','normal','normal','wide','normal','normal','normal','normal','normal'],
+  ['large','normal','normal','wide','tall','normal','normal','normal','wide','normal','normal','normal','normal'],
+  ['large','normal','normal','wide','normal','tall','normal','normal','normal','normal'],
+  ['wide','tall','normal','normal','large','normal','normal','wide','normal','normal','normal','tall','normal','wide','normal','normal','normal','large','normal','normal','normal']
+];
+
+// BUILD ALBUMS
+const wrap = document.getElementById('albumsWrap');
+ALBUMS.forEach((album, ai) => {
+  const photos = PHOTOS[album.key];
+  if (!photos || !photos.length) return;
+  const layout = LAYOUTS[ai] || [];
+
+  const section = document.createElement('section');
+  section.className   = 'album-section reveal';
+  section.id          = album.key.toLowerCase().replace(/\s+/g, '-');
+  section.dataset.filter = album.filter;
+
+  const padded = String(photos.length).padStart(2, '0');
+  section.innerHTML =
+    '<div class="album-head">' +
+      '<div>' +
+        '<div class="album-loc">' + album.loc + '</div>' +
+        '<div class="album-title">' + album.key + '</div>' +
+      '</div>' +
+      '<div class="album-info">' +
+        '<div class="album-num">' + padded + '</div>' +
+        '<div class="album-num-label">Fotografie</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="photo-grid" id="grid' + ai + '"></div>';
+
+  wrap.appendChild(section);
+  observer.observe(section);
+
+  const grid = section.querySelector('#grid' + ai);
+  photos.forEach((src, pi) => {
+    const cls = layout[pi] || 'normal';
+    const item = document.createElement('div');
+    item.className = 'photo-item' + (cls !== 'normal' ? ' ' + cls : '');
+    item.innerHTML =
+      '<img src="' + src + '" alt="' + album.key + ' ' + (pi+1) + '" loading="lazy">' +
+      '<div class="photo-overlay"><div class="zoom-icon">' +
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>' +
+      '</div></div>' +
+      '<div class="photo-num">' + String(pi+1).padStart(2,'0') + '</div>';
+    item.addEventListener('click', () => openLightbox(album.key, pi));
+    grid.appendChild(item);
+  });
+});
+
+// FILTER
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.album-section').forEach(s => {
+      s.classList.toggle('hidden', f !== 'all' && s.dataset.filter !== f);
+    });
+  });
+});
+
+// LIGHTBOX
+let lbKey = '', lbIdx = 0;
+const lightbox  = document.getElementById('lightbox');
+const lbImg     = document.getElementById('lbImg');
+const lbCounter = document.getElementById('lbCounter');
+const lbAlbumEl = document.getElementById('lbAlbum');
+
+function openLightbox(key, idx) {
+  lbKey = key; lbIdx = idx;
+  updateLightbox();
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function updateLightbox() {
+  const photos = PHOTOS[lbKey];
+  lbImg.style.opacity = '0';
+  lbImg.src = photos[lbIdx];
+  lbImg.onload = () => { lbImg.style.opacity = '1'; };
+  lbCounter.textContent = String(lbIdx+1).padStart(2,'0') + ' / ' + String(photos.length).padStart(2,'0');
+  lbAlbumEl.textContent = lbKey.toUpperCase();
+}
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+document.getElementById('lbPrev').addEventListener('click', () => {
+  lbIdx = (lbIdx - 1 + PHOTOS[lbKey].length) % PHOTOS[lbKey].length;
+  updateLightbox();
+});
+document.getElementById('lbNext').addEventListener('click', () => {
+  lbIdx = (lbIdx + 1) % PHOTOS[lbKey].length;
+  updateLightbox();
+});
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape')      closeLightbox();
+  if (e.key === 'ArrowLeft')  { lbIdx = (lbIdx - 1 + PHOTOS[lbKey].length) % PHOTOS[lbKey].length; updateLightbox(); }
+  if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % PHOTOS[lbKey].length; updateLightbox(); }
+});
+
+// HASH SCROLL
+if (window.location.hash) {
+  setTimeout(() => {
+    const el = document.querySelector(window.location.hash);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }, 300);
+}
+</script>
+</body>
+</html>
