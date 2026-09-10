@@ -20,7 +20,7 @@
 <!-- Open Graph / anteprima social -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Patagonia & Polinesia 2026" />
-<meta property="og:description" content="Il diario del nostro viaggio di nozze: dalla fine del mondo alla laguna, 22 giorni tra la notte dei ghiacciai e l'alba della Polinesia." />
+<meta property="og:description" content="Il diario del nostro viaggio di nozze: dalla fine del mondo alla laguna, 23 giorni tra la notte dei ghiacciai e l'alba della Polinesia." />
 <meta property="og:image" content="https://www.gioriva.it/poitiracconto/patagonia2026/og-viaggio.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -261,10 +261,10 @@
     color: var(--ivory);
   }
   .hero-copy .dates {
-    font-size: 15px;
+    font-size: 16.5px;
     color: var(--ivory-2);
-    margin: 14px 0 0;
-    letter-spacing: 0.03em;
+    margin: 16px 0 0;
+    letter-spacing: 0.05em;
   }
   .hero-hint {
     position: absolute;
@@ -493,7 +493,11 @@
     </a>
     <a class="d-link" href="programma.html">
       <span class="place">Programma</span>
-      <span class="sub">L'itinerario e i voli</span>
+      <span class="sub">L'itinerario, giorno per giorno</span>
+    </a>
+    <a class="d-link" href="trasporti.html">
+      <span class="place">Trasporti</span>
+      <span class="sub">Voli, orari e trasferimenti</span>
     </a>
     <a class="d-link" href="galleria.html">
       <span class="place">Galleria</span>
@@ -708,10 +712,9 @@
   <div class="hero-vignette" aria-hidden="true"></div>
 
   <div class="hero-copy">
-    <p class="eyebrow">Il diario del nostro viaggio di nozze</p>
     <h1>Patagonia <i>&amp;</i><br>Polinesia</h1>
     <p class="names">Giorgio e Lucrezia</p>
-    <p class="dates">dal 15 settembre al 7 ottobre 2026, dalla fine del mondo alla laguna</p>
+    <p class="dates">Il diario del nostro viaggio di nozze</p>
   </div>
   <div class="hero-hint" id="hint"><b>Trascina le fedi</b> per attraversare i due mondi</div>
 </section>
@@ -783,7 +786,7 @@
     <h2>Intanto, <i>si può sfogliare</i></h2>
     <div class="rimandi">
       <a class="rimando" href="programma.html">
-        <div><div class="t">Il programma</div><div class="s">L'itinerario giorno per giorno, i sette hotel, i quattordici voli e le note pratiche.</div></div>
+        <div><div class="t">Il programma</div><div class="s">L'itinerario giorno per giorno, dove dormiamo e cosa facciamo. Voli e trasferimenti hanno una pagina a parte.</div></div>
         <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
       <a class="rimando" href="galleria.html">
@@ -966,10 +969,10 @@
       var giorno = Math.floor((now - new Date('2026-09-15T00:00:00+02:00').getTime()) / 86400000) + 1;
       var qui = tappe.filter(function (t) { return t.querySelector('.stato-tappa').classList.contains('oggi'); })[0];
       stNum.textContent = giorno;
-      stMain.textContent = 'giorno di viaggio su ventidue' + (qui ? ', oggi siamo ' + qui.dataset.dove : '');
+      stMain.textContent = 'giorno di viaggio su ventitré' + (qui ? ', oggi siamo ' + qui.dataset.dove : '');
       stSec.textContent = 'partiti il 15 settembre, si torna il 7 ottobre';
     } else {
-      stNum.textContent = '22';
+      stNum.textContent = '23';
       stMain.textContent = 'giorni di viaggio, tutti da rileggere';
       stSec.textContent = 'siamo tornati il 7 ottobre 2026';
     }

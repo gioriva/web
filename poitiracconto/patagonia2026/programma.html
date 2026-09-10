@@ -19,7 +19,7 @@
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Programma · Patagonia & Polinesia 2026" />
-<meta property="og:description" content="L'itinerario del nostro viaggio di nozze, giorno per giorno: sette hotel, quattordici voli, dalla fine del mondo alla laguna." />
+<meta property="og:description" content="Il nostro viaggio di nozze giorno per giorno: ventitré giorni dalla fine del mondo alla laguna." />
 <meta property="og:image" content="https://www.gioriva.it/poitiracconto/patagonia2026/og-viaggio.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -27,7 +27,7 @@
 <meta property="og:locale" content="it_IT" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Programma · Patagonia & Polinesia 2026" />
-<meta name="twitter:description" content="L'itinerario del nostro viaggio di nozze, giorno per giorno." />
+<meta name="twitter:description" content="Il nostro viaggio di nozze giorno per giorno." />
 <meta name="twitter:image" content="https://www.gioriva.it/poitiracconto/patagonia2026/og-viaggio.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,47 +46,30 @@
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-  body {
-    margin: 0; background: var(--night); color: var(--ivory);
-    font-family: var(--sans); font-weight: 300; font-size: 17px; line-height: 1.6;
-    -webkit-font-smoothing: antialiased; overflow-x: hidden;
-  }
+  body { margin: 0; background: var(--night); color: var(--ivory); font-family: var(--sans); font-weight: 300; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   ::selection { background: var(--dawn); color: var(--night); }
   a { color: inherit; text-decoration: none; }
   :focus-visible { outline: 2px solid var(--dawn); outline-offset: 4px; border-radius: 2px; }
   button { font-family: inherit; }
 
-  /* header, drawer e footer: identici al diario */
-  header.bar {
-    position: fixed; top: 0; left: 0; right: 0; height: var(--head-h); z-index: 90;
-    display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 22px;
-    background: rgba(6,20,35,0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
+  header.bar { position: fixed; top: 0; left: 0; right: 0; height: var(--head-h); z-index: 90; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 22px; background: rgba(6,20,35,0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
   .brand { font-family: var(--display); font-size: 21px; color: var(--ivory); white-space: nowrap; }
   .brand i { font-style: italic; }
-  .burger {
-    width: 46px; height: 46px; border: 1px solid rgba(243,241,234,0.35); background: rgba(6,20,35,0.35);
-    border-radius: 50%; cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
-  }
+  .burger { width: 46px; height: 46px; border: 1px solid rgba(243,241,234,0.35); background: rgba(6,20,35,0.35); border-radius: 50%; cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
   .burger span { display: block; width: 18px; height: 1.5px; background: var(--ivory); border-radius: 1px; transition: transform 0.3s, opacity 0.3s; }
   .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
   .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
   .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
   .scrim { position: fixed; inset: 0; background: rgba(2,8,16,0.6); z-index: 95; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
   .scrim.open { opacity: 1; pointer-events: auto; }
-  .drawer {
-    position: fixed; top: 0; right: 0; bottom: 0; width: min(340px, 86vw); z-index: 96;
-    background: var(--night-2); border-left: 1px solid var(--line); transform: translateX(102%);
-    transition: transform 0.4s cubic-bezier(.3,.8,.3,1); display: flex; flex-direction: column; padding: 26px 0 22px; overflow-y: auto;
-  }
+  .drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(340px, 86vw); z-index: 96; background: var(--night-2); border-left: 1px solid var(--line); transform: translateX(102%); transition: transform 0.4s cubic-bezier(.3,.8,.3,1); display: flex; flex-direction: column; padding: 26px 0 22px; overflow-y: auto; }
   .drawer.open { transform: translateX(0); }
   @media (prefers-reduced-motion: reduce) { .drawer, .scrim { transition: none; } }
   .d-head { display: flex; justify-content: space-between; align-items: center; padding: 0 26px 18px; border-bottom: 1px solid var(--line); }
   .d-head .t { font-size: 13px; color: var(--ivory-3); }
   .d-close { background: none; border: none; color: var(--ivory); font-size: 26px; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; line-height: 1; }
   .drawer nav { padding: 14px 0; flex-grow: 1; }
-  .d-link { display: block; padding: 16px 26px; border-left: 2px solid transparent; transition: background 0.2s, border-color 0.2s; }
+  .d-link { display: block; padding: 14px 26px; border-left: 2px solid transparent; transition: background 0.2s, border-color 0.2s; }
   .d-link:hover { background: var(--panel); }
   .d-link.active { border-left-color: var(--dawn); background: var(--panel); }
   .d-link .place { font-family: var(--display); font-size: 25px; display: block; line-height: 1.15; }
@@ -100,87 +83,75 @@
   footer a:hover { color: var(--ivory); }
   footer a svg { width: 15px; height: 15px; }
 
-  /* ═══ NAVIGAZIONE TAPPE ═══ */
-  .tappe-nav {
-    position: fixed; top: var(--head-h); left: 0; right: 0; z-index: 80;
-    background: rgba(6,20,35,0.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-    overflow-x: auto; scrollbar-width: none;
-  }
-  .tappe-nav::-webkit-scrollbar { display: none; }
-  .tappe-nav .row { display: flex; gap: 26px; padding: 12px 24px; width: max-content; margin: 0 auto; }
-  .tappe-nav a { font-size: 14px; color: var(--ivory-2); white-space: nowrap; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
-  .tappe-nav a:hover { color: var(--ivory); border-bottom-color: var(--ivory-2); }
-
   /* ═══ CONTENUTI ═══ */
-  main { padding-top: calc(var(--head-h) + 46px); }
+  main { padding-top: var(--head-h); }
   .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
-  .intro { padding: 60px 0 56px; border-bottom: 1px solid var(--line); }
-  h1 {
-    font-family: var(--display); font-weight: 400;
-    font-size: clamp(44px, 8.4vw, 84px); line-height: 0.96; margin: 0 0 20px; letter-spacing: -0.01em;
-  }
+  .intro { padding: 64px 0 40px; }
+  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 8.4vw, 84px); line-height: 0.96; margin: 0 0 20px; letter-spacing: -0.01em; }
   h1 i, h2 i { font-style: italic; }
   .lede { font-size: 18px; color: var(--ivory-2); max-width: 600px; margin: 0; }
 
-  section.tappa { padding: 72px 0 64px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--head-h) + 60px); }
-  .tappa-head { display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: baseline; margin-bottom: 30px; }
-  @media (max-width: 560px) { .tappa-head { grid-template-columns: 1fr; gap: 6px; } }
-  .tappa-num {
-    font-family: var(--display); font-size: clamp(60px, 10vw, 96px); line-height: 0.8; font-style: italic;
-    color: var(--glacier);
+  /* la barra dei ventitré giorni */
+  .barra { padding: 10px 0 64px; border-bottom: 1px solid var(--line); }
+  .barra-track { display: flex; gap: 3px; height: 54px; }
+  .seg {
+    flex-grow: var(--g, 1); flex-basis: 0;
+    border-radius: 3px; background: var(--c);
+    position: relative; display: flex; align-items: flex-end;
+    padding: 0 0 6px 8px;
+    color: var(--night); font-size: 13px; font-weight: 400;
+    white-space: nowrap; overflow: hidden;
+    transition: transform 0.2s;
   }
+  .seg:hover { transform: translateY(-3px); }
+  .seg .n { position: absolute; top: 5px; left: 8px; font-family: var(--display); font-size: 17px; line-height: 1; opacity: 0.85; }
+  .seg.piccolo { padding-left: 0; justify-content: center; }
+  .seg.piccolo .l { display: none; }
+  .seg.piccolo .n { position: static; }
+  .barra-date { display: flex; justify-content: space-between; font-size: 13.5px; color: var(--ivory-3); margin-top: 10px; }
+  @media (max-width: 640px) {
+    .barra-track { height: 46px; }
+    .seg { font-size: 11.5px; }
+    .seg .n { font-size: 14px; }
+  }
+
+  /* tappe */
+  section.tappa { padding: 74px 0 60px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--head-h) + 14px); position: relative; }
+  section.tappa::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 240px; background: linear-gradient(to bottom, var(--tinta, transparent), transparent); pointer-events: none; }
+  .tappa-head { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: baseline; margin-bottom: 26px; position: relative; }
+  @media (max-width: 560px) { .tappa-head { grid-template-columns: 1fr; gap: 6px; } }
+  .tappa-num { font-family: var(--display); font-style: italic; font-size: clamp(64px, 11vw, 104px); line-height: 0.8; color: var(--glacier); }
   .tappa.caldo .tappa-num { color: var(--lagoon); }
   .tappa.volo .tappa-num { color: var(--dawn); }
   h2 { font-family: var(--display); font-weight: 400; font-size: clamp(38px, 6.6vw, 64px); line-height: 1.0; margin: 0; }
   .tappa-head .quando { font-size: 15.5px; color: var(--ivory-2); margin-top: 6px; }
+  .tappa-lede { font-size: 18px; color: var(--ivory); max-width: 600px; margin: 0 0 28px; position: relative; }
 
-  .dormire {
-    display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap;
-    padding: 14px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 8px;
-    font-size: 15.5px;
-  }
-  .dormire b { font-weight: 400; font-family: var(--display); font-size: 21px; }
-  .dormire span { color: var(--ivory-2); }
+  .dormire { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 6px; position: relative; }
+  .dormire svg { width: 26px; height: 26px; margin-top: 4px; color: var(--ivory-3); }
+  .dormire b { display: block; font-weight: 400; font-family: var(--display); font-size: 23px; line-height: 1.15; }
+  .dormire span { display: block; font-size: 15px; color: var(--ivory-2); margin-top: 3px; }
 
-  .giorno { display: grid; grid-template-columns: 82px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); }
-  .giorno .data { font-family: var(--display); font-size: 40px; line-height: 0.9; color: var(--ivory); }
+  .giorno { display: grid; grid-template-columns: 82px 1fr; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--line); position: relative; }
+  .giorno .data { font-family: var(--display); font-size: 42px; line-height: 0.9; }
   .giorno .data small { display: block; font-family: var(--sans); font-size: 13px; color: var(--ivory-3); margin-top: 6px; line-height: 1.3; }
-  .giorno h3 { font-weight: 400; font-size: 19px; margin: 0 0 6px; }
+  .giorno h3 { font-weight: 400; font-size: 20px; margin: 0 0 6px; }
   .giorno p { margin: 0; font-size: 15.5px; color: var(--ivory-2); max-width: 560px; }
+  .giorno p + p { margin-top: 10px; }
   .giorno p b { color: var(--ivory); font-weight: 400; }
-  @media (max-width: 480px) { .giorno { grid-template-columns: 62px 1fr; gap: 14px; } .giorno .data { font-size: 32px; } }
+  .giorno.libero .data, .giorno.libero h3 { color: var(--ivory-2); }
+  @media (max-width: 480px) { .giorno { grid-template-columns: 62px 1fr; gap: 14px; } .giorno .data { font-size: 34px; } }
 
-  .nota { margin-top: 26px; padding-left: 18px; border-left: 2px solid var(--dawn); font-size: 15px; color: var(--ivory-2); max-width: 580px; }
+  .nota { margin-top: 24px; padding-left: 18px; border-left: 2px solid var(--dawn); font-size: 15px; color: var(--ivory-2); max-width: 580px; position: relative; }
   .nota b { color: var(--ivory); font-weight: 400; }
 
-  /* registro voli */
-  .voli { border-top: 1px solid var(--line); }
-  .voli .gruppo { padding: 18px 0 6px; font-size: 14px; color: var(--ivory-3); }
-  .volo { display: grid; grid-template-columns: 90px 1fr auto; gap: 16px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--line); }
-  .volo .n { font-family: var(--display); font-size: 20px; }
-  .volo .tr { font-size: 16px; }
-  .volo .tr small { display: block; font-size: 13.5px; color: var(--ivory-3); }
-  .volo .hh { font-size: 15px; color: var(--ivory-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .tappa.volo .volo .n { color: var(--dawn); }
-  @media (max-width: 520px) { .volo { grid-template-columns: 74px 1fr; } .volo .hh { grid-column: 2; } }
-
-  /* note di rotta */
-  details { border-top: 1px solid var(--line); }
-  details:last-of-type { border-bottom: 1px solid var(--line); }
-  summary {
-    list-style: none; cursor: pointer; padding: 20px 4px;
-    display: flex; justify-content: space-between; align-items: center;
-    font-family: var(--display); font-size: clamp(22px, 3.4vw, 28px);
-  }
-  summary::-webkit-details-marker { display: none; }
-  summary .segno { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: var(--sans); font-size: 20px; color: var(--dawn); transition: transform 0.3s; font-weight: 300; }
-  details[open] summary .segno { transform: rotate(45deg); }
-  .corpo { padding: 0 4px 24px; font-size: 15.5px; color: var(--ivory-2); max-width: 620px; }
-  .corpo b { color: var(--ivory); font-weight: 400; }
-  .corpo ul { margin: 0; padding: 0; list-style: none; }
-  .corpo li { padding: 9px 0; border-top: 1px solid var(--line); }
-  .corpo li:first-child { border-top: none; }
+  .rimando { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px; padding: 34px 0 0; transition: padding-left 0.3s; position: relative; }
+  .rimando:hover { padding-left: 10px; }
+  .rimando .t { font-family: var(--display); font-size: clamp(28px, 4.4vw, 40px); line-height: 1.05; }
+  .rimando .s { font-size: 15px; color: var(--ivory-2); margin-top: 4px; max-width: 560px; }
+  .rimando .go { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--ivory-2); transition: background 0.25s, color 0.25s, border-color 0.25s; }
+  .rimando:hover .go { background: var(--ivory); color: var(--night); border-color: var(--ivory); }
+  .rimando .go svg { width: 18px; height: 18px; }
 </style>
 </head>
 <body>
@@ -189,15 +160,6 @@
   <a class="brand" href="https://www.gioriva.it/poitiracconto/patagonia2026">Patagonia <i>&amp;</i> Polinesia</a>
   <button class="burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Apri il menu"><span></span><span></span><span></span></button>
 </header>
-
-<nav class="tappe-nav" aria-label="Tappe">
-  <div class="row">
-    <a href="#ba">Buenos Aires</a><a href="#calafate">El Calafate</a><a href="#ushuaia">Ushuaia</a>
-    <a href="#traversata">La traversata</a><a href="#tahaa">Taha'a</a><a href="#borabora">Bora Bora</a>
-    <a href="#voli">I voli</a><a href="#note">Note di rotta</a>
-  </div>
-</nav>
-
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-label="Menu">
   <div class="d-head"><span class="t">Indice</span><button class="d-close" id="dclose" aria-label="Chiudi il menu">×</button></div>
@@ -205,7 +167,8 @@
     <a class="d-link d-home" href="https://www.gioriva.it/poitiracconto/"><span class="place">Home page</span><span class="sub">Tutti i viaggi, su gioriva.it</span></a>
     <hr class="d-sep">
     <a class="d-link" href="https://www.gioriva.it/poitiracconto/patagonia2026"><span class="place">Diario di viaggio</span><span class="sub">Il racconto, tappa per tappa</span></a>
-    <a class="d-link active" href="programma.html"><span class="place">Programma</span><span class="sub">L'itinerario e i voli</span></a>
+    <a class="d-link active" href="programma.html"><span class="place">Programma</span><span class="sub">L'itinerario, giorno per giorno</span></a>
+    <a class="d-link" href="trasporti.html"><span class="place">Trasporti</span><span class="sub">Voli, orari e trasferimenti</span></a>
     <a class="d-link" href="galleria.html"><span class="place">Galleria</span><span class="sub">Le foto del viaggio</span></a>
   </nav>
   <div class="d-foot">Patagonia &amp; Polinesia 2026<br>Il viaggio di nozze di Giorgio e Lucrezia</div>
@@ -214,183 +177,146 @@
 <main>
 
 <div class="wrap intro">
-  <h1>La rotta, <i>giorno per giorno</i></h1>
-  <p class="lede">Ventidue giorni e ventuno notti. Da Milano alla fine del mondo, poi su, fino alle Isole della Società. Si parte il 15 settembre alle 06:25 da Linate.</p>
+  <h1>Ventitré giorni, <i>otto tappe</i></h1>
+  <p class="lede">Da Milano alla fine del mondo, poi su fino alle Isole della Società. Questa è la rotta come l'abbiamo pensata: dove dormiamo, cosa facciamo, cosa aspettiamo di più. Orari di voli e trasferimenti sono nella pagina dei trasporti.</p>
+</div>
+
+<div class="wrap barra" aria-label="I ventitré giorni del viaggio in proporzione">
+  <div class="barra-track">
+    <a class="seg" href="#ba" style="--g:3; --c:#4a8fb0"><span class="n">I</span><span class="l">Buenos Aires</span></a>
+    <a class="seg" href="#calafate" style="--g:4; --c:#8fd0e6"><span class="n">II</span><span class="l">El Calafate</span></a>
+    <a class="seg" href="#ushuaia" style="--g:2; --c:#b9e3f0"><span class="n">III</span><span class="l">Ushuaia</span></a>
+    <a class="seg piccolo" href="#ushuaia" style="--g:1; --c:#c9d6dc" title="Buenos Aires, una notte di transito"><span class="n">·</span></a>
+    <a class="seg piccolo" href="#traversata" style="--g:1; --c:#d8d3c4" title="In volo verso Lima e Los Angeles"><span class="n">✈</span></a>
+    <a class="seg piccolo" href="#traversata" style="--g:1; --c:#ffd9a4" title="Papeete, la prima notte in Polinesia"><span class="n">·</span></a>
+    <a class="seg" href="#tahaa" style="--g:4; --c:#5fdcd0"><span class="n">IV</span><span class="l">Taha'a</span></a>
+    <a class="seg" href="#borabora" style="--g:4; --c:#2fc9bd"><span class="n">V</span><span class="l">Bora Bora</span></a>
+    <a class="seg" href="#ritorno" style="--g:3; --c:#ffbe8c"><span class="n">✈</span><span class="l">Il ritorno</span></a>
+  </div>
+  <div class="barra-date"><span>15 settembre, Linate</span><span>7 ottobre, Linate</span></div>
 </div>
 
 <!-- I -->
-<section class="tappa" id="ba">
+<section class="tappa" id="ba" style="--tinta: rgba(74,143,176,0.12)">
   <div class="wrap">
     <div class="tappa-head">
       <div class="tappa-num">I</div>
-      <div><h2>Buenos Aires</h2><div class="quando">Dal 15 al 18 settembre, tre notti, più una di transito il 24.</div></div>
+      <div><h2>Buenos Aires</h2><div class="quando">Dal 15 al 18 settembre, tre notti. Ci torneremo per una notte il 24.</div></div>
     </div>
-    <div class="dormire"><b>725 Continental</b><span>palazzo anni '30 di Alejandro Bustillo, a duecento metri da Plaza de Mayo</span></div>
-
-    <div class="giorno"><div class="data">15<small>martedì</small></div><div><h3>Arrivo a Ezeiza</h3><p>Partenza da Linate alle 06:25 con scalo a Parigi, atterraggio alle 18:50. Incontro con la guida in italiano e trasferimento privato in hotel.</p></div></div>
-    <div class="giorno"><div class="data">16<small>mercoledì</small></div><div><h3>La città in mezza giornata</h3><p>Con guida in italiano: Plaza de Mayo con Casa Rosada, Cattedrale e Cabildo, il Caminito multicolore de La Boca, San Telmo e il suo mercato delle pulci, il cimitero della Recoleta dove riposa Evita Perón, chiusura a Palermo.</p></div></div>
-    <div class="giorno"><div class="data">17<small>giovedì</small></div><div><h3>Giornata libera</h3><p>Nessun programma: escursioni facoltative o città in autonomia.</p></div></div>
-    <div class="giorno"><div class="data">18<small>venerdì</small></div><div><h3>Volo verso sud</h3><p>Trasferimento in aeroporto e volo AR1840 alle 09:35 da Aeroparque. Tre ore dopo, la Patagonia.</p></div></div>
+    <p class="tappa-lede">La città dove l'Europa si specchia nel Sudamerica: palazzi eleganti, piazze monumentali, avenidas e tango.</p>
+    <div class="dormire">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10M3 13h18M7 13V9h4v4M3 18v2M21 18v2"/></svg>
+      <div><b>725 Continental</b><span>Pernottamento e prima colazione. Palazzo anni '30 di Alejandro Bustillo, a duecento metri da Plaza de Mayo.</span></div>
+    </div>
+    <div class="giorno"><div class="data">15<small>martedì</small></div><div><h3>Arrivo in serata</h3><p>Si atterra a Ezeiza dopo la traversata da Milano con scalo a Parigi. Incontro con la guida e trasferimento in hotel.</p></div></div>
+    <div class="giorno"><div class="data">16<small>mercoledì</small></div><div><h3>La città in mezza giornata</h3><p>Con la guida in italiano si parte dal centro storico: Plaza de Mayo con la Casa Rosada, la Cattedrale e il Cabildo. Poi il quartiere de La Boca, il più italiano della città, con una passeggiata lungo il Caminito e i suoi edifici multicolore. Il barrio di San Telmo, dove la domenica c'è il mercato delle pulci e i ballerini di tango animano Plaza Dorrego. La Recoleta con le sue residenze e il cimitero che ospita le spoglie di Evita Perón. Chiusura nel barrio di Palermo.</p></div></div>
+    <div class="giorno libero"><div class="data">17<small>giovedì</small></div><div><h3>Giornata libera</h3><p>Nessun programma: escursioni facoltative o città in autonomia.</p></div></div>
+    <div class="giorno"><div class="data">18<small>venerdì</small></div><div><h3>Verso la Patagonia</h3><p>Colazione, trasferimento in aeroporto e volo verso sud. Si atterra a El Calafate per l'ora di pranzo.</p></div></div>
   </div>
 </section>
 
 <!-- II -->
-<section class="tappa" id="calafate">
+<section class="tappa" id="calafate" style="--tinta: rgba(143,208,230,0.13)">
   <div class="wrap">
     <div class="tappa-head">
       <div class="tappa-num">II</div>
       <div><h2>El Calafate</h2><div class="quando">Dal 18 al 22 settembre, quattro notti sul Lago Argentino.</div></div>
     </div>
-    <div class="dormire"><b>Kosten Aike</b><span>"luogo del vento" in lingua tehuelche, stile andino sulle rive del lago</span></div>
-
-    <div class="giorno"><div class="data">19<small>sabato</small></div><div><h3>Ghiacciaio Perito Moreno</h3><p>Il Parco Nazionale Los Glaciares: seicentomila ettari e 356 ghiacciai. Il Perito Moreno ha un fronte di cinque chilometri che scivola nel lago; dal belvedere sulla penisola di Magellano si aspetta il distacco dei blocchi. <b>Prima il silenzio, poi il boato.</b></p></div></div>
-    <div class="giorno"><div class="data">20<small>domenica</small></div><div><h3>Navigazione Todo Glaciares</h3><p>Dal porto di Punta Bandera in motonave sul Brazo Norte: la Boca del Diablo, il Canale Upsala tra gli iceberg, poi i fronti dei ghiacciai Spegazzini, Heim Sur e Peineta. Un sentiero panoramico di trecento metri sulla Baia del Ghiacciaio.</p></div></div>
-    <div class="giorno"><div class="data">21<small>lunedì</small></div><div><h3>Estancia Cristina, giornata intera</h3><p>Escursione privata: navigazione fino al Canale Upsala e sbarco all'estancia. Camminata di media difficoltà nella valle tra foreste di ñire, punti panoramici sul Lago Argentino e sul Lago Pearson, il museo dei pionieri. Pranzo con asado argentino.</p></div></div>
-    <div class="giorno"><div class="data">22<small>martedì</small></div><div><h3>Ancora più a sud</h3><p>Volo AR1894 alle 14:30. Destinazione: la fine del mondo.</p></div></div>
+    <p class="tappa-lede">La cittadina prende il nome dal calafate, una bacca simile al mirtillo. È la porta del Parco Nazionale Los Glaciares: seicentomila ettari e 356 ghiacciai.</p>
+    <div class="dormire">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10M3 13h18M7 13V9h4v4M3 18v2M21 18v2"/></svg>
+      <div><b>Kosten Aike</b><span>Pernottamento e prima colazione. "Kosten" vento, "Aike" luogo: stile andino, tetti verdi e legno chiaro, sulle rive del lago.</span></div>
+    </div>
+    <div class="giorno"><div class="data">19<small>sabato</small></div><div><h3>Il ghiacciaio Perito Moreno</h3><p>Escursione con guida in italiano. Il Perito Moreno è una lingua di ghiaccio lunga 195 chilometri che scivola tra le montagne fino ad affondare nel Lago Argentino con un fronte di cinque chilometri. A differenza di altri ghiacciai qui si staccano blocchi enormi: nel silenzio una massa di ghiaccio bianco azzurro crolla nell'acqua gelida con un frastuono impressionante, affonda, crea onde e riemerge come un piccolo iceberg. Si guarda tutto dal belvedere sulla penisola di Magellano, di fronte alla parete.</p></div></div>
+    <div class="giorno"><div class="data">20<small>domenica</small></div><div><h3>Navigazione Todo Glaciares</h3><p>Dal porto di Punta Bandera, a 47 chilometri, ci si imbarca sulla motonave per il Brazo Norte del Lago Argentino. Si attraversa la Boca del Diablo verso il Canale Upsala, tra i grandi iceberg caduti dal fronte del ghiacciaio, dalle forme fantasiose e dalle sfumature d'azzurro. Poi il Canale Spegazzini, il Ghiacciaio Secco e il fronte dello Spegazzini, con i ghiacciai Heim Sur e Peineta. Un sentiero di trecento metri si affaccia sulla Baia del Ghiacciaio.</p></div></div>
+    <div class="giorno"><div class="data">21<small>lunedì</small></div><div><h3>Una giornata all'Estancia Nibepo Aike</h3><p>Giornata intera privata con guida in italiano. Si parte al mattino lungo la strada sterrata numero 15, il Camino de las Estancias, con il monte Frías che domina il panorama: lungo la strada è facile avvistare condor, volpi, lepri e greggi di pecore. Superato il Río Rico la steppa lascia il posto alla montagna, si entra nel Parco Nazionale Los Glaciares e si costeggia il Lago Roca fino all'estancia.</p><p>Più di un secolo fa un pioniere di origine croata trovò qui il suo posto nel mondo; dopo tre generazioni la tenuta è ancora della stessa famiglia. Benvenuto al Quincho con una bevanda calda, tè, caffè o mate, i dolci fatti in casa e le empanadas, davanti alla Cordigliera. Poi la vita dell'estancia: la tosatura delle pecore, la mungitura, i gauchos che radunano il bestiame a cavallo, la prova delle redini. A pranzo l'agnello allo spiedo, <b>l'asado de cordero</b>, con un calice di vino. Chi vuole fa una passeggiata a cavallo di tre quarti d'ora. Rientro a El Calafate nel pomeriggio.</p></div></div>
+    <div class="giorno"><div class="data">22<small>martedì</small></div><div><h3>Ancora più a sud</h3><p>Colazione, trasferimento in aeroporto e volo del primo pomeriggio verso la fine del mondo.</p></div></div>
   </div>
 </section>
 
 <!-- III -->
-<section class="tappa" id="ushuaia">
+<section class="tappa" id="ushuaia" style="--tinta: rgba(185,227,240,0.12)">
   <div class="wrap">
     <div class="tappa-head">
       <div class="tappa-num">III</div>
       <div><h2>Ushuaia</h2><div class="quando">Dal 22 al 24 settembre, due notti sul Canale di Beagle.</div></div>
     </div>
-    <div class="dormire"><b>Los Acebos</b><span>camera doppia con vista sul canale</span></div>
-
-    <div class="giorno"><div class="data">23<small>mercoledì</small></div><div><h3>Tierra del Fuego e il faro della fine del mondo</h3><p>La mattina nel Parco Nazionale con guida in italiano. Poi in catamarano sul Canale di Beagle: la baia tra i monti Olivia e Cinco Hermanos, l'Isla de los Lobos con i leoni marini, il faro Les Eclaireurs e l'avvicinamento all'Isla Martillo.</p></div></div>
-
+    <p class="tappa-lede">La città più australe del mondo. Il nome viene dalla lingua Yámana e significa "baia che penetra verso ponente". Case di legno e lamiera con i tetti spioventi per la neve, dipinte con gli avanzi delle vernici delle barche: così i marinai riconoscevano casa dal mare.</p>
+    <div class="dormire">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10M3 13h18M7 13V9h4v4M3 18v2M21 18v2"/></svg>
+      <div><b>Los Acebos</b><span>Pernottamento e prima colazione, con vista sul canale.</span></div>
+    </div>
+    <div class="giorno"><div class="data">22<small>martedì</small></div><div><h3>Arrivo alla fine del mondo</h3><p>Si atterra nel tardo pomeriggio. Trasferimento in hotel con la guida in italiano.</p></div></div>
+    <div class="giorno"><div class="data">23<small>mercoledì</small></div><div><h3>Tierra del Fuego e il faro della fine del mondo</h3><p>Al mattino l'escursione al Parco Nazionale Tierra del Fuego. Poi in catamarano sul Canale di Beagle, che prende il nome dalla nave del capitano Fitzroy: la baia di Ushuaia circondata dai monti Olivia, Cinco Hermanos e Escarpados, l'Isla de los Lobos con la sua colonia di leoni marini, e infine il faro Les Eclaireurs, il faro della fine del mondo, spingendosi fino all'Isla Martillo.</p></div></div>
+    <div class="giorno"><div class="data">24<small>giovedì</small></div><div><h3>Si risale verso nord</h3><p>Colazione, trasferimento in aeroporto e volo per Buenos Aires, dove si arriva nel pomeriggio. Una notte al 725 Continental prima della grande traversata.</p></div></div>
     <div class="nota"><b>Nota di stagione.</b> I pinguini di Magellano dell'Isla Martillo si avvistano solo da ottobre ad aprile. A settembre vedremo leoni marini e uccelli marini, niente pinguini.</div>
   </div>
 </section>
 
 <!-- traversata -->
-<section class="tappa volo" id="traversata">
+<section class="tappa volo" id="traversata" style="--tinta: rgba(255,217,164,0.10)">
   <div class="wrap">
     <div class="tappa-head">
       <div class="tappa-num">✈</div>
-      <div><h2>La traversata</h2><div class="quando">Dal 24 al 27 settembre: quattro voli, tre continenti, tredici fusi orari.</div></div>
+      <div><h2>La traversata</h2><div class="quando">Dal 25 al 27 settembre: tre continenti e tredici fusi orari inseguendo il sole.</div></div>
     </div>
-
-    <div class="giorno"><div class="data">24<small>giovedì</small></div><div><h3>Ritorno a Buenos Aires</h3><p>Volo AR1877 alle 13:20 da Ushuaia. Una notte di transito al 725 Continental.</p></div></div>
-    <div class="giorno"><div class="data">25<small>venerdì</small></div><div><h3>Buenos Aires, Lima</h3><p>LA2381 alle 17:35 da Aeroparque, arrivo a Lima alle 20:20. Scalo notturno.</p></div></div>
-    <div class="giorno"><div class="data">26<small>sabato</small></div><div><h3>Lima, Los Angeles, Papeete</h3><p>LA2478 alle 00:50, atterraggio alle 07:50. Poi TN0007 di Air Tahiti Nui alle 16:40, arrivo a Papeete alle 21:50. Notte al Kon Tiki Tahiti, con corona di fiori all'arrivo, monoï e perla nera di benvenuto.</p></div></div>
-    <div class="giorno"><div class="data">27<small>domenica</small></div><div><h3>Papeete, Raiatea, il motu</h3><p>VT0311 alle 10:35, arrivo alle 11:20. Da lì trenta minuti di barca fino al Motu Tautau.</p></div></div>
-
-    <div class="nota"><b>Scalo a Los Angeles.</b> Serve l'ESTA anche per il solo transito. Le valigie vanno ritirate e reimbarcate, e per i voli verso gli Stati Uniti conviene presentarsi con tre ore e mezza di anticipo.</div>
+    <p class="tappa-lede">Si parte da Buenos Aires un venerdì sera e si arriva in paradiso il sabato notte. In mezzo, Lima e Los Angeles.</p>
+    <div class="giorno"><div class="data">25<small>venerdì</small></div><div><h3>Buenos Aires, Lima</h3><p>Trasferimento privato in aeroporto e volo serale per Lima. Scalo notturno.</p></div></div>
+    <div class="giorno"><div class="data">26<small>sabato</small></div><div><h3>Lima, Los Angeles, Papeete</h3><p>Nella notte si vola verso Los Angeles, poi nel pomeriggio l'ultimo balzo sul Pacifico. A Papeete si atterra la sera tardi: accoglienza con la collana di fiori, bus collettivo fino al Kon Tiki Tahiti, nel cuore di Papeete, vicino al lungomare e al molo dei traghetti. Camera Tahitian, colazione americana.</p></div></div>
+    <div class="giorno"><div class="data">27<small>domenica</small></div><div><h3>Verso il motu</h3><p>Bus per l'aeroporto, volo di mezz'ora per Raiatea e poi la barca: trenta minuti di laguna fino al Motu Tautau.</p></div></div>
   </div>
 </section>
 
 <!-- IV -->
-<section class="tappa caldo" id="tahaa">
+<section class="tappa caldo" id="tahaa" style="--tinta: rgba(95,220,208,0.12)">
   <div class="wrap">
     <div class="tappa-head">
       <div class="tappa-num">IV</div>
       <div><h2>Taha'a</h2><div class="quando">Dal 27 settembre al 1 ottobre, quattro notti sull'acqua.</div></div>
     </div>
-    <div class="dormire"><b>Le Taha'a by Pearl Resorts</b><span>Relais &amp; Châteaux, suite overwater sul Motu Tautau, sabbia bianca sulla barriera corallina</span></div>
-
-    <div class="giorno"><div class="data">27<small>domenica</small></div><div><h3>Check-in sull'acqua</h3><p>Arrivo al motu in barca. Per gli sposi, Champagne e letto decorato di fiori: basta mostrare il certificato di matrimonio.</p></div></div>
-    <div class="giorno"><div class="data">28<small>fino al 30</small></div><div><h3>Tre giorni sospesi sulla laguna</h3><p>La barriera corallina è sotto la suite. Snorkeling nel giardino di corallo, la vaniglia di Taha'a, il minibar rifornito ogni giorno.</p></div></div>
-    <div class="giorno"><div class="data">1<small>giovedì</small></div><div><h3>Venti minuti di volo</h3><p>VT4804 alle 17:25 da Raiatea. Atterraggio a Bora Bora al tramonto.</p></div></div>
-
-    <div class="nota"><b>Orari della barca.</b> Il trasferimento per Le Taha'a opera solo per arrivi tra le 07:30 e le 17:30 e partenze tra le 09:00 e le 18:30. I nostri voli sono compatibili.</div>
+    <p class="tappa-lede">Un isolotto di sabbia bianca sulla barriera corallina, a cinque minuti di barca dall'isola principale e trenta dall'aeroporto di Raiatea. Un mondo di bellezza immacolata, ispirato all'architettura polinesiana.</p>
+    <div class="dormire">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10M3 13h18M7 13V9h4v4M3 18v2M21 18v2"/></svg>
+      <div><b>Le Taha'a by Pearl Resorts</b><span>Tahaa Overwater Suite, mezza pensione. Relais &amp; Châteaux sul Motu Tautau.</span></div>
+    </div>
+    <div class="giorno"><div class="data">27<small>domenica</small></div><div><h3>Check-in sull'acqua</h3><p>Arrivo al motu con la barca del resort. La suite è sospesa sulla laguna, la barriera corallina sotto i piedi.</p></div></div>
+    <div class="giorno libero"><div class="data">28<small>fino al 30</small></div><div><h3>Tre giorni sospesi</h3><p>Snorkeling nel giardino di corallo, la vaniglia di Taha'a, il silenzio. Nessun programma.</p></div></div>
+    <div class="giorno"><div class="data">1<small>giovedì</small></div><div><h3>Venti minuti di volo</h3><p>Barca fino all'aeroporto di Raiatea e volo del tardo pomeriggio. A Bora Bora si atterra al tramonto.</p></div></div>
   </div>
 </section>
 
 <!-- V -->
-<section class="tappa caldo" id="borabora">
+<section class="tappa caldo" id="borabora" style="--tinta: rgba(47,201,189,0.12)">
   <div class="wrap">
     <div class="tappa-head">
       <div class="tappa-num">V</div>
       <div><h2>Bora Bora</h2><div class="quando">Dal 1 al 5 ottobre, quattro notti davanti al monte Otemanu.</div></div>
     </div>
-    <div class="dormire"><b>Le Bora Bora by Pearl Resorts</b><span>Relais &amp; Châteaux, bungalow overwater sul Motu Tevairoa</span></div>
-
-    <div class="giorno"><div class="data">1<small>giovedì</small></div><div><h3>Arrivo sul Motu Tevairoa</h3><p>Dieci minuti di barca veloce dall'aeroporto. Champagne di benvenuto per gli sposi.</p></div></div>
-    <div class="giorno"><div class="data">2<small>fino al 4</small></div><div><h3>Gli ultimi giorni di laguna</h3><p>La laguna più fotografata del mondo davanti al bungalow, l'Otemanu all'orizzonte.</p></div></div>
-    <div class="giorno"><div class="data">5<small>lunedì</small></div><div><h3>Si torna inseguendo il sole</h3><p>VT0227 alle 15:40 per Papeete, poi il notturno TN0002 delle 22:30 per Los Angeles. Parigi la mattina del 7, Linate alle 13:55.</p></div></div>
+    <p class="tappa-lede">La pace del Motu Tevairoa, a dieci minuti di barca veloce dall'aeroporto. Dal bungalow la vista è sul monte Otemanu, il rilievo verdissimo che domina l'orizzonte e che è il simbolo di questo angolo di paradiso.</p>
+    <div class="dormire">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10M3 13h18M7 13V9h4v4M3 18v2M21 18v2"/></svg>
+      <div><b>Le Bora Bora by Pearl Resorts</b><span>Lagoon Overwater Bungalow, mezza pensione. Relais &amp; Châteaux sul Motu Tevairoa.</span></div>
+    </div>
+    <div class="giorno"><div class="data">1<small>giovedì</small></div><div><h3>Arrivo sul Motu Tevairoa</h3><p>Dall'aeroporto la barca del resort, dieci minuti sulla laguna.</p></div></div>
+    <div class="giorno libero"><div class="data">2<small>fino al 4</small></div><div><h3>Gli ultimi giorni di laguna</h3><p>La laguna più fotografata del mondo davanti al bungalow. Nessun programma.</p></div></div>
+    <div class="giorno"><div class="data">5<small>lunedì</small></div><div><h3>Si torna inseguendo il sole</h3><p>Ultima giornata sull'acqua, poi la barca all'aeroporto e il volo serale per Papeete. Nella notte si riparte per Los Angeles.</p></div></div>
   </div>
 </section>
 
-<!-- voli -->
-<section class="tappa volo" id="voli">
+<!-- ritorno -->
+<section class="tappa volo" id="ritorno" style="--tinta: rgba(255,190,140,0.10); border-bottom: none;">
   <div class="wrap">
     <div class="tappa-head">
-      <div class="tappa-num">14</div>
-      <div><h2>I voli</h2><div class="quando">Quattordici tratte. Gli orari sono sempre quelli locali.</div></div>
+      <div class="tappa-num">✈</div>
+      <div><h2>Il ritorno</h2><div class="quando">Dal 5 al 7 ottobre: Papeete, Los Angeles, Parigi, Milano.</div></div>
     </div>
-    <div class="voli">
-      <div class="gruppo">Andata, 15 settembre</div>
-      <div class="volo"><span class="n">AF1733</span><span class="tr">Milano Linate, Parigi<small>Air France</small></span><span class="hh">06:25 – 08:05</span></div>
-      <div class="volo"><span class="n">AF0556</span><span class="tr">Parigi, Buenos Aires Ezeiza<small>Air France</small></span><span class="hh">10:10 – 18:50</span></div>
-      <div class="gruppo">Voli interni in Argentina</div>
-      <div class="volo"><span class="n">AR1840</span><span class="tr">Buenos Aires Aeroparque, El Calafate<small>Aerolíneas Argentinas, 18 settembre</small></span><span class="hh">09:35 – 12:55</span></div>
-      <div class="volo"><span class="n">AR1894</span><span class="tr">El Calafate, Ushuaia<small>Aerolíneas Argentinas, 22 settembre</small></span><span class="hh">14:30 – 15:50</span></div>
-      <div class="volo"><span class="n">AR1877</span><span class="tr">Ushuaia, Buenos Aires Aeroparque<small>Aerolíneas Argentinas, 24 settembre</small></span><span class="hh">13:20 – 16:50</span></div>
-      <div class="gruppo">La traversata, 25 e 26 settembre</div>
-      <div class="volo"><span class="n">LA2381</span><span class="tr">Buenos Aires Aeroparque, Lima<small>LATAM, 25 settembre</small></span><span class="hh">17:35 – 20:20</span></div>
-      <div class="volo"><span class="n">LA2478</span><span class="tr">Lima, Los Angeles<small>LATAM, 26 settembre</small></span><span class="hh">00:50 – 07:50</span></div>
-      <div class="volo"><span class="n">TN0007</span><span class="tr">Los Angeles, Papeete<small>Air Tahiti Nui, 26 settembre</small></span><span class="hh">16:40 – 21:50</span></div>
-      <div class="gruppo">Tra le isole, franchigia 23 chili</div>
-      <div class="volo"><span class="n">VT0311</span><span class="tr">Papeete, Raiatea<small>Air Tahiti, 27 settembre</small></span><span class="hh">10:35 – 11:20</span></div>
-      <div class="volo"><span class="n">VT4804</span><span class="tr">Raiatea, Bora Bora<small>Air Tahiti, 1 ottobre</small></span><span class="hh">17:25 – 17:45</span></div>
-      <div class="volo"><span class="n">VT0227</span><span class="tr">Bora Bora, Papeete<small>Air Tahiti, 5 ottobre</small></span><span class="hh">15:40 – 16:30</span></div>
-      <div class="gruppo">Ritorno, dal 5 al 7 ottobre</div>
-      <div class="volo"><span class="n">TN0002</span><span class="tr">Papeete, Los Angeles<small>Air Tahiti Nui, 5 ottobre</small></span><span class="hh">22:30 – 09:20 del giorno dopo</span></div>
-      <div class="volo"><span class="n">AF0023</span><span class="tr">Los Angeles, Parigi<small>Air France, 6 ottobre</small></span><span class="hh">15:15 – 11:10 del giorno dopo</span></div>
-      <div class="volo"><span class="n">AF1012</span><span class="tr">Parigi, Milano Linate<small>Air France, 7 ottobre</small></span><span class="hh">12:20 – 13:55</span></div>
-    </div>
-  </div>
-</section>
+    <div class="giorno"><div class="data">6<small>martedì</small></div><div><h3>Los Angeles</h3><p>Si atterra in California la mattina, e nel pomeriggio si riparte per Parigi con il volo notturno.</p></div></div>
+    <div class="giorno"><div class="data">7<small>mercoledì</small></div><div><h3>Casa</h3><p>Parigi in tarda mattinata, Linate alle 13:55. Ventitré giorni dopo.</p></div></div>
 
-<!-- note -->
-<section class="tappa" id="note" style="border-bottom: none;">
-  <div class="wrap">
-    <div class="tappa-head">
-      <div class="tappa-num">✓</div>
-      <div><h2>Note di rotta</h2><div class="quando">Documenti, bagagli e le cose da sapere prima di partire.</div></div>
-    </div>
-
-    <details>
-      <summary>Documenti da preparare <span class="segno">+</span></summary>
-      <div class="corpo"><ul>
-        <li><b>Passaporto</b> con almeno sei mesi di validità residua e quattro pagine libere, integro in ogni sua parte.</li>
-        <li><b>ESTA</b> per il transito a Los Angeles, da richiedere prima della partenza su esta.cbp.dhs.gov.</li>
-        <li><b>Certificato di matrimonio</b>, valido al massimo dodici mesi, per i benefit sposi nei resort polinesiani.</li>
-        <li><b>Assicurazione medica e bagaglio</b> stampata: in Argentina va mostrata all'Immigrazione insieme al biglietto di uscita e alle prenotazioni degli alloggi.</li>
-        <li><b>Formulario doganale</b> argentino: si compila all'arrivo e si restituisce all'uscita.</li>
-        <li><b>Carta di credito</b> per le cauzioni al check-in di ogni hotel.</li>
-      </ul></div>
-    </details>
-    <details>
-      <summary>Bagagli e franchigie <span class="segno">+</span></summary>
-      <div class="corpo"><ul>
-        <li><b>Aerolíneas Argentinas</b>: massimo quindici chili in stiva, le eccedenze si saldano al banco.</li>
-        <li><b>Air Tahiti</b>: ventitré chili in stiva (massimo venticinque a collo) e cinque a mano entro 55 per 35 per 25 centimetri. Controlli severi e supplementi cari.</li>
-        <li>Conviene estendere la franchigia per uno dei due, o usare il deposito bagagli di Papeete.</li>
-        <li>A Los Angeles le valigie vanno <b>ritirate e reimbarcate</b>.</li>
-      </ul></div>
-    </details>
-    <details>
-      <summary>Avvertenze <span class="segno">+</span></summary>
-      <div class="corpo"><ul>
-        <li><b>Orari e tariffe</b> possono subire riconferme e variazioni fino a ridosso della partenza.</li>
-        <li><b>Tasse di soggiorno</b> a Buenos Aires e possibili resort fee in Polinesia, da pagare direttamente in loco.</li>
-        <li><b>Orari Air Tahiti</b> modificabili fino al giorno della partenza; i biglietti elettronici si ritirano all'arrivo a Papeete.</li>
-        <li><b>Febbre gialla</b>: vaccinazione raccomandata, non obbligatoria, per chi transita da aree a rischio. Da verificare per tempo.</li>
-      </ul></div>
-    </details>
-    <details>
-      <summary>I regali per gli sposi <span class="segno">+</span></summary>
-      <div class="corpo"><ul>
-        <li><b>Kon Tiki Tahiti</b>: monoï e perla nera di benvenuto, corona di fiori e assistenza in aeroporto.</li>
-        <li><b>Le Taha'a</b>: piccola bottiglia di Champagne e letto decorato di fiori, minibar rifornito ogni giorno.</li>
-        <li><b>Le Bora Bora</b>: piccola bottiglia di Champagne, minibar rifornito ogni giorno.</li>
-        <li>I benefit valgono una sola volta per soggiorno, presentando il certificato di matrimonio al check-in.</li>
-      </ul></div>
-    </details>
+    <a class="rimando" href="trasporti.html">
+      <div><div class="t">Tutti i trasporti</div><div class="s">Quattordici voli con orari e compagnie, i trasferimenti, le barche per i resort, i bagagli e i documenti: sono nella pagina dedicata.</div></div>
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
   </div>
 </section>
 
