@@ -86,13 +86,13 @@
   /* ═══ CONTENUTI ═══ */
   main { padding-top: var(--head-h); }
   .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
-  .intro { padding: 64px 0 40px; }
+  .intro { padding-top: 64px; padding-bottom: 40px; }
   h1 { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 8.4vw, 84px); line-height: 0.96; margin: 0 0 20px; letter-spacing: -0.01em; }
   h1 i, h2 i { font-style: italic; }
   .lede { font-size: 18px; color: var(--ivory-2); max-width: 600px; margin: 0; }
 
   /* la barra dei ventitré giorni */
-  .barra { padding: 10px 0 64px; border-bottom: 1px solid var(--line); }
+  .barra { padding-top: 10px; padding-bottom: 64px; border-bottom: 1px solid var(--line); }
   .barra-track { display: flex; gap: 3px; height: 54px; }
   .seg {
     flex-grow: var(--g, 1); flex-basis: 0;
@@ -113,6 +113,8 @@
     .barra-track { height: 46px; }
     .seg { font-size: 11.5px; }
     .seg .n { font-size: 14px; }
+    .seg .l { display: none; }
+    .seg.grande .l { display: inline; }
   }
 
   /* tappe */
@@ -184,13 +186,13 @@
 <div class="wrap barra" aria-label="I ventitré giorni del viaggio in proporzione">
   <div class="barra-track">
     <a class="seg" href="#ba" style="--g:3; --c:#4a8fb0"><span class="n">I</span><span class="l">Buenos Aires</span></a>
-    <a class="seg" href="#calafate" style="--g:4; --c:#8fd0e6"><span class="n">II</span><span class="l">El Calafate</span></a>
+    <a class="seg grande" href="#calafate" style="--g:4; --c:#8fd0e6"><span class="n">II</span><span class="l">El Calafate</span></a>
     <a class="seg" href="#ushuaia" style="--g:2; --c:#b9e3f0"><span class="n">III</span><span class="l">Ushuaia</span></a>
     <a class="seg piccolo" href="#ushuaia" style="--g:1; --c:#c9d6dc" title="Buenos Aires, una notte di transito"><span class="n">·</span></a>
     <a class="seg piccolo" href="#traversata" style="--g:1; --c:#d8d3c4" title="In volo verso Lima e Los Angeles"><span class="n">✈</span></a>
     <a class="seg piccolo" href="#traversata" style="--g:1; --c:#ffd9a4" title="Papeete, la prima notte in Polinesia"><span class="n">·</span></a>
-    <a class="seg" href="#tahaa" style="--g:4; --c:#5fdcd0"><span class="n">IV</span><span class="l">Taha'a</span></a>
-    <a class="seg" href="#borabora" style="--g:4; --c:#2fc9bd"><span class="n">V</span><span class="l">Bora Bora</span></a>
+    <a class="seg grande" href="#tahaa" style="--g:4; --c:#5fdcd0"><span class="n">IV</span><span class="l">Taha'a</span></a>
+    <a class="seg grande" href="#borabora" style="--g:4; --c:#2fc9bd"><span class="n">V</span><span class="l">Bora Bora</span></a>
     <a class="seg" href="#ritorno" style="--g:3; --c:#ffbe8c"><span class="n">✈</span><span class="l">Il ritorno</span></a>
   </div>
   <div class="barra-date"><span>15 settembre, Linate</span><span>7 ottobre, Linate</span></div>
