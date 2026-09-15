@@ -32,7 +32,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300,100;0,9..144,400,100;1,9..144,300,100&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Outfit:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -42,7 +42,7 @@
   --accent: #F2B36B;
   --line:   rgba(239,230,216,0.10);
   --mono:   "IBM Plex Mono", ui-monospace, monospace;
-  --serif:  "Fraunces", Georgia, serif;
+  --serif:  "Outfit", "Helvetica Neue", Arial, sans-serif;
   --sans:   "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
 }
 html { background: var(--bg); }
@@ -66,7 +66,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .back { display: inline-flex; align-items: center; gap: 0.55rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em;
   color: var(--dim); text-decoration: none; margin-bottom: 3rem; transition: color .2s, gap .25s; }
 .back:hover { color: var(--accent); gap: 0.9rem; }
-h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(2rem, 4.4vw, 2.8rem); line-height: 1.1; letter-spacing: 0.01em; }
+h1 { font-family: var(--serif); font-weight: 300; letter-spacing: 0.01em; font-size: clamp(2rem, 4.4vw, 2.8rem); line-height: 1.1; letter-spacing: 0.01em; }
 .updated { margin-top: 0.5rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--dim); }
 .rule { width: 34px; height: 1px; background: linear-gradient(90deg, var(--accent), transparent); margin: 1.5rem 0 2.2rem; }
 h2 { font-family: var(--serif); font-weight: 400; font-size: 1.35rem; margin: 2.4rem 0 0.6rem; color: var(--ink); }
@@ -202,8 +202,7 @@ footer a:hover { color: var(--accent); }
       const tst = (utcHours * 60 + eqt + 4 * LON) % 1440;
       const ha = (tst / 4 - 180) * Math.PI / 180;
       const alt = Math.asin(Math.sin(LAT) * Math.sin(decl) + Math.cos(LAT) * Math.cos(decl) * Math.cos(ha));
-      let az = Math.acos(((Math.sin(LAT) * Math.cos(ha) * Math.cos(decl)) - Math.cos(LAT) * Math.sin(decl)) / Math.cos(alt) * -1 + 0) ;
-      az = Math.atan2(Math.sin(ha), Math.cos(ha) * Math.sin(LAT) - Math.tan(decl) * Math.cos(LAT)) + Math.PI;  /* from north, clockwise */
+      const az = Math.atan2(Math.sin(ha), Math.cos(ha) * Math.sin(LAT) - Math.tan(decl) * Math.cos(LAT)) + Math.PI;  /* from north, clockwise */
       return { alt, az };
     }
     let sun = sunNow();

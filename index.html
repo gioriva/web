@@ -92,8 +92,7 @@ body:not(.plotted) .hud { opacity: 0 !important; }
 .wm { text-align: center; opacity: 1; }
 .wm .logo circle { opacity: 0; }
 body.plotted .wm .logo circle { opacity: 1; }
-.wm .payoff { opacity: 0; transition: opacity 1.4s ease; }
-body.plotted .wm .payoff { opacity: 1; }
+.wm .payoff { opacity: 1; min-height: 1.2em; }
 #burger {
   position: fixed; top: 1.5rem; right: 1.8rem; z-index: 10005;
   width: 52px; height: 48px;
@@ -228,12 +227,12 @@ body.menu-open .hud { opacity: 0 !important; }
 
 <nav id="menu" aria-label="Menu principale">
   <div class="lines">
-    <a class="line" href="https://www.gioriva.it/poitiracconto" data-t="Poi ti racconto" data-s="Storie e diari di viaggio"><span class="t"></span><span class="s"></span></a>
-    <a class="line" href="https://www.gioriva.it/lineadivolo" data-t="Linea di volo" data-s="Il mondo visto dal drone"><span class="t"></span><span class="s"></span></a>
-    <a class="line" href="https://www.gioriva.it/quotazero" data-t="Quota Zero" data-s="Il volo comincia a terra"><span class="t"></span><span class="s"></span></a>
-    <a class="line" href="https://www.gioriva.it/formulatre" data-t="Formula Tre" data-s="Un album di ricordi"><span class="t"></span><span class="s"></span></a>
-    <a class="line" href="https://www.gioriva.it/rotta/" data-t="Rotta" data-s="Traccia i tuoi voli"><span class="t"></span><span class="s"></span></a>
-    <a class="line" href="https://www.gioriva.it/issdeck" data-t="ISS Deck" data-s="Nello spazio con la ISS"><span class="t"></span><span class="s"></span></a>
+    <a class="line" href="https://www.gioriva.it/poitiracconto" aria-label="Poi ti racconto" data-t="Poi ti racconto" data-s="Storie e diari di viaggio"><span class="t"></span><span class="s"></span></a>
+    <a class="line" href="https://www.gioriva.it/lineadivolo" aria-label="Linea di volo" data-t="Linea di volo" data-s="Il mondo visto dal drone"><span class="t"></span><span class="s"></span></a>
+    <a class="line" href="https://www.gioriva.it/quotazero" aria-label="Quota Zero" data-t="Quota Zero" data-s="Il volo comincia a terra"><span class="t"></span><span class="s"></span></a>
+    <a class="line" href="https://www.gioriva.it/formulatre" aria-label="Formula Tre" data-t="Formula Tre" data-s="Un album di ricordi"><span class="t"></span><span class="s"></span></a>
+    <a class="line" href="https://www.gioriva.it/rotta/" aria-label="Rotta" data-t="Rotta" data-s="Traccia i tuoi voli"><span class="t"></span><span class="s"></span></a>
+    <a class="line" href="https://www.gioriva.it/issdeck" aria-label="ISS Deck" data-t="ISS Deck" data-s="Nello spazio con la ISS"><span class="t"></span><span class="s"></span></a>
   </div>
 <ul class="menu-icons">
     <li><a href="/privacy.html" aria-label="Privacy" title="Privacy">
@@ -324,8 +323,7 @@ body.menu-open .hud { opacity: 0 !important; }
       const tst = (utcHours * 60 + eqt + 4 * LON) % 1440;
       const ha = (tst / 4 - 180) * Math.PI / 180;
       const alt = Math.asin(Math.sin(LAT) * Math.sin(decl) + Math.cos(LAT) * Math.cos(decl) * Math.cos(ha));
-      let az = Math.acos(((Math.sin(LAT) * Math.cos(ha) * Math.cos(decl)) - Math.cos(LAT) * Math.sin(decl)) / Math.cos(alt) * -1 + 0) ;
-      az = Math.atan2(Math.sin(ha), Math.cos(ha) * Math.sin(LAT) - Math.tan(decl) * Math.cos(LAT)) + Math.PI;  /* from north, clockwise */
+      const az = Math.atan2(Math.sin(ha), Math.cos(ha) * Math.sin(LAT) - Math.tan(decl) * Math.cos(LAT)) + Math.PI;  /* from north, clockwise */
       return { alt, az };
     }
     let sun = sunNow();
@@ -456,75 +454,13 @@ body.menu-open .hud { opacity: 0 !important; }
       }
     }
 
-    /* ── the matter: particles that live on the wave and can become words ── */
-    let particles = [], voices = [], menuOpen = false, menuT = 0, hoverVoice = -1;
-    const TITLES = ['Poi ti racconto', 'Linea di volo', 'Quota Zero', 'Formula Tre', 'Rotta', 'ISS Deck'];
-
-    function sampleText(text, fontPx, pitch) {
-      const off = document.createElement('canvas'); const o = off.getContext('2d');
-      o.font = `500 ${fontPx}px Outfit, "Helvetica Neue", Arial, sans-serif`;
-      const w = Math.ceil(o.measureText(text).width) + 8, h = Math.ceil(fontPx * 1.3);
-      off.width = w; off.height = h;
-      o.font = `500 ${fontPx}px Outfit, "Helvetica Neue", Arial, sans-serif`;
-      o.fillStyle = '#fff'; o.textBaseline = 'middle'; o.fillText(text, 4, h / 2);
-      const d = o.getImageData(0, 0, w, h).data, pts = [];
-      for (let y = pitch / 2; y < h; y += pitch) for (let x = pitch / 2; x < w; x += pitch) {
-        if (d[((y | 0) * w + (x | 0)) * 4 + 3] > 120) pts.push([x - w / 2, y - h / 2]);
-      }
-      return { pts, w, h };
-    }
-
-    function buildMatter() {
-      const fontPx = (mobile ? 30 : 46) * DPR, pitch = (mobile ? 3.0 : 3.6) * DPR;
-      const gap = (mobile ? 64 : 92) * DPR;
-      const total = TITLES.length * gap;
-      const top = H / 2 - total / 2 + gap * 0.5 - (mobile ? H * 0.04 : H * 0.03);
-      voices = []; particles = [];
-      TITLES.forEach((t, i) => {
-        const s = sampleText(t, fontPx, pitch);
-        const yC = top + i * gap;
-        voices.push({ x: cx, y: yC, w: s.w, h: s.h, from: particles.length, to: particles.length + s.pts.length });
-        s.pts.forEach(([px, py]) => {
-          particles.push({
-            tx: cx + px, ty: yC + py,                    /* where it stands in the menu */
-            c: Math.floor(Math.random() * COLS),          /* its cell on the wave */
-            r: Math.floor(ROWS * (0.35 + 0.65 * Math.random())),
-            d: Math.random() * 0.35,                      /* start delay */
-            arc: (0.4 + Math.random() * 0.8) * H * 0.06,  /* how much it lifts on the way */
-            v: i
-          });
-        });
-      });
-      /* place the HTML hit-areas over the dot-titles */
-      document.querySelectorAll('.voice').forEach((el, i) => {
-        const v = voices[i];
-        el.style.setProperty('--vx', (v.x - v.w / 2) / DPR + 'px');
-        el.style.setProperty('--vy', (v.y - v.h / 2) / DPR + 'px');
-        el.style.setProperty('--vw', v.w / DPR + 'px');
-        el.style.setProperty('--vh', v.h / DPR + 'px');
-      });
-    }
-
+    /* ── menu state: the scene dims while the plotter writes the lines ── */
+    let menuOpen = false, menuT = 0, menuHead = null;
     const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     function drawMatter(t, dt) {
       menuT = Math.max(0, Math.min(1, menuT + (menuOpen ? 1 : -1) * dt / 0.9));
       waveA = 1 - 0.7 * ease(menuT);
       if (menuHead) head(menuHead.x, menuHead.y, 1);
-      return;
-      const size = (mobile ? 1.5 : 1.7) * DPR;
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        const k = ease(Math.max(0, Math.min(1, (menuT - p.d) / (1 - 0.35))));
-        if (k <= 0) continue;
-        const home = cell(p.c, p.r, t);
-        const x = home.sx + (p.tx - home.sx) * k;
-        const y = home.sy + (p.ty - home.sy) * k - Math.sin(k * Math.PI) * p.arc;
-        const hot = hoverVoice === p.v;
-        const a = 0.35 + 0.65 * k;
-        ctx.fillStyle = hot ? `rgba(242,179,107,${a})` : `rgba(239,230,216,${(a * 0.92).toFixed(3)})`;
-        const s = size * (hot ? 1.25 : 1);
-        ctx.fillRect(x - s / 2, y - s / 2, s, s);
-      }
     }
 
     /* ── pointer on the water ── */
@@ -541,12 +477,8 @@ body.menu-open .hud { opacity: 0 !important; }
     }
 
     /* ── public hooks for the menu ── */
-    window.__materia = {
-      menu(on) { menuOpen = on; },
-      hover(i) { hoverVoice = i; }
-    };
+    window.__materia = { menu(on) { menuOpen = on; } };
     /* the menu writer asks for the head at the end of the line being written */
-    let menuHead = null;
     window.__head = function (el, n) {
       if (!el) { menuHead = null; return; }
       const r = el.getBoundingClientRect();
@@ -563,8 +495,12 @@ body.menu-open .hud { opacity: 0 !important; }
     const logoSvg = document.querySelector('.wm .logo');
     const dots = logoSvg ? Array.from(logoSvg.querySelectorAll('circle')) : [];
     const solidG = logoSvg ? logoSvg.querySelector('g[clip-path]') : null;
-    let plotStart = null, plotDone = sessionStorage.getItem('gr_plot') === '1', drawnDots = 0, clipRect = null;
-    const T = { solidA: 0.3, solidB: 1.6, dotsB: 4.2, travelB: 4.8, waveB: 8.6 };
+    let plotStart = null, drawnDots = 0, clipRect = null;
+    let plotDone = (function () { try { const t = +localStorage.getItem('gr_plot_at') || 0; return Date.now() - t < 10 * 60 * 1000; } catch (e) { return false; } })();
+    const T = { solidA: 0.3, solidB: 1.6, dotsB: 4.2, payB: 5.5, travelB: 6.1, waveB: 9.8 };
+    const payEl = document.querySelector('.wm .payoff');
+    const PAY = payEl ? payEl.textContent : '';
+    if (payEl) payEl.textContent = '';
     function setupPlotter() {
       canvas2.width = W; canvas2.height = H;
       if (plotDone || !logoSvg || !solidG) { finishPlot(); return; }
@@ -581,15 +517,21 @@ body.menu-open .hud { opacity: 0 !important; }
       plotStart = null;
     }
     function finishPlot() {
-      plotDone = true; reveal = null; sessionStorage.setItem('gr_plot', '1');
+      plotDone = true; reveal = null; try { localStorage.setItem('gr_plot_at', String(Date.now())); } catch (e) {}
       if (clipRect) clipRect.setAttribute('width', 99999);
       document.body.classList.add('plotted');
+      if (payEl) payEl.textContent = PAY;
+      headPos = null;
       skyA = Math.max(skyA, 0.001);
     }
     addEventListener('pointerdown', () => { if (!plotDone) finishPlot(); }, { passive: true });
     window.__finishPlot = function () { if (!plotDone) finishPlot(); };
     document.addEventListener('keydown', () => { if (!plotDone) finishPlot(); });
-    function head(x, y, glow) {
+    let headPos = null;
+    function head(x, y, glow) { headPos = { x, y, glow }; }
+    function drawHead() {
+      if (!headPos) return;
+      const { x, y, glow } = headPos;
       const r = 14 * DPR;
       const g = ctx2.createRadialGradient(x, y, 0, x, y, r);
       g.addColorStop(0, `rgba(242,179,107,${(0.55 * glow).toFixed(3)})`); g.addColorStop(1, 'rgba(242,179,107,0)');
@@ -621,10 +563,23 @@ body.menu-open .hud { opacity: 0 !important; }
         return 0;
       }
       for (; drawnDots < dots.length; drawnDots++) dots[drawnDots].style.opacity = 1;
+      if (s < T.payB && payEl) {                                       /* the payoff, letter by letter */
+        const k = (s - T.dotsB) / (T.payB - T.dotsB);
+        const n = Math.round(k * PAY.length);
+        payEl.textContent = PAY.slice(0, n);
+        const r = payEl.getBoundingClientRect();
+        const meas = document.createElement('canvas').getContext('2d');
+        meas.font = getComputedStyle(payEl).font;
+        const full = meas.measureText(PAY).width, part = meas.measureText(PAY.slice(0, n)).width;
+        const x0 = (r.left + r.width / 2 - full / 2 + part + 2) * DPR, y0 = (r.top + r.height * 0.62) * DPR;
+        head(x0, y0, 1);
+        return 0;
+      }
+      if (payEl) payEl.textContent = PAY;
       if (s < T.travelB) {                                             /* down to the horizon */
-        const k = (s - T.dotsB) / (T.travelB - T.dotsB), e = k * k * (3 - 2 * k);
-        const last = dots[dots.length - 1];
-        const x0 = toX(parseFloat(last.getAttribute('cx'))), y0 = toY(parseFloat(last.getAttribute('cy')));
+        const k = (s - T.payB) / (T.travelB - T.payB), e = k * k * (3 - 2 * k);
+        const r = payEl ? payEl.getBoundingClientRect() : logoSvg.getBoundingClientRect();
+        const x0 = (r.left + r.width / 2 + (payEl ? (document.createElement('canvas').getContext('2d').measureText(PAY).width / 2) : 0)) * DPR, y0 = (r.top + r.height * 0.62) * DPR;
         const p1 = cell(0, ROWS - 1, 0);
         head(x0 + (p1.sx - x0) * e, y0 + (p1.sy - y0) * e, 1);
         return 0;
@@ -656,7 +611,6 @@ body.menu-open .hud { opacity: 0 !important; }
     let last = 0, waveT0 = null;
     function frame(ts) {
       const dt = Math.min(0.05, (ts - last) / 1000 || 0.016); last = ts;
-      if (!plotDone) { plot(ts); }
       if (plotDone && waveT0 === null) waveT0 = ts;
       const t = plotDone ? (ts - waveT0) * 0.00035 : 0;
       autoPointer(ts);
@@ -664,10 +618,13 @@ body.menu-open .hud { opacity: 0 !important; }
       ctx.fillStyle = '#0C0907'; ctx.fillRect(0, 0, W, H);
       ctx2.clearRect(0, 0, W, H);
       /* the sky fills in while the sea is being traced */
-      skyA = plotDone ? Math.min(1, skyA + dt / 2.5) : (plotStart === null ? 0 : Math.min(1, Math.max(0, ((ts - plotStart) / 1000 - T.dotsB) / 3.2)));
+      skyA = plotDone ? Math.min(1, skyA + dt / 2.5) : (plotStart === null ? 0 : Math.min(1, Math.max(0, ((ts - plotStart) / 1000 - T.payB) / 3.2)));
+      headPos = null;
+      if (!plotDone) { plot(ts); }
       drawWave(t);
       drawSky(ts);
       drawMatter(t, dt);
+      drawHead();
       requestAnimationFrame(frame);
     }
     setupPlotter();
