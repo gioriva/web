@@ -9,7 +9,7 @@
 <meta name="description" content="Freedom is a state of mind.">
 <meta property="og:title" content="Giorgio Riva">
 <meta property="og:description" content="Freedom is a state of mind.">
-<meta property="og:image" content="https://www.gioriva.it/og-image.png?v=13">
+<meta property="og:image" content="https://www.gioriva.it/og-image.png?v=14">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:type" content="website">
@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Giorgio Riva">
 <meta name="twitter:description" content="Freedom is a state of mind.">
-<meta name="twitter:image" content="https://www.gioriva.it/og-image.png?v=13">
+<meta name="twitter:image" content="https://www.gioriva.it/og-image.png?v=14">
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=6">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=6">
@@ -60,12 +60,13 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; }
 body {
-  background: var(--bg);
+  background: radial-gradient(60% 40% at 62% 30%, rgba(242,179,107,0.06) 0%, rgba(242,179,107,0) 70%), radial-gradient(50% 35% at 35% 40%, rgba(239,230,216,0.035) 0%, rgba(239,230,216,0) 70%), var(--bg);
   font-family: var(--font);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
 }
-canvas#c { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+canvas#c, canvas#c2 { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+canvas#c2 { z-index: 6; pointer-events: none; }
 a:focus-visible, button:focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
 
 /* vignette: darkens the edges, warm */
@@ -74,129 +75,91 @@ a:focus-visible, button:focus-visible { outline: 1px solid var(--accent); outlin
   background: radial-gradient(ellipse 75% 70% at 50% 62%, transparent 45%, rgba(12,9,7,0.92) 100%);
 }
 
+/* a whisper of context at the foot */
+body:not(.plotted) .hud { opacity: 0 !important; }
+.hud { position: fixed; left: 0; right: 0; bottom: clamp(16px, 2.6vh, 26px); text-align: center; pointer-events: none;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim);
+  opacity: 0; animation: fade 1.8s ease 1.4s forwards; }
+.hud i { font-style: normal; color: var(--accent); margin: 0 8px; }
+
 /* the name, where the wordmark was */
 .center {
-  position: fixed; inset: 0;
+  position: fixed; inset: 0; z-index: 3;
   display: flex; align-items: center; justify-content: center;
   pointer-events: none;
   transform: translateY(-14vh);
 }
-.wm {
-  text-align: center;
-  opacity: 0; animation: fade 2s ease 0.8s forwards;
-}
-.wm .logo {
-  display: block;
-  width: clamp(160px, 20vw, 290px);
-  height: auto;
-  margin: 0 auto;
-  overflow: visible;
-}
-.wm .rule {
-  width: 30px; height: 1px;
-  margin: 0.9rem auto 0.8rem;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0.85;
-}
-.wm .payoff {
-  margin-top: 0.5rem;
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(0.72rem, 0.95vw, 0.86rem);
-  letter-spacing: 0.1em;
-  color: rgba(239,230,216,0.6);
-  white-space: nowrap;
-}
-@keyframes fade { to { opacity: 1; } }
-@keyframes blink { 50% { opacity: 0; } }
-
-/* ── menu ── */
+.wm { text-align: center; opacity: 1; }
+.wm .logo circle { opacity: 0; }
+body.plotted .wm .logo circle { opacity: 1; }
+.wm .payoff { opacity: 0; transition: opacity 1.4s ease; }
+body.plotted .wm .payoff { opacity: 1; }
 #burger {
-  position: fixed; top: 1.35rem; right: 1.7rem; z-index: 10005;
-  width: 48px; height: 48px;
+  position: fixed; top: 1.5rem; right: 1.8rem; z-index: 10005;
+  width: 52px; height: 48px;
+  display: grid; place-items: center;
   background: none; border: none; padding: 0; cursor: pointer;
+  color: var(--ink);
 }
-#burger .d {
-  position: absolute; left: 50%; top: 50%;
-  width: 4px; height: 4px; margin: -2px 0 0 -2px;
-  border-radius: 50%;
-  background: var(--ink);
-  transition: transform .55s cubic-bezier(.16,.84,.44,1), background .3s, opacity .3s;
+#burger svg { width: 40px; height: 36px; display: block; overflow: visible; }
+#burger line {
+  stroke: currentColor; stroke-width: 1.2; stroke-linecap: round;
+  stroke-dasharray: 30 40; stroke-dashoffset: 0;
+  transform-origin: 17px 18px;
+  transition: transform .5s cubic-bezier(.16,.84,.44,1), stroke-dasharray .5s ease, opacity .3s;
 }
-#burger .d3 { background: var(--accent); }
-/* closed: a little wave */
-#burger .d1 { transform: translate(-16px, 4px); animation: bob 3.2s ease-in-out infinite; }
-#burger .d2 { transform: translate(-8px, -2px); animation: bob 3.2s ease-in-out infinite .35s; }
-#burger .d3 { transform: translate(0, -5px); animation: bob 3.2s ease-in-out infinite .7s; }
-#burger .d4 { transform: translate(8px, -2px); animation: bob 3.2s ease-in-out infinite 1.05s; }
-#burger .d5 { transform: translate(16px, 4px); animation: bob 3.2s ease-in-out infinite 1.4s; }
-@keyframes bob { 0%, 100% { margin-top: -2px; } 50% { margin-top: -5px; } }
-#burger:hover .d { background: var(--accent); }
-/* open: an X made of the same five dots */
-body.menu-open #burger .d { animation: none; margin-top: -2px; }
-body.menu-open #burger .d1 { transform: translate(-9px, -9px); }
-body.menu-open #burger .d2 { transform: translate(9px, -9px); }
-body.menu-open #burger .d3 { transform: translate(0, 0); }
-body.menu-open #burger .d4 { transform: translate(-9px, 9px); }
-body.menu-open #burger .d5 { transform: translate(9px, 9px); }
+#burger .l2 { stroke-dasharray: 17 40; }
+#burger .hd { fill: var(--accent); transition: transform .5s cubic-bezier(.16,.84,.44,1), opacity .3s; filter: drop-shadow(0 0 4px rgba(242,179,107,0.8)); }
+/* hover: the head rewrites both lines left to right */
+#burger:hover line { animation: rewrite .9s ease both; }
+#burger:hover .l2 { animation: rewrite2 .8s ease both .25s; }
+@keyframes rewrite { from { stroke-dashoffset: 30; } to { stroke-dashoffset: 0; } }
+@keyframes rewrite2 { from { stroke-dashoffset: 17; } to { stroke-dashoffset: 0; } }
+/* open: the two lines cross, the head leaves to write the menu */
+body.menu-open #burger .l1 { transform: translateY(5px) rotate(45deg); }
+body.menu-open #burger .l2 { transform: translateY(-5px) rotate(-45deg); stroke-dasharray: 30 40; }
+body.menu-open #burger .hd { opacity: 0; transform: translateX(-12px); }
+body.menu-open #burger:hover line { animation: none; }
 
-#menu-veil { position: fixed; inset: 0; z-index: 10003; background: rgba(8,6,4,0.62);
-  backdrop-filter: blur(4px); opacity: 0; visibility: hidden; transition: opacity .5s, visibility .5s; }
-body.menu-open #menu-veil { opacity: 1; visibility: visible; }
 #menu {
-  position: fixed; top: 0; right: 0; bottom: 0; z-index: 10004;
-  width: min(460px, 90vw);
-  background: radial-gradient(120% 80% at 100% 50%, #171109 0%, #100C09 60%);
-  border-left: 1px solid var(--line);
-  transform: translateX(100%);
-  transition: transform .6s cubic-bezier(.16,.84,.44,1);
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 5.5rem 3rem 3rem;
-  overflow-y: auto;
+  position: fixed; inset: 0; z-index: 10004;
+  pointer-events: none; visibility: hidden;
 }
-body.menu-open #menu { transform: translateX(0); }
-/* a little dotted water at the foot of the panel */
-#menu::after {
-  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 26%;
-  pointer-events: none; opacity: 0.35;
-  background-image: radial-gradient(rgba(239,230,216,0.55) 0.7px, transparent 0.9px);
-  background-size: 11px 11px;
-  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
-  mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+body.menu-open #menu { visibility: visible; }
+.lines {
+  position: absolute; left: 50%; top: 46%;
+  transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; gap: 0.35rem;
+  pointer-events: auto;
 }
-#menu > * { position: relative; z-index: 1; }
-.menu-kicker {
-  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--dim); margin-bottom: 1.4rem;
-  opacity: 0; transition: opacity .5s .1s;
+.line {
+  display: grid; grid-template-columns: minmax(12ch, auto) 1fr; column-gap: 1.6rem; align-items: baseline;
+  text-decoration: none; padding: 0.42rem 0;
+  min-height: 2.1rem;
 }
-body.menu-open .menu-kicker { opacity: 1; }
-.menu-list { display: block; }
-.menu-item {
-  display: grid; grid-template-columns: 1.5rem 1fr; align-items: center; column-gap: 0.85rem;
-  text-decoration: none;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid var(--line);
-  opacity: 0; transform: translateX(16px);
-  transition: opacity .5s, transform .5s;
+.line .t { font-family: var(--serif); font-weight: 300; font-size: 1.35rem; letter-spacing: 0.02em; color: var(--ink); white-space: pre; transition: color .3s; }
+.line .s { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--dim); white-space: pre; opacity: 0; transition: opacity .5s, color .3s; }
+.line.written .s { opacity: 1; }
+.line:hover .t, .line:focus-visible .t { color: var(--accent); }
+.line:hover .s { color: rgba(239,230,216,0.72); }
+body.menu-closing .line .t, body.menu-closing .line .s { opacity: 0; transition: opacity .35s; }
+.menu-icons {
+  position: absolute; left: 0; right: 0; bottom: 5vh;
+  display: flex; justify-content: center; gap: 1.8rem; list-style: none;
+  pointer-events: auto;
+  opacity: 0; transition: opacity .6s .9s;
 }
-body.menu-open .menu-item { opacity: 1; transform: translateX(0); }
-.menu-list .menu-item:last-child { border-bottom: none; }
-.menu-item .mi { display: block; width: 19px; height: 19px; color: rgba(239,230,216,0.55); transition: color .3s, transform .35s; }
-.menu-item .mi .dot { fill: var(--accent); stroke: none; }
-.menu-item .tx { display: block; transition: transform .35s; }
-.menu-item .t { display: block; font-family: var(--serif); font-weight: 300; font-size: 1.05rem; line-height: 1.2; letter-spacing: 0.02em; color: var(--ink); transition: color .3s; }
-.menu-item .s { display: block; margin-top: 0.08rem; font-family: var(--serif); font-weight: 300; font-size: 0.76rem; letter-spacing: 0.02em; color: var(--dim); transition: color .3s; }
-.menu-item:hover .t  { color: var(--accent); }
-.menu-item:hover .mi { color: var(--accent); transform: translateX(2px); }
-.menu-item:hover .tx { transform: translateX(5px); }
-.menu-item:hover .s  { color: rgba(239,230,216,0.72); }
-.menu-sep { height: 1px; margin: 1.6rem 0; background: linear-gradient(90deg, var(--accent), transparent); opacity: 0.5; }
-.menu-icons { display: flex; gap: 1.8rem; list-style: none; opacity: 0; transition: opacity .5s; }
-body.menu-open .menu-icons { opacity: 1; transition-delay: .5s; }
+body.menu-open .menu-icons { opacity: 1; }
 .menu-icons a { display: block; color: var(--dim); transition: color .25s, transform .25s; }
 .menu-icons svg { width: 17px; height: 17px; display: block; }
 .menu-icons a:hover { color: var(--accent); transform: translateY(-2px); }
+body.menu-open .wm { opacity: 0 !important; transition: opacity .5s; }
+body.menu-open .hud { opacity: 0 !important; }
+@media (max-width: 768px) {
+  .line { grid-template-columns: 1fr; row-gap: 0.1rem; min-height: 2.6rem; padding: 0.3rem 0; }
+  .line .t { font-size: 1.15rem; }
+  .lines { top: 44%; width: 82vw; }
+}
 
 /* ── cookie banner ── */
 #cookie-banner {
@@ -227,8 +190,6 @@ body.menu-open .menu-icons { opacity: 1; transition-delay: .5s; }
 }
 @media (max-width: 768px) {
   #burger { top: 0.7rem; right: 0.7rem; }
-  #menu { width: 100vw; border-left: none; padding: 5rem 1.8rem 2.5rem; }
-  .menu-item .t { font-size: 1.05rem; }
   #cookie-banner { flex-direction: column; align-items: stretch; bottom: 12px; padding: 1.1rem 1.2rem; gap: 0.9rem; }
   .cookie-text { flex: 0 0 auto; }
   .cookie-actions { justify-content: stretch; }
@@ -242,8 +203,10 @@ body.menu-open .menu-icons { opacity: 1; transition-delay: .5s; }
 <body>
 
 <canvas id="c" aria-hidden="true"></canvas>
+<canvas id="c2" aria-hidden="true"></canvas>
 <div class="vignette" aria-hidden="true"></div>
 
+<div class="hud" id="hud" aria-hidden="true"></div>
 <div class="center">
   <div class="wm">
     <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="-60 -240 1279 371" role="img" aria-label="giorgio riva"><defs><clipPath id="s"><rect x="-60" y="-240" width="462.3" height="371"/></clipPath></defs><g transform="translate(0.0,0)"><g clip-path="url(#s)" fill="#EFE6D8"><path d="M57.42 46.2Q40.7 46.2 28.16 40.150000000000006Q15.62 34.1 7.92 23.1L23.76 7.26Q30.14 15.18 38.28 19.14Q46.42 23.1 57.86 23.1Q72.16 23.1 80.52 15.73Q88.88 8.36 88.88 -4.4V-30.36L93.06 -53.68L88.88 -77.22V-105.6H113.08V-4.4Q113.08 10.78 106.03999999999999 22.11Q99.0 33.44 86.46000000000001 39.82Q73.92 46.2 57.42 46.2ZM56.32 -2.2Q42.24 -2.2 30.910000000000004 -9.129999999999999Q19.580000000000002 -16.06 13.09 -28.159999999999997Q6.6 -40.26 6.6 -55.22Q6.6 -70.18 13.09 -82.06Q19.580000000000002 -93.94 30.910000000000004 -100.87Q42.24 -107.8 56.32 -107.8Q68.86 -107.8 78.32 -102.74000000000001Q87.78 -97.68 93.06 -88.77000000000001Q98.34 -79.86 98.34 -67.98V-42.02Q98.34 -30.36 92.95 -21.34Q87.56 -12.32 78.1 -7.26Q68.64 -2.2 56.32 -2.2ZM61.160000000000004 -25.080000000000002Q69.96 -25.080000000000002 76.56 -28.82Q83.16 -32.56 86.78999999999999 -39.269999999999996Q90.42 -45.98 90.42 -55.0Q90.42 -64.02 86.78999999999999 -70.72999999999999Q83.16 -77.44 76.56 -81.18Q69.96 -84.92 61.160000000000004 -84.92Q52.36 -84.92 45.65 -81.18Q38.94 -77.44 35.2 -70.72999999999999Q31.46 -64.02 31.46 -55.0Q31.46 -46.2 35.2 -39.38Q38.94 -32.56 45.65 -28.82Q52.36 -25.080000000000002 61.160000000000004 -25.080000000000002Z"/><path d="M144.14 0.0V-105.6H168.34V0.0ZM156.24 -124.96Q150.08 -124.96 146.01 -129.14Q141.94 -133.32 141.94 -139.48Q141.94 -145.64000000000001 146.01 -149.82Q150.08 -154.0 156.24 -154.0Q162.62 -154.0 166.57999999999998 -149.82Q170.54 -145.64000000000001 170.54 -139.48Q170.54 -133.32 166.57999999999998 -129.14Q162.62 -124.96 156.24 -124.96Z"/><path d="M247.79999999999998 2.2Q232.39999999999998 2.2 219.85999999999999 -5.17Q207.32 -12.540000000000001 199.95 -25.08Q192.57999999999998 -37.62 192.57999999999998 -53.02Q192.57999999999998 -68.42 199.95 -80.74000000000001Q207.32 -93.06 219.85999999999999 -100.43Q232.39999999999998 -107.8 247.79999999999998 -107.8Q263.41999999999996 -107.8 275.96 -100.53999999999999Q288.5 -93.28 295.87 -80.85Q303.24 -68.42 303.24 -53.02Q303.24 -37.62 295.87 -25.08Q288.5 -12.540000000000001 275.96 -5.17Q263.41999999999996 2.2 247.79999999999998 2.2ZM247.79999999999998 -21.12Q256.82 -21.12 263.75 -25.19Q270.68 -29.26 274.53 -36.52Q278.38 -43.78 278.38 -53.02Q278.38 -62.26 274.41999999999996 -69.3Q270.46 -76.34 263.64 -80.41Q256.82 -84.48 247.79999999999998 -84.48Q239.0 -84.48 232.07 -80.41Q225.14 -76.34 221.29 -69.3Q217.44 -62.26 217.44 -53.02Q217.44 -43.78 221.29 -36.52Q225.14 -29.26 232.07 -25.19Q239.0 -21.12 247.79999999999998 -21.12Z"/><path d="M327.26 0.0V-105.6H351.46V0.0ZM351.46 -58.74 343.09999999999997 -62.92Q343.09999999999997 -82.94 352.01 -95.37Q360.91999999999996 -107.8 378.96 -107.8Q386.88 -107.8 393.26 -104.94Q399.64 -102.08 405.14 -95.7L389.29999999999995 -79.42Q386.43999999999994 -82.5 382.91999999999996 -83.82Q379.4 -85.14 374.78 -85.14Q364.65999999999997 -85.14 358.05999999999995 -78.75999999999999Q351.46 -72.38 351.46 -58.74Z"/><path d="M461.71999999999997 46.2Q444.99999999999994 46.2 432.4599999999999 40.150000000000006Q419.91999999999996 34.1 412.21999999999997 23.1L428.05999999999995 7.26Q434.43999999999994 15.18 442.5799999999999 19.14Q450.71999999999997 23.1 462.15999999999997 23.1Q476.4599999999999 23.1 484.81999999999994 15.73Q493.17999999999995 8.36 493.17999999999995 -4.4V-30.36L497.35999999999996 -53.68L493.17999999999995 -77.22V-105.6H517.38V-4.4Q517.38 10.78 510.34 22.11Q503.29999999999995 33.44 490.76 39.82Q478.21999999999997 46.2 461.71999999999997 46.2ZM460.61999999999995 -2.2Q446.53999999999996 -2.2 435.2099999999999 -9.129999999999999Q423.87999999999994 -16.06 417.39 -28.159999999999997Q410.9 -40.26 410.9 -55.22Q410.9 -70.18 417.39 -82.06Q423.87999999999994 -93.94 435.2099999999999 -100.87Q446.53999999999996 -107.8 460.61999999999995 -107.8Q473.15999999999997 -107.8 482.61999999999995 -102.74000000000001Q492.0799999999999 -97.68 497.35999999999996 -88.77000000000001Q502.64 -79.86 502.64 -67.98V-42.02Q502.64 -30.36 497.25 -21.34Q491.85999999999996 -12.32 482.4 -7.26Q472.93999999999994 -2.2 460.61999999999995 -2.2ZM465.46 -25.080000000000002Q474.25999999999993 -25.080000000000002 480.8599999999999 -28.82Q487.4599999999999 -32.56 491.0899999999999 -39.269999999999996Q494.71999999999997 -45.98 494.71999999999997 -55.0Q494.71999999999997 -64.02 491.0899999999999 -70.72999999999999Q487.4599999999999 -77.44 480.8599999999999 -81.18Q474.25999999999993 -84.92 465.46 -84.92Q456.65999999999997 -84.92 449.94999999999993 -81.18Q443.23999999999995 -77.44 439.49999999999994 -70.72999999999999Q435.75999999999993 -64.02 435.75999999999993 -55.0Q435.75999999999993 -46.2 439.49999999999994 -39.38Q443.23999999999995 -32.56 449.94999999999993 -28.82Q456.65999999999997 -25.080000000000002 465.46 -25.080000000000002Z"/><path d="M548.4399999999999 0.0V-105.6H572.64V0.0ZM560.54 -124.96Q554.38 -124.96 550.31 -129.14Q546.24 -133.32 546.24 -139.48Q546.24 -145.64000000000001 550.31 -149.82Q554.38 -154.0 560.54 -154.0Q566.92 -154.0 570.8799999999999 -149.82Q574.8399999999999 -145.64000000000001 574.8399999999999 -139.48Q574.8399999999999 -133.32 570.8799999999999 -129.14Q566.92 -124.96 560.54 -124.96Z"/><path d="M652.1 2.2Q636.6999999999999 2.2 624.16 -5.17Q611.62 -12.540000000000001 604.25 -25.08Q596.88 -37.62 596.88 -53.02Q596.88 -68.42 604.25 -80.74000000000001Q611.62 -93.06 624.16 -100.43Q636.6999999999999 -107.8 652.1 -107.8Q667.72 -107.8 680.26 -100.53999999999999Q692.8 -93.28 700.17 -80.85Q707.54 -68.42 707.54 -53.02Q707.54 -37.62 700.17 -25.08Q692.8 -12.540000000000001 680.26 -5.17Q667.72 2.2 652.1 2.2ZM652.1 -21.12Q661.12 -21.12 668.05 -25.19Q674.98 -29.26 678.8299999999999 -36.52Q682.68 -43.78 682.68 -53.02Q682.68 -62.26 678.72 -69.3Q674.76 -76.34 667.94 -80.41Q661.12 -84.48 652.1 -84.48Q643.3 -84.48 636.3699999999999 -80.41Q629.4399999999999 -76.34 625.5899999999999 -69.3Q621.74 -62.26 621.74 -53.02Q621.74 -43.78 625.5899999999999 -36.52Q629.4399999999999 -29.26 636.3699999999999 -25.19Q643.3 -21.12 652.1 -21.12Z"/><path d=""/><path d="M779.56 0.0V-105.6H803.76V0.0ZM803.76 -58.74 795.4 -62.92Q795.4 -82.94 804.31 -95.37Q813.22 -107.8 831.26 -107.8Q839.18 -107.8 845.56 -104.94Q851.9399999999999 -102.08 857.4399999999999 -95.7L841.6 -79.42Q838.74 -82.5 835.22 -83.82Q831.7 -85.14 827.0799999999999 -85.14Q816.96 -85.14 810.36 -78.75999999999999Q803.76 -72.38 803.76 -58.74Z"/><path d="M873.3199999999999 0.0V-105.6H897.52V0.0ZM885.42 -124.96Q879.26 -124.96 875.19 -129.14Q871.12 -133.32 871.12 -139.48Q871.12 -145.64000000000001 875.19 -149.82Q879.26 -154.0 885.42 -154.0Q891.8 -154.0 895.76 -149.82Q899.7199999999999 -145.64000000000001 899.7199999999999 -139.48Q899.7199999999999 -133.32 895.76 -129.14Q891.8 -124.96 885.42 -124.96Z"/><path d="M964.22 0.0 916.04 -105.6H942.88L979.62 -19.580000000000002H963.78L1000.74 -105.6H1026.48L978.3 0.0Z"/><path d="M1085.48 2.2Q1071.1799999999998 2.2 1059.6299999999999 -5.0600000000000005Q1048.08 -12.32 1041.37 -24.75Q1034.6599999999999 -37.18 1034.6599999999999 -52.58Q1034.6599999999999 -68.2 1041.37 -80.63Q1048.08 -93.06 1059.6299999999999 -100.43Q1071.1799999999998 -107.8 1085.48 -107.8Q1097.58 -107.8 1106.9299999999998 -102.63Q1116.28 -97.46 1121.78 -88.44Q1127.28 -79.42 1127.28 -67.98V-37.62Q1127.28 -26.18 1121.8899999999999 -17.16Q1116.5 -8.14 1107.04 -2.97Q1097.58 2.2 1085.48 2.2ZM1089.4399999999998 -20.68Q1102.86 -20.68 1111.11 -29.7Q1119.36 -38.72 1119.36 -52.8Q1119.36 -62.26 1115.62 -69.52Q1111.8799999999999 -76.78 1105.17 -80.85Q1098.46 -84.92 1089.4399999999998 -84.92Q1080.6399999999999 -84.92 1073.9299999999998 -80.85Q1067.22 -76.78 1063.37 -69.52Q1059.52 -62.26 1059.52 -52.8Q1059.52 -43.34 1063.37 -36.08Q1067.22 -28.82 1073.9299999999998 -24.75Q1080.6399999999999 -20.68 1089.4399999999998 -20.68ZM1117.82 0.0V-28.38L1122.0 -54.12L1117.82 -79.64V-105.6H1142.02V0.0Z"/></g><circle cx="414.9" cy="24.2" r="2.23" fill="#efe6d8" fill-opacity="1.00"/><circle cx="414.9" cy="-34.6" r="2.18" fill="#efe6d8" fill-opacity="1.00"/><circle cx="414.9" cy="-43.0" r="2.40" fill="#efe6d8" fill-opacity="1.00"/><circle cx="414.9" cy="-51.4" r="2.49" fill="#efe6d8" fill-opacity="1.00"/><circle cx="414.9" cy="-59.8" r="2.48" fill="#efe6d8" fill-opacity="1.00"/><circle cx="414.9" cy="-68.2" r="2.39" fill="#efe6d8" fill-opacity="1.00"/><circle cx="414.9" cy="-76.6" r="2.14" fill="#efe6d8" fill-opacity="1.00"/><circle cx="423.3" cy="32.6" r="2.33" fill="#efe6d8" fill-opacity="1.00"/><circle cx="423.3" cy="24.2" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="423.3" cy="15.8" r="2.41" fill="#efe6d8" fill-opacity="1.00"/><circle cx="423.3" cy="-17.8" r="1.97" fill="#efe6d8" fill-opacity="1.00"/><circle cx="423.3" cy="-26.2" r="2.48" fill="#efe6d8" fill-opacity="1.00"/><circle cx="423.3" cy="-34.6" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="423.3" cy="-43.0" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="423.3" cy="-51.4" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="423.3" cy="-59.8" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="423.3" cy="-68.2" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="423.3" cy="-76.6" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="423.3" cy="-85.0" r="2.46" fill="#efe6d8" fill-opacity="1.00"/><circle cx="423.3" cy="-93.4" r="1.87" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="41.0" r="2.01" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="32.6" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="24.2" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="15.8" r="2.45" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="-9.4" r="1.88" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="-17.8" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="-26.2" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="-34.6" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="-43.0" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="-51.4" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="-59.8" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="-68.2" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="-76.6" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="-85.0" r="2.52" fill="#efe6d8" fill-opacity="1.00"/><circle cx="431.7" cy="-93.4" r="2.48" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="41.0" r="2.35" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="32.6" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="24.2" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="15.8" r="1.91" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="-9.4" r="2.40" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="-17.8" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="-26.2" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="-34.6" r="2.38" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="-43.0" r="1.88" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="-68.2" r="1.94" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="-76.6" r="2.43" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="-85.0" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="-93.4" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="440.1" cy="-101.8" r="2.30" fill="#efe6d8" fill-opacity="1.00"/><circle cx="448.5" cy="41.0" r="2.50" fill="#efe6d8" fill-opacity="1.00"/><circle cx="448.5" cy="32.6" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="448.5" cy="24.2" r="2.41" fill="#efe6d8" fill-opacity="1.00"/><circle cx="448.5" cy="-1.0" r="1.79" fill="#efe6d8" fill-opacity="1.00"/><circle cx="448.5" cy="-9.4" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="448.5" cy="-17.8" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="448.5" cy="-26.2" r="2.43" fill="#efe6d8" fill-opacity="1.00"/><circle cx="448.5" cy="-85.0" r="2.48" fill="#efe6d8" fill-opacity="1.00"/><circle cx="448.5" cy="-93.4" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="448.5" cy="-101.8" r="2.50" fill="#efe6d8" fill-opacity="1.00"/><circle cx="456.9" cy="41.0" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="456.9" cy="32.6" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="456.9" cy="24.2" r="2.27" fill="#efe6d8" fill-opacity="1.00"/><circle cx="456.9" cy="-1.0" r="1.98" fill="#efe6d8" fill-opacity="1.00"/><circle cx="456.9" cy="-9.4" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="456.9" cy="-17.8" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="456.9" cy="-26.2" r="2.14" fill="#efe6d8" fill-opacity="1.00"/><circle cx="456.9" cy="-85.0" r="2.26" fill="#efe6d8" fill-opacity="1.00"/><circle cx="456.9" cy="-93.4" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="456.9" cy="-101.8" r="2.51" fill="#efe6d8" fill-opacity="1.00"/><circle cx="456.9" cy="-110.2" r="1.80" fill="#efe6d8" fill-opacity="1.00"/><circle cx="465.3" cy="41.0" r="2.50" fill="#efe6d8" fill-opacity="0.99"/><circle cx="465.3" cy="32.6" r="2.50" fill="#efe6d8" fill-opacity="0.99"/><circle cx="465.3" cy="24.2" r="2.26" fill="#efe6d8" fill-opacity="0.99"/><circle cx="465.3" cy="-1.0" r="1.97" fill="#efe6d8" fill-opacity="0.99"/><circle cx="465.3" cy="-9.4" r="2.50" fill="#efe6d8" fill-opacity="0.99"/><circle cx="465.3" cy="-17.8" r="2.50" fill="#efe6d8" fill-opacity="0.99"/><circle cx="465.3" cy="-26.2" r="2.02" fill="#efe6d8" fill-opacity="0.99"/><circle cx="465.3" cy="-85.0" r="2.15" fill="#efe6d8" fill-opacity="0.99"/><circle cx="465.3" cy="-93.4" r="2.50" fill="#efe6d8" fill-opacity="0.99"/><circle cx="465.3" cy="-101.8" r="2.50" fill="#efe6d8" fill-opacity="0.99"/><circle cx="465.3" cy="-110.2" r="1.78" fill="#efe6d8" fill-opacity="0.99"/><circle cx="473.7" cy="41.0" r="2.49" fill="#efe6d8" fill-opacity="0.99"/><circle cx="473.7" cy="32.6" r="2.50" fill="#efe6d8" fill-opacity="0.99"/><circle cx="473.7" cy="24.2" r="2.38" fill="#efe6d8" fill-opacity="0.99"/><circle cx="473.7" cy="-9.4" r="2.50" fill="#efe6d8" fill-opacity="0.99"/><circle cx="473.7" cy="-17.8" r="2.50" fill="#efe6d8" fill-opacity="0.99"/><circle cx="473.7" cy="-26.2" r="2.12" fill="#efe6d8" fill-opacity="0.99"/><circle cx="473.7" cy="-85.0" r="2.24" fill="#efe6d8" fill-opacity="0.99"/><circle cx="473.7" cy="-93.4" r="2.50" fill="#efe6d8" fill-opacity="0.99"/><circle cx="473.7" cy="-101.8" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="482.1" cy="41.0" r="2.35" fill="#efe6d8" fill-opacity="0.99"/><circle cx="482.1" cy="32.6" r="2.49" fill="#efe6d8" fill-opacity="0.99"/><circle cx="482.1" cy="24.2" r="2.49" fill="#efe6d8" fill-opacity="0.99"/><circle cx="482.1" cy="15.8" r="1.90" fill="#efe6d8" fill-opacity="0.99"/><circle cx="482.1" cy="-9.4" r="2.33" fill="#efe6d8" fill-opacity="0.99"/><circle cx="482.1" cy="-17.8" r="2.49" fill="#efe6d8" fill-opacity="0.99"/><circle cx="482.1" cy="-26.2" r="2.41" fill="#efe6d8" fill-opacity="0.99"/><circle cx="482.1" cy="-85.0" r="2.46" fill="#efe6d8" fill-opacity="0.99"/><circle cx="482.1" cy="-93.4" r="2.49" fill="#efe6d8" fill-opacity="0.99"/><circle cx="482.1" cy="-101.8" r="2.24" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="41.0" r="2.01" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="32.6" r="2.49" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="24.2" r="2.49" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="15.8" r="2.46" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="7.4" r="2.09" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="-1.0" r="1.81" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="-9.4" r="1.95" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="-17.8" r="2.47" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="-26.2" r="2.49" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="-34.6" r="2.35" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="-43.0" r="1.86" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="-68.2" r="1.92" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="-76.6" r="2.40" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="-85.0" r="2.49" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="-93.4" r="2.45" fill="#efe6d8" fill-opacity="0.99"/><circle cx="490.5" cy="-101.8" r="1.87" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="32.6" r="2.31" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="24.2" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="15.8" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="7.4" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="-1.0" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="-9.4" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="-17.8" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="-26.2" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="-34.6" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="-43.0" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="-51.4" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="-59.8" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="-68.2" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="-76.6" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="-85.0" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="-93.4" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="498.9" cy="-101.8" r="2.45" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="24.2" r="2.27" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="15.8" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="7.4" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="-1.0" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="-9.4" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="-17.8" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="-26.2" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="-34.6" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="-43.0" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="-51.4" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="-59.8" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="-68.2" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="-76.6" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="-85.0" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="-93.4" r="2.48" fill="#efe6d8" fill-opacity="0.99"/><circle cx="507.3" cy="-101.8" r="2.44" fill="#efe6d8" fill-opacity="0.99"/><circle cx="515.7" cy="15.8" r="1.86" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="7.4" r="2.16" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="-1.0" r="2.26" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="-9.4" r="2.27" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="-17.8" r="2.27" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="-26.2" r="2.27" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="-34.6" r="2.27" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="-43.0" r="2.27" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="-51.4" r="2.27" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="-59.8" r="2.27" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="-68.2" r="2.27" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="-76.6" r="2.27" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="-85.0" r="2.27" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="-93.4" r="2.27" fill="#efe6d8" fill-opacity="0.98"/><circle cx="515.7" cy="-101.8" r="2.24" fill="#efe6d8" fill-opacity="0.98"/><circle cx="549.3" cy="-1.0" r="1.96" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-9.4" r="2.16" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-17.8" r="2.16" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-26.2" r="2.16" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-34.6" r="2.16" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-43.0" r="2.16" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-51.4" r="2.16" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-59.8" r="2.16" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-68.2" r="2.16" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-76.6" r="2.16" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-85.0" r="2.16" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-93.4" r="2.16" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-101.8" r="2.13" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-135.4" r="2.28" fill="#efe6d8" fill-opacity="0.97"/><circle cx="549.3" cy="-143.8" r="2.28" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-1.0" r="2.17" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-9.4" r="2.43" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-17.8" r="2.43" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-26.2" r="2.43" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-34.6" r="2.43" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-43.0" r="2.43" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-51.4" r="2.43" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-59.8" r="2.43" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-68.2" r="2.43" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-76.6" r="2.43" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-85.0" r="2.43" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-93.4" r="2.43" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-101.8" r="2.39" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-127.0" r="2.21" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-135.4" r="2.43" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-143.8" r="2.43" fill="#efe6d8" fill-opacity="0.97"/><circle cx="557.7" cy="-152.2" r="2.20" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-1.0" r="2.17" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-9.4" r="2.42" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-17.8" r="2.42" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-26.2" r="2.42" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-34.6" r="2.42" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-43.0" r="2.42" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-51.4" r="2.42" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-59.8" r="2.42" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-68.2" r="2.42" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-76.6" r="2.42" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-85.0" r="2.42" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-93.4" r="2.42" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-101.8" r="2.38" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-127.0" r="2.13" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-135.4" r="2.42" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-143.8" r="2.42" fill="#efe6d8" fill-opacity="0.97"/><circle cx="566.1" cy="-152.2" r="2.12" fill="#efe6d8" fill-opacity="0.97"/><circle cx="574.5" cy="-9.4" r="1.84" fill="#efe6d8" fill-opacity="0.96"/><circle cx="574.5" cy="-17.8" r="1.84" fill="#efe6d8" fill-opacity="0.96"/><circle cx="574.5" cy="-26.2" r="1.84" fill="#efe6d8" fill-opacity="0.96"/><circle cx="574.5" cy="-34.6" r="1.84" fill="#efe6d8" fill-opacity="0.96"/><circle cx="574.5" cy="-43.0" r="1.84" fill="#efe6d8" fill-opacity="0.96"/><circle cx="574.5" cy="-51.4" r="1.84" fill="#efe6d8" fill-opacity="0.96"/><circle cx="574.5" cy="-59.8" r="1.84" fill="#efe6d8" fill-opacity="0.96"/><circle cx="574.5" cy="-68.2" r="1.84" fill="#efe6d8" fill-opacity="0.96"/><circle cx="574.5" cy="-76.6" r="1.84" fill="#efe6d8" fill-opacity="0.96"/><circle cx="574.5" cy="-85.0" r="1.84" fill="#efe6d8" fill-opacity="0.96"/><circle cx="574.5" cy="-93.4" r="1.84" fill="#efe6d8" fill-opacity="0.96"/><circle cx="574.5" cy="-101.8" r="1.83" fill="#efe6d8" fill-opacity="0.96"/><circle cx="574.5" cy="-135.4" r="2.02" fill="#efe6d8" fill-opacity="0.96"/><circle cx="574.5" cy="-143.8" r="2.02" fill="#efe6d8" fill-opacity="0.96"/><circle cx="599.7" cy="-34.6" r="2.00" fill="#efe6d8" fill-opacity="0.95"/><circle cx="599.7" cy="-43.0" r="2.20" fill="#efe6d8" fill-opacity="0.95"/><circle cx="599.7" cy="-51.4" r="2.26" fill="#efe6d8" fill-opacity="0.95"/><circle cx="599.7" cy="-59.8" r="2.23" fill="#efe6d8" fill-opacity="0.95"/><circle cx="599.7" cy="-68.2" r="2.09" fill="#efe6d8" fill-opacity="0.95"/><circle cx="599.7" cy="-76.6" r="1.73" fill="#efe6d8" fill-opacity="0.95"/><circle cx="608.1" cy="-17.8" r="1.88" fill="#efe6d8" fill-opacity="0.95"/><circle cx="608.1" cy="-26.2" r="2.33" fill="#efe6d8" fill-opacity="0.95"/><circle cx="608.1" cy="-34.6" r="2.36" fill="#efe6d8" fill-opacity="0.95"/><circle cx="608.1" cy="-43.0" r="2.36" fill="#efe6d8" fill-opacity="0.95"/><circle cx="608.1" cy="-51.4" r="2.36" fill="#efe6d8" fill-opacity="0.95"/><circle cx="608.1" cy="-59.8" r="2.36" fill="#efe6d8" fill-opacity="0.95"/><circle cx="608.1" cy="-68.2" r="2.36" fill="#efe6d8" fill-opacity="0.95"/><circle cx="608.1" cy="-76.6" r="2.36" fill="#efe6d8" fill-opacity="0.95"/><circle cx="608.1" cy="-85.0" r="2.10" fill="#efe6d8" fill-opacity="0.95"/><circle cx="616.5" cy="-9.4" r="1.88" fill="#efe6d8" fill-opacity="0.95"/><circle cx="616.5" cy="-17.8" r="2.35" fill="#efe6d8" fill-opacity="0.95"/><circle cx="616.5" cy="-26.2" r="2.35" fill="#efe6d8" fill-opacity="0.95"/><circle cx="616.5" cy="-34.6" r="2.35" fill="#efe6d8" fill-opacity="0.95"/><circle cx="616.5" cy="-43.0" r="2.35" fill="#efe6d8" fill-opacity="0.95"/><circle cx="616.5" cy="-51.4" r="2.35" fill="#efe6d8" fill-opacity="0.95"/><circle cx="616.5" cy="-59.8" r="2.35" fill="#efe6d8" fill-opacity="0.95"/><circle cx="616.5" cy="-68.2" r="2.35" fill="#efe6d8" fill-opacity="0.95"/><circle cx="616.5" cy="-76.6" r="2.35" fill="#efe6d8" fill-opacity="0.95"/><circle cx="616.5" cy="-85.0" r="2.35" fill="#efe6d8" fill-opacity="0.95"/><circle cx="616.5" cy="-93.4" r="2.14" fill="#efe6d8" fill-opacity="0.95"/><circle cx="624.9" cy="-9.4" r="2.31" fill="#efe6d8" fill-opacity="0.94"/><circle cx="624.9" cy="-17.8" r="2.34" fill="#efe6d8" fill-opacity="0.94"/><circle cx="624.9" cy="-26.2" r="2.34" fill="#efe6d8" fill-opacity="0.94"/><circle cx="624.9" cy="-34.6" r="2.17" fill="#efe6d8" fill-opacity="0.94"/><circle cx="624.9" cy="-43.0" r="1.81" fill="#efe6d8" fill-opacity="0.94"/><circle cx="624.9" cy="-59.8" r="1.71" fill="#efe6d8" fill-opacity="0.94"/><circle cx="624.9" cy="-68.2" r="2.03" fill="#efe6d8" fill-opacity="0.94"/><circle cx="624.9" cy="-76.6" r="2.33" fill="#efe6d8" fill-opacity="0.94"/><circle cx="624.9" cy="-85.0" r="2.34" fill="#efe6d8" fill-opacity="0.94"/><circle cx="624.9" cy="-93.4" r="2.34" fill="#efe6d8" fill-opacity="0.94"/><circle cx="624.9" cy="-101.8" r="1.88" fill="#efe6d8" fill-opacity="0.94"/><circle cx="633.3" cy="-1.0" r="2.00" fill="#efe6d8" fill-opacity="0.94"/><circle cx="633.3" cy="-9.4" r="2.33" fill="#efe6d8" fill-opacity="0.94"/><circle cx="633.3" cy="-17.8" r="2.33" fill="#efe6d8" fill-opacity="0.94"/><circle cx="633.3" cy="-26.2" r="2.10" fill="#efe6d8" fill-opacity="0.94"/><circle cx="633.3" cy="-76.6" r="1.84" fill="#efe6d8" fill-opacity="0.94"/><circle cx="633.3" cy="-85.0" r="2.33" fill="#efe6d8" fill-opacity="0.94"/><circle cx="633.3" cy="-93.4" r="2.33" fill="#efe6d8" fill-opacity="0.94"/><circle cx="633.3" cy="-101.8" r="2.22" fill="#efe6d8" fill-opacity="0.94"/><circle cx="641.7" cy="-1.0" r="2.18" fill="#efe6d8" fill-opacity="0.93"/><circle cx="641.7" cy="-9.4" r="2.32" fill="#efe6d8" fill-opacity="0.93"/><circle cx="641.7" cy="-17.8" r="2.31" fill="#efe6d8" fill-opacity="0.93"/><circle cx="641.7" cy="-85.0" r="2.18" fill="#efe6d8" fill-opacity="0.93"/><circle cx="641.7" cy="-93.4" r="2.32" fill="#efe6d8" fill-opacity="0.93"/><circle cx="641.7" cy="-101.8" r="2.32" fill="#efe6d8" fill-opacity="0.93"/><circle cx="650.1" cy="-1.0" r="2.24" fill="#efe6d8" fill-opacity="0.93"/><circle cx="650.1" cy="-9.4" r="2.30" fill="#efe6d8" fill-opacity="0.93"/><circle cx="650.1" cy="-17.8" r="2.25" fill="#efe6d8" fill-opacity="0.93"/><circle cx="650.1" cy="-85.0" r="2.03" fill="#efe6d8" fill-opacity="0.93"/><circle cx="650.1" cy="-93.4" r="2.30" fill="#efe6d8" fill-opacity="0.93"/><circle cx="650.1" cy="-101.8" r="2.30" fill="#efe6d8" fill-opacity="0.93"/><circle cx="650.1" cy="-110.2" r="1.66" fill="#efe6d8" fill-opacity="0.93"/><circle cx="658.5" cy="-1.0" r="2.20" fill="#efe6d8" fill-opacity="0.93"/><circle cx="658.5" cy="-9.4" r="2.29" fill="#efe6d8" fill-opacity="0.93"/><circle cx="658.5" cy="-17.8" r="2.27" fill="#efe6d8" fill-opacity="0.93"/><circle cx="658.5" cy="-85.0" r="2.07" fill="#efe6d8" fill-opacity="0.93"/><circle cx="658.5" cy="-93.4" r="2.29" fill="#efe6d8" fill-opacity="0.93"/><circle cx="658.5" cy="-101.8" r="2.29" fill="#efe6d8" fill-opacity="0.93"/><circle cx="666.9" cy="-1.0" r="2.07" fill="#efe6d8" fill-opacity="0.92"/><circle cx="666.9" cy="-9.4" r="2.28" fill="#efe6d8" fill-opacity="0.92"/><circle cx="666.9" cy="-17.8" r="2.28" fill="#efe6d8" fill-opacity="0.92"/><circle cx="666.9" cy="-26.2" r="1.77" fill="#efe6d8" fill-opacity="0.92"/><circle cx="666.9" cy="-85.0" r="2.24" fill="#efe6d8" fill-opacity="0.92"/><circle cx="666.9" cy="-93.4" r="2.28" fill="#efe6d8" fill-opacity="0.92"/><circle cx="666.9" cy="-101.8" r="2.26" fill="#efe6d8" fill-opacity="0.92"/><circle cx="675.3" cy="-1.0" r="1.77" fill="#efe5d5" fill-opacity="0.92"/><circle cx="675.3" cy="-9.4" r="2.27" fill="#efe5d5" fill-opacity="0.92"/><circle cx="675.3" cy="-17.8" r="2.27" fill="#efe5d5" fill-opacity="0.92"/><circle cx="675.3" cy="-26.2" r="2.21" fill="#efe5d5" fill-opacity="0.92"/><circle cx="675.3" cy="-34.6" r="1.66" fill="#efe5d5" fill-opacity="0.92"/><circle cx="675.3" cy="-76.6" r="2.11" fill="#efe5d5" fill-opacity="0.92"/><circle cx="675.3" cy="-85.0" r="2.27" fill="#efe5d5" fill-opacity="0.92"/><circle cx="675.3" cy="-93.4" r="2.27" fill="#efe5d5" fill-opacity="0.92"/><circle cx="675.3" cy="-101.8" r="2.04" fill="#efe5d5" fill-opacity="0.92"/><circle cx="683.7" cy="-9.4" r="2.10" fill="#efe3d2" fill-opacity="0.91"/><circle cx="683.7" cy="-17.8" r="2.25" fill="#efe3d2" fill-opacity="0.91"/><circle cx="683.7" cy="-26.2" r="2.25" fill="#efe3d2" fill-opacity="0.91"/><circle cx="683.7" cy="-34.6" r="2.25" fill="#efe3d2" fill-opacity="0.91"/><circle cx="683.7" cy="-43.0" r="2.12" fill="#efe3d2" fill-opacity="0.91"/><circle cx="683.7" cy="-51.4" r="2.02" fill="#efe3d2" fill-opacity="0.91"/><circle cx="683.7" cy="-59.8" r="2.07" fill="#efe3d2" fill-opacity="0.91"/><circle cx="683.7" cy="-68.2" r="2.23" fill="#efe3d2" fill-opacity="0.91"/><circle cx="683.7" cy="-76.6" r="2.25" fill="#efe3d2" fill-opacity="0.91"/><circle cx="683.7" cy="-85.0" r="2.25" fill="#efe3d2" fill-opacity="0.91"/><circle cx="683.7" cy="-93.4" r="2.22" fill="#efe3d2" fill-opacity="0.91"/><circle cx="692.1" cy="-17.8" r="2.13" fill="#efe2cf" fill-opacity="0.91"/><circle cx="692.1" cy="-26.2" r="2.24" fill="#efe2cf" fill-opacity="0.91"/><circle cx="692.1" cy="-34.6" r="2.24" fill="#efe2cf" fill-opacity="0.91"/><circle cx="692.1" cy="-43.0" r="2.24" fill="#efe2cf" fill-opacity="0.91"/><circle cx="692.1" cy="-51.4" r="2.24" fill="#efe2cf" fill-opacity="0.91"/><circle cx="692.1" cy="-59.8" r="2.24" fill="#efe2cf" fill-opacity="0.91"/><circle cx="692.1" cy="-68.2" r="2.24" fill="#efe2cf" fill-opacity="0.91"/><circle cx="692.1" cy="-76.6" r="2.24" fill="#efe2cf" fill-opacity="0.91"/><circle cx="692.1" cy="-85.0" r="2.22" fill="#efe2cf" fill-opacity="0.91"/><circle cx="692.1" cy="-93.4" r="1.71" fill="#efe2cf" fill-opacity="0.91"/><circle cx="700.5" cy="-26.2" r="1.93" fill="#efe1cd" fill-opacity="0.90"/><circle cx="700.5" cy="-34.6" r="2.20" fill="#efe1cd" fill-opacity="0.90"/><circle cx="700.5" cy="-43.0" r="2.23" fill="#efe1cd" fill-opacity="0.90"/><circle cx="700.5" cy="-51.4" r="2.23" fill="#efe1cd" fill-opacity="0.90"/><circle cx="700.5" cy="-59.8" r="2.23" fill="#efe1cd" fill-opacity="0.90"/><circle cx="700.5" cy="-68.2" r="2.22" fill="#efe1cd" fill-opacity="0.90"/><circle cx="700.5" cy="-76.6" r="2.06" fill="#efe1cd" fill-opacity="0.90"/><circle cx="708.9" cy="-43.0" r="1.65" fill="#efdfca" fill-opacity="0.90"/><circle cx="708.9" cy="-51.4" r="1.75" fill="#efdfca" fill-opacity="0.90"/><circle cx="708.9" cy="-59.8" r="1.70" fill="#efdfca" fill-opacity="0.90"/><circle cx="784.5" cy="-1.0" r="1.87" fill="#f0d3af" fill-opacity="0.86"/><circle cx="784.5" cy="-9.4" r="2.09" fill="#f0d3af" fill-opacity="0.86"/><circle cx="784.5" cy="-17.8" r="2.09" fill="#f0d3af" fill-opacity="0.86"/><circle cx="784.5" cy="-26.2" r="2.09" fill="#f0d3af" fill-opacity="0.86"/><circle cx="784.5" cy="-34.6" r="2.09" fill="#f0d3af" fill-opacity="0.86"/><circle cx="784.5" cy="-43.0" r="2.09" fill="#f0d3af" fill-opacity="0.86"/><circle cx="784.5" cy="-51.4" r="2.09" fill="#f0d3af" fill-opacity="0.86"/><circle cx="784.5" cy="-59.8" r="2.09" fill="#f0d3af" fill-opacity="0.86"/><circle cx="784.5" cy="-68.2" r="2.09" fill="#f0d3af" fill-opacity="0.86"/><circle cx="784.5" cy="-76.6" r="2.09" fill="#f0d3af" fill-opacity="0.86"/><circle cx="784.5" cy="-85.0" r="2.09" fill="#f0d3af" fill-opacity="0.86"/><circle cx="784.5" cy="-93.4" r="2.09" fill="#f0d3af" fill-opacity="0.86"/><circle cx="784.5" cy="-101.8" r="2.05" fill="#f0d3af" fill-opacity="0.86"/><circle cx="792.9" cy="-1.0" r="1.86" fill="#f0d1ac" fill-opacity="0.85"/><circle cx="792.9" cy="-9.4" r="2.07" fill="#f0d1ac" fill-opacity="0.85"/><circle cx="792.9" cy="-17.8" r="2.07" fill="#f0d1ac" fill-opacity="0.85"/><circle cx="792.9" cy="-26.2" r="2.07" fill="#f0d1ac" fill-opacity="0.85"/><circle cx="792.9" cy="-34.6" r="2.07" fill="#f0d1ac" fill-opacity="0.85"/><circle cx="792.9" cy="-43.0" r="2.07" fill="#f0d1ac" fill-opacity="0.85"/><circle cx="792.9" cy="-51.4" r="2.07" fill="#f0d1ac" fill-opacity="0.85"/><circle cx="792.9" cy="-59.8" r="2.07" fill="#f0d1ac" fill-opacity="0.85"/><circle cx="792.9" cy="-68.2" r="2.07" fill="#f0d1ac" fill-opacity="0.85"/><circle cx="792.9" cy="-76.6" r="2.07" fill="#f0d1ac" fill-opacity="0.85"/><circle cx="792.9" cy="-85.0" r="2.07" fill="#f0d1ac" fill-opacity="0.85"/><circle cx="792.9" cy="-93.4" r="2.07" fill="#f0d1ac" fill-opacity="0.85"/><circle cx="792.9" cy="-101.8" r="2.04" fill="#f0d1ac" fill-opacity="0.85"/><circle cx="801.3" cy="-1.0" r="1.76" fill="#f0d0a9" fill-opacity="0.85"/><circle cx="801.3" cy="-9.4" r="1.95" fill="#f0d0a9" fill-opacity="0.85"/><circle cx="801.3" cy="-17.8" r="1.95" fill="#f0d0a9" fill-opacity="0.85"/><circle cx="801.3" cy="-26.2" r="1.95" fill="#f0d0a9" fill-opacity="0.85"/><circle cx="801.3" cy="-34.6" r="1.95" fill="#f0d0a9" fill-opacity="0.85"/><circle cx="801.3" cy="-43.0" r="1.95" fill="#f0d0a9" fill-opacity="0.85"/><circle cx="801.3" cy="-51.4" r="1.95" fill="#f0d0a9" fill-opacity="0.85"/><circle cx="801.3" cy="-59.8" r="1.96" fill="#f0d0a9" fill-opacity="0.85"/><circle cx="801.3" cy="-68.2" r="2.02" fill="#f0d0a9" fill-opacity="0.85"/><circle cx="801.3" cy="-76.6" r="2.06" fill="#f0d0a9" fill-opacity="0.85"/><circle cx="801.3" cy="-85.0" r="2.06" fill="#f0d0a9" fill-opacity="0.85"/><circle cx="801.3" cy="-93.4" r="2.04" fill="#f0d0a9" fill-opacity="0.85"/><circle cx="801.3" cy="-101.8" r="1.92" fill="#f0d0a9" fill-opacity="0.85"/><circle cx="809.7" cy="-76.6" r="1.67" fill="#f0cea6" fill-opacity="0.84"/><circle cx="809.7" cy="-85.0" r="2.04" fill="#f0cea6" fill-opacity="0.84"/><circle cx="809.7" cy="-93.4" r="2.04" fill="#f0cea6" fill-opacity="0.84"/><circle cx="809.7" cy="-101.8" r="1.66" fill="#f0cea6" fill-opacity="0.84"/><circle cx="818.1" cy="-85.0" r="1.85" fill="#f0cda3" fill-opacity="0.84"/><circle cx="818.1" cy="-93.4" r="2.03" fill="#f0cda3" fill-opacity="0.84"/><circle cx="818.1" cy="-101.8" r="1.99" fill="#f0cda3" fill-opacity="0.84"/><circle cx="826.5" cy="-85.0" r="1.71" fill="#f1cca0" fill-opacity="0.83"/><circle cx="826.5" cy="-93.4" r="2.01" fill="#f1cca0" fill-opacity="0.83"/><circle cx="826.5" cy="-101.8" r="2.01" fill="#f1cca0" fill-opacity="0.83"/><circle cx="834.9" cy="-85.0" r="1.80" fill="#f1ca9d" fill-opacity="0.83"/><circle cx="834.9" cy="-93.4" r="2.00" fill="#f1ca9d" fill-opacity="0.83"/><circle cx="834.9" cy="-101.8" r="2.00" fill="#f1ca9d" fill-opacity="0.83"/><circle cx="834.9" cy="-110.2" r="1.43" fill="#f1ca9d" fill-opacity="0.83"/><circle cx="843.3" cy="-85.0" r="1.91" fill="#f1c99a" fill-opacity="0.83"/><circle cx="843.3" cy="-93.4" r="1.99" fill="#f1c99a" fill-opacity="0.83"/><circle cx="843.3" cy="-101.8" r="1.96" fill="#f1c99a" fill-opacity="0.83"/><circle cx="851.7" cy="-93.4" r="1.89" fill="#f1c897" fill-opacity="0.82"/><circle cx="851.7" cy="-101.8" r="1.62" fill="#f1c897" fill-opacity="0.82"/><circle cx="876.9" cy="-1.0" r="1.70" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-9.4" r="1.90" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-17.8" r="1.90" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-26.2" r="1.90" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-34.6" r="1.90" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-43.0" r="1.90" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-51.4" r="1.90" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-59.8" r="1.90" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-68.2" r="1.90" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-76.6" r="1.90" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-85.0" r="1.90" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-93.4" r="1.90" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-101.8" r="1.87" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-127.0" r="1.55" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-135.4" r="1.93" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-143.8" r="1.93" fill="#f1c38e" fill-opacity="0.81"/><circle cx="876.9" cy="-152.2" r="1.54" fill="#f1c38e" fill-opacity="0.81"/><circle cx="885.3" cy="-1.0" r="1.72" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-9.4" r="1.92" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-17.8" r="1.92" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-26.2" r="1.92" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-34.6" r="1.92" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-43.0" r="1.92" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-51.4" r="1.92" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-59.8" r="1.92" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-68.2" r="1.92" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-76.6" r="1.92" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-85.0" r="1.92" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-93.4" r="1.92" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-101.8" r="1.89" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-127.0" r="1.77" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-135.4" r="1.92" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-143.8" r="1.92" fill="#f1c28b" fill-opacity="0.80"/><circle cx="885.3" cy="-152.2" r="1.76" fill="#f1c28b" fill-opacity="0.80"/><circle cx="893.7" cy="-1.0" r="1.69" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-9.4" r="1.88" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-17.8" r="1.88" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-26.2" r="1.88" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-34.6" r="1.88" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-43.0" r="1.88" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-51.4" r="1.88" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-59.8" r="1.88" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-68.2" r="1.88" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-76.6" r="1.88" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-85.0" r="1.88" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-93.4" r="1.88" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-101.8" r="1.86" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-127.0" r="1.56" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-135.4" r="1.90" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-143.8" r="1.90" fill="#f1c189" fill-opacity="0.80"/><circle cx="893.7" cy="-152.2" r="1.55" fill="#f1c189" fill-opacity="0.80"/><circle cx="918.9" cy="-101.8" r="1.65" fill="#f1bd81" fill-opacity="0.79"/><circle cx="927.3" cy="-76.6" r="1.40" fill="#f1bc7e" fill-opacity="0.78"/><circle cx="927.3" cy="-85.0" r="1.71" fill="#f1bc7e" fill-opacity="0.78"/><circle cx="927.3" cy="-93.4" r="1.85" fill="#f1bc7e" fill-opacity="0.78"/><circle cx="927.3" cy="-101.8" r="1.83" fill="#f1bc7e" fill-opacity="0.78"/><circle cx="935.7" cy="-59.8" r="1.47" fill="#f2bb7b" fill-opacity="0.78"/><circle cx="935.7" cy="-68.2" r="1.75" fill="#f2bb7b" fill-opacity="0.78"/><circle cx="935.7" cy="-76.6" r="1.84" fill="#f2bb7b" fill-opacity="0.78"/><circle cx="935.7" cy="-85.0" r="1.84" fill="#f2bb7b" fill-opacity="0.78"/><circle cx="935.7" cy="-93.4" r="1.84" fill="#f2bb7b" fill-opacity="0.78"/><circle cx="935.7" cy="-101.8" r="1.82" fill="#f2bb7b" fill-opacity="0.78"/><circle cx="944.1" cy="-43.0" r="1.52" fill="#f2ba79" fill-opacity="0.78"/><circle cx="944.1" cy="-51.4" r="1.77" fill="#f2ba79" fill-opacity="0.78"/><circle cx="944.1" cy="-59.8" r="1.83" fill="#f2ba79" fill-opacity="0.78"/><circle cx="944.1" cy="-68.2" r="1.83" fill="#f2ba79" fill-opacity="0.78"/><circle cx="944.1" cy="-76.6" r="1.83" fill="#f2ba79" fill-opacity="0.78"/><circle cx="944.1" cy="-85.0" r="1.83" fill="#f2ba79" fill-opacity="0.78"/><circle cx="944.1" cy="-93.4" r="1.80" fill="#f2ba79" fill-opacity="0.78"/><circle cx="944.1" cy="-101.8" r="1.58" fill="#f2ba79" fill-opacity="0.78"/><circle cx="952.5" cy="-26.2" r="1.57" fill="#f2b876" fill-opacity="0.77"/><circle cx="952.5" cy="-34.6" r="1.79" fill="#f2b876" fill-opacity="0.77"/><circle cx="952.5" cy="-43.0" r="1.82" fill="#f2b876" fill-opacity="0.77"/><circle cx="952.5" cy="-51.4" r="1.82" fill="#f2b876" fill-opacity="0.77"/><circle cx="952.5" cy="-59.8" r="1.82" fill="#f2b876" fill-opacity="0.77"/><circle cx="952.5" cy="-68.2" r="1.82" fill="#f2b876" fill-opacity="0.77"/><circle cx="952.5" cy="-76.6" r="1.74" fill="#f2b876" fill-opacity="0.77"/><circle cx="952.5" cy="-85.0" r="1.49" fill="#f2b876" fill-opacity="0.77"/><circle cx="960.9" cy="-9.4" r="1.61" fill="#f2b774" fill-opacity="0.77"/><circle cx="960.9" cy="-17.8" r="1.80" fill="#f2b774" fill-opacity="0.77"/><circle cx="960.9" cy="-26.2" r="1.81" fill="#f2b774" fill-opacity="0.77"/><circle cx="960.9" cy="-34.6" r="1.81" fill="#f2b774" fill-opacity="0.77"/><circle cx="960.9" cy="-43.0" r="1.81" fill="#f2b774" fill-opacity="0.77"/><circle cx="960.9" cy="-51.4" r="1.80" fill="#f2b774" fill-opacity="0.77"/><circle cx="960.9" cy="-59.8" r="1.66" fill="#f2b774" fill-opacity="0.77"/><circle cx="960.9" cy="-68.2" r="1.37" fill="#f2b774" fill-opacity="0.77"/><circle cx="969.3" cy="-1.0" r="1.61" fill="#f2b672" fill-opacity="0.76"/><circle cx="969.3" cy="-9.4" r="1.80" fill="#f2b672" fill-opacity="0.76"/><circle cx="969.3" cy="-17.8" r="1.80" fill="#f2b672" fill-opacity="0.76"/><circle cx="969.3" cy="-26.2" r="1.80" fill="#f2b672" fill-opacity="0.76"/><circle cx="969.3" cy="-34.6" r="1.80" fill="#f2b672" fill-opacity="0.76"/><circle cx="969.3" cy="-43.0" r="1.58" fill="#f2b672" fill-opacity="0.76"/><circle cx="977.7" cy="-1.0" r="1.49" fill="#f2b570" fill-opacity="0.76"/><circle cx="977.7" cy="-9.4" r="1.78" fill="#f2b570" fill-opacity="0.76"/><circle cx="977.7" cy="-17.8" r="1.79" fill="#f2b570" fill-opacity="0.76"/><circle cx="977.7" cy="-26.2" r="1.79" fill="#f2b570" fill-opacity="0.76"/><circle cx="977.7" cy="-34.6" r="1.79" fill="#f2b570" fill-opacity="0.76"/><circle cx="977.7" cy="-43.0" r="1.75" fill="#f2b570" fill-opacity="0.76"/><circle cx="977.7" cy="-51.4" r="1.54" fill="#f2b570" fill-opacity="0.76"/><circle cx="986.1" cy="-17.8" r="1.54" fill="#f2b46d" fill-opacity="0.76"/><circle cx="986.1" cy="-26.2" r="1.75" fill="#f2b46d" fill-opacity="0.76"/><circle cx="986.1" cy="-34.6" r="1.78" fill="#f2b46d" fill-opacity="0.76"/><circle cx="986.1" cy="-43.0" r="1.78" fill="#f2b46d" fill-opacity="0.76"/><circle cx="986.1" cy="-51.4" r="1.78" fill="#f2b46d" fill-opacity="0.76"/><circle cx="986.1" cy="-59.8" r="1.77" fill="#f2b46d" fill-opacity="0.76"/><circle cx="986.1" cy="-68.2" r="1.62" fill="#f2b46d" fill-opacity="0.76"/><circle cx="986.1" cy="-76.6" r="1.32" fill="#f2b46d" fill-opacity="0.76"/><circle cx="994.5" cy="-34.6" r="1.48" fill="#f2b36b" fill-opacity="0.75"/><circle cx="994.5" cy="-43.0" r="1.72" fill="#f2b36b" fill-opacity="0.75"/><circle cx="994.5" cy="-51.4" r="1.77" fill="#f2b36b" fill-opacity="0.75"/><circle cx="994.5" cy="-59.8" r="1.77" fill="#f2b36b" fill-opacity="0.75"/><circle cx="994.5" cy="-68.2" r="1.77" fill="#f2b36b" fill-opacity="0.75"/><circle cx="994.5" cy="-76.6" r="1.77" fill="#f2b36b" fill-opacity="0.75"/><circle cx="994.5" cy="-85.0" r="1.68" fill="#f2b36b" fill-opacity="0.75"/><circle cx="994.5" cy="-93.4" r="1.43" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1002.9" cy="-51.4" r="1.41" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1002.9" cy="-59.8" r="1.68" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1002.9" cy="-68.2" r="1.76" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1002.9" cy="-76.6" r="1.76" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1002.9" cy="-85.0" r="1.76" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1002.9" cy="-93.4" r="1.76" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1002.9" cy="-101.8" r="1.70" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1011.3" cy="-68.2" r="1.34" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1011.3" cy="-76.6" r="1.63" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1011.3" cy="-85.0" r="1.75" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1011.3" cy="-93.4" r="1.75" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1011.3" cy="-101.8" r="1.73" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1019.7" cy="-85.0" r="1.26" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1019.7" cy="-93.4" r="1.57" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1019.7" cy="-101.8" r="1.71" fill="#f2b36b" fill-opacity="0.75"/><circle cx="1036.5" cy="-34.6" r="1.40" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1036.5" cy="-43.0" r="1.54" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1036.5" cy="-51.4" r="1.58" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1036.5" cy="-59.8" r="1.56" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1036.5" cy="-68.2" r="1.45" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1044.9" cy="-17.8" r="1.38" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1044.9" cy="-26.2" r="1.69" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1044.9" cy="-34.6" r="1.72" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1044.9" cy="-43.0" r="1.72" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1044.9" cy="-51.4" r="1.72" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1044.9" cy="-59.8" r="1.72" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1044.9" cy="-68.2" r="1.72" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1044.9" cy="-76.6" r="1.71" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1044.9" cy="-85.0" r="1.51" fill="#f2b36b" fill-opacity="0.74"/><circle cx="1053.3" cy="-9.4" r="1.42" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1053.3" cy="-17.8" r="1.71" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1053.3" cy="-26.2" r="1.71" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1053.3" cy="-34.6" r="1.71" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1053.3" cy="-43.0" r="1.71" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1053.3" cy="-51.4" r="1.71" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1053.3" cy="-59.8" r="1.71" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1053.3" cy="-68.2" r="1.71" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1053.3" cy="-76.6" r="1.71" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1053.3" cy="-85.0" r="1.71" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1053.3" cy="-93.4" r="1.58" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1061.7" cy="-9.4" r="1.69" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1061.7" cy="-17.8" r="1.70" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1061.7" cy="-26.2" r="1.70" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1061.7" cy="-34.6" r="1.62" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1061.7" cy="-43.0" r="1.40" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1061.7" cy="-51.4" r="1.30" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1061.7" cy="-59.8" r="1.35" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1061.7" cy="-68.2" r="1.54" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1061.7" cy="-76.6" r="1.70" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1061.7" cy="-85.0" r="1.70" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1061.7" cy="-93.4" r="1.70" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1061.7" cy="-101.8" r="1.43" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1070.1" cy="-1.0" r="1.51" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1070.1" cy="-9.4" r="1.70" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1070.1" cy="-17.8" r="1.70" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1070.1" cy="-26.2" r="1.54" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1070.1" cy="-76.6" r="1.37" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1070.1" cy="-85.0" r="1.70" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1070.1" cy="-93.4" r="1.70" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1070.1" cy="-101.8" r="1.65" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1078.5" cy="-1.0" r="1.62" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1078.5" cy="-9.4" r="1.69" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1078.5" cy="-17.8" r="1.68" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1078.5" cy="-85.0" r="1.58" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1078.5" cy="-93.4" r="1.69" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1078.5" cy="-101.8" r="1.69" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1086.9" cy="-1.0" r="1.64" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1086.9" cy="-9.4" r="1.69" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1086.9" cy="-17.8" r="1.62" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1086.9" cy="-85.0" r="1.46" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1086.9" cy="-93.4" r="1.69" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1086.9" cy="-101.8" r="1.69" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1086.9" cy="-110.2" r="1.22" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1095.3" cy="-1.0" r="1.58" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1095.3" cy="-9.4" r="1.68" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1095.3" cy="-17.8" r="1.64" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1095.3" cy="-85.0" r="1.48" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1095.3" cy="-93.4" r="1.68" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1095.3" cy="-101.8" r="1.68" fill="#f2b36b" fill-opacity="0.73"/><circle cx="1103.7" cy="-1.0" r="1.41" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1103.7" cy="-9.4" r="1.68" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1103.7" cy="-17.8" r="1.68" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1103.7" cy="-26.2" r="1.24" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1103.7" cy="-85.0" r="1.62" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1103.7" cy="-93.4" r="1.68" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1103.7" cy="-101.8" r="1.58" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1112.1" cy="-9.4" r="1.60" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1112.1" cy="-17.8" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1112.1" cy="-26.2" r="1.62" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1112.1" cy="-34.6" r="1.19" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1112.1" cy="-76.6" r="1.52" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1112.1" cy="-85.0" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1112.1" cy="-93.4" r="1.66" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1112.1" cy="-101.8" r="1.23" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1120.5" cy="-1.0" r="1.43" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1120.5" cy="-9.4" r="1.62" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1120.5" cy="-17.8" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1120.5" cy="-26.2" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1120.5" cy="-34.6" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1120.5" cy="-43.0" r="1.56" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1120.5" cy="-51.4" r="1.49" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1120.5" cy="-59.8" r="1.53" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1120.5" cy="-68.2" r="1.64" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1120.5" cy="-76.6" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1120.5" cy="-85.0" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1120.5" cy="-93.4" r="1.64" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1120.5" cy="-101.8" r="1.56" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1128.9" cy="-1.0" r="1.49" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1128.9" cy="-9.4" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1128.9" cy="-17.8" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1128.9" cy="-26.2" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1128.9" cy="-34.6" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1128.9" cy="-43.0" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1128.9" cy="-51.4" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1128.9" cy="-59.8" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1128.9" cy="-68.2" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1128.9" cy="-76.6" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1128.9" cy="-85.0" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1128.9" cy="-93.4" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1128.9" cy="-101.8" r="1.64" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1137.3" cy="-1.0" r="1.49" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1137.3" cy="-9.4" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1137.3" cy="-17.8" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1137.3" cy="-26.2" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1137.3" cy="-34.6" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1137.3" cy="-43.0" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1137.3" cy="-51.4" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1137.3" cy="-59.8" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1137.3" cy="-68.2" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1137.3" cy="-76.6" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1137.3" cy="-85.0" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1137.3" cy="-93.4" r="1.67" fill="#f2b36b" fill-opacity="0.72"/><circle cx="1137.3" cy="-101.8" r="1.64" fill="#f2b36b" fill-opacity="0.72"/></g></svg>
@@ -255,93 +218,24 @@ body.menu-open .menu-icons { opacity: 1; transition-delay: .5s; }
 
 <!-- Menu -->
 <button id="burger" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu">
-  <span class="d d1"></span><span class="d d2"></span><span class="d d3"></span><span class="d d4"></span><span class="d d5"></span>
+  <svg viewBox="0 0 40 36" aria-hidden="true">
+    <line class="l1" x1="4" y1="13" x2="30" y2="13"/>
+    <line class="l2" x1="4" y1="23" x2="30" y2="23"/>
+    <circle class="hd" cx="32.5" cy="13" r="2.2"/>
+  </svg>
 </button>
 
-<div id="menu-veil"></div>
 
 <nav id="menu" aria-label="Menu principale">
-<div class="menu-kicker">Dove andare</div>
-<div class="menu-list">
-  <a class="menu-item" href="https://www.gioriva.it/poitiracconto">
-    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M5 4.5 C5 3.7 5.7 3 6.5 3 H18.5 C19.3 3 20 3.7 20 4.5 V19.5 C20 20.3 19.3 21 18.5 21 H6.5 C5.7 21 5 20.3 5 19.5 Z"/>
-      <path d="M8.5 3 V21"/>
-      <path d="M11.5 8 H17 M11.5 11.5 H17 M11.5 15 H15"/>
-      <circle class="dot" cx="16" cy="17.8" r="1.2"/>
-    </svg>
-    <span class="tx">
-      <span class="t">Poi ti racconto</span>
-      <span class="s">Storie e diari di viaggio</span>
-    </span>
-  </a>
-  <a class="menu-item" href="https://www.gioriva.it/lineadivolo">
-    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M9.5 9.5 L6.5 6.5 M14.5 9.5 L17.5 6.5 M9.5 14.5 L6.5 17.5 M14.5 14.5 L17.5 17.5"/>
-      <circle cx="5.5" cy="5.5" r="2.2"/><circle cx="18.5" cy="5.5" r="2.2"/><circle cx="5.5" cy="18.5" r="2.2"/><circle cx="18.5" cy="18.5" r="2.2"/>
-      <rect x="9.5" y="9.5" width="5" height="5" rx="1.4"/>
-      <circle class="dot" cx="12" cy="12" r="1"/>
-    </svg>
-    <span class="tx">
-      <span class="t">Linea di volo</span>
-      <span class="s">Il mondo visto dal drone</span>
-    </span>
-  </a>
-  <a class="menu-item" href="https://www.gioriva.it/quotazero">
-    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M3.5 19 H20.5"/>
-      <path d="M7 19 h2.4 M11.8 19 h2.4"/>
-      <path d="M5.2 16.4 C 8 13.8, 11.2 11.4, 15.2 9.4" stroke-dasharray="1.6 2.2"/>
-      <path d="M13.8 10.9 L20.4 4.6 L18.2 12.2 L16.7 10.2 Z"/>
-      <circle class="dot" cx="5.2" cy="16.4" r="1.1"/>
-    </svg>
-    <span class="tx">
-      <span class="t">Quota Zero</span>
-      <span class="s">Il volo comincia a terra</span>
-    </span>
-  </a>
-  <a class="menu-item" href="https://www.gioriva.it/formulatre">
-    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M4.2 13.6 A7.8 7.8 0 0 1 19.8 13.2 V16.4 A1.6 1.6 0 0 1 18.2 18 H10"/>
-      <path d="M4.2 13.6 V16 A2 2 0 0 0 6.2 18 H10"/>
-      <path d="M6.6 11.4 H17.2 A2 2 0 0 1 19.2 13.4 H6.2"/>
-      <circle class="dot" cx="16.4" cy="15.6" r="1.1"/>
-    </svg>
-    <span class="tx">
-      <span class="t">Formula Tre</span>
-      <span class="s">Un album di ricordi</span>
-    </span>
-  </a>
-  <a class="menu-item" href="https://www.gioriva.it/rotta/">
-    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <circle cx="5.4" cy="17.6" r="1.6"/>
-      <path d="M6.6 16.6 C 9 11.6, 13 8.2, 17.2 6.6" stroke-dasharray="1.7 2.3"/>
-      <path d="M9.6 14.6 L15.4 11 L13.2 15.4 L12.2 13.9 Z"/>
-      <circle class="dot" cx="18.4" cy="6.2" r="1.5"/>
-    </svg>
-    <span class="tx">
-      <span class="t">Rotta</span>
-      <span class="s">Traccia i tuoi voli</span>
-    </span>
-  </a>
-  <a class="menu-item" href="https://www.gioriva.it/issdeck">
-    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M10.1 10.1 L6.6 6.6 M13.9 13.9 L17.4 17.4"/>
-      <rect x="3.4" y="4.2" width="4.6" height="3" rx="0.6" transform="rotate(-45 5.7 5.7)"/>
-      <rect x="16" y="16.8" width="4.6" height="3" rx="0.6" transform="rotate(-45 18.3 18.3)"/>
-      <path d="M13.9 10.1 L16.4 7.6 M10.1 13.9 L7.6 16.4"/>
-      <circle cx="12" cy="12" r="2.6"/>
-      <circle class="dot" cx="12" cy="12" r="1"/>
-    </svg>
-    <span class="tx">
-      <span class="t">ISS Deck</span>
-      <span class="s">Nello spazio con la ISS</span>
-    </span>
-  </a>
+  <div class="lines">
+    <a class="line" href="https://www.gioriva.it/poitiracconto" data-t="Poi ti racconto" data-s="Storie e diari di viaggio"><span class="t"></span><span class="s"></span></a>
+    <a class="line" href="https://www.gioriva.it/lineadivolo" data-t="Linea di volo" data-s="Il mondo visto dal drone"><span class="t"></span><span class="s"></span></a>
+    <a class="line" href="https://www.gioriva.it/quotazero" data-t="Quota Zero" data-s="Il volo comincia a terra"><span class="t"></span><span class="s"></span></a>
+    <a class="line" href="https://www.gioriva.it/formulatre" data-t="Formula Tre" data-s="Un album di ricordi"><span class="t"></span><span class="s"></span></a>
+    <a class="line" href="https://www.gioriva.it/rotta/" data-t="Rotta" data-s="Traccia i tuoi voli"><span class="t"></span><span class="s"></span></a>
+    <a class="line" href="https://www.gioriva.it/issdeck" data-t="ISS Deck" data-s="Nello spazio con la ISS"><span class="t"></span><span class="s"></span></a>
   </div>
-
-  <div class="menu-sep"></div>
-  <ul class="menu-icons">
+<ul class="menu-icons">
     <li><a href="/privacy.html" aria-label="Privacy" title="Privacy">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 3 L19 6 V11 C19 16 16 19.5 12 21 C8 19.5 5 16 5 11 V6 Z"/>
@@ -395,162 +289,444 @@ body.menu-open .menu-icons { opacity: 1; transition-delay: .5s; }
 
 
 <script>
+  (() => {
+    'use strict';
     const canvas = document.getElementById('c');
-    const ctx = canvas.getContext('2d');
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const SPEED = reduced ? 0.5 : 1;   // con "riduci movimento" l'onda rallenta ma non si ferma
+    const ctx = canvas.getContext('2d', { alpha: false });
+    const canvas2 = document.getElementById('c2'), ctx2 = canvas2.getContext('2d');
+    const DPR = Math.min(2, devicePixelRatio || 1);
+    const TOUCH = matchMedia('(pointer: coarse)').matches;
+    let W, H, cx, cy, K, COLS, ROWS, XR, mobile;
+    const cam_y = 0.75, cam_f = 1.55;
 
-    let W, H, DPR, COLS, ROWS, XR;
-    function resize() {
-      const mobile = innerWidth < 600;
-      DPR = Math.min(devicePixelRatio || 1, mobile ? 1.5 : 2);
-      W = canvas.width = Math.round(innerWidth * DPR);
-      H = canvas.height = Math.round(innerHeight * DPR);
-      // densità della griglia in base alla larghezza
-      COLS = mobile ? 110 : 200;
-      ROWS = mobile ? 60 : 80;
-      // larghezza del piano in scena: su schermi stretti si restringe, così i punti restano fitti
-      XR = 20 * Math.max(0.4, Math.min(1, (innerWidth / innerHeight) / 1.6));
+    let reveal = null;
+    /* ── the dunes: a still relief, lit by the real sun over Como ── */
+    let waveA = 1;
+    const LAT = 45.81 * Math.PI / 180, LON = 9.09;
+    const params = new URLSearchParams(location.search);
+    const HOUR_OVERRIDE = params.has('h') ? parseFloat(params.get('h')) : null;   /* ?h=6.5 simulates 06:30 */
+
+    function sunNow() {
+      /* NOAA-style approximation: altitude and azimuth of the sun in Como */
+      const now = new Date();
+      let d = new Date(now);
+      let utcHours = now.getUTCHours() + now.getUTCMinutes() / 60 + now.getUTCSeconds() / 3600;
+      if (HOUR_OVERRIDE !== null) {                           /* local hour -> utc (Como is UTC+1/+2) */
+        const off = -new Date().getTimezoneOffset() / 60;
+        utcHours = HOUR_OVERRIDE - (Intl.DateTimeFormat('it-IT', { timeZone: 'Europe/Rome', timeZoneName: 'short' })
+          .formatToParts(now).find(p => p.type === 'timeZoneName').value.includes('+2') ? 2 : 1);
+      }
+      const start = Date.UTC(d.getUTCFullYear(), 0, 0);
+      const doy = (Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) - start) / 86400000;
+      const g = 2 * Math.PI / 365 * (doy - 1 + (utcHours - 12) / 24);
+      const eqt = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+      const decl = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+      const tst = (utcHours * 60 + eqt + 4 * LON) % 1440;
+      const ha = (tst / 4 - 180) * Math.PI / 180;
+      const alt = Math.asin(Math.sin(LAT) * Math.sin(decl) + Math.cos(LAT) * Math.cos(decl) * Math.cos(ha));
+      let az = Math.acos(((Math.sin(LAT) * Math.cos(ha) * Math.cos(decl)) - Math.cos(LAT) * Math.sin(decl)) / Math.cos(alt) * -1 + 0) ;
+      az = Math.atan2(Math.sin(ha), Math.cos(ha) * Math.sin(LAT) - Math.tan(decl) * Math.cos(LAT)) + Math.PI;  /* from north, clockwise */
+      return { alt, az };
     }
-    resize();
-    addEventListener('resize', resize);
+    let sun = sunNow();
+    setInterval(() => { sun = sunNow(); }, 30000);
 
-    // camera fissa, leggermente dall'alto
-    const cam = { y: 0.75, f: 1.55 };
-    const TOUCH = matchMedia('(hover: none)').matches;
-    const AMP = TOUCH ? 1.35 : 1;      // su touch onda più visibile
-    let lastTouch = -1e9;              // ultimo tocco reale
-    const K = () => cam.f * H * 0.62;      // fattore di proiezione
-    const pointer = { x: 0, z: 0, s: 0 }; // punto in scena e forza del ripple
-    let ripple = 0;
-
-    function toScene(clientX, clientY) {
-      // proiezione inversa approssimata del cursore sul piano y=0
-      const off = Math.max(0.02, clientY / innerHeight - 0.5);
-      const pz = Math.min(10.4, cam.y * cam.f * 0.62 / off);
-      pointer.z = pz - 0.4;
-      pointer.x = (clientX - innerWidth / 2) * pz / (cam.f * 0.62 * innerHeight);
-      pointer.s = 1;
+    function relief(x, z) {
+      const d1 = 1 - Math.abs(Math.sin(0.30 * x + 0.16 * z + 0.6 * Math.sin(0.28 * z)));
+      return 0.9 * Math.pow(d1, 1.5) + 0.22 * Math.sin(0.9 * x - 0.55 * z + 1.3) + 0.10 * Math.sin(2.1 * x + 1.6 * z);
     }
-    addEventListener('pointermove', e => { toScene(e.clientX, e.clientY); lastTouch = performance.now(); }, { passive: true });
-    addEventListener('pointerdown', e => { toScene(e.clientX, e.clientY); ripple = 1; lastTouch = performance.now(); }, { passive: true });
-
-    // senza mouse (o dopo 3 s senza tocchi) un punto di pressione vaga da solo sul piano
-    function autoPointer(t) {
-      if (!TOUCH || t - lastTouch < 3000) return;
-      const k = t * 0.00022 * SPEED;
-      pointer.x = Math.sin(k * 1.3) * (XR * 0.28);
-      pointer.z = 2.6 + (Math.sin(k * 0.9 + 1.7) * 0.5 + 0.5) * 3.5;
-      pointer.s += (0.9 - pointer.s) * 0.02;
-      if (Math.sin(k * 0.45) > 0.995 && ripple < 0.05) ripple = 1;
+    const pointer = { x: 0, z: 0, s: 0 };
+    let ripple = 0, lastTouch = -1e9;
+    function surface(x, z, t) {
+      /* the dune, plus a slow sand ripple and the soft print of the pointer */
+      const dx = x - pointer.x, dz = z - pointer.z, d = Math.sqrt(dx * dx + dz * dz);
+      /* sand ripples that travel with the wind, and a slow breath of the dunes themselves */
+      return relief(x, z)
+        + 0.085 * Math.sin(3.6 * x + 2.4 * z + t * 0.55)
+        + 0.045 * Math.sin(5.1 * x - 1.7 * z - t * 0.8)
+        + 0.07 * Math.sin(0.7 * x - 0.35 * z + t * 0.22)
+        - Math.exp(-d * d * 1.6) * 0.32 * pointer.s;
     }
-
-    // colori precalcolati (16 livelli di alpha per ciascuna tinta)
-    const LEVELS = 16;
-    const PAL_INK = [], PAL_ACC = [];
-    for (let i = 0; i < LEVELS; i++) {
-      const a = (i + 1) / LEVELS;
-      PAL_INK.push(`rgba(239,230,216,${a.toFixed(3)})`);
-      PAL_ACC.push(`rgba(242,179,107,${a.toFixed(3)})`);
+    function light() {
+      /* light direction in scene space: +x east, +z north (away), +y up */
+      const alt = sun.alt, az = sun.az;
+      const day = Math.max(0, Math.min(1, (alt + 0.06) / 0.20));           /* 0 at night .. 1 in full day */
+      const a = alt > -0.05 ? alt : 0.45;                                   /* at night, a high faint moon */
+      const l = [Math.cos(a) * Math.sin(az), Math.sin(a), Math.cos(a) * Math.cos(az)];
+      const golden = Math.max(0, 1 - Math.max(0, alt) / 0.5);                /* low sun = warm */
+      return { l, day, golden, alt, az };
     }
-
-    let lastT = 0;
-
-    function frame(t) {
-      const dt = Math.min(100, t - lastT); lastT = t;
-
-      autoPointer(t);
-      if (!TOUCH || t - lastTouch < 3000) pointer.s *= 0.97;
-      ripple *= 0.985;
-
-      ctx.fillStyle = '#0C0907';
-      ctx.fillRect(0, 0, W, H);
-
-      const time = t * 0.00035 * SPEED;
-      const cx = W / 2, cy = H / 2;
-
-      // disegno dal fondo verso il davanti
+    function cell(c, r, t) {
+      const x = ((c / (COLS - 1)) - 0.5) * XR, z = 0.6 + (r / ROWS) * 9.4;
+      const y = surface(x, z, t) * 0.34 - 0.12;
+      const pz = z + 0.4;
+      return { sx: cx + (x / pz) * K, sy: cy - ((y - cam_y) / pz) * K, y, depth: 1 - r / ROWS, r, x, z };
+    }
+    function drawWave(t) {
+      const L = light();
+      const e = 0.004;
+      const inkHi = [239, 230, 216], amb = [242, 179, 107];
       for (let r = ROWS - 1; r >= 0; r--) {
-        const z = 0.6 + (r / ROWS) * 9.4;              // parte sotto il bordo inferiore, così non si stacca mai
+        if (reveal && r < reveal.row) break;
+        const rowFrac = (reveal && r === reveal.row) ? reveal.frac : 1;
+        const fwd = ((ROWS - 1 - r) % 2 === 0);
         for (let c = 0; c < COLS; c++) {
-          const x = ((c / (COLS - 1)) - 0.5) * XR;   // larghezza -XR/2 .. XR/2
-
-          // superficie: due onde incrociate + un'increspatura dal cursore
-          const near = Math.min(1, (r / ROWS) * 3.5);   // le prime file restano piatte: il bordo inferiore non si scopre mai
-          const amp = (0.95 - (r / ROWS) * 0.6) * AMP * near; // il fondo si calma, così non si aggroviglia
-          let y = (Math.sin(x * 0.32 + time * 1.4) * 0.16
-                + Math.sin(z * 0.55 - time * 1.1) * 0.14
-                + Math.sin((x + z) * 0.22 + time * 0.7) * 0.10) * amp;
-
-          const dx = x - pointer.x, dz = z - pointer.z;
-          const d = Math.sqrt(dx * dx + dz * dz);
-          y += Math.exp(-d * d * 1.6) * 0.35 * pointer.s;
-          y += Math.sin(d * 6 - t * 0.008) * Math.exp(-d * 0.9) * 0.12 * ripple;
-
-          // proiezione prospettica
-          const pz = z + 0.4;                    // distanza dalla camera
-          const py = y - cam.y;
-          const sx = cx + (x / pz) * K();
-          const sy = cy - (py / pz) * K();
-
-          if (sy < -10 || sy > H + 10 || sx < -10 || sx > W + 10) continue;
-
-          const depth = 1 - r / ROWS;                       // 1 vicino, 0 lontano
-          const lift = Math.max(0, y + 0.25);               // le creste brillano
-          const far = Math.min(1, (1 - r / ROWS) * 4);  // dissolvenza sull'orizzonte
-          const a = (0.12 + depth * 0.45 + lift * 0.6) * far;
-          const size = (0.6 + depth * 1.2 + lift * 1.0) * DPR;
-
-          if (a < 0.04) continue;
-          const idx = Math.min(LEVELS - 1, (a * LEVELS) | 0);
-          ctx.fillStyle = lift > 0.42 ? PAL_ACC[idx] : PAL_INK[idx];
-          ctx.fillRect(sx - size / 2, sy - size / 2, size, size);
+          if (rowFrac < 1) { const cc = fwd ? c : (COLS - 1 - c); if (cc > rowFrac * COLS) continue; }
+          const p = cell(c, r, t);
+          if (p.sy < -10 || p.sy > H + 10 || p.sx < -10 || p.sx > W + 10) continue;
+          /* normal by finite differences */
+          const hx = surface(p.x + e, p.z, t) - surface(p.x - e, p.z, t);
+          const hz = surface(p.x, p.z + e, t) - surface(p.x, p.z - e, t);
+          let nx = -hx / (2 * e), ny = 1, nz = -hz / (2 * e);
+          const nl = Math.sqrt(nx * nx + ny * ny + nz * nz); nx /= nl; ny /= nl; nz /= nl;
+          const lam = Math.max(0, nx * L.l[0] + ny * L.l[1] + nz * L.l[2]);
+          const far = Math.min(1, (1 - p.r / ROWS) * 4);
+          const dayI = 0.12 + 0.78 * lam, nightI = 0.09 + 0.24 * lam;
+          const inten = (nightI + (dayI - nightI) * L.day) * far * waveA;
+          if (inten < 0.035) continue;
+          const warm = L.day * L.golden * lam;
+          const col = [0, 1, 2].map(i => Math.round(inkHi[i] + (amb[i] - inkHi[i]) * warm));
+          const size = (0.6 + p.depth * 1.3 + lam * 0.5) * DPR;
+          ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${Math.min(1, inten).toFixed(3)})`;
+          ctx.fillRect(p.sx - size / 2, p.sy - size / 2, size, size);
         }
       }
-
-      requestAnimationFrame(frame);
+      /* the sky at the horizon glows where the sun is, warm and low */
+      const glowI = (L.day * L.golden * 0.9 + (1 - L.day) * 0.08) * skyA;
+      if (glowI > 0.02) {
+        const gx = cx + Math.sin(L.az) * W * 0.42;
+        const hy = cy - ((surface(0, 10, t) * 0.34 - 0.12 - cam_y) / 10.4) * K;
+        const g = ctx.createRadialGradient(gx, hy, 0, gx, hy, W * 0.36);
+        g.addColorStop(0, `rgba(242,179,107,${(0.22 * glowI).toFixed(3)})`);
+        g.addColorStop(1, 'rgba(242,179,107,0)');
+        ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      }
+    }
+    function resize() {
+      W = canvas.width = Math.round(innerWidth * DPR);
+      H = canvas.height = Math.round(innerHeight * DPR);
+      cx = W / 2; cy = H / 2;
+      mobile = innerWidth <= 768;
+      COLS = mobile ? 120 : 200;
+      ROWS = mobile ? 60 : 80;
+      XR = 20 * Math.max(0.4, Math.min(1, (innerWidth / innerHeight) / 1.6));
+      K = cam_f * H * 0.62;
+      if (canvas2) { canvas2.width = W; canvas2.height = H; }
+      seedSky();
     }
 
-    requestAnimationFrame(frame);
+    /* ── the sky: warm dust in depth above the horizon ── */
+    let sky = [], skyA = 0;
+    const NEARZ = 0.55;
+    function seedSky() {
+      sky = [];
+      const n = mobile ? 700 : 1500, XRS = W / H;
+      for (let i = 0; i < n; i++) {
+        const z = 0.25 + Math.pow(Math.random(), 1.6) * 2.9;
+        sky.push({ x: (Math.random() * 2 - 1) * XRS * 1.6, y: -0.03 - Math.random() * 1.5, z,
+          warm: Math.random() < 0.07, ph: Math.random() * 6.28, tw: 0.2 + Math.random() * 0.5,
+          vx: (0.010 + Math.random() * 0.006) * (Math.random() < 0.15 ? -1 : 1), vy: (Math.random() - 0.5) * 0.004 });
+      }
+    }
+    let lastSky = 0;
+    function drawSky(ts) {
+      const dt = Math.min(0.05, (ts - lastSky) / 1000 || 0.016); lastSky = ts;
+      const XRS = W / H;
+      const horizonY = cy - ((surface(0, 10, 0) * 0.34 - 0.12 - cam_y) / 10.4) * K;
+      for (let i = 0; i < sky.length; i++) {
+        const g = sky[i];
+        g.x += g.vx * dt * 3 / g.z; g.y += g.vy * dt * 3 / g.z;
+        if (g.x > XRS * 1.7) g.x = -XRS * 1.7; if (g.x < -XRS * 1.7) g.x = XRS * 1.7;
+        if (g.y > -0.03) g.y = -1.5; if (g.y < -1.53) g.y = -0.03;
+        const sx = cx + (g.x / g.z) * K * 0.55, sy = cy + (g.y / g.z) * K * 0.55;
+        if (sx < -20 || sx > W + 20 || sy < -20 || sy > horizonY - 6 * DPR) continue;
+        const depth = 1 - (g.z - 0.25) / 2.9;
+        const tw = 0.75 + 0.25 * Math.sin(ts * 0.0004 * g.tw * 40 + g.ph);
+        const a = (0.10 + 0.75 * depth * depth) * tw * skyA * waveA;
+        const r = (0.5 + 2.4 * depth * depth) * DPR;
+        const col = g.warm ? '242,179,107' : '239,230,216';
+        const target = g.z < NEARZ ? ctx2 : ctx;
+        if (g.z < NEARZ) {
+          const gr = target.createRadialGradient(sx, sy, 0, sx, sy, r * 4);
+          gr.addColorStop(0, `rgba(${col},${(a * 0.55).toFixed(3)})`); gr.addColorStop(1, `rgba(${col},0)`);
+          target.fillStyle = gr; target.beginPath(); target.arc(sx, sy, r * 4, 0, Math.PI * 2); target.fill();
+        }
+        target.fillStyle = `rgba(${col},${Math.min(1, a).toFixed(3)})`;
+        target.beginPath(); target.arc(sx, sy, r, 0, Math.PI * 2); target.fill();
+      }
+    }
 
+    /* ── the matter: particles that live on the wave and can become words ── */
+    let particles = [], voices = [], menuOpen = false, menuT = 0, hoverVoice = -1;
+    const TITLES = ['Poi ti racconto', 'Linea di volo', 'Quota Zero', 'Formula Tre', 'Rotta', 'ISS Deck'];
+
+    function sampleText(text, fontPx, pitch) {
+      const off = document.createElement('canvas'); const o = off.getContext('2d');
+      o.font = `500 ${fontPx}px Outfit, "Helvetica Neue", Arial, sans-serif`;
+      const w = Math.ceil(o.measureText(text).width) + 8, h = Math.ceil(fontPx * 1.3);
+      off.width = w; off.height = h;
+      o.font = `500 ${fontPx}px Outfit, "Helvetica Neue", Arial, sans-serif`;
+      o.fillStyle = '#fff'; o.textBaseline = 'middle'; o.fillText(text, 4, h / 2);
+      const d = o.getImageData(0, 0, w, h).data, pts = [];
+      for (let y = pitch / 2; y < h; y += pitch) for (let x = pitch / 2; x < w; x += pitch) {
+        if (d[((y | 0) * w + (x | 0)) * 4 + 3] > 120) pts.push([x - w / 2, y - h / 2]);
+      }
+      return { pts, w, h };
+    }
+
+    function buildMatter() {
+      const fontPx = (mobile ? 30 : 46) * DPR, pitch = (mobile ? 3.0 : 3.6) * DPR;
+      const gap = (mobile ? 64 : 92) * DPR;
+      const total = TITLES.length * gap;
+      const top = H / 2 - total / 2 + gap * 0.5 - (mobile ? H * 0.04 : H * 0.03);
+      voices = []; particles = [];
+      TITLES.forEach((t, i) => {
+        const s = sampleText(t, fontPx, pitch);
+        const yC = top + i * gap;
+        voices.push({ x: cx, y: yC, w: s.w, h: s.h, from: particles.length, to: particles.length + s.pts.length });
+        s.pts.forEach(([px, py]) => {
+          particles.push({
+            tx: cx + px, ty: yC + py,                    /* where it stands in the menu */
+            c: Math.floor(Math.random() * COLS),          /* its cell on the wave */
+            r: Math.floor(ROWS * (0.35 + 0.65 * Math.random())),
+            d: Math.random() * 0.35,                      /* start delay */
+            arc: (0.4 + Math.random() * 0.8) * H * 0.06,  /* how much it lifts on the way */
+            v: i
+          });
+        });
+      });
+      /* place the HTML hit-areas over the dot-titles */
+      document.querySelectorAll('.voice').forEach((el, i) => {
+        const v = voices[i];
+        el.style.setProperty('--vx', (v.x - v.w / 2) / DPR + 'px');
+        el.style.setProperty('--vy', (v.y - v.h / 2) / DPR + 'px');
+        el.style.setProperty('--vw', v.w / DPR + 'px');
+        el.style.setProperty('--vh', v.h / DPR + 'px');
+      });
+    }
+
+    const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    function drawMatter(t, dt) {
+      menuT = Math.max(0, Math.min(1, menuT + (menuOpen ? 1 : -1) * dt / 0.9));
+      waveA = 1 - 0.7 * ease(menuT);
+      if (menuHead) head(menuHead.x, menuHead.y, 1);
+      return;
+      const size = (mobile ? 1.5 : 1.7) * DPR;
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        const k = ease(Math.max(0, Math.min(1, (menuT - p.d) / (1 - 0.35))));
+        if (k <= 0) continue;
+        const home = cell(p.c, p.r, t);
+        const x = home.sx + (p.tx - home.sx) * k;
+        const y = home.sy + (p.ty - home.sy) * k - Math.sin(k * Math.PI) * p.arc;
+        const hot = hoverVoice === p.v;
+        const a = 0.35 + 0.65 * k;
+        ctx.fillStyle = hot ? `rgba(242,179,107,${a})` : `rgba(239,230,216,${(a * 0.92).toFixed(3)})`;
+        const s = size * (hot ? 1.25 : 1);
+        ctx.fillRect(x - s / 2, y - s / 2, s, s);
+      }
+    }
+
+    /* ── pointer on the water ── */
+    function toScene(px, py) {
+      const nx = (px * DPR - cx) / K, ny = (cy - py * DPR) / K;
+      const z = Math.max(0.6, Math.min(10, cam_y / Math.max(0.05, -ny) - 0.4));
+      pointer.x = nx * (z + 0.4); pointer.z = z; pointer.s = 1;
+    }
+    addEventListener('pointermove', e => { toScene(e.clientX, e.clientY); lastTouch = performance.now(); }, { passive: true });
+    addEventListener('pointerdown', e => { toScene(e.clientX, e.clientY); lastTouch = performance.now(); }, { passive: true });
+    function autoPointer(ts) {
+      if (!TOUCH || ts - lastTouch < 3000) return;
+      pointer.x = Math.sin(ts * 0.00018) * XR * 0.35; pointer.z = 2.2 + Math.sin(ts * 0.00011) * 1.4; pointer.s = 0.8;
+    }
+
+    /* ── public hooks for the menu ── */
+    window.__materia = {
+      menu(on) { menuOpen = on; },
+      hover(i) { hoverVoice = i; }
+    };
+    /* the menu writer asks for the head at the end of the line being written */
+    let menuHead = null;
+    window.__head = function (el, n) {
+      if (!el) { menuHead = null; return; }
+      const r = el.getBoundingClientRect();
+      const meas = document.createElement('canvas').getContext('2d');
+      meas.font = getComputedStyle(el).font;
+      const w = meas.measureText(el.textContent).width;
+      menuHead = { x: (r.left + w + 2) * DPR, y: (r.top + r.height * 0.62) * DPR };
+    };
+
+    addEventListener('resize', resize);
+    resize();
+
+    /* ── the plotter ── */
+    const logoSvg = document.querySelector('.wm .logo');
+    const dots = logoSvg ? Array.from(logoSvg.querySelectorAll('circle')) : [];
+    const solidG = logoSvg ? logoSvg.querySelector('g[clip-path]') : null;
+    let plotStart = null, plotDone = sessionStorage.getItem('gr_plot') === '1', drawnDots = 0, clipRect = null;
+    const T = { solidA: 0.3, solidB: 1.6, dotsB: 4.2, travelB: 4.8, waveB: 8.6 };
+    function setupPlotter() {
+      canvas2.width = W; canvas2.height = H;
+      if (plotDone || !logoSvg || !solidG) { finishPlot(); return; }
+      const NS = 'http://www.w3.org/2000/svg';
+      const defs = logoSvg.querySelector('defs') || logoSvg.insertBefore(document.createElementNS(NS, 'defs'), logoSvg.firstChild);
+      const cp = document.createElementNS(NS, 'clipPath'); cp.setAttribute('id', 'plot');
+      clipRect = document.createElementNS(NS, 'rect');
+      const vb = logoSvg.viewBox.baseVal;
+      clipRect.setAttribute('x', vb.x); clipRect.setAttribute('y', vb.y); clipRect.setAttribute('width', 0); clipRect.setAttribute('height', vb.height);
+      cp.appendChild(clipRect); defs.appendChild(cp);
+      const wrap = document.createElementNS(NS, 'g'); wrap.setAttribute('clip-path', 'url(#plot)');
+      solidG.parentNode.insertBefore(wrap, solidG); wrap.appendChild(solidG);
+      reveal = { row: ROWS, frac: 0 };
+      plotStart = null;
+    }
+    function finishPlot() {
+      plotDone = true; reveal = null; sessionStorage.setItem('gr_plot', '1');
+      if (clipRect) clipRect.setAttribute('width', 99999);
+      document.body.classList.add('plotted');
+      skyA = Math.max(skyA, 0.001);
+    }
+    addEventListener('pointerdown', () => { if (!plotDone) finishPlot(); }, { passive: true });
+    window.__finishPlot = function () { if (!plotDone) finishPlot(); };
+    document.addEventListener('keydown', () => { if (!plotDone) finishPlot(); });
+    function head(x, y, glow) {
+      const r = 14 * DPR;
+      const g = ctx2.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0, `rgba(242,179,107,${(0.55 * glow).toFixed(3)})`); g.addColorStop(1, 'rgba(242,179,107,0)');
+      ctx2.fillStyle = g; ctx2.beginPath(); ctx2.arc(x, y, r, 0, Math.PI * 2); ctx2.fill();
+      ctx2.fillStyle = `rgba(255,252,246,${glow.toFixed(3)})`; ctx2.beginPath(); ctx2.arc(x, y, 2.2 * DPR, 0, Math.PI * 2); ctx2.fill();
+    }
+    function plot(ts) {
+      if (plotStart === null) plotStart = ts;
+      const s = (ts - plotStart) / 1000;
+      const box = logoSvg.getBoundingClientRect(), vb = logoSvg.viewBox.baseVal;
+      const toX = vx => (box.left + (vx - vb.x) / vb.width * box.width) * DPR;
+      const toY = vy => (box.top + (vy - vb.y) / vb.height * box.height) * DPR;
+      const solidEnd = dots.length ? parseFloat(dots[0].getAttribute('cx')) : vb.x + vb.width;
+      if (s < T.solidA) { return 0; }
+      if (s < T.solidB) {                                              /* writing the solid letters */
+        const k = (s - T.solidA) / (T.solidB - T.solidA), e = k < 0.5 ? 2 * k * k : -1 + (4 - 2 * k) * k;
+        const vx = vb.x + (solidEnd - vb.x) * e;
+        clipRect.setAttribute('width', vx - vb.x);
+        head(toX(vx), toY(vb.y + vb.height * 0.62), 1);
+        return 0;
+      }
+      if (s < T.dotsB) {                                               /* the dots, one by one, in order */
+        clipRect.setAttribute('width', 99999);
+        const k = (s - T.solidB) / (T.dotsB - T.solidB);
+        const n = Math.floor(k * dots.length);
+        for (; drawnDots < n; drawnDots++) dots[drawnDots].style.opacity = 1;
+        const d = dots[Math.max(0, Math.min(dots.length - 1, n))];
+        head(toX(parseFloat(d.getAttribute('cx'))), toY(parseFloat(d.getAttribute('cy'))), 1);
+        return 0;
+      }
+      for (; drawnDots < dots.length; drawnDots++) dots[drawnDots].style.opacity = 1;
+      if (s < T.travelB) {                                             /* down to the horizon */
+        const k = (s - T.dotsB) / (T.travelB - T.dotsB), e = k * k * (3 - 2 * k);
+        const last = dots[dots.length - 1];
+        const x0 = toX(parseFloat(last.getAttribute('cx'))), y0 = toY(parseFloat(last.getAttribute('cy')));
+        const p1 = cell(0, ROWS - 1, 0);
+        head(x0 + (p1.sx - x0) * e, y0 + (p1.sy - y0) * e, 1);
+        return 0;
+      }
+      if (s < T.waveB) {                                               /* tracing the sea, far to near */
+        const k = (s - T.travelB) / (T.waveB - T.travelB);
+        const rowsDone = k * ROWS;
+        const row = ROWS - 1 - Math.floor(rowsDone), frac = rowsDone - Math.floor(rowsDone);
+        reveal = { row: Math.max(0, row), frac };
+        const fwd = ((ROWS - 1 - row) % 2 === 0);
+        const col = Math.floor((fwd ? frac : 1 - frac) * (COLS - 1));
+        const p = cell(col, Math.max(0, row), 0);
+        head(p.sx, p.sy, 1);
+        return 0;
+      }
+      finishPlot();
+      return 0;
+    }
+
+    const hud = document.getElementById('hud');
+    function updateHud() {
+      const L = light();
+      const hh = HOUR_OVERRIDE !== null ? (Math.floor(HOUR_OVERRIDE) + ':' + String(Math.round((HOUR_OVERRIDE % 1) * 60)).padStart(2, '0')) : new Intl.DateTimeFormat('it-IT', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome' }).format(new Date());
+      const deg = Math.round(L.alt * 180 / Math.PI);
+      hud.innerHTML = 'Como ' + hh + '<i>&middot;</i>' + (deg > 0 ? 'sole a ' + deg + '&deg;' : 'notte');
+    }
+    updateHud(); setInterval(updateHud, 30000);
+
+    let last = 0, waveT0 = null;
+    function frame(ts) {
+      const dt = Math.min(0.05, (ts - last) / 1000 || 0.016); last = ts;
+      if (!plotDone) { plot(ts); }
+      if (plotDone && waveT0 === null) waveT0 = ts;
+      const t = plotDone ? (ts - waveT0) * 0.00035 : 0;
+      autoPointer(ts);
+      if (!TOUCH || ts - lastTouch < 3000) pointer.s *= 0.97;
+      ctx.fillStyle = '#0C0907'; ctx.fillRect(0, 0, W, H);
+      ctx2.clearRect(0, 0, W, H);
+      /* the sky fills in while the sea is being traced */
+      skyA = plotDone ? Math.min(1, skyA + dt / 2.5) : (plotStart === null ? 0 : Math.min(1, Math.max(0, ((ts - plotStart) / 1000 - T.dotsB) / 3.2)));
+      drawWave(t);
+      drawSky(ts);
+      drawMatter(t, dt);
+      requestAnimationFrame(frame);
+    }
+    setupPlotter();
+    requestAnimationFrame(frame);
+  })();
 </script>
 <script>
 'use strict';
 /* ════════════════════════════════════
-   MENU
+   MENU: the plotter writes the lines
    ════════════════════════════════════ */
 (function () {
   var burger = document.getElementById('burger');
-  var veil   = document.getElementById('menu-veil');
-  var menu   = document.getElementById('menu');
-  var items  = menu.querySelectorAll('.menu-item');
+  var lines = Array.from(document.querySelectorAll('.line'));
+  var writing = null, raf = null;
 
-  // staggered reveal
-  items.forEach(function (el, i) {
-    el.style.transitionDelay = (0.12 + i * 0.07) + 's';
-  });
+  function write() {
+    var t0 = null, total = 0, plan = [];
+    lines.forEach(function (el) {
+      var t = el.dataset.t, s = el.dataset.s;
+      plan.push({ el: el, t: t, s: s, start: total }); total += t.length * 0.03 + 0.12;
+    });
+    lines.forEach(function (el) { el.classList.remove('written'); el.querySelector('.t').textContent = ''; el.querySelector('.s').textContent = ''; });
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var s = (ts - t0) / 1000, headEl = null, headN = 0;
+      plan.forEach(function (p) {
+        var k = Math.max(0, Math.min(1, (s - p.start) / (p.t.length * 0.03)));
+        var n = Math.round(k * p.t.length);
+        p.el.querySelector('.t').textContent = p.t.slice(0, n);
+        if (k >= 1 && !p.el.classList.contains('written')) { p.el.classList.add('written'); p.el.querySelector('.s').textContent = p.s; }
+        if (k > 0 && k < 1) { headEl = p.el.querySelector('.t'); headN = n; }
+      });
+      if (window.__head) window.__head(headEl, headN);
+      if (s < total + 0.2 && document.body.classList.contains('menu-open')) raf = requestAnimationFrame(step);
+      else if (window.__head) window.__head(null, 0);
+    }
+    raf = requestAnimationFrame(step);
+  }
 
   function open() {
+    if (window.__finishPlot) window.__finishPlot();
+    document.body.classList.add('plotted');
+    document.body.classList.remove('menu-closing');
     document.body.classList.add('menu-open');
-    burger.setAttribute('aria-expanded', 'true');
-    burger.setAttribute('aria-label', 'Chiudi il menu');
+    burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Chiudi il menu');
+    window.__materia.menu(true);
+    write();
   }
   function close() {
-    document.body.classList.remove('menu-open');
-    burger.setAttribute('aria-expanded', 'false');
-    burger.setAttribute('aria-label', 'Apri il menu');
+    if (!document.body.classList.contains('menu-open')) return;
+    document.body.classList.add('menu-closing');
+    burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Apri il menu');
+    window.__materia.menu(false);
+    if (window.__head) window.__head(null, 0);
+    setTimeout(function () { document.body.classList.remove('menu-open'); document.body.classList.remove('menu-closing'); }, 380);
   }
-  function toggle() {
-    document.body.classList.contains('menu-open') ? close() : open();
-  }
-
-  burger.addEventListener('click', toggle);
-  veil.addEventListener('click', close);
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') close();
-  });
-
-  // expose for the cookie link inside the menu
+  burger.addEventListener('click', function () { document.body.classList.contains('menu-open') ? close() : open(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   window.__closeMenu = close;
 })();
 

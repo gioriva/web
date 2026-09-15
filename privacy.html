@@ -175,119 +175,128 @@ footer a:hover { color: var(--accent); }
 <canvas id="c" aria-hidden="true"></canvas>
 <div class="vignette" aria-hidden="true"></div>
 <script>
+  (() => {
+    'use strict';
     const canvas = document.getElementById('c');
-    const ctx = canvas.getContext('2d');
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const SPEED = reduced ? 0.5 : 1;   // con "riduci movimento" l'onda rallenta ma non si ferma
-
-    let W, H, DPR, COLS, ROWS, XR;
-    function resize() {
-      const mobile = innerWidth < 600;
-      DPR = Math.min(devicePixelRatio || 1, mobile ? 1.5 : 2);
-      W = canvas.width = Math.round(innerWidth * DPR);
-      H = canvas.height = Math.round(canvas.clientHeight * DPR);
-      // densità della griglia in base alla larghezza
-      COLS = mobile ? 110 : 200;
-      ROWS = mobile ? 34 : 44;
-      // larghezza del piano in scena: su schermi stretti si restringe, così i punti restano fitti
-      XR = 20 * Math.max(0.4, Math.min(1, (innerWidth / (canvas.clientHeight * 2.4)) / 1.6));
+    const ctx = canvas.getContext('2d', { alpha: false });
+    const DPR = Math.min(2, devicePixelRatio || 1);
+    let W, H, cx, cy, K, COLS, ROWS, XR, mobile, waveA = 1;
+    const cam_y = 0.75, cam_f = 1.55;
+    const LAT = 45.81 * Math.PI / 180, LON = 9.09;
+    const HOUR_OVERRIDE = null;
+    function sunNow() {
+      /* NOAA-style approximation: altitude and azimuth of the sun in Como */
+      const now = new Date();
+      let d = new Date(now);
+      let utcHours = now.getUTCHours() + now.getUTCMinutes() / 60 + now.getUTCSeconds() / 3600;
+      if (HOUR_OVERRIDE !== null) {                           /* local hour -> utc (Como is UTC+1/+2) */
+        const off = -new Date().getTimezoneOffset() / 60;
+        utcHours = HOUR_OVERRIDE - (Intl.DateTimeFormat('it-IT', { timeZone: 'Europe/Rome', timeZoneName: 'short' })
+          .formatToParts(now).find(p => p.type === 'timeZoneName').value.includes('+2') ? 2 : 1);
+      }
+      const start = Date.UTC(d.getUTCFullYear(), 0, 0);
+      const doy = (Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) - start) / 86400000;
+      const g = 2 * Math.PI / 365 * (doy - 1 + (utcHours - 12) / 24);
+      const eqt = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+      const decl = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+      const tst = (utcHours * 60 + eqt + 4 * LON) % 1440;
+      const ha = (tst / 4 - 180) * Math.PI / 180;
+      const alt = Math.asin(Math.sin(LAT) * Math.sin(decl) + Math.cos(LAT) * Math.cos(decl) * Math.cos(ha));
+      let az = Math.acos(((Math.sin(LAT) * Math.cos(ha) * Math.cos(decl)) - Math.cos(LAT) * Math.sin(decl)) / Math.cos(alt) * -1 + 0) ;
+      az = Math.atan2(Math.sin(ha), Math.cos(ha) * Math.sin(LAT) - Math.tan(decl) * Math.cos(LAT)) + Math.PI;  /* from north, clockwise */
+      return { alt, az };
     }
-    resize();
-    addEventListener('resize', resize);
+    let sun = sunNow();
+    setInterval(() => { sun = sunNow(); }, 30000);
 
-    // camera fissa, leggermente dall'alto
-    const cam = { y: 0.75, f: 1.55 };
-    const TOUCH = matchMedia('(hover: none)').matches;
-    const AMP = TOUCH ? 1.35 : 1;      // su touch onda più visibile
-    let lastTouch = -1e9;              // ultimo tocco reale
-    const K = () => cam.f * H * 0.62;      // fattore di proiezione
-    const pointer = { x: 0, z: 0, s: 0 }; // punto in scena e forza del ripple
-    let ripple = 0;
-
-    function toScene(clientX, clientY) {
-      // proiezione inversa approssimata del cursore sul piano y=0
-      const off = Math.max(0.02, clientY / innerHeight - 0.5);
-      const pz = Math.min(10.4, cam.y * cam.f * 0.62 / off);
-      pointer.z = pz - 0.4;
-      pointer.x = (clientX - innerWidth / 2) * pz / (cam.f * 0.62 * innerHeight);
-      pointer.s = 1;
+    function relief(x, z) {
+      const d1 = 1 - Math.abs(Math.sin(0.30 * x + 0.16 * z + 0.6 * Math.sin(0.28 * z)));
+      return 0.9 * Math.pow(d1, 1.5) + 0.22 * Math.sin(0.9 * x - 0.55 * z + 1.3) + 0.10 * Math.sin(2.1 * x + 1.6 * z);
     }
-
-    // senza mouse (o dopo 3 s senza tocchi) un punto di pressione vaga da solo sul piano
-    function autoPointer(t) {
-      const k = t * 0.00022 * SPEED;
-      pointer.x = Math.sin(k * 1.3) * (XR * 0.28);
-      pointer.z = 2.6 + (Math.sin(k * 0.9 + 1.7) * 0.5 + 0.5) * 3.5;
-      pointer.s += (0.9 - pointer.s) * 0.02;
-      if (Math.sin(k * 0.45) > 0.995 && ripple < 0.05) ripple = 1;
+    const pointer = { x: 0, z: 0, s: 0 };
+    let ripple = 0, lastTouch = -1e9;
+    function surface(x, z, t) {
+      /* the dune, plus a slow sand ripple and the soft print of the pointer */
+      const dx = x - pointer.x, dz = z - pointer.z, d = Math.sqrt(dx * dx + dz * dz);
+      /* sand ripples that travel with the wind, and a slow breath of the dunes themselves */
+      return relief(x, z)
+        + 0.085 * Math.sin(3.6 * x + 2.4 * z + t * 0.55)
+        + 0.045 * Math.sin(5.1 * x - 1.7 * z - t * 0.8)
+        + 0.07 * Math.sin(0.7 * x - 0.35 * z + t * 0.22)
+        - Math.exp(-d * d * 1.6) * 0.32 * pointer.s;
     }
-
-    // colori precalcolati (16 livelli di alpha per ciascuna tinta)
-    const LEVELS = 16;
-    const PAL_INK = [], PAL_ACC = [];
-    for (let i = 0; i < LEVELS; i++) {
-      const a = (i + 1) / LEVELS;
-      PAL_INK.push(`rgba(239,230,216,${a.toFixed(3)})`);
-      PAL_ACC.push(`rgba(242,179,107,${a.toFixed(3)})`);
+    function light() {
+      /* light direction in scene space: +x east, +z north (away), +y up */
+      const alt = sun.alt, az = sun.az;
+      const day = Math.max(0, Math.min(1, (alt + 0.06) / 0.20));           /* 0 at night .. 1 in full day */
+      const a = alt > -0.05 ? alt : 0.45;                                   /* at night, a high faint moon */
+      const l = [Math.cos(a) * Math.sin(az), Math.sin(a), Math.cos(a) * Math.cos(az)];
+      const golden = Math.max(0, 1 - Math.max(0, alt) / 0.5);                /* low sun = warm */
+      return { l, day, golden, alt, az };
     }
-
-    let lastT = 0;
-
-    function frame(t) {
-      const dt = Math.min(100, t - lastT); lastT = t;
-
-      autoPointer(t);
-      ripple *= 0.985;
-
-      ctx.fillStyle = '#0C0907';
-      ctx.fillRect(0, 0, W, H);
-
-      const time = t * 0.00035 * SPEED;
-      const cx = W / 2, cy = H / 2;
-
-      // disegno dal fondo verso il davanti
+    function cell(c, r, t) {
+      const x = ((c / (COLS - 1)) - 0.5) * XR, z = 0.6 + (r / ROWS) * 9.4;
+      const y = surface(x, z, t) * 0.34 - 0.12;
+      const pz = z + 0.4;
+      return { sx: cx + (x / pz) * K, sy: cy - ((y - cam_y) / pz) * K, y, depth: 1 - r / ROWS, r, x, z };
+    }
+    function drawWave(t) {
+      const L = light();
+      const e = 0.004;
+      const inkHi = [239, 230, 216], amb = [242, 179, 107];
       for (let r = ROWS - 1; r >= 0; r--) {
-        const z = 0.6 + (r / ROWS) * 9.4;              // parte sotto il bordo inferiore, così non si stacca mai
         for (let c = 0; c < COLS; c++) {
-          const x = ((c / (COLS - 1)) - 0.5) * XR;   // larghezza -XR/2 .. XR/2
-
-          // superficie: due onde incrociate + un'increspatura dal cursore
-          const near = Math.min(1, (r / ROWS) * 3.5);   // le prime file restano piatte: il bordo inferiore non si scopre mai
-          const amp = (0.95 - (r / ROWS) * 0.6) * AMP * near; // il fondo si calma, così non si aggroviglia
-          let y = (Math.sin(x * 0.32 + time * 1.4) * 0.16
-                + Math.sin(z * 0.55 - time * 1.1) * 0.14
-                + Math.sin((x + z) * 0.22 + time * 0.7) * 0.10) * amp;
-
-          const dx = x - pointer.x, dz = z - pointer.z;
-          const d = Math.sqrt(dx * dx + dz * dz);
-          y += Math.exp(-d * d * 1.6) * 0.35 * pointer.s;
-          y += Math.sin(d * 6 - t * 0.008) * Math.exp(-d * 0.9) * 0.12 * ripple;
-
-          // proiezione prospettica
-          const pz = z + 0.4;                    // distanza dalla camera
-          const py = y - cam.y;
-          const sx = cx + (x / pz) * K();
-          const sy = cy - (py / pz) * K();
-
-          if (sy < -10 || sy > H + 10 || sx < -10 || sx > W + 10) continue;
-
-          const depth = 1 - r / ROWS;                       // 1 vicino, 0 lontano
-          const lift = Math.max(0, y + 0.25);               // le creste brillano
-          const far = Math.min(1, (1 - r / ROWS) * 4);  // dissolvenza sull'orizzonte
-          const a = (0.12 + depth * 0.45 + lift * 0.6) * far;
-          const size = (0.6 + depth * 1.2 + lift * 1.0) * DPR;
-
-          if (a < 0.04) continue;
-          const idx = Math.min(LEVELS - 1, (a * LEVELS) | 0);
-          ctx.fillStyle = lift > 0.42 ? PAL_ACC[idx] : PAL_INK[idx];
-          ctx.fillRect(sx - size / 2, sy - size / 2, size, size);
+          const p = cell(c, r, t);
+          if (p.sy < -10 || p.sy > H + 10 || p.sx < -10 || p.sx > W + 10) continue;
+          /* normal by finite differences */
+          const hx = surface(p.x + e, p.z, t) - surface(p.x - e, p.z, t);
+          const hz = surface(p.x, p.z + e, t) - surface(p.x, p.z - e, t);
+          let nx = -hx / (2 * e), ny = 1, nz = -hz / (2 * e);
+          const nl = Math.sqrt(nx * nx + ny * ny + nz * nz); nx /= nl; ny /= nl; nz /= nl;
+          const lam = Math.max(0, nx * L.l[0] + ny * L.l[1] + nz * L.l[2]);
+          const far = Math.min(1, (1 - p.r / ROWS) * 4);
+          const dayI = 0.12 + 0.78 * lam, nightI = 0.09 + 0.24 * lam;
+          const inten = (nightI + (dayI - nightI) * L.day) * far * waveA;
+          if (inten < 0.035) continue;
+          const warm = L.day * L.golden * lam;
+          const col = [0, 1, 2].map(i => Math.round(inkHi[i] + (amb[i] - inkHi[i]) * warm));
+          const size = (0.6 + p.depth * 1.3 + lam * 0.5) * DPR;
+          ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${Math.min(1, inten).toFixed(3)})`;
+          ctx.fillRect(p.sx - size / 2, p.sy - size / 2, size, size);
         }
       }
-
-      requestAnimationFrame(frame);
+      /* the sky at the horizon glows where the sun is, warm and low */
+      const glowI = (L.day * L.golden * 0.9 + (1 - L.day) * 0.08) ;
+      if (glowI > 0.02) {
+        const gx = cx + Math.sin(L.az) * W * 0.42;
+        const hy = cy - ((surface(0, 10, t) * 0.34 - 0.12 - cam_y) / 10.4) * K;
+        const g = ctx.createRadialGradient(gx, hy, 0, gx, hy, W * 0.36);
+        g.addColorStop(0, `rgba(242,179,107,${(0.22 * glowI).toFixed(3)})`);
+        g.addColorStop(1, 'rgba(242,179,107,0)');
+        ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      }
     }
 
+    function resize() {
+      W = canvas.width = Math.round(innerWidth * DPR);
+      H = canvas.height = Math.round(canvas.clientHeight * DPR);
+      cx = W / 2; cy = H * 0.42;
+      mobile = innerWidth <= 768;
+      COLS = mobile ? 110 : 170; ROWS = mobile ? 34 : 44;
+      XR = 20 * Math.max(0.4, Math.min(1, (innerWidth / (canvas.clientHeight * 2.4)) / 1.6));
+      K = cam_f * H * 1.15;
+    }
+    addEventListener('resize', resize); resize();
+    let t0 = null;
+    function frame(ts) {
+      if (t0 === null) t0 = ts;
+      const t = (ts - t0) * 0.00035;
+      ctx.fillStyle = '#0C0907'; ctx.fillRect(0, 0, W, H);
+      drawWave(t);
+      requestAnimationFrame(frame);
+    }
     requestAnimationFrame(frame);
+  })();
 </script>
 </body>
 </html>
