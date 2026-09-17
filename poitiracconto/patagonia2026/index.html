@@ -52,6 +52,7 @@
     --split: 50;
   }
   *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   body {
@@ -317,134 +318,36 @@
   h2 i { font-style: italic; }
   .lede { font-size: 18px; color: var(--ivory-2); max-width: 600px; margin: 0 0 44px; }
 
-  /* stato del viaggio */
-  .stato {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 26px;
-    align-items: center;
-    padding: 30px 0 34px;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  @media (max-width: 560px) { .stato { grid-template-columns: 1fr; gap: 10px; } }
-  .stato .num {
-    font-family: var(--display);
-    font-size: clamp(76px, 15vw, 128px);
-    line-height: 0.85;
-    font-variant-numeric: tabular-nums;
-    background: linear-gradient(120deg, var(--glacier), var(--lagoon) 60%, var(--dawn));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .stato .txt { font-size: 19px; line-height: 1.45; }
-  .stato .txt p { margin: 0; }
-  .stato .txt .sec { color: var(--ivory-2); font-size: 15px; margin-top: 8px; font-variant-numeric: tabular-nums; }
-  .orologi {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-top: 34px;
-  }
-  @media (max-width: 520px) { .orologi { grid-template-columns: 1fr; gap: 12px; } }
-  .orologio .luogo { font-size: 13.5px; color: var(--ivory-3); }
-  .orologio .ora {
-    font-family: var(--display);
-    font-size: 34px;
-    line-height: 1.1;
-    font-variant-numeric: tabular-nums;
-    margin-top: 2px;
-  }
-  .orologio.freddo .ora { color: var(--glacier); }
-  .orologio.caldo .ora { color: var(--lagoon); }
-
-  /* la rotta del diario */
-  .rotta {
-    position: relative;
-    padding-left: 44px;
-    margin-top: 10px;
-  }
-  .rotta::before {
-    content: '';
-    position: absolute;
-    left: 10px; top: 14px; bottom: 14px;
-    width: 2px;
-    border-radius: 2px;
-    background: linear-gradient(to bottom, var(--glacier) 0%, var(--glacier) 38%, var(--lagoon) 62%, var(--dawn) 100%);
-  }
-  .tappa {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 20px;
-    align-items: baseline;
-    padding: 22px 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .tappa:last-child { border-bottom: none; }
-  .tappa::before {
-    content: '';
-    position: absolute;
-    left: -39px; top: 30px;
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    background: var(--night);
-    border: 2px solid var(--glacier);
-    box-shadow: 0 0 0 4px var(--night);
-  }
-  .tappa.caldo::before { border-color: var(--lagoon); }
-  .tappa.volo::before { border-color: var(--ivory-2); }
-  .tappa .luogo {
-    font-family: var(--display);
-    font-size: clamp(26px, 4vw, 34px);
-    line-height: 1.1;
-  }
-  .tappa .quando { font-size: 14.5px; color: var(--ivory-2); margin-top: 4px; }
-  .tappa .quando span { color: var(--ivory-3); }
-  .tappa .stato-tappa {
-    font-size: 13.5px;
-    color: var(--ivory-3);
-    white-space: nowrap;
-    border: 1px solid var(--line);
-    border-radius: 100px;
-    padding: 5px 13px;
-  }
-  .tappa .stato-tappa.oggi {
-    color: var(--night);
-    background: var(--dawn);
-    border-color: var(--dawn);
-    font-weight: 400;
-  }
-  @media (max-width: 480px) {
-    .tappa { grid-template-columns: 1fr; gap: 8px; }
-  }
-
-  /* rimandi */
-  .rimandi { display: grid; gap: 0; }
-  .rimando {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 20px;
-    padding: 26px 0;
-    border-bottom: 1px solid var(--line);
-    transition: padding-left 0.3s;
-  }
-  .rimando:first-child { border-top: 1px solid var(--line); }
-  .rimando:hover { padding-left: 10px; }
-  .rimando .t { font-family: var(--display); font-size: clamp(28px, 4.4vw, 40px); line-height: 1.05; }
-  .rimando .s { font-size: 15px; color: var(--ivory-2); margin-top: 4px; }
-  .rimando .go {
-    width: 46px; height: 46px;
-    border-radius: 50%;
-    border: 1px solid var(--line);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--ivory-2);
-    transition: background 0.25s, color 0.25s, border-color 0.25s;
-  }
-  .rimando:hover .go { background: var(--ivory); color: var(--night); border-color: var(--ivory); }
-  .rimando .go svg { width: 18px; height: 18px; }
+  /* il diario */
+  #diario { padding: 64px 0 40px; }
+  .fusi { display: flex; flex-wrap: wrap; gap: 6px 0; margin: -6px 0 22px; font-size: 14.5px; color: var(--ivory-3); }
+  .fusi span { padding-right: 14px; margin-right: 14px; border-right: 1px solid var(--line); white-space: nowrap; }
+  .fusi span:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .fusi b { font-weight: 400; color: var(--ivory-2); font-variant-numeric: tabular-nums; margin-left: 5px; }
+  .diario-nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 8px; }
+  .diario-nav a { font-size: 14px; color: var(--ivory-2); border: 1px solid var(--line); border-radius: 100px; padding: 6px 13px; transition: color 0.2s, border-color 0.2s; }
+  .diario-nav a:hover { color: var(--ivory); border-color: var(--ivory-2); }
+  .giornata { padding: 56px 0 48px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--head-h) + 16px); }
+  .giornata:last-of-type { border-bottom: none; }
+  .g-head { margin-bottom: 22px; }
+  .g-data { display: flex; align-items: center; gap: 12px; font-size: 14.5px; color: var(--ivory-2); }
+  .g-data::before { content: ''; width: 26px; height: 1px; background: var(--glacier); flex-shrink: 0; }
+  .giornata.caldo .g-data::before { background: var(--lagoon); }
+  .giornata.volo .g-data::before { background: var(--dawn); }
+  .g-luogo { font-family: var(--display); font-size: clamp(32px, 6vw, 48px); line-height: 1.05; margin-top: 8px; }
+  .g-foto { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 0 14px; margin: 0 0 18px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .g-foto a { flex: 0 0 auto; scroll-snap-align: start; }
+  .g-foto img { height: 230px; width: auto; max-width: 84vw; object-fit: cover; display: block; border-radius: 4px; background: var(--night-2); }
+  @media (max-width: 560px) { .g-foto img { height: 190px; } }
+  .g-testo p { font-size: 17.5px; line-height: 1.72; color: rgba(243,241,234,0.88); margin: 0 0 20px; max-width: 680px; }
+  .g-testo p:last-child { margin-bottom: 0; }
+  .g-testo b { font-weight: 500; color: var(--ivory); }
+  .g-testo i { font-style: italic; }
+  .g-testo p:first-child::first-letter { font-family: var(--display); font-size: 3.1em; line-height: 0.8; float: left; margin: 6px 8px 0 0; color: var(--ivory); }
+  .lightbox { position: fixed; inset: 0; background: rgba(6,20,35,0.96); z-index: 120; display: none; align-items: center; justify-content: center; padding: 28px; cursor: zoom-out; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 100%; max-height: 100%; }
+  .lb-close { position: absolute; top: 14px; right: 14px; background: none; border: none; color: var(--ivory); font-size: 34px; cursor: pointer; width: 46px; height: 46px; }
 
   /* ═══ FOOTER ═══ */
   footer {
@@ -719,89 +622,52 @@
   <div class="hero-hint" id="hint"><b>Trascina le fedi</b> per attraversare i due mondi</div>
 </section>
 
-<!-- ═══ DOVE SIAMO ═══ -->
-<section id="stato">
-  <div class="wrap">
-    <h2>Dove siamo <i>adesso</i></h2>
-    <p class="lede">Questa riga si aggiorna da sola: prima della partenza conta i giorni, durante il viaggio dice in quale tappa ci troviamo.</p>
-
-    <div class="stato">
-      <div class="num" id="st-num">–</div>
-      <div class="txt">
-        <p id="st-main">Calcolo in corso</p>
-        <p class="sec" id="st-sec"></p>
-      </div>
-    </div>
-
-    <div class="orologi">
-      <div class="orologio"><div class="luogo">Como</div><div class="ora" id="clk-como">–:–</div></div>
-      <div class="orologio freddo"><div class="luogo">Buenos Aires, cinque ore indietro</div><div class="ora" id="clk-ba">–:–</div></div>
-      <div class="orologio caldo"><div class="luogo">Papeete, dodici ore indietro</div><div class="ora" id="clk-ppt">–:–</div></div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══ IL DIARIO ═══ -->
 <section id="diario">
   <div class="wrap">
-    <h2>Il diario, <i>tappa per tappa</i></h2>
-    <p class="lede">Per ora le pagine sono bianche. Le scriveremo da laggiù, una tappa alla volta: la prima da Buenos Aires la sera del 15 settembre, l'ultima sulla via di casa.</p>
+    <h2>Il diario, <i>giorno per giorno</i></h2>
+    <p class="fusi"><span>Como <b id="clk-como">–:–</b></span><span>Buenos Aires <b id="clk-ba">–:–</b></span><span>Papeete <b id="clk-ppt">–:–</b></span></p>
+    <nav class="diario-nav" aria-label="Salta al giorno">
+      <a href="#giorno-1">15 settembre</a>
+      <a href="#giorno-2">16 settembre</a>
+    </nav>
 
-    <div class="rotta" id="rotta">
-      <article class="tappa" data-from="2026-09-15" data-dove="a Buenos Aires" data-to="2026-09-18">
-        <div><div class="luogo">Buenos Aires</div><div class="quando">dal 15 al 18 settembre <span>· 34°S</span></div></div>
-        <span class="stato-tappa">Da scrivere</span>
-      </article>
-      <article class="tappa" data-from="2026-09-18" data-dove="a El Calafate" data-to="2026-09-22">
-        <div><div class="luogo">El Calafate</div><div class="quando">dal 18 al 22 settembre <span>· 50°S, il Perito Moreno</span></div></div>
-        <span class="stato-tappa">Da scrivere</span>
-      </article>
-      <article class="tappa" data-from="2026-09-22" data-dove="a Ushuaia" data-to="2026-09-24">
-        <div><div class="luogo">Ushuaia</div><div class="quando">dal 22 al 24 settembre <span>· 54°S, la fine del mondo</span></div></div>
-        <span class="stato-tappa">Da scrivere</span>
-      </article>
-      <article class="tappa volo" data-from="2026-09-24" data-dove="in volo sull&#39;oceano" data-to="2026-09-27">
-        <div><div class="luogo">La traversata</div><div class="quando">dal 24 al 27 settembre <span>· Buenos Aires, Lima, Los Angeles, Papeete</span></div></div>
-        <span class="stato-tappa">Da scrivere</span>
-      </article>
-      <article class="tappa caldo" data-from="2026-09-27" data-dove="a Taha&#39;a" data-to="2026-10-01">
-        <div><div class="luogo">Taha'a</div><div class="quando">dal 27 settembre al 1 ottobre <span>· 16°S, la suite sull'acqua</span></div></div>
-        <span class="stato-tappa">Da scrivere</span>
-      </article>
-      <article class="tappa caldo" data-from="2026-10-01" data-dove="a Bora Bora" data-to="2026-10-05">
-        <div><div class="luogo">Bora Bora</div><div class="quando">dal 1 al 5 ottobre <span>· 16°S, il monte Otemanu</span></div></div>
-        <span class="stato-tappa">Da scrivere</span>
-      </article>
-      <article class="tappa volo" data-from="2026-10-05" data-dove="sulla via di casa" data-to="2026-10-08">
-        <div><div class="luogo">La via di casa</div><div class="quando">dal 5 al 7 ottobre <span>· Papeete, Los Angeles, Parigi, Milano</span></div></div>
-        <span class="stato-tappa">Da scrivere</span>
-      </article>
-    </div>
-  </div>
-</section>
+    <article class="giornata" id="giorno-1" data-day="1">
+      <div class="g-head">
+        <div class="g-data">Giorno 1, martedì 15 settembre</div>
+        <div class="g-luogo">Milano, Parigi, Buenos Aires</div>
+      </div>
+      <div class="g-foto" hidden></div>
+      <div class="g-testo">
+        <p>La parte più difficile nell'organizzazione di questo viaggio è stata pensare a come <b>preparare i bagagli</b> in modo intelligente, dato che attraversiamo <b>quattro fasce climatiche differenti</b> e volevamo comunque viaggiare leggeri: sfida decisamente impegnativa, soprattutto per Lucrezia! Ad ogni modo, scollinata questa incombenza, è arrivato finalmente il momento: sveglia alle tre del mattino e alle 4:30 siamo a Linate, pronti a imbarcarci sul primo volo con scalo a Parigi (e colazione con un delizioso pain au chocolat) e <b>destinazione finale Buenos Aires</b>, dopo ben 13 ore e mezza nei cieli, per fortuna senza turbolenze di alcun tipo.</p>
+        <p>Atterriamo nella capitale argentina verso le 20:30 e ci accoglie un vento freddino, dal momento che qua è inverno, trovandoci nell'emisfero australe. Sbrighiamo rapidamente le pratiche doganali e, con immenso stupore, anche i nostri bagagli arrivano immediatamente. Usciti dall'aeroporto ci aspettano la nostra guida, <b>Giuliana</b>, di origine toscana, e il nostro autista per questi giorni, <b>Plinio</b>, di origine calabrese. Sono due persone sorridenti e accomodanti, soprattutto <b>Giuliana</b>, che ci trasmette energia ed entusiasmo durante il breve tragitto fino al nostro albergo, dove ci saluta dandoci appuntamento all'indomani mattina.</p>
+        <p>L'idea iniziale è quella di lasciare i bagagli in camera, farci una rapida doccia e poi uscire a fare due passi per iniziare a familiarizzare con i dintorni, ma una volta in camera crolliamo letteralmente in un sonno quasi istantaneo.</p>
+      </div>
+    </article>
 
-<!-- ═══ RIMANDI ═══ -->
-<section id="altro">
-  <div class="wrap">
-    <h2>Intanto, <i>si può sfogliare</i></h2>
-    <div class="rimandi">
-      <a class="rimando" href="programma.html">
-        <div><div class="t">Il programma</div><div class="s">L'itinerario giorno per giorno, dove dormiamo e cosa facciamo. Voli e trasferimenti hanno una pagina a parte.</div></div>
-        <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="rimando" href="galleria.html">
-        <div><div class="t">La galleria</div><div class="s">Le foto del viaggio. Vuota fino alla partenza, poi si riempie da sola.</div></div>
-        <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="rimando" href="contatti.html">
-        <div><div class="t">Scrivici</div><div class="s">Un saluto, un consiglio di rotta, un indirizzo da non perdere. Leggiamo tutto anche da laggiù.</div></div>
-        <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-    </div>
+    <article class="giornata" id="giorno-2" data-day="2">
+      <div class="g-head">
+        <div class="g-data">Giorno 2, mercoledì 16 settembre</div>
+        <div class="g-luogo">Buenos Aires</div>
+      </div>
+      <div class="g-foto" hidden></div>
+      <div class="g-testo">
+        <p>Riusciamo inaspettatamente a dormire fino alle 07:00 del mattino (mezzogiorno ora italiana, qui sono indietro di cinque ore), e ad attenderci c'è una deliziosa colazione al ristorante dell'hotel. Alle 09:30 <b>Giuliana</b> ci aspetta nella hall per iniziare un giro guidato di circa quattro ore. Prima tappa: <b>Plaza de Mayo</b>, probabilmente la piazza più iconica della città, che ospita diversi palazzi governativi tra cui la famosa <b>Casa Rosada</b>, un edificio dal colore rossastro che ospita l'ufficio del Presidente, e la <b>Catedral Metropolitana de Buenos Aires</b>, che ospita la tomba di <b>San Martín</b> (eroe nazionale e principale artefice dell'indipendenza argentina dalla Spagna) e di cui fu arcivescovo <b>Papa Francesco</b>. <b>Giuliana</b> parla un ottimo italiano, è veramente simpatica e molto preparata, e mentre ci racconta la storia del suo paese con alcuni aneddoti, noi ci perdiamo ad ammirare una gigantesca bandiera dell'<b>Argentina</b> che sventola su un pennone al centro della piazza, proprio davanti alla <b>Casa Rosada</b>.</p>
+        <p>Esaurita la nostra curiosità per la piazza, ci recupera <b>Plinio</b> in macchina e andiamo diretti verso il quartiere di <b>La Boca</b>, un quartiere popolare nato attorno al porto, celebre soprattutto per <b>Caminito</b>, la stradina-museo a cielo aperto con le case colorate in lamiera, e per essere la culla del club calcistico <b>Boca Juniors</b>, con lo stadio "<i>La Bombonera</i>" (non che noi siamo grandi appassionati, ma qua è praticamente una religione). Il quartiere è molto folkloristico e colorato, con casette basse e anche un po' precarie e balconcini decorati con statue di <b>Maradona</b> e <b>Messi</b>. Mentre ci gustiamo un ottimo caffè in un bar tipico nella via del <b>Caminito</b>, <b>Giuliana</b> ci spiega che questo quartiere così tanto turistico di giorno è assolutamente sconsigliato di sera e di notte, in quanto molto pericoloso a causa dell'elevata delinquenza locale.</p>
+        <p>Ci recupera <b>Plinio</b> con la macchina e inizia a guidare tornando verso nord, lasciandoci sconcertati dalla velocità con cui le favelas intorno a <b>La Boca</b> lasciano il posto, improvvisamente, ai moderni grattacieli e agli eleganti palazzi residenziali del quartiere di <b>Puerto Madero</b>, una delle zone più ricche e benestanti di tutta la città. Il viaggio prosegue costeggiando il Rio Darsena verso nord, fino al verdeggiante e meraviglioso quartiere di <b>Palermo</b>, noto per boutique, locali alla moda e vita notturna vivace: ospita anche ampi spazi verdi come i <i>Bosques de Palermo</i>, il <i>Giardino Giapponese</i> e il <i>Planetario</i>. In tutta la zona troviamo un mix di architetture francesi, nordeuropee e anche un po' italiane che la rendono estremamente affascinante. Visitiamo a seguire il <b>cimitero della Recoleta</b>, uno dei cimiteri monumentali più famosi al mondo, situato nell'omonimo, elegante quartiere di Buenos Aires: un vero e proprio labirinto di mausolei e statue in marmo che ospita le tombe di personaggi illustri argentini, tra cui la più visitata è quella di <b>Eva Perón</b> (Evita). <b>Plinio</b> a questo punto cambia direzione, rientrando senza fretta verso il nostro albergo, e <b>Giuliana</b> ci indica alcuni punti di interesse che programmiamo per la giornata di domani.</p>
+        <p>Nel pomeriggio siamo liberi, quindi ripartiamo a piedi alla volta di <b>San Telmo</b>, il quartiere più antico di Buenos Aires, noto per le sue strade acciottolate, l'architettura coloniale e l'atmosfera bohémien: famoso soprattutto per il mercato domenicale di antiquariato e artigianato lungo Defensa, e per essere una delle culle storiche del tango. Ci perdiamo senza fretta nel <b>Mercado de San Telmo</b>, un mercato coperto storico, costruito in ferro e vetro in stile Belle Époque: al suo interno convivono bancarelle di antiquariato, oggetti vintage e piccoli stand gastronomici, ed è un punto di ritrovo sia per i locali che per i turisti. È qui che facciamo il primo brindisi della vacanza, con un paio di birrette a stomaco vuoto che ci danno una botta di allegria! Ed è proprio con questo spirito allegro che rientriamo a piedi in albergo, ci sistemiamo e prendiamo un Uber per andare a cena da <b>Villegas</b>, una steak house nella zona di <b>Puerto Madero</b>, dove battezziamo la famosa carne argentina con una tagliata spettacolare. Restiamo sorpresi (e anche un po' emozionati) dalla cortesia dello staff che, quando ha scoperto che siamo in luna di miele, ci ha offerto delle ottime bollicine e ci ha omaggiato di una bottiglia di limoncello locale! La giornata si conclude così: rientriamo in hotel con Uber e buonanotte!</p>
+      </div>
+    </article>
   </div>
 </section>
 
 </main>
+
+<!-- lightbox per le foto del diario -->
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Foto ingrandita">
+  <button class="lb-close" id="lbclose" aria-label="Chiudi">×</button>
+  <img id="lbimg" src="" alt="" />
+</div>
 
 <footer>
   <a href="https://www.gioriva.it" aria-label="Gio Riva">
@@ -937,49 +803,7 @@
   else { requestAnimationFrame(frame); }
   window.addEventListener('resize', function () { applySplit(split); });
 
-  /* ── dove siamo ── */
-  var DEP = new Date('2026-09-15T06:25:00+02:00').getTime();
-  var RET = new Date('2026-10-07T13:55:00+02:00').getTime();
-  var stNum = document.getElementById('st-num'),
-      stMain = document.getElementById('st-main'),
-      stSec = document.getElementById('st-sec');
-  var tappe = Array.prototype.slice.call(document.querySelectorAll('.tappa'));
-
-  function pad(n) { return n < 10 ? '0' + n : '' + n; }
-  function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
-
-  function stato() {
-    var now = Date.now();
-    var oggiKey = ymd(new Date(now));
-    tappe.forEach(function (t) {
-      var tag = t.querySelector('.stato-tappa');
-      var attiva = now >= DEP && now <= RET && oggiKey >= t.dataset.from && oggiKey < t.dataset.to;
-      tag.classList.toggle('oggi', attiva);
-      tag.textContent = attiva ? 'Siamo qui' : 'Da scrivere';
-    });
-
-    if (now < DEP) {
-      var diff = DEP - now;
-      var d = Math.floor(diff / 86400000), h = Math.floor(diff / 3600000) % 24,
-          m = Math.floor(diff / 60000) % 60, s = Math.floor(diff / 1000) % 60;
-      stNum.textContent = d;
-      stMain.textContent = d === 1 ? 'giorno alla partenza da Linate' : 'giorni alla partenza da Linate';
-      stSec.textContent = 'più ' + h + ' ore, ' + m + ' minuti e ' + s + ' secondi';
-    } else if (now <= RET) {
-      var giorno = Math.floor((now - new Date('2026-09-15T00:00:00+02:00').getTime()) / 86400000) + 1;
-      var qui = tappe.filter(function (t) { return t.querySelector('.stato-tappa').classList.contains('oggi'); })[0];
-      stNum.textContent = giorno;
-      stMain.textContent = 'giorno di viaggio su ventitré' + (qui ? ', oggi siamo ' + qui.dataset.dove : '');
-      stSec.textContent = 'partiti il 15 settembre, si torna il 7 ottobre';
-    } else {
-      stNum.textContent = '23';
-      stMain.textContent = 'giorni di viaggio, tutti da rileggere';
-      stSec.textContent = 'siamo tornati il 7 ottobre 2026';
-    }
-  }
-  stato(); setInterval(stato, 1000);
-
-  /* ── orologi ── */
+  /* ── le tre ore ── */
   function fmt(tz) {
     try { return new Intl.DateTimeFormat('it-IT', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date()); }
     catch (e) { return '–:–'; }
@@ -990,6 +814,34 @@
     document.getElementById('clk-ppt').textContent = fmt('Pacific/Tahiti');
   }
   clocks(); setInterval(clocks, 15000);
+
+  /* ── le foto di ogni giorno ──
+     album: https://gioriva.github.io/album/patagonia2026/ (nessuna sottocartella)
+     file numerati in ordine progressivo (001.jpg, 002.jpg, ...) e un manifest.json:
+       { "photos": [ { "file": "001.jpg", "day": 1, "caption": "..." }, ... ] }
+     ogni foto viene mostrata nel giorno indicato da "day". */
+  var ALBUM_BASE = 'https://gioriva.github.io/album/patagonia2026/';
+  var lb = document.getElementById('lightbox'), lbimg = document.getElementById('lbimg'), lbclose = document.getElementById('lbclose');
+  function openLb(src, alt) { lbimg.src = src; lbimg.alt = alt || 'Foto del viaggio'; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeLb() { lb.classList.remove('open'); lbimg.src = ''; document.body.style.overflow = ''; }
+  lb.addEventListener('click', closeLb); lbclose.addEventListener('click', closeLb);
+  lbimg.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb.classList.contains('open')) closeLb(); });
+  fetch(ALBUM_BASE + 'manifest.json', { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw new Error('no manifest'); return r.json(); })
+    .then(function (data) {
+      var list = Array.isArray(data) ? data : (data.photos || []);
+      list.forEach(function (item) {
+        if (typeof item === 'string' || !item.day) return;
+        var box = document.querySelector('.giornata[data-day="' + item.day + '"] .g-foto');
+        if (!box) return;
+        var src = ALBUM_BASE + item.file, a = document.createElement('a'), img = document.createElement('img');
+        a.href = src; img.src = src; img.alt = item.caption || 'Foto del giorno ' + item.day; img.loading = 'lazy';
+        a.appendChild(img); a.addEventListener('click', function (e) { e.preventDefault(); openLb(src, item.caption); });
+        box.appendChild(a); box.hidden = false;
+      });
+    })
+    .catch(function () {});
 })();
 </script>
 </body>
