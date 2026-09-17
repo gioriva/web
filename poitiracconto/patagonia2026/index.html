@@ -338,7 +338,11 @@
   .g-foto { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 0 14px; margin: 0 0 18px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
   .g-foto a { flex: 0 0 auto; scroll-snap-align: start; }
   .g-foto img { height: 230px; width: auto; max-width: 84vw; object-fit: cover; display: block; border-radius: 4px; background: var(--night-2); }
-  @media (max-width: 560px) { .g-foto img { height: 190px; } }
+  .g-more { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; height: 230px; width: 150px; border: 1px solid var(--line); border-radius: 4px; text-align: center; color: var(--ivory-2); transition: border-color 0.2s, color 0.2s; }
+  .g-more:hover { border-color: var(--ivory-2); color: var(--ivory); }
+  .g-more b { font-family: var(--display); font-weight: 400; font-size: 40px; line-height: 1; }
+  .g-more span { font-size: 13px; line-height: 1.35; }
+  @media (max-width: 560px) { .g-foto img { height: 190px; } .g-more { height: 190px; width: 130px; } .g-more b { font-size: 34px; } }
   .g-testo p { font-size: 17.5px; line-height: 1.72; color: rgba(243,241,234,0.88); margin: 0 0 20px; max-width: 680px; }
   .g-testo p:last-child { margin-bottom: 0; }
   .g-testo b { font-weight: 500; color: var(--ivory); }
@@ -831,14 +835,27 @@
     .then(function (r) { if (!r.ok) throw new Error('no manifest'); return r.json(); })
     .then(function (data) {
       var list = Array.isArray(data) ? data : (data.photos || []);
+      var MAX = 5, conteggio = {};
       list.forEach(function (item) {
         if (typeof item === 'string' || !item.day) return;
         var box = document.querySelector('.giornata[data-day="' + item.day + '"] .g-foto');
         if (!box) return;
+        conteggio[item.day] = (conteggio[item.day] || 0) + 1;
+        if (conteggio[item.day] > MAX) return;
         var src = ALBUM_BASE + item.file, a = document.createElement('a'), img = document.createElement('img');
         a.href = src; img.src = src; img.alt = item.caption || 'Foto del giorno ' + item.day; img.loading = 'lazy';
         a.appendChild(img); a.addEventListener('click', function (e) { e.preventDefault(); openLb(src, item.caption); });
         box.appendChild(a); box.hidden = false;
+      });
+      /* se ce ne sono altre, l'ultima tessera rimanda alla galleria */
+      Object.keys(conteggio).forEach(function (day) {
+        var extra = conteggio[day] - MAX;
+        if (extra <= 0) return;
+        var box = document.querySelector('.giornata[data-day="' + day + '"] .g-foto');
+        var a = document.createElement('a');
+        a.className = 'g-more'; a.href = 'galleria.html#giorno-' + day;
+        a.innerHTML = '<b>+' + extra + '</b><span>' + (extra === 1 ? 'altra foto' : 'altre foto') + '<br>in galleria</span>';
+        box.appendChild(a);
       });
     })
     .catch(function () {});
