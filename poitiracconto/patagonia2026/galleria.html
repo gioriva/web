@@ -109,6 +109,12 @@
   .cornice .did small { display: block; font-family: var(--sans); font-style: normal; font-size: 11.5px; color: #7a8089; margin-top: 2px; }
 
   /* griglia vera */
+  .giorni-nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 34px; }
+  .giorni-nav a { font-size: 14.5px; color: var(--ivory-2); border: 1px solid var(--line); border-radius: 100px; padding: 7px 15px; white-space: nowrap; transition: color 0.2s, border-color 0.2s, background 0.2s; }
+  .giorni-nav a:hover { color: var(--ivory); border-color: var(--ivory-2); }
+  .giorni-nav a.attivo { color: var(--night); background: var(--ivory); border-color: var(--ivory); }
+  .giorni-nav a span { color: var(--ivory-3); margin-left: 6px; font-size: 13px; }
+  .giorni-nav a.attivo span { color: rgba(6,20,35,0.6); }
   .giorno-foto { padding-bottom: 54px; scroll-margin-top: calc(var(--head-h) + 16px); }
   .giorno-foto:last-child { padding-bottom: 80px; }
   .g-titolo { font-family: var(--display); font-weight: 400; font-style: italic; font-size: clamp(22px, 3.6vw, 30px); margin: 0 0 16px; color: var(--ivory-2); }
@@ -147,8 +153,8 @@
 <main>
 <div class="wrap">
   <div class="intro">
-    <h1>Le foto <i>arriveranno</i></h1>
-    <p class="lede">Qui finiranno il Perito Moreno, il faro della fine del mondo e la laguna di Bora Bora. Le prime dal 15 settembre, caricate direttamente dal viaggio.</p>
+    <h1 id="g-h1">Le foto <i>arriveranno</i></h1>
+    <p class="lede" id="g-lede">Qui finiranno il Perito Moreno, il faro della fine del mondo e la laguna di Bora Bora. Le prime dal 15 settembre, caricate direttamente dal viaggio.</p>
   </div>
 
   <div class="cornici" id="empty">
@@ -163,6 +169,7 @@
   </div>
   <p class="album-nota" id="empty-note">Le foto caricate nell'album del viaggio compariranno qui da sole, senza toccare questa pagina.</p>
 
+  <nav class="giorni-nav" id="giorni-nav" aria-label="Vai al giorno" hidden></nav>
   <div id="grid" hidden></div>
 </div>
 </main>
@@ -233,8 +240,30 @@
       });
       sez.appendChild(g); grid.appendChild(sez);
     });
+    var nav = document.getElementById('giorni-nav'); nav.innerHTML = '';
+    ordine.forEach(function (day) {
+      if (!day) return;
+      var a = document.createElement('a'); a.href = '#giorno-' + day;
+      var d = new Date(Date.UTC(2026, 8, 15 + (day - 1)));
+      a.innerHTML = 'Giorno ' + day + '<span>' + d.getUTCDate() + ' ' + MESI[d.getUTCMonth()].slice(0, 3) + '</span>';
+      a.addEventListener('click', function (e) { e.preventDefault(); var t = document.getElementById('giorno-' + day); if (t) { t.scrollIntoView({ behavior: 'smooth' }); history.replaceState(null, '', '#giorno-' + day); } });
+      nav.appendChild(a);
+    });
+    if (nav.children.length) {
+      nav.hidden = false;
+      var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) links.forEach(function (l) { l.classList.toggle('attivo', l.getAttribute('href') === '#' + en.target.id); });
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      grid.querySelectorAll('.giorno-foto[id]').forEach(function (s) { io.observe(s); });
+    }
     if (grid.children.length) {
       empty.hidden = true; note.hidden = true; grid.hidden = false;
+      var tot = grid.querySelectorAll('img').length;
+      document.getElementById('g-h1').innerHTML = 'Le foto, <i>giorno per giorno</i>';
+      document.getElementById('g-lede').textContent = tot + ' foto in ' + ordine.filter(function (d) { return d; }).length + ' giornate, caricate direttamente dal viaggio. Scegli un giorno per saltare alle sue foto.';
       if (location.hash) { var target = document.querySelector(location.hash); if (target) setTimeout(function () { target.scrollIntoView(); }, 50); }
     }
   }
