@@ -1,277 +1,987 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="robots" content="noindex, nofollow" />
-<title>Galleria · Patagonia & Polinesia 2026</title>
-<meta name="theme-color" content="#061423" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Ccircle cx='32' cy='32' r='30'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23c)'%3E%3Crect width='64' height='64' fill='%23061423'/%3E%3Cpolygon points='38,0 64,0 64,64 26,64' fill='%2323b3b0'/%3E%3Ccircle cx='50' cy='24' r='7' fill='%23ffd29a'/%3E%3Cpolygon points='0,48 12,32 22,44 32,26 40,44 40,64 0,64' fill='%230e2c44'/%3E%3Ccircle cx='16' cy='16' r='1.8' fill='%23fff'/%3E%3Ccircle cx='24' cy='24' r='1.3' fill='%23fff'/%3E%3Ccircle cx='9' cy='27' r='1.3' fill='%23fff'/%3E%3Ccircle cx='19' cy='8' r='1.1' fill='%23fff'/%3E%3C/g%3E%3Ccircle cx='32' cy='32' r='30' fill='none' stroke='%23f3f1ea' stroke-width='2.5'/%3E%3C/svg%3E" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="color-scheme" content="light" />
+  <title>Poi ti racconto | Galleria</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fdf8ee'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23c4502f' stroke-width='2.8'/%3E%3Cellipse cx='32' cy='32' rx='8.5' ry='19' fill='none' stroke='%23c4502f' stroke-width='2.2'/%3E%3Cpath d='M13 32h38M16.5 22h31M16.5 42h31' stroke='%23c4502f' stroke-width='2.2' fill='none'/%3E%3C/svg%3E">
 
-<!-- Google Analytics (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-1ZCCJ6QBR4');
-</script>
+  <meta property="og:title" content="Poi ti racconto | Galleria" />
+  <meta property="og:description" content="Gli album fotografici di tutti i viaggi, raccolti in un posto solo" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.gioriva.it/poitiracconto/galleria.html" />
+  <meta property="og:image" content="https://www.gioriva.it/poitiracconto/og-poitiracconto.png" />
+  <meta name="description" content="Gli album fotografici di tutti i viaggi, raccolti in un posto solo" />
 
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Galleria · Patagonia & Polinesia 2026" />
-<meta property="og:description" content="Le foto del nostro viaggio di nozze, dalla fine del mondo alla laguna." />
-<meta property="og:image" content="https://www.gioriva.it/poitiracconto/patagonia2026/og-viaggio.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://www.gioriva.it/poitiracconto/patagonia2026/galleria.html" />
-<meta property="og:locale" content="it_IT" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Galleria · Patagonia & Polinesia 2026" />
-<meta name="twitter:description" content="Le foto del nostro viaggio di nozze." />
-<meta name="twitter:image" content="https://www.gioriva.it/poitiracconto/patagonia2026/og-viaggio.png" />
+  <!-- Google Analytics (GA4) con Consent Mode v2 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --night: #061423; --night-2: #0b1d30;
-    --ivory: #f3f1ea; --ivory-2: rgba(243,241,234,0.7); --ivory-3: rgba(243,241,234,0.42);
-    --line: rgba(243,241,234,0.13); --panel: rgba(243,241,234,0.045);
-    --glacier: #8fd0e6; --lagoon: #2fc9bd; --dawn: #ffbe8c;
-    --display: 'Bodoni Moda', 'Didot', 'Bodoni 72', serif;
-    --sans: 'Jost', 'Futura', system-ui, sans-serif;
-    --head-h: 64px;
-  }
-  *, *::before, *::after { box-sizing: border-box; }
-  [hidden] { display: none !important; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--night); color: var(--ivory); font-family: var(--sans); font-weight: 300; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-  ::selection { background: var(--dawn); color: var(--night); }
-  a { color: inherit; text-decoration: none; }
-  :focus-visible { outline: 2px solid var(--dawn); outline-offset: 4px; border-radius: 2px; }
-  button { font-family: inherit; }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-  header.bar { position: fixed; top: 0; left: 0; right: 0; height: var(--head-h); z-index: 90; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 22px; background: rgba(6,20,35,0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-  .brand { font-family: var(--display); font-size: 21px; color: var(--ivory); white-space: nowrap; }
-  .brand i { font-style: italic; }
-  .burger { width: 46px; height: 46px; border: 1px solid rgba(243,241,234,0.35); background: rgba(6,20,35,0.35); border-radius: 50%; cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
-  .burger span { display: block; width: 18px; height: 1.5px; background: var(--ivory); border-radius: 1px; transition: transform 0.3s, opacity 0.3s; }
-  .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-  .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-  .scrim { position: fixed; inset: 0; background: rgba(2,8,16,0.6); z-index: 95; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-  .scrim.open { opacity: 1; pointer-events: auto; }
-  .drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(340px, 86vw); z-index: 96; background: var(--night-2); border-left: 1px solid var(--line); transform: translateX(102%); transition: transform 0.4s cubic-bezier(.3,.8,.3,1); display: flex; flex-direction: column; padding: 26px 0 22px; overflow-y: auto; }
-  .drawer.open { transform: translateX(0); }
-  @media (prefers-reduced-motion: reduce) { .drawer, .scrim { transition: none; } }
-  .d-head { display: flex; justify-content: space-between; align-items: center; padding: 0 26px 18px; border-bottom: 1px solid var(--line); }
-  .d-head .t { font-size: 13px; color: var(--ivory-3); }
-  .d-close { background: none; border: none; color: var(--ivory); font-size: 26px; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; line-height: 1; }
-  .drawer nav { padding: 14px 0; flex-grow: 1; }
-  .d-link { display: block; padding: 16px 26px; border-left: 2px solid transparent; transition: background 0.2s, border-color 0.2s; }
-  .d-link:hover { background: var(--panel); }
-  .d-link.active { border-left-color: var(--dawn); background: var(--panel); }
-  .d-link .place { font-family: var(--display); font-size: 25px; display: block; line-height: 1.15; }
-  .d-link .sub { font-size: 13px; color: var(--ivory-3); display: block; margin-top: 2px; }
-  .d-link.d-home { padding: 12px 26px; }
-  .d-link.d-home .place { font-size: 18px; color: var(--ivory-2); }
-  .d-sep { margin: 10px 26px; border: none; border-top: 1px solid var(--line); }
-  .d-foot { padding: 18px 26px 0; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ivory-3); line-height: 1.8; }
-  footer { border-top: 1px solid var(--line); padding: 32px 24px 44px; display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; }
-  footer a { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ivory-3); transition: color 0.2s; }
-  footer a:hover { color: var(--ivory); }
-  footer a svg { width: 15px; height: 15px; }
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-  main { padding-top: var(--head-h); }
-  .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
-  .intro { padding-top: 60px; padding-bottom: 44px; max-width: 780px; }
-  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 8.4vw, 84px); line-height: 0.96; margin: 0 0 20px; letter-spacing: -0.01em; }
-  h1 i { font-style: italic; }
-  .lede { font-size: 18px; color: var(--ivory-2); max-width: 600px; margin: 0; }
+    :root {
+      color-scheme: light;
+      --carta:   #fdf8ee;
+      --carta-2: #f6efe1;
+      --inchiostro: #23201c;
+      --grigio:  #6f675c;
+      --tenue:   #a89c8b;
+      --bordo:   #e3d9c6;
+      --rosso:   #c4502f;
+      --c-singapore: #d98b2b;
+      --c-giappone18:#c8493f;
+      --c-california:#3a7bb8;
+      --c-hkbali:    #2e9e6b;
+      --c-messico:   #e0662f;
+      --c-giappone26:#6b5fb5;
+      --c-patagonia: #17a2a2;
+    }
 
-  /* album vuoto: cornici dal ghiaccio all'alba */
-  .cornici { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; padding: 10px 0 70px; }
-  @media (max-width: 760px) { .cornici { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
-  .cornice {
-    aspect-ratio: 4 / 5;
-    padding: 10px 10px 30px;
-    background: var(--ivory);
-    transform: rotate(var(--tilt, 0deg));
-    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-    display: flex; flex-direction: column;
-  }
-  .cornice:nth-child(odd) { --tilt: -1.6deg; }
-  .cornice:nth-child(even) { --tilt: 1.3deg; }
-  .cornice:nth-child(3n) { --tilt: 0.6deg; }
-  .cornice .foto { flex-grow: 1; background: var(--tinta, #123); }
-  .cornice .did { font-family: var(--display); font-style: italic; color: #2a2f38; font-size: 16px; margin-top: 10px; line-height: 1.2; }
-  .cornice .did small { display: block; font-family: var(--sans); font-style: normal; font-size: 11.5px; color: #7a8089; margin-top: 2px; }
+    html { scroll-behavior:smooth; background:var(--carta); }
+    body {
+      background:transparent; color:var(--inchiostro);
+      font-family:'DM Sans', sans-serif; line-height:1.6;
+      overflow-x:hidden; min-height:100vh;
+      display:flex; flex-direction:column;
+    }
+    a { color:inherit; }
 
-  /* griglia vera */
-  .giorni-nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 34px; }
-  .giorni-nav a { font-size: 14.5px; color: var(--ivory-2); border: 1px solid var(--line); border-radius: 100px; padding: 7px 15px; white-space: nowrap; transition: color 0.2s, border-color 0.2s, background 0.2s; }
-  .giorni-nav a:hover { color: var(--ivory); border-color: var(--ivory-2); }
-  .giorni-nav a.attivo { color: var(--night); background: var(--ivory); border-color: var(--ivory); }
-  .giorni-nav a span { color: var(--ivory-3); margin-left: 6px; font-size: 13px; }
-  .giorni-nav a.attivo span { color: rgba(6,20,35,0.6); }
-  .giorno-foto { padding-bottom: 54px; scroll-margin-top: calc(var(--head-h) + 16px); }
-  .giorno-foto:last-child { padding-bottom: 80px; }
-  .g-titolo { font-family: var(--display); font-weight: 400; font-style: italic; font-size: clamp(22px, 3.6vw, 30px); margin: 0 0 16px; color: var(--ivory-2); }
-  .foto-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  @media (max-width: 700px) { .foto-grid { grid-template-columns: repeat(2, 1fr); } }
-  .foto-grid a { display: block; aspect-ratio: 1 / 1; overflow: hidden; background: var(--night-2); }
-  .foto-grid img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s; }
-  .foto-grid a:hover img { transform: scale(1.03); }
-  .lightbox { position: fixed; inset: 0; background: rgba(6,20,35,0.96); z-index: 120; display: none; align-items: center; justify-content: center; padding: 28px; cursor: zoom-out; }
-  .lightbox.open { display: flex; }
-  .lightbox img { max-width: 100%; max-height: 100%; }
-  .lb-close { position: absolute; top: 14px; right: 14px; background: none; border: none; color: var(--ivory); font-size: 34px; cursor: pointer; width: 46px; height: 46px; }
-  .album-nota { max-width: 560px; font-size: 15px; color: var(--ivory-3); margin: -40px 0 70px; }
-</style>
+    .sfondo {
+      position:fixed; inset:0; z-index:-2;
+      background-color:var(--carta);
+      background-image:
+        radial-gradient(ellipse 120% 70% at 50% -10%, #fff6e4 0%, rgba(253,248,238,0) 62%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+    .portolano {
+      position:fixed; inset:0; z-index:-1; pointer-events:none;
+      -webkit-mask-image:radial-gradient(ellipse 85% 75% at 50% 30%, #000 0%, rgba(0,0,0,.5) 62%, rgba(0,0,0,.25) 100%);
+      mask-image:radial-gradient(ellipse 85% 75% at 50% 30%, #000 0%, rgba(0,0,0,.5) 62%, rgba(0,0,0,.25) 100%);
+    }
+    .portolano svg { width:100%; height:100%; }
+    .alone {
+      position:fixed; z-index:-2; border-radius:50%;
+      pointer-events:none; filter:blur(10px); will-change:transform;
+    }
+    .alone-a {
+      width:44vw; height:44vw; left:-14vw; top:42vh;
+      background:radial-gradient(circle, rgba(23,162,162,.12) 0%, rgba(23,162,162,0) 68%);
+      animation:deriva 36s ease-in-out infinite;
+    }
+    .alone-b {
+      width:40vw; height:40vw; right:-10vw; top:-10vh;
+      background:radial-gradient(circle, rgba(224,102,47,.11) 0%, rgba(224,102,47,0) 68%);
+      animation:deriva2 44s ease-in-out infinite;
+    }
+    @keyframes deriva  { 0%,100% { transform:translate3d(0,0,0) } 50% { transform:translate3d(3vw,-2vh,0) } }
+    @keyframes deriva2 { 0%,100% { transform:translate3d(0,0,0) } 50% { transform:translate3d(-2.5vw,2.5vh,0) } }
+
+    /* ── barra e menu ── */
+    .barra {
+      max-width:1280px; width:100%; margin:0 auto;
+      padding:1.4rem 5vw;
+      display:flex; align-items:center; justify-content:flex-end;
+    }
+    .apri-menu {
+      width:44px; height:38px;
+      display:inline-flex; flex-direction:column; justify-content:center; gap:6px;
+      background:none; border:none; padding:0 4px; cursor:pointer;
+    }
+    .apri-menu span {
+      display:block; height:2px; border-radius:2px;
+      background:var(--inchiostro);
+      transition:background .25s, transform .3s, width .3s;
+    }
+    .apri-menu span:nth-child(1) { width:30px; }
+    .apri-menu span:nth-child(2) { width:22px; }
+    .apri-menu span:nth-child(3) { width:26px; }
+    .apri-menu:hover span { background:var(--rosso); width:30px; }
+
+    .velo {
+      position:fixed; inset:0; z-index:9000;
+      background:rgba(35,32,28,.32);
+      opacity:0; transition:opacity .35s;
+    }
+    .velo.visibile { opacity:1; }
+
+    .menu {
+      position:fixed; top:0; right:0; bottom:0; z-index:9100;
+      width:min(360px, 86vw);
+      background:#fffdf8;
+      border-left:1px solid var(--bordo);
+      box-shadow:-16px 0 44px rgba(35,32,28,.14);
+      padding:4.4rem 1.6rem 2rem;
+      transform:translateX(102%);
+      transition:transform .42s cubic-bezier(.2,.8,.2,1);
+      display:flex; flex-direction:column; gap:.4rem;
+    }
+    .menu.aperto { transform:none; }
+    .chiudi-menu {
+      position:absolute; top:1.3rem; right:1.4rem;
+      width:38px; height:38px; border-radius:50%;
+      border:1px solid var(--bordo); background:transparent;
+      color:var(--grigio); cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center;
+      transition:color .25s, border-color .25s, transform .25s;
+    }
+    .chiudi-menu:hover { color:var(--rosso); border-color:var(--rosso); transform:rotate(90deg); }
+
+    .menu-voce {
+      display:flex; align-items:center; gap:1rem;
+      padding:1rem .9rem;
+      border-radius:4px;
+      text-decoration:none;
+      color:var(--inchiostro);
+      transition:background .25s, color .25s;
+    }
+    .menu-voce svg { color:var(--rosso); flex-shrink:0; }
+    .menu-voce span { display:flex; flex-direction:column; }
+    .menu-voce b {
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:1.32rem; line-height:1.2;
+    }
+    .menu-voce i {
+      font-style:normal;
+      font-size:.7rem; letter-spacing:.1em;
+      color:var(--tenue);
+      margin-top:.1rem;
+    }
+    .menu-voce:hover { background:var(--carta-2); }
+    .menu-voce:hover b { color:var(--rosso); }
+    .menu-voce.attiva { background:var(--carta-2); }
+    .menu-voce.attiva b { color:var(--rosso); }
+    .menu-voce + .menu-voce { border-top:1px solid var(--bordo); border-radius:0; }
+
+    /* apertura */
+    .apertura {
+      max-width:1280px; width:100%; margin:0 auto;
+      padding:2rem 5vw 2.6rem;
+    }
+    h1 {
+      font-family:'Instrument Serif', serif;
+      font-weight:400;
+      font-size:clamp(2.8rem, 6.5vw, 5rem);
+      line-height:1.02; letter-spacing:-.015em;
+    }
+    h1 em { font-style:italic; color:var(--rosso); }
+    .intro {
+      margin-top:1.2rem;
+      padding-left:1.4rem; position:relative;
+      font-size:1.06rem; font-weight:300;
+      color:var(--grigio); max-width:52ch;
+    }
+    .intro::before {
+      content:''; position:absolute; left:0; top:.35rem; bottom:.35rem;
+      width:2px; border-radius:2px;
+      background:linear-gradient(to bottom, var(--c-singapore), var(--rosso) 50%, var(--c-patagonia));
+    }
+
+    /* album */
+    .raccolta {
+      max-width:1280px; width:100%; margin:0 auto;
+      padding:1rem 5vw 4rem;
+      flex:1;
+    }
+    .titolo-sezione {
+      display:flex; align-items:baseline; gap:1.4rem;
+      margin-bottom:2rem;
+    }
+    .titolo-sezione h2 {
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:1.9rem;
+    }
+    .titolo-sezione::after {
+      content:''; flex:1; height:1px; background:var(--bordo);
+    }
+
+    .griglia {
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:2.4rem 2rem;
+    }
+
+    .album {
+      --c: var(--rosso);
+      display:block; text-decoration:none;
+      transition:transform .4s cubic-bezier(.2,.8,.2,1);
+    }
+    .album:hover, .album:focus-visible { transform:translateY(-7px); }
+    .album:focus-visible { outline:2px solid var(--c); outline-offset:8px; border-radius:4px; }
+
+    .cornice {
+      position:relative;
+      border-radius:3px; overflow:hidden;
+      background:var(--carta-2);
+      box-shadow:0 2px 4px rgba(35,32,28,.06), 0 14px 30px rgba(35,32,28,.09);
+      transition:box-shadow .4s;
+    }
+    .album:hover .cornice { box-shadow:0 4px 8px rgba(35,32,28,.08), 0 26px 50px rgba(35,32,28,.16); }
+
+    .scena {
+      position:relative;
+      aspect-ratio:1/1;
+      color:var(--c);
+      background:linear-gradient(180deg, color-mix(in srgb, var(--c) 20%, #fff) 0%, color-mix(in srgb, var(--c) 7%, #fff) 58%, #fffdf8 100%);
+      display:flex; align-items:flex-end; justify-content:center; overflow:hidden;
+    }
+    .scena svg { width:100%; height:100%; display:block; }
+
+    .anno {
+      position:absolute; top:1rem; left:1rem;
+      width:56px; height:56px; border-radius:50%;
+      background:var(--c); color:#fff;
+      font-family:'Instrument Serif', serif;
+      font-size:1.15rem;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 12px rgba(35,32,28,.2);
+      z-index:2; transition:transform .4s;
+    }
+    .anno::after {
+      content:''; position:absolute; inset:4px;
+      border:1px solid rgba(255,255,255,.55); border-radius:50%;
+    }
+    .album:hover .anno { transform:scale(1.08) rotate(-6deg); }
+
+    .dettagli {
+      padding:1rem 1.15rem 1.1rem;
+      background:#fffdf8;
+      border-top:3px solid var(--c);
+      border-left:1px solid var(--bordo);
+      border-right:1px solid var(--bordo);
+      border-bottom:1px solid var(--bordo);
+      border-radius:0 0 3px 3px;
+    }
+    .dettagli h3 {
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:1.6rem; line-height:1.12;
+      margin-bottom:.15rem;
+    }
+    .nota {
+      font-size:.8rem; font-weight:300; color:var(--grigio);
+      margin-bottom:.8rem;
+    }
+    .vai {
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-size:.68rem; font-weight:500;
+      letter-spacing:.16em; text-transform:uppercase;
+      color:var(--c);
+      padding-top:.7rem;
+      border-top:1px solid var(--bordo);
+      width:100%;
+      transition:gap .3s;
+    }
+    .vai::after { content:'→'; font-size:.85rem; }
+    .album:hover .vai { gap:.9rem; }
+
+    .rivela { opacity:0; transform:translateY(22px); }
+    .rivela.dentro {
+      opacity:1; transform:none;
+      transition:opacity .65s ease, transform .65s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .coda {
+      margin-top:2.6rem;
+      padding:1.4rem 1.6rem;
+      background:var(--carta-2);
+      border:1px solid var(--bordo);
+      border-radius:4px;
+      font-size:.88rem; font-weight:300; color:var(--grigio);
+      display:flex; align-items:center; gap:.9rem;
+    }
+    .coda span {
+      width:9px; height:9px; border-radius:50%;
+      background:var(--c-patagonia); flex-shrink:0;
+    }
+
+
+    /* filtri */
+    .filtri {
+      display:flex; flex-wrap:wrap; gap:.6rem;
+      margin-bottom:2rem;
+    }
+    .filtro {
+      --c: var(--rosso);
+      font-family:inherit;
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-size:.74rem; font-weight:500;
+      letter-spacing:.1em; text-transform:uppercase;
+      padding:.6rem 1rem;
+      border:1px solid var(--bordo); border-radius:100px;
+      background:#fffdf8; color:var(--grigio);
+      cursor:pointer;
+      transition:border-color .25s, color .25s, background .25s;
+    }
+    .filtro em {
+      font-style:normal; font-size:.66rem;
+      color:var(--tenue); letter-spacing:.04em;
+    }
+    .filtro i {
+      width:8px; height:8px; border-radius:50%;
+      background:var(--c); flex-shrink:0;
+    }
+    .filtro:hover { border-color:var(--c); color:var(--inchiostro); }
+    .filtro.scelto {
+      background:var(--c); border-color:var(--c); color:#fff;
+    }
+    .filtro.scelto em { color:rgba(255,255,255,.75); }
+    .filtro.scelto i { background:rgba(255,255,255,.85); }
+
+    /* blocchi per viaggio */
+    .blocco { margin-bottom:3.2rem; }
+    .blocco[hidden] { display:none; }
+    .blocco-testa {
+      display:flex; align-items:center; gap:1rem;
+      margin-bottom:1.1rem; flex-wrap:wrap;
+    }
+    .blocco-testa .pallino {
+      width:11px; height:11px; border-radius:50%;
+      background:var(--c); flex-shrink:0;
+    }
+    .blocco-testa h3 {
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:1.7rem; line-height:1.1;
+    }
+    .blocco-testa .conteggio {
+      font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--tenue);
+    }
+    .blocco-testa .diario {
+      margin-left:auto;
+      font-size:.68rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase;
+      color:var(--c); text-decoration:none;
+      display:inline-flex; align-items:center; gap:.45rem;
+      transition:gap .3s;
+    }
+    .blocco-testa .diario::after { content:'→'; }
+    .blocco-testa .diario:hover { gap:.8rem; }
+
+    .mosaico {
+      display:grid;
+      grid-template-columns:repeat(6, minmax(0, 1fr));
+      gap:.55rem;
+    }
+    @media (max-width: 1040px) { .mosaico { grid-template-columns:repeat(4, minmax(0,1fr)); } }
+    .mosaico button {
+      position:relative;
+      aspect-ratio:1/1;
+      padding:0; border:none; border-radius:3px;
+      overflow:hidden; cursor:pointer;
+      background:var(--carta-2);
+      transition:transform .3s, box-shadow .3s;
+    }
+    .mosaico img {
+      width:100%; height:100%; object-fit:cover; display:block;
+      transition:transform .5s, opacity .4s;
+      opacity:0;
+    }
+    .mosaico img.carica { opacity:1; }
+    .mosaico button:hover { transform:scale(1.03); z-index:2; box-shadow:0 10px 24px rgba(35,32,28,.18); }
+    .mosaico button:hover img { transform:scale(1.08); }
+    .mosaico button:focus-visible { outline:2px solid var(--rosso); outline-offset:3px; }
+
+    .ancora {
+      display:block; margin:1.2rem auto 0;
+      font-family:inherit;
+      font-size:.72rem; font-weight:500;
+      letter-spacing:.16em; text-transform:uppercase;
+      padding:.75rem 1.6rem;
+      border:1px solid var(--bordo); border-radius:100px;
+      background:#fffdf8; color:var(--grigio);
+      cursor:pointer;
+      transition:border-color .25s, color .25s;
+    }
+    .ancora:hover { border-color:var(--c, var(--rosso)); color:var(--c, var(--rosso)); }
+    .ancora.aperta { border-color:var(--c, var(--rosso)); color:var(--c, var(--rosso)); }
+
+    /* visualizzatore */
+    .visore {
+      position:fixed; inset:0; z-index:9500;
+      background:rgba(28,25,21,.94);
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; visibility:hidden;
+      transition:opacity .3s, visibility 0s .3s;
+    }
+    .visore.aperto { opacity:1; visibility:visible; transition:opacity .3s, visibility 0s; }
+    .visore img {
+      max-width:92vw; max-height:84vh;
+      border-radius:3px;
+      box-shadow:0 24px 60px rgba(0,0,0,.5);
+    }
+    .visore-chiudi, .visore-nav {
+      position:absolute;
+      width:46px; height:46px; border-radius:50%;
+      border:1px solid rgba(253,248,238,.3);
+      background:rgba(28,25,21,.5);
+      color:#fdf8ee; cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center;
+      font-size:1.1rem;
+      transition:background .25s, border-color .25s;
+    }
+    .visore-chiudi:hover, .visore-nav:hover { background:var(--rosso); border-color:var(--rosso); }
+    .visore-chiudi { top:1.2rem; right:1.2rem; }
+    .visore-nav.prec { left:1.2rem; }
+    .visore-nav.succ { right:1.2rem; }
+    .visore-info {
+      position:absolute; bottom:1.3rem; left:50%;
+      transform:translateX(-50%);
+      font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+      color:rgba(253,248,238,.75);
+      background:rgba(28,25,21,.5);
+      padding:.5rem 1rem; border-radius:100px;
+      white-space:nowrap;
+    }
+    @media (max-width: 640px) {
+      .mosaico { grid-template-columns:repeat(2, minmax(0,1fr)); gap:.4rem; }
+      .visore-nav { width:40px; height:40px; }
+      .visore-nav.prec { left:.5rem; }
+      .visore-nav.succ { right:.5rem; }
+    }
+
+    /* footer */
+    footer {
+      max-width:1280px; width:100%; margin:0 auto;
+      padding:2rem 5vw 2.8rem;
+      display:flex; align-items:center; justify-content:center;
+      flex-wrap:wrap; gap:2.4rem;
+      border-top:1px solid var(--bordo);
+    }
+    .voce {
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--grigio);
+      background:none; border:none; padding:0; cursor:pointer;
+      text-decoration:none; font-family:inherit;
+      transition:color .25s;
+    }
+    .voce:hover { color:var(--rosso); }
+    .voce svg { flex-shrink:0; }
+    .voce--marchio { color:var(--rosso); }
+
+    /* cookie */
+    .cookie {
+      position:fixed; left:5vw; right:5vw; bottom:1.6rem;
+      max-width:820px; margin:0 auto; z-index:9999;
+      background:#fffdf8; border:1px solid var(--bordo); border-radius:5px;
+      box-shadow:0 18px 46px rgba(35,32,28,.18);
+      padding:1.6rem 1.8rem;
+      display:grid; grid-template-columns:1fr auto;
+      gap:1.2rem 2rem; align-items:center;
+      transform:translateY(150%); opacity:0; visibility:hidden;
+      transition:transform .55s cubic-bezier(.2,.8,.2,1), opacity .55s, visibility 0s .55s;
+    }
+    .cookie.mostra {
+      transform:none; opacity:1; visibility:visible;
+      transition:transform .55s cubic-bezier(.2,.8,.2,1), opacity .55s, visibility 0s;
+    }
+    .cookie h3 { font-family:'Instrument Serif', serif; font-weight:400; font-size:1.35rem; margin-bottom:.3rem; }
+    .cookie p { font-size:.84rem; font-weight:300; color:var(--grigio); max-width:58ch; }
+    .cookie a { color:var(--rosso); text-decoration:none; border-bottom:1px solid rgba(196,80,47,.35); }
+    .cookie-azioni { display:flex; flex-direction:column; gap:.55rem; min-width:158px; }
+    .bottone {
+      font-family:inherit; font-size:.72rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase;
+      padding:.75rem 1.2rem; border-radius:3px; cursor:pointer;
+      border:1px solid var(--rosso); background:var(--rosso); color:#fff;
+      transition:background .25s, color .25s; white-space:nowrap;
+    }
+    .bottone:hover { background:#a83f22; border-color:#a83f22; }
+    .bottone--vuoto { background:transparent; color:var(--grigio); border-color:var(--bordo); }
+    .bottone--vuoto:hover { color:var(--inchiostro); border-color:var(--grigio); }
+
+    @media (max-width: 1040px) { .griglia { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 660px) {
+      .griglia { grid-template-columns:1fr; gap:2rem; max-width:420px; margin:0 auto; }
+      .cookie { grid-template-columns:1fr; left:0; right:0; bottom:0; border-radius:0; padding:1.4rem 1.2rem; }
+      .cookie-azioni { flex-direction:row; min-width:0; }
+      .bottone { flex:1; padding:.75rem .5rem; }
+      footer { gap:1.6rem 2rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .alone { animation:none !important; }
+      .rivela { opacity:1 !important; transform:none !important; }
+      html { scroll-behavior:auto; }
+    }
+  </style>
 </head>
 <body>
 
-<header class="bar">
-  <a class="brand" href="https://www.gioriva.it/poitiracconto/patagonia2026">Patagonia <i>&amp;</i> Polinesia</a>
-  <button class="burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Apri il menu"><span></span><span></span><span></span></button>
-</header>
-<div class="scrim" id="scrim"></div>
-<aside class="drawer" id="drawer" aria-label="Menu">
-  <div class="d-head"><span class="t">Indice</span><button class="d-close" id="dclose" aria-label="Chiudi il menu">×</button></div>
-  <nav>
-    <a class="d-link d-home" href="https://www.gioriva.it/poitiracconto/"><span class="place">Home page</span><span class="sub">Tutti i viaggi, su gioriva.it</span></a>
-    <hr class="d-sep">
-    <a class="d-link" href="https://www.gioriva.it/poitiracconto/patagonia2026"><span class="place">Diario di viaggio</span><span class="sub">Il racconto, tappa per tappa</span></a>
-    <a class="d-link" href="programma.html"><span class="place">Programma</span><span class="sub">L'itinerario, giorno per giorno</span></a>
-    <a class="d-link" href="trasporti.html"><span class="place">Trasporti</span><span class="sub">Voli, orari e trasferimenti</span></a>
-    <a class="d-link active" href="galleria.html"><span class="place">Galleria</span><span class="sub">Le foto del viaggio</span></a>
+  <div class="sfondo" aria-hidden="true"></div>
+  <div class="alone alone-a" aria-hidden="true"></div>
+  <div class="alone alone-b" aria-hidden="true"></div>
+  <div class="portolano" aria-hidden="true">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <path d="M0 0 L0 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M100 0 L100 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M200 0 L200 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M300 0 L300 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M400 0 L400 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M500 0 L500 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M600 0 L600 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M700 0 L700 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M800 0 L800 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M900 0 L900 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M1000 0 L1000 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M1100 0 L1100 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M1200 0 L1200 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 0 L1200 0" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 100 L1200 100" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 200 L1200 200" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 300 L1200 300" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 400 L1200 400" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 500 L1200 500" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 600 L1200 600" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 700 L1200 700" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 800 L1200 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M232 214 L232 -1686" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M232 214 L959 -1541" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L1576 -1130" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M232 214 L1987 -513" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L2132 214" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M232 214 L1987 941" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L1576 1558" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M232 214 L959 1969" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L232 2114" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M232 214 L-495 1969" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L-1112 1558" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M232 214 L-1523 941" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L-1668 214" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M232 214 L-1523 -513" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L-1112 -1130" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M232 214 L-495 -1541" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L968 -1304" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M968 596 L1695 -1159" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L2312 -748" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M968 596 L2723 -131" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L2868 596" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M968 596 L2723 1323" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L2312 1940" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M968 596 L1695 2351" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L968 2496" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M968 596 L241 2351" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L-376 1940" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M968 596 L-787 1323" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L-932 596" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M968 596 L-787 -131" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L-376 -748" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M968 596 L241 -1159" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <circle cx="232" cy="214" r="46" stroke="#23201c" stroke-width="1" opacity=".1" fill="none"/>
+      <circle cx="968" cy="596" r="46" stroke="#23201c" stroke-width="1" opacity=".1" fill="none"/>
+      <circle cx="232" cy="214" r="30" stroke="#23201c" stroke-width="1" opacity=".08" fill="none"/>
+      <circle cx="968" cy="596" r="30" stroke="#23201c" stroke-width="1" opacity=".08" fill="none"/>
+      <path d="M232 190l4.5 12 12 4.5-12 4.5-4.5 12-4.5-12-12-4.5 12-4.5z" fill="#c4502f" opacity=".16"/>
+      <path d="M968 574l4 10.5 10.5 4-10.5 4-4 10.5-4-10.5-10.5-4 10.5-4z" fill="#17a2a2" opacity=".14"/>
+    </svg>
+  </div>
+
+  <div class="barra">
+    <button type="button" class="apri-menu" id="apriMenu" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="velo" id="velo" hidden></div>
+  <nav class="menu" id="menu" aria-label="Menu principale" aria-hidden="true">
+    <button type="button" class="chiudi-menu" id="chiudiMenu" aria-label="Chiudi il menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 3l12 12M15 3L3 15"/></svg>
+    </button>
+
+    <a class="menu-voce" href="https://www.gioriva.it/">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2.5 4.6c6.4-1.6 12.6-1.6 19 0"/><path d="M3.6 7.4h16.8"/>
+        <path d="M6.2 7.4V21M17.8 7.4V21"/><path d="M5.4 11h13.2"/>
+      </svg>
+      <span><b>Gio Riva</b><i>Torna alla home</i></span>
+    </a>
+
+    <a class="menu-voce" href="index.html">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/>
+        <path d="M3 12h18M4.6 7h14.8M4.6 17h14.8"/>
+      </svg>
+      <span><b>Poi ti racconto</b><i>Tutti i viaggi, uno per uno</i></span>
+    </a>
+
+    <a class="menu-voce attiva" href="galleria.html">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+        <rect x="2.5" y="4.5" width="19" height="15" rx="2"/>
+        <circle cx="8.2" cy="9.6" r="1.7"/>
+        <path d="M2.5 16.2l5-4.4 4.4 3.9 3.4-2.9 6.2 5.2"/>
+      </svg>
+      <span><b>Galleria</b><i>Gli album di tutti i viaggi</i></span>
+    </a>
+
+    <a class="menu-voce" href="contatti.html">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+        <rect x="2.5" y="5" width="19" height="14" rx="2"/>
+        <path d="M2.5 6.2L12 13l9.5-6.8"/>
+      </svg>
+      <span><b>Contatti</b><i>Scrivimi due righe</i></span>
+    </a>
   </nav>
-  <div class="d-foot">Patagonia &amp; Polinesia 2026<br>Il viaggio di nozze di Giorgio e Lucrezia</div>
-</aside>
 
-<main>
-<div class="wrap">
-  <div class="intro">
-    <h1 id="g-h1">Le foto <i>arriveranno</i></h1>
-    <p class="lede" id="g-lede">Qui finiranno il Perito Moreno, il faro della fine del mondo e la laguna di Bora Bora. Le prime dal 15 settembre, caricate direttamente dal viaggio.</p>
+  <header class="apertura">
+    <h1>Le foto che <em>ti racconto</em></h1>
+    <p class="intro">Millequattrocentoventisette fotografie, quattro viaggi, otto anni. Filtra per destinazione, tocca una foto per aprirla.</p>
+  </header>
+
+  <main class="raccolta">
+    <div class="filtri" id="filtri"></div>
+    <div id="album"></div>
+
+    <p class="coda"><span></span>Patagonia e Polinesia arriva in autunno 2026: l'album si aggiunge qui appena tornati.</p>
+  </main>
+
+  <div class="visore" id="visore" role="dialog" aria-label="Foto a schermo intero">
+    <button type="button" class="visore-chiudi" id="visoreChiudi" aria-label="Chiudi">✕</button>
+    <button type="button" class="visore-nav prec" id="visorePrec" aria-label="Foto precedente">‹</button>
+    <img id="visoreImg" alt="">
+    <button type="button" class="visore-nav succ" id="visoreSucc" aria-label="Foto successiva">›</button>
+    <p class="visore-info" id="visoreInfo"></p>
   </div>
 
-  <div class="cornici" id="empty">
-    <div class="cornice" style="--tinta: linear-gradient(160deg,#0b2b46,#15405f)"><div class="foto"></div><div class="did">Buenos Aires<small>dal 15 al 18 settembre</small></div></div>
-    <div class="cornice" style="--tinta: linear-gradient(160deg,#0f3a52,#8fc7dc)"><div class="foto"></div><div class="did">El Calafate<small>il Perito Moreno</small></div></div>
-    <div class="cornice" style="--tinta: linear-gradient(160deg,#04111d,#0f3049)"><div class="foto"></div><div class="did">Ushuaia<small>la fine del mondo</small></div></div>
-    <div class="cornice" style="--tinta: linear-gradient(160deg,#0c5670,#3fa9bd)"><div class="foto"></div><div class="did">La traversata<small>tre continenti</small></div></div>
-    <div class="cornice" style="--tinta: linear-gradient(160deg,#3fa9bd,#ffcf9e)"><div class="foto"></div><div class="did">Papeete<small>la prima notte in Polinesia</small></div></div>
-    <div class="cornice" style="--tinta: linear-gradient(160deg,#22b8b4,#5fdcd0)"><div class="foto"></div><div class="did">Taha'a<small>la suite sull'acqua</small></div></div>
-    <div class="cornice" style="--tinta: linear-gradient(160deg,#0d7f90,#ffb37e)"><div class="foto"></div><div class="did">Bora Bora<small>il monte Otemanu</small></div></div>
-    <div class="cornice" style="--tinta: linear-gradient(160deg,#ffb37e,#f3f1ea)"><div class="foto"></div><div class="did">La via di casa<small>dal 5 al 7 ottobre</small></div></div>
+  <footer>
+    <a href="https://www.gioriva.it/" class="voce voce--marchio">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2.5 4.6c6.4-1.6 12.6-1.6 19 0"/>
+        <path d="M3.6 7.4h16.8"/>
+        <path d="M6.2 7.4V21M17.8 7.4V21"/>
+        <path d="M5.4 11h13.2"/>
+      </svg>
+      Gio Riva
+    </a>
+    <a href="privacy.html" class="voce">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round">
+        <path d="M8 1.6 L13.4 3.6 V8 c0 3.4-2.4 5.4-5.4 6.2 C5 13.4 2.6 11.4 2.6 8 V3.6 Z"/>
+        <circle cx="6.4" cy="6.2" r=".55" fill="currentColor" stroke="none"/>
+        <circle cx="9.6" cy="7.4" r=".55" fill="currentColor" stroke="none"/>
+        <circle cx="7.2" cy="9.6" r=".55" fill="currentColor" stroke="none"/>
+      </svg>
+      Privacy &amp; Cookie
+    </a>
+    <a href="contatti.html" class="voce">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round">
+        <rect x="1.6" y="3.2" width="12.8" height="9.6"/>
+        <path d="M1.6 4 L8 8.8 L14.4 4"/>
+      </svg>
+      Contatti
+    </a>
+  </footer>
+
+  <div class="cookie" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Gestione cookie">
+    <div>
+      <h3>Un attimo, prima di partire</h3>
+      <p>Questo sito usa cookie statistici (Google Analytics) per capire come viene esplorato e migliorarlo nel tempo. Si attivano solo con il tuo consenso. Trovi i dettagli nella <a href="privacy.html">Privacy &amp; Cookie</a>.</p>
+    </div>
+    <div class="cookie-azioni">
+      <button class="bottone" id="cookieAccept">Accetto</button>
+      <button class="bottone bottone--vuoto" id="cookieDecline">Solo necessari</button>
+    </div>
   </div>
-  <p class="album-nota" id="empty-note">Le foto caricate nell'album del viaggio compariranno qui da sole, senza toccare questa pagina.</p>
 
-  <nav class="giorni-nav" id="giorni-nav" aria-label="Vai al giorno" hidden></nav>
-  <div id="grid" hidden></div>
-</div>
-</main>
-
-<footer>
-  <a href="https://www.gioriva.it" aria-label="Gio Riva"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 L12 3 L21 11 M5 10 V20 H19 V10"/></svg>Gio Riva</a>
-  <a href="https://www.gioriva.it/poitiracconto/privacy.html" aria-label="Privacy e Cookie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L20 6 V11 C20 16.5 16.5 20 12 21.5 C7.5 20 4 16.5 4 11 V6 Z"/></svg>Privacy &amp; Cookie</a>
-  <a href="contatti.html" aria-label="Contatti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 7.5 L12 13.5 L21 7.5"/></svg>Contatti</a>
-</footer>
-
-<div class="lightbox" id="lightbox" role="dialog" aria-label="Foto ingrandita">
-  <button class="lb-close" id="lbclose" aria-label="Chiudi">×</button>
-  <img id="lbimg" src="" alt="" />
-</div>
-
-<script>
-(function () {
-  'use strict';
-  var burger = document.getElementById('burger'), drawer = document.getElementById('drawer'),
-      scrim = document.getElementById('scrim'), dclose = document.getElementById('dclose');
-  function setDrawer(open) {
-    drawer.classList.toggle('open', open); scrim.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-    document.body.style.overflow = open ? 'hidden' : '';
-  }
-  burger.addEventListener('click', function () { setDrawer(!drawer.classList.contains('open')); });
-  dclose.addEventListener('click', function () { setDrawer(false); });
-  scrim.addEventListener('click', function () { setDrawer(false); });
-
-  /* album: https://gioriva.github.io/album/patagonia2026/ + manifest.json
-     ["01.jpg", ...]  oppure  { "photos": [ { "file": "01.jpg", "caption": "..." } ] } */
-  var ALBUM_BASE = 'https://gioriva.github.io/album/patagonia2026/';
-  var grid = document.getElementById('grid'), empty = document.getElementById('empty'), note = document.getElementById('empty-note'),
-      lb = document.getElementById('lightbox'), lbimg = document.getElementById('lbimg'), lbclose = document.getElementById('lbclose');
-  function openLb(src, alt) { lbimg.src = src; lbimg.alt = alt || 'Foto del viaggio'; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closeLb() { lb.classList.remove('open'); lbimg.src = ''; document.body.style.overflow = ''; }
-  lb.addEventListener('click', closeLb); lbclose.addEventListener('click', closeLb);
-  lbimg.addEventListener('click', function (e) { e.stopPropagation(); });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { if (drawer.classList.contains('open')) setDrawer(false); if (lb.classList.contains('open')) closeLb(); }
-  });
-  var GIORNI = ['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'];
-  var MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
-  function etichetta(day) {
-    var d = new Date(Date.UTC(2026, 8, 15 + (day - 1)));
-    return 'Giorno ' + day + ', ' + GIORNI[d.getUTCDay()] + ' ' + d.getUTCDate() + ' ' + MESI[d.getUTCMonth()];
-  }
-  function render(list) {
-    if (!list || !list.length) return;
-    grid.innerHTML = '';
-    var perGiorno = {}, ordine = [];
-    list.forEach(function (item) {
-      var file = typeof item === 'string' ? item : item.file; if (!file) return;
-      var day = (typeof item === 'string') ? 0 : (item.day || 0);
-      if (!perGiorno[day]) { perGiorno[day] = []; ordine.push(day); }
-      perGiorno[day].push(item);
-    });
-    ordine.forEach(function (day) {
-      var sez = document.createElement('section'); sez.className = 'giorno-foto';
-      if (day) { sez.id = 'giorno-' + day; var t = document.createElement('h2'); t.className = 'g-titolo'; t.textContent = etichetta(day); sez.appendChild(t); }
-      var g = document.createElement('div'); g.className = 'foto-grid';
-      perGiorno[day].forEach(function (item) {
-        var file = typeof item === 'string' ? item : item.file, cap = typeof item === 'string' ? '' : (item.caption || '');
-        var src = ALBUM_BASE + file, a = document.createElement('a'), img = document.createElement('img');
-        a.href = src; img.src = src; img.alt = cap || 'Foto del viaggio'; img.loading = 'lazy';
-        a.appendChild(img); a.addEventListener('click', function (e) { e.preventDefault(); openLb(src, cap); });
-        g.appendChild(a);
+  <script>
+    (function(){
+      'use strict';
+      var KEY = 'gr_cookie_consent';
+      var banner = document.getElementById('cookieBanner');
+      var ok = document.getElementById('cookieAccept');
+      var no = document.getElementById('cookieDecline');
+      var piede = document.getElementById('cookieFooter');
+      if (!banner) return;
+      function gtagSafe(){ if (typeof gtag === 'function') gtag.apply(null, arguments); }
+      function consenso(dato){
+        gtagSafe('consent', 'update', { 'analytics_storage': dato ? 'granted' : 'denied' });
+      }
+      function mostra(){ banner.classList.add('mostra'); }
+      function nascondi(){ banner.classList.remove('mostra'); }
+      var salvato = null;
+      try { salvato = localStorage.getItem(KEY); } catch(e){}
+      if (salvato === 'granted'){ consenso(true); }
+      else if (salvato === 'denied'){ consenso(false); }
+      else { mostra(); }
+      ok.addEventListener('click', function(){
+        try { localStorage.setItem(KEY, 'granted'); } catch(e){}
+        consenso(true); nascondi();
       });
-      sez.appendChild(g); grid.appendChild(sez);
-    });
-    var nav = document.getElementById('giorni-nav'); nav.innerHTML = '';
-    ordine.forEach(function (day) {
-      if (!day) return;
-      var a = document.createElement('a'); a.href = '#giorno-' + day;
-      var d = new Date(Date.UTC(2026, 8, 15 + (day - 1)));
-      a.innerHTML = 'Giorno ' + day + '<span>' + d.getUTCDate() + ' ' + MESI[d.getUTCMonth()].slice(0, 3) + '</span>';
-      a.addEventListener('click', function (e) { e.preventDefault(); var t = document.getElementById('giorno-' + day); if (t) { t.scrollIntoView({ behavior: 'smooth' }); history.replaceState(null, '', '#giorno-' + day); } });
-      nav.appendChild(a);
-    });
-    if (nav.children.length) {
-      nav.hidden = false;
-      var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) links.forEach(function (l) { l.classList.toggle('attivo', l.getAttribute('href') === '#' + en.target.id); });
+      no.addEventListener('click', function(){
+        try { localStorage.setItem(KEY, 'denied'); } catch(e){}
+        consenso(false); nascondi();
+      });
+      if (piede) piede.addEventListener('click', mostra);
+    })();
+
+    (function(){
+      'use strict';
+      var pezzi = document.querySelectorAll('.rivela');
+      if (!('IntersectionObserver' in window)){
+        Array.prototype.forEach.call(pezzi, function(p){ p.classList.add('dentro'); });
+        return;
+      }
+      var oss = new IntersectionObserver(function(voci){
+        voci.forEach(function(v, i){
+          if (v.isIntersecting){
+            var el = v.target;
+            setTimeout(function(){ el.classList.add('dentro'); }, i * 70);
+            oss.unobserve(el);
+          }
         });
-      }, { rootMargin: '-30% 0px -60% 0px' });
-      grid.querySelectorAll('.giorno-foto[id]').forEach(function (s) { io.observe(s); });
-    }
-    if (grid.children.length) {
-      empty.hidden = true; note.hidden = true; grid.hidden = false;
-      var tot = grid.querySelectorAll('img').length;
-      document.getElementById('g-h1').innerHTML = 'Le foto, <i>giorno per giorno</i>';
-      document.getElementById('g-lede').textContent = tot + ' foto in ' + ordine.filter(function (d) { return d; }).length + ' giornate, caricate direttamente dal viaggio. Scegli un giorno per saltare alle sue foto.';
-      if (location.hash) { var target = document.querySelector(location.hash); if (target) setTimeout(function () { target.scrollIntoView(); }, 50); }
-    }
-  }
-  fetch(ALBUM_BASE + 'manifest.json', { cache: 'no-store' })
-    .then(function (r) { if (!r.ok) throw new Error('no manifest'); return r.json(); })
-    .then(function (d) { render(Array.isArray(d) ? d : d.photos); })
-    .catch(function () {});
-})();
-</script>
+      }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
+      Array.prototype.forEach.call(pezzi, function(p){ oss.observe(p); });
+    })();
+
+    /* menu */
+    (function(){
+      'use strict';
+      var apri = document.getElementById('apriMenu'),
+          chiudi = document.getElementById('chiudiMenu'),
+          menu = document.getElementById('menu'),
+          velo = document.getElementById('velo');
+      if (!apri || !menu) return;
+
+      function stato(aperto){
+        menu.classList.toggle('aperto', aperto);
+        menu.setAttribute('aria-hidden', aperto ? 'false' : 'true');
+        apri.setAttribute('aria-expanded', aperto ? 'true' : 'false');
+        if (aperto){
+          velo.hidden = false;
+          requestAnimationFrame(function(){ velo.classList.add('visibile'); });
+          document.body.style.overflow = 'hidden';
+        } else {
+          velo.classList.remove('visibile');
+          setTimeout(function(){ velo.hidden = true; }, 350);
+          document.body.style.overflow = '';
+        }
+      }
+      apri.addEventListener('click', function(){ stato(true); });
+      chiudi.addEventListener('click', function(){ stato(false); });
+      velo.addEventListener('click', function(){ stato(false); });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') stato(false);
+      });
+    })();
+
+
+    /* ══ galleria ══ */
+    (function(){
+      'use strict';
+  var BASE = 'https://gioriva.github.io/album/';
+  var ALBUM = [
+    {slug:'giappone2018',nome:'Giappone',anno:'2018',col:'--c-giappone18',gall:'https://www.gioriva.it/poitiracconto/giappone2018/galleria.html',tipo:'cartelle',gruppi:[["Day01_Milano-Tokyo",["00_img_0985.jpg","01_img_0989.jpg","02_img_0992.jpg","03_img_0994.jpg","04_img_0996-1.jpg","05_img_1001.jpg","06_img_1010-1.jpg","07_img_1005.jpg","08_img_1012.jpg"]],["Day02_Tokyo-Tsukiji-Shibuya",["00_img_1040.jpg","01_img_1038.jpg","02_img_1042.jpg","03_img_1048.jpg","04_img_1054.jpg","05_img_1057.jpg","06_img_1060.jpg","07_img_1069.jpg","08_img_1070.jpg","09_img_1077.jpg","10_img_1089.jpg","11_img_1101.jpg","12_img_1105.jpg","13_img_1114-1.jpg","14_img_1117.jpg"]],["Day03_Osaka",["00_img_1119.jpg","01_img_1120.jpg","02_img_1123.jpg","03_img_1124.jpg","04_img_1131.jpg","05_img_1136.jpg","06_img_1141-2.jpg","07_img_1138.jpg","08_img_1142.jpg","09_img_1151.jpg","10_img_1154.jpg","11_img_1155.jpg","12_img_1163.jpg","13_img_1160.jpg","14_img_1175.jpg","15_img_1169.jpg","16_img_1174.jpg","17_img_1179.jpg","18_img_1181.jpg"]],["Day04_Nara",["00_img_1194.jpg","01_img_1183.jpg","02_img_1243.jpg","03_img_1188.jpg","04_img_1187.jpg","05_img_1195-1.jpg","06_img_1205-1.jpg","07_img_1207-2.jpg","08_img_1219.jpg","09_img_1223.jpg","10_img_1236.jpg","11_img_1301.jpg","12_img_1302.jpg","13_img_1265.jpg","14_img_1272.jpg"]],["Day05_Kyoto",["00_img_1314-1.jpg","01_img_1317-1.jpg","02_img_1321.jpg","03_img_1327.jpg","04_image.jpg"]],["Day06_Arashiyama-Fushimi-Kinkakuji",["00_img_1370-1.jpg","01_img_1365.jpg","02_img_1334.jpg","03_img_1337.jpg","04_img_1350.jpg","05_img_1351.jpg","06_img_1372.jpg","07_img_1385.jpg","08_img_1427-1.jpg","09_img_1412.jpg","10_img_1438.jpg","11_img_1441.jpg","12_img_1456.jpg","13_img_1458.jpg","14_img_1463.jpg","15_img_1468.jpg","16_img_1469.jpg"]],["Day07_Kyoto-Higashiyama",["00_img_1525-1.jpg","01_img_1475.jpg","02_img_1489.jpg","03_img_1503-1.jpg","04_img_1506.jpg","05_img_1511.jpg","06_img_1509-1.jpg","07_img_1524-1.jpg","08_img_1536.jpg","09_img_1550.jpg","10_img_1552.jpg","11_img_1543.jpg","12_img_1558.jpg","13_img_1554.jpg","14_img_1625.jpg"]],["Day08_Hiroshima-Miyajima",["00_img_1630-1.jpg","01_img_1641.jpg","02_img_1649.jpg","03_img_1654.jpg","04_img_1660.jpg","05_img_1665.jpg","06_img_1671.jpg","07_img_1675-1.jpg","08_img_1686-1.jpg","09_img_1679-2.jpg","10_img_1681.jpg","11_img_1700.jpg"]],["Day09_Kanazawa",["00_img_1714.jpg","01_img_1720.jpg","02_img_1729.jpg","03_img_1730.jpg","04_img_1731-2.jpg","05_img_1736.jpg","06_img_1765-1.jpg","07_img_1757-1.jpg","08_img_1769-1.jpg","09_img_1774.jpg","10_img_1781.jpg","11_img_1782-1.jpg","12_img_1785.jpg","13_img_1801-1.jpg","14_img_1802-1.jpg"]],["Day10_Yamanouchi-Nagano",["00_img_1808.jpg","01_img_1814-2.jpg","02_img_1815.jpg","03_img_1819.jpg","04_img_1832.jpg","05_img_1835.jpg","06_img_1839.jpg","07_img_1849.jpg","08_img_1852.jpg","09_img_1864.jpg","10_img_1894-1.jpg","11_img_1882.jpg","12_img_1883.jpg"]],["Day11_Tokyo-Odaiba",["00_img_1898.jpg","01_img_1901.jpg","02_img_1905.jpg","03_img_1911.jpg","04_img_1928.jpg","05_img_1933-2.jpg","06_img_1941.jpg","07_img_1944.jpg","08_img_1946.jpg","09_img_1948.jpg","10_img_1952-11.jpg","11_img_1958.jpg"]],["Day12_Fuji-Kawaguchiko-Akihabara",["00_img_1965.jpg","01_img_1967.jpg","02_img_1974.jpg","03_img_1984.jpg","04_img_1976.jpg","05_img_1981.jpg","06_img_1986.jpg","07_img_1993.jpg","08_img_1996.jpg","09_img_2007.jpg","10_img_2013.jpg","11_img_2017.jpg","12_img_2018.jpg","13_img_2022-1.jpg","14_img_2026.jpg"]],["Day13_Shibuya-Hachiko-Narita",["00_img_2032.jpg","01_img_2034.jpg","02_img_2036.jpg","03_img_2037.jpg","04_img_2041.jpg"]]]},
+    {slug:'california2024',nome:'California &amp; Las Vegas',anno:'2024',col:'--c-california',gall:'https://www.gioriva.it/poitiracconto/california2024/galleria.html',tipo:'california',giorni:{"1":18,"2":35,"3":31,"4":33,"5":41,"6":30,"7":20,"8":17,"9":34,"10":18,"11":26,"12":15,"13":15,"14":10,"15":39,"16":6}},
+    {slug:'indonesia2025',nome:'Hong Kong &amp; Bali',anno:'2025',col:'--c-hkbali',gall:'https://www.gioriva.it/poitiracconto/indonesia2025/galleria.html',tipo:'indonesia',gruppi:[["day01",["IMG_1346.jpg","IMG_1351.jpg"]],["day02",["IMG_1352.jpg","IMG_1353.jpg","IMG_1354.jpg","IMG_1356.jpg","IMG_1357.jpg","IMG_1358.jpg","IMG_1359.jpg","IMG_1360.jpg","IMG_1361.jpg","IMG_1362.jpg","IMG_1363.jpg"]],["day03",["IMG_1374.jpg","IMG_1375.jpg","IMG_1377.jpg","IMG_1378.jpg","IMG_1397.jpg","IMG_1409.jpg","IMG_1415.jpg","IMG_1416.jpg","IMG_1417.jpg","IMG_1419.jpg","IMG_1420.jpg","IMG_1421.jpg","IMG_1423.jpg","IMG_1424.jpg","IMG_1427.jpg","IMG_1428.jpg","IMG_1429.jpg","IMG_1432.jpg","IMG_1433.jpg","IMG_1439.jpg","IMG_1447.jpg","IMG_1448.jpg","IMG_1450.jpg","IMG_1455.jpg","IMG_1456.jpg","IMG_1457.jpg","IMG_1459.jpg","IMG_1460.jpg","IMG_1461.jpg","IMG_1465.jpg","IMG_1466.jpg","IMG_1467.jpg","IMG_1469.jpg","IMG_1470.jpg","IMG_1471.jpg","IMG_1473.jpg","IMG_1475.jpg"]],["day04",["IMG_1490.jpg","IMG_1491.jpg","IMG_1493.jpg","IMG_1494.jpg","IMG_1495.jpg","IMG_1496.jpg","IMG_1497.jpg","IMG_1498.jpg","IMG_1499.jpg","IMG_1500.jpg","IMG_1501.jpg","IMG_1502.jpg","IMG_1503.jpg","IMG_1504.jpg","IMG_1505.jpg","IMG_1506.jpg","IMG_1507.jpg","IMG_1508.jpg","IMG_1509.jpg","IMG_1510.jpg","IMG_1512.jpg","IMG_1513.jpg","IMG_1514.jpg","IMG_1527.jpg"]],["day05",["IMG_1528.jpg","IMG_1533.jpg","IMG_1535.jpg","IMG_1536.jpg","IMG_1545.jpg"]],["day06",["IMG_1549.jpg","IMG_1553.jpg","IMG_1554.jpg","IMG_1557.jpg","IMG_1559.jpg","IMG_1560.jpg","IMG_1561.jpg","IMG_1562.jpg","IMG_1563.jpg","IMG_1564.jpg","IMG_1565.jpg","IMG_1566.jpg","IMG_1569.jpg","IMG_1573.jpg","IMG_1574.jpg","IMG_1575.jpg","IMG_1576.jpg","IMG_1577.jpg","IMG_1594.jpg","IMG_1646.jpg","IMG_1647.jpg","IMG_1649.jpg","IMG_1651.jpg","IMG_1652.jpg","IMG_1659.jpg","IMG_1664.jpg","IMG_1666.jpg","IMG_1667.jpg","IMG_1669.jpg","IMG_1670.jpg","IMG_1672.jpg","IMG_1673.jpg","IMG_1674.jpg","IMG_1675.jpg","IMG_1676.jpg","IMG_1677.jpg","IMG_1684.jpg","IMG_1689.jpg","IMG_1692.jpg","IMG_1697.jpg","IMG_1698.jpg","IMG_1721.jpg","IMG_1726.jpg","IMG_1730.jpg","IMG_1748.jpg","IMG_1751.jpg","IMG_1755.jpg","IMG_1756.jpg","IMG_1760.jpg","IMG_1763.jpg","IMG_1767.jpg","IMG_1770.jpg","IMG_1771.jpg","IMG_1772.jpg","IMG_1774.jpg","IMG_1775.jpg","IMG_1776.jpg","IMG_1779.jpg","IMG_1781.jpg","IMG_1782.jpg","IMG_1783.jpg","IMG_1786.jpg","IMG_1787.jpg","IMG_1788.jpg","IMG_1789.jpg","IMG_1791.jpg","IMG_1795.jpg","IMG_1799.jpg","IMG_1800.jpg","IMG_1805.jpg","IMG_1806.jpg"]],["day07",["IMG_1808.jpg","IMG_1809.jpg","IMG_1810.jpg","IMG_1833.jpg","IMG_1835.jpg","IMG_1839.jpg","IMG_1845.jpg","IMG_1858.jpg","IMG_1859.jpg","IMG_1869.jpg","IMG_1879.jpg","IMG_1882.jpg","IMG_1884.jpg","IMG_1885.jpg","IMG_1887.jpg","IMG_1888.jpg","IMG_1889.jpg","IMG_1974.jpg","IMG_1977.jpg","IMG_1978.jpg"]],["day08",["IMG_2005.jpg","IMG_2007.jpg","IMG_2008.jpg","IMG_2011.jpg","IMG_2022.jpg","IMG_2023.jpg","IMG_2025.jpg","IMG_2026.jpg","IMG_2027.jpg","IMG_2028.jpg","IMG_2031.jpg","IMG_2032.jpg","IMG_2033.jpg","IMG_2043.jpg","IMG_2044.jpg","IMG_2045.jpg","IMG_2046.jpg","IMG_2047.jpg","IMG_2048.jpg","IMG_2049.jpg","IMG_2052.jpg","IMG_2059.jpg","IMG_2068.jpg","IMG_2072.jpg","IMG_2073.jpg"]],["day09",["IMG_2075.jpg","IMG_2077.jpg","IMG_2090.jpg","IMG_2091.jpg","IMG_2092.jpg","IMG_2093.jpg","IMG_2095.jpg","IMG_2096.jpg"]],["day10",["IMG_2110.jpg","IMG_2113.jpg","IMG_2116.jpg","IMG_2122.jpg","IMG_2125.jpg","IMG_2127.jpg","IMG_2135.jpg","IMG_2136.jpg","IMG_2138.jpg","IMG_2139.jpg","IMG_2140.jpg","IMG_2141.jpg","IMG_2142.jpg","IMG_2143.jpg","IMG_2151.jpg","IMG_2152.jpg","IMG_2162.jpg","IMG_2165.jpg","IMG_2166.jpg","IMG_2170.jpg","IMG_2172.jpg","IMG_2173.jpg","IMG_2176.jpg","IMG_2178.jpg","IMG_2179.jpg","IMG_2181.jpg","IMG_2182.jpg","IMG_2185.jpg","IMG_2187.jpg","IMG_2188.jpg","IMG_2189.jpg"]],["day11",["IMG_2195.jpg","IMG_2196.jpg","IMG_2197.jpg","IMG_2198.jpg","IMG_2201.jpg","IMG_2203.jpg","IMG_2204.jpg","IMG_2205.jpg","IMG_2210.jpg"]],["day12",["IMG_2214.jpg","IMG_2218.jpg","IMG_2220.jpg","IMG_2221.jpg","IMG_2222.jpg","IMG_2223.jpg","IMG_2224.jpg","IMG_2232.jpg","IMG_2241.jpg","IMG_2245.jpg","IMG_2246.jpg","IMG_2247.jpg","IMG_2248.jpg","IMG_2249.jpg","IMG_2251.jpg","IMG_2252.jpg"]],["day13",["72752F76-8546-4376-9798-AB3A8F0D1539.jpg","GP010660.jpg","GP010665.jpg","GP010682.jpg","GP010695.jpg","GP010696.jpg","GP010703.jpg","GP010704.jpg","GP010706.jpg","GP010709.jpg","GP010710.jpg","GP010723.jpg","GP010730.jpg","GP010731.jpg","GP010744.jpg","GP010748.jpg","GP010750.jpg","GP010751.jpg","GP010769.jpg","GP010788.jpg","GP010789.jpg","IMG_2255.jpg","IMG_2256.jpg","IMG_2257.jpg","IMG_2260.jpg","IMG_2266.jpg"]],["day14",["IMG_2269.jpg","IMG_2273.jpg","IMG_2274.jpg","IMG_2297.jpg","IMG_2299.jpg","IMG_2300.jpg","IMG_2301.jpg"]],["day15",["IMG_2305.jpg","IMG_2310.jpg","IMG_2311.jpg","IMG_2312.jpg"]],["day16",["IMG_2317.jpg","IMG_2318.jpg","IMG_2319.jpg","IMG_2320.jpg","IMG_2321.jpg","IMG_2322.jpg","IMG_2323.jpg","IMG_2324.jpg","IMG_2325.jpg","IMG_2326.jpg","IMG_2330.jpg","IMG_2336.jpg"]],["day17",["IMG_2343.jpg","IMG_2344.jpg","IMG_2346.jpg","IMG_2353.jpg","IMG_2358.jpg","IMG_2361.jpg","IMG_2363.jpg","IMG_2365.jpg","IMG_2366.jpg","IMG_2372.jpg","IMG_2374.jpg","IMG_2377.jpg","IMG_2379.jpg","IMG_2382.jpg","IMG_2385.jpg","IMG_2395.jpg","IMG_2396.jpg","IMG_2397.jpg","IMG_2398.jpg","IMG_2400.jpg","IMG_2401.jpg","IMG_2402.jpg","IMG_2404.jpg","IMG_2408.jpg","IMG_2414.jpg","IMG_2415.jpg","IMG_2417.jpg","IMG_2418.jpg","IMG_2421.jpg","IMG_2422.jpg","IMG_2425.jpg","IMG_2426.jpg","IMG_2427.jpg","IMG_2429.jpg","IMG_2430.jpg","IMG_2431.jpg","IMG_2432.jpg","IMG_2435.jpg","IMG_2448.jpg","IMG_2449.jpg","IMG_2454.jpg","IMG_2460.jpg","IMG_2465.jpg"]],["day18",["IMG_2470.jpg","IMG_2474.jpg"]]]},
+    {slug:'giappone2026',nome:'Giappone',anno:'2026',col:'--c-giappone26',gall:'https://www.gioriva.it/poitiracconto/giappone2026/galleria.html',tipo:'giappone26',giorni:{"1":3,"2":36,"3":57,"4":46,"5":72,"6":54,"7":96,"8":26,"9":75,"10":51,"11":3}},
+  ];
+
+      function voci(a){
+        var out = [], i, j, g, n;
+        if (a.tipo === 'cartelle'){
+          for (i = 0; i < a.gruppi.length; i++){
+            g = a.gruppi[i];
+            for (j = 0; j < g[1].length; j++){
+              var u = BASE + a.slug + '/' + g[0] + '/' + g[1][j];
+              out.push({t: u, f: u});
+            }
+          }
+        } else if (a.tipo === 'piatto'){
+          for (i = 0; i < a.file.length; i++){
+            var p = BASE + a.slug + '/' + a.file[i];
+            out.push({t: p, f: p});
+          }
+        } else if (a.tipo === 'california'){
+          for (var d in a.giorni){
+            n = a.giorni[d];
+            var dd = ('0' + d).slice(-2);
+            for (j = 1; j <= n; j++){
+              var nn = ('0' + j).slice(-2);
+              out.push({
+                t: BASE + a.slug + '/t-d' + dd + '-' + nn + '.jpg',
+                f: BASE + a.slug + '/f-d' + dd + '-' + nn + '.jpg'
+              });
+            }
+          }
+        } else if (a.tipo === 'indonesia'){
+          for (i = 0; i < a.gruppi.length; i++){
+            g = a.gruppi[i];
+            for (j = 0; j < g[1].length; j++){
+              out.push({
+                t: BASE + a.slug + '/thumb/' + g[0] + '/' + g[1][j],
+                f: BASE + a.slug + '/full/'  + g[0] + '/' + g[1][j]
+              });
+            }
+          }
+        } else if (a.tipo === 'giappone26'){
+          for (var k in a.giorni){
+            n = a.giorni[k];
+            for (j = 1; j <= n; j++){
+              var mm = ('0' + j).slice(-2);
+              out.push({
+                t: BASE + a.slug + '/day' + k + '/t-' + mm + '.jpg',
+                f: BASE + a.slug + '/day' + k + '/f-' + mm + '.jpg'
+              });
+            }
+          }
+        }
+        return out;
+      }
+
+      ALBUM.forEach(function(a){ a.foto = voci(a); });
+
+      var contenitore = document.getElementById('album');
+      var barraFiltri = document.getElementById('filtri');
+      var PRIME = window.matchMedia('(max-width: 660px)').matches ? 8 : 12;
+      var corrente = [], indice = 0;
+
+      /* filtri */
+      function creaFiltro(testo, extra, colore, azione, scelto){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'filtro' + (scelto ? ' scelto' : '');
+        if (colore) b.style.setProperty('--c', 'var(' + colore + ')');
+        var i = document.createElement('i');
+        b.appendChild(i);
+        b.appendChild(document.createTextNode(testo));
+        if (extra){
+          var em = document.createElement('em');
+          em.textContent = extra;
+          b.appendChild(em);
+        }
+        b.addEventListener('click', function(){
+          Array.prototype.forEach.call(barraFiltri.children, function(c){ c.classList.remove('scelto'); });
+          b.classList.add('scelto');
+          azione();
+        });
+        return b;
+      }
+
+      function mostra(slug){
+        Array.prototype.forEach.call(contenitore.children, function(bl){
+          bl.hidden = !!(slug && bl.dataset.slug !== slug);
+        });
+      }
+
+      var totale = ALBUM.reduce(function(s, a){ return s + a.foto.length; }, 0);
+      barraFiltri.appendChild(creaFiltro('Tutti i viaggi', String(totale), null, function(){ mostra(null); }, true));
+      ALBUM.forEach(function(a){
+        barraFiltri.appendChild(creaFiltro(a.nome.replace('&amp;','&') + ' ' + a.anno, String(a.foto.length), a.col, function(){ mostra(a.slug); }));
+      });
+
+      /* blocchi */
+      ALBUM.forEach(function(a){
+        var bl = document.createElement('section');
+        bl.className = 'blocco';
+        bl.dataset.slug = a.slug;
+        bl.style.setProperty('--c', 'var(' + a.col + ')');
+
+        var testa = document.createElement('div');
+        testa.className = 'blocco-testa';
+        testa.innerHTML = '<span class="pallino"></span>' +
+          '<h3>' + a.nome + ' <span style="color:var(--tenue);font-size:.7em">' + a.anno + '</span></h3>' +
+          '<span class="conteggio">' + a.foto.length + ' foto</span>';
+        var link = document.createElement('a');
+        link.className = 'diario';
+        link.href = a.gall;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.textContent = 'Vai al diario';
+        testa.appendChild(link);
+        bl.appendChild(testa);
+
+        var mos = document.createElement('div');
+        mos.className = 'mosaico';
+        bl.appendChild(mos);
+
+        var mostrate = 0, aperte = false;
+
+        function aggiungi(fino){
+          for (var i = mostrate; i < fino; i++){
+            (function(i){
+              var b = document.createElement('button');
+              b.type = 'button';
+              var im = document.createElement('img');
+              im.loading = 'lazy';
+              im.decoding = 'async';
+              im.src = a.foto[i].t;
+              im.alt = a.nome + ' ' + a.anno;
+              im.addEventListener('load', function(){ im.classList.add('carica'); });
+              im.addEventListener('error', function(){ b.remove(); });
+              b.appendChild(im);
+              b.addEventListener('click', function(){ apri(a, i); });
+              mos.appendChild(b);
+            })(i);
+          }
+          mostrate = fino;
+        }
+
+        var bottone = null;
+        if (a.foto.length > PRIME){
+          bottone = document.createElement('button');
+          bottone.type = 'button';
+          bottone.className = 'ancora';
+          bottone.textContent = 'Mostra tutte le ' + a.foto.length + ' foto';
+          bottone.addEventListener('click', function(){
+            if (!aperte){
+              aggiungi(a.foto.length);
+              aperte = true;
+              bottone.textContent = 'Mostra solo le prime';
+              bottone.classList.add('aperta');
+            } else {
+              while (mos.children.length > PRIME) mos.removeChild(mos.lastChild);
+              mostrate = PRIME;
+              aperte = false;
+              bottone.textContent = 'Mostra tutte le ' + a.foto.length + ' foto';
+              bottone.classList.remove('aperta');
+              var y = bl.getBoundingClientRect().top + window.pageYOffset - 90;
+              window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+          });
+        }
+        aggiungi(Math.min(PRIME, a.foto.length));
+        if (bottone) bl.appendChild(bottone);
+        contenitore.appendChild(bl);
+      });
+
+      /* visualizzatore */
+      var visore = document.getElementById('visore'),
+          vimg = document.getElementById('visoreImg'),
+          vinfo = document.getElementById('visoreInfo');
+
+      function apri(a, i){
+        corrente = a.foto; indice = i;
+        vimg.src = corrente[i].f;
+        vimg.alt = a.nome + ' ' + a.anno;
+        vinfo.textContent = a.nome.replace('&amp;','&') + ' ' + a.anno + '  ·  ' + (i+1) + ' di ' + corrente.length;
+        visore.classList.add('aperto');
+        document.body.style.overflow = 'hidden';
+      }
+      function scorri(passo){
+        if (!corrente.length) return;
+        indice = (indice + passo + corrente.length) % corrente.length;
+        vimg.src = corrente[indice].f;
+        vinfo.textContent = vinfo.textContent.replace(/\d+ di \d+/, (indice+1) + ' di ' + corrente.length);
+      }
+      function chiudi(){
+        visore.classList.remove('aperto');
+        vimg.src = '';
+        document.body.style.overflow = '';
+      }
+      document.getElementById('visoreChiudi').addEventListener('click', chiudi);
+      document.getElementById('visorePrec').addEventListener('click', function(e){ e.stopPropagation(); scorri(-1); });
+      document.getElementById('visoreSucc').addEventListener('click', function(e){ e.stopPropagation(); scorri(1); });
+      visore.addEventListener('click', function(e){ if (e.target === visore) chiudi(); });
+      document.addEventListener('keydown', function(e){
+        if (!visore.classList.contains('aperto')) return;
+        if (e.key === 'Escape') chiudi();
+        if (e.key === 'ArrowLeft') scorri(-1);
+        if (e.key === 'ArrowRight') scorri(1);
+      });
+    })();
+  </script>
+
 </body>
 </html>
