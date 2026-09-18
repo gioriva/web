@@ -327,14 +327,15 @@
   .diario-nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 8px; }
   .diario-nav a { font-size: 14px; color: var(--ivory-2); border: 1px solid var(--line); border-radius: 100px; padding: 6px 13px; transition: color 0.2s, border-color 0.2s; }
   .diario-nav a:hover { color: var(--ivory); border-color: var(--ivory-2); }
-  .giornata { padding: 56px 0 48px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--head-h) + 16px); }
-  .giornata:last-of-type { border-bottom: none; }
-  .g-head { margin-bottom: 22px; }
-  .g-data { display: flex; align-items: center; gap: 12px; font-size: 14.5px; color: var(--ivory-2); }
-  .g-data::before { content: ''; width: 26px; height: 1px; background: var(--glacier); flex-shrink: 0; }
-  .giornata.caldo .g-data::before { background: var(--lagoon); }
-  .giornata.volo .g-data::before { background: var(--dawn); }
+  .giornata { padding: 40px 0 40px; scroll-margin-top: calc(var(--head-h) + 16px); }
+  .giornata + .giornata { padding-top: 72px; }
+  .g-head { margin-bottom: 24px; }
+  .g-data { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: var(--ivory-2); }
+  .g-icona { width: 18px; height: 18px; flex-shrink: 0; fill: var(--glacier); }
+  .giornata.caldo .g-icona { fill: var(--lagoon); }
+  .giornata.volo .g-icona { fill: var(--dawn); }
   .g-luogo { font-family: var(--display); font-size: clamp(32px, 6vw, 48px); line-height: 1.05; margin-top: 8px; }
+  .g-sotto { font-family: var(--display); font-style: italic; font-size: clamp(18px, 3vw, 22px); color: var(--ivory-2); margin-top: 6px; }
   .g-foto { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 0 14px; margin: 0 0 18px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
   .g-foto a { flex: 0 0 auto; scroll-snap-align: start; }
   .g-foto img { height: 230px; width: auto; max-width: 84vw; object-fit: cover; display: block; border-radius: 4px; background: var(--night-2); }
@@ -352,6 +353,22 @@
   .lightbox.open { display: flex; }
   .lightbox img { max-width: 100%; max-height: 100%; }
   .lb-close { position: absolute; top: 14px; right: 14px; background: none; border: none; color: var(--ivory); font-size: 34px; cursor: pointer; width: 46px; height: 46px; }
+
+  /* torna su */
+  .torna-su {
+    position: fixed; right: 18px; bottom: 22px; z-index: 85;
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 1px solid rgba(243,241,234,0.35); background: rgba(6,20,35,0.6);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    color: var(--ivory); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(12px); pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+  }
+  .torna-su svg { width: 20px; height: 20px; }
+  .torna-su.visibile { opacity: 1; transform: none; pointer-events: auto; }
+  .torna-su:hover { background: var(--ivory); color: var(--night); }
+  @media (prefers-reduced-motion: reduce) { .torna-su { transition: none; } }
 
   /* ═══ FOOTER ═══ */
   footer {
@@ -637,10 +654,11 @@
       <a href="#giorno-3">17 settembre</a>
     </nav>
 
-    <article class="giornata" id="giorno-1" data-day="1">
+    <article class="giornata volo" id="giorno-1" data-day="1">
       <div class="g-head">
-        <div class="g-data">Giorno 1, martedì 15 settembre</div>
+        <div class="g-data"><svg class="g-icona" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12 L20 6 L14 12 L20 18 Z"/></svg><span>Giorno 1, martedì 15 settembre</span></div>
         <div class="g-luogo">Milano, Parigi, Buenos Aires</div>
+        <div class="g-sotto">Tredici ore e mezza nei cieli</div>
       </div>
       <div class="g-foto" hidden></div>
       <div class="g-testo">
@@ -652,8 +670,9 @@
 
     <article class="giornata" id="giorno-2" data-day="2">
       <div class="g-head">
-        <div class="g-data">Giorno 2, mercoledì 16 settembre</div>
+        <div class="g-data"><svg class="g-icona" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14.2 9.8 L22 12 L14.2 14.2 L12 22 L9.8 14.2 L2 12 L9.8 9.8 Z"/></svg><span>Giorno 2, mercoledì 16 settembre</span></div>
         <div class="g-luogo">Buenos Aires</div>
+        <div class="g-sotto">La città con Giuliana e Plinio</div>
       </div>
       <div class="g-foto" hidden></div>
       <div class="g-testo">
@@ -666,8 +685,9 @@
 
     <article class="giornata" id="giorno-3" data-day="3">
       <div class="g-head">
-        <div class="g-data">Giorno 3, giovedì 17 settembre</div>
+        <div class="g-data"><svg class="g-icona" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14.2 9.8 L22 12 L14.2 14.2 L12 22 L9.8 14.2 L2 12 L9.8 9.8 Z"/></svg><span>Giorno 3, giovedì 17 settembre</span></div>
         <div class="g-luogo">Buenos Aires</div>
+        <div class="g-sotto">Libri, teatro e tango</div>
       </div>
       <div class="g-foto" hidden></div>
       <div class="g-testo">
@@ -688,6 +708,10 @@
   <button class="lb-close" id="lbclose" aria-label="Chiudi">×</button>
   <img id="lbimg" src="" alt="" />
 </div>
+
+<button class="torna-su" id="torna-su" aria-label="Torna a inizio pagina">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
 
 <footer>
   <a href="https://www.gioriva.it" aria-label="Gio Riva">
@@ -822,6 +846,12 @@
   if (reduce) { applySplit(50); }
   else { requestAnimationFrame(frame); }
   window.addEventListener('resize', function () { applySplit(split); });
+
+  /* ── torna su ── */
+  var su = document.getElementById('torna-su');
+  function checkSu() { su.classList.toggle('visibile', window.scrollY > window.innerHeight * 0.9); }
+  window.addEventListener('scroll', checkSu, { passive: true }); checkSu();
+  su.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
 
   /* ── le tre ore ── */
   function fmt(tz) {
