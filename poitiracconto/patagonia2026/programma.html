@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow" />
 <title>Programma · Patagonia & Polinesia 2026</title>
 <meta name="theme-color" content="#061423" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Ccircle cx='32' cy='32' r='30'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23c)'%3E%3Crect width='64' height='64' fill='%23061423'/%3E%3Cpolygon points='38,0 64,0 64,64 26,64' fill='%2323b3b0'/%3E%3Ccircle cx='50' cy='24' r='7' fill='%23ffd29a'/%3E%3Cpolygon points='0,48 12,32 22,44 32,26 40,44 40,64 0,64' fill='%230e2c44'/%3E%3Ccircle cx='16' cy='16' r='1.8' fill='%23fff'/%3E%3Ccircle cx='24' cy='24' r='1.3' fill='%23fff'/%3E%3Ccircle cx='9' cy='27' r='1.3' fill='%23fff'/%3E%3Ccircle cx='19' cy='8' r='1.1' fill='%23fff'/%3E%3C/g%3E%3Ccircle cx='32' cy='32' r='30' fill='none' stroke='%23f3f1ea' stroke-width='2.5'/%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Ccircle cx='20' cy='20' r='18'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url%28%23c%29'%3E%3Crect width='40' height='40' fill='%230b2b46'/%3E%3Cpolygon points='24,0 40,0 40,40 16,40' fill='%232fc9bd'/%3E%3Ccircle cx='31' cy='15' r='4.2' fill='%23ffd9a4'/%3E%3Cpolygon points='0,30 7,20 12,27 17,18 22,29 22,40 0,40' fill='%23061423'/%3E%3Cpath d='M11 9 L12.1 12.4 L15.5 13.5 L12.1 14.6 L11 18 L9.9 14.6 L6.5 13.5 L9.9 12.4 Z' fill='%23f3f1ea'/%3E%3Cline x1='24' y1='0' x2='16' y2='40' stroke='%23f3f1ea' stroke-width='1'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='18' fill='none' stroke='%23f3f1ea' stroke-width='1.6'/%3E%3C/svg%3E" />
 
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
@@ -55,6 +55,9 @@
   header.bar { position: fixed; top: 0; left: 0; right: 0; height: var(--head-h); z-index: 90; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 22px; background: rgba(6,20,35,0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
   .brand { font-family: var(--display); font-size: 21px; color: var(--ivory); white-space: nowrap; }
   .brand i { font-style: italic; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; }
+  .brand .logo { width: 30px; height: 30px; flex-shrink: 0; filter: drop-shadow(0 1px 6px rgba(0,0,0,0.35)); }
+  @media (max-width: 380px) { .brand .logo { width: 26px; height: 26px; } }
   .burger { width: 46px; height: 46px; border: 1px solid rgba(243,241,234,0.35); background: rgba(6,20,35,0.35); border-radius: 50%; cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
   .burger span { display: block; width: 18px; height: 1.5px; background: var(--ivory); border-radius: 1px; transition: transform 0.3s, opacity 0.3s; }
   .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
@@ -120,11 +123,11 @@
   /* tappe */
   section.tappa { padding: 74px 0 60px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--head-h) + 14px); position: relative; }
   section.tappa::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 240px; background: linear-gradient(to bottom, var(--tinta, transparent), transparent); pointer-events: none; }
-  .tappa-head { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: baseline; margin-bottom: 26px; position: relative; }
-  @media (max-width: 560px) { .tappa-head { grid-template-columns: 1fr; gap: 6px; } }
-  .tappa-num { font-family: var(--display); font-style: italic; font-size: clamp(64px, 11vw, 104px); line-height: 0.8; color: var(--glacier); }
-  .tappa.caldo .tappa-num { color: var(--lagoon); }
-  .tappa.volo .tappa-num { color: var(--dawn); }
+  .tappa-head { margin-bottom: 26px; position: relative; }
+  .t-eti { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: var(--ivory-2); margin-bottom: 10px; }
+  .t-icona { width: 18px; height: 18px; flex-shrink: 0; fill: var(--glacier); }
+  .tappa.caldo .t-icona { fill: var(--lagoon); }
+  .tappa.volo .t-icona { fill: var(--dawn); }
   h2 { font-family: var(--display); font-weight: 400; font-size: clamp(38px, 6.6vw, 64px); line-height: 1.0; margin: 0; }
   .tappa-head .quando { font-size: 15.5px; color: var(--ivory-2); margin-top: 6px; }
   .tappa-lede { font-size: 18px; color: var(--ivory); max-width: 600px; margin: 0 0 28px; position: relative; }
@@ -159,7 +162,18 @@
 <body>
 
 <header class="bar">
-  <a class="brand" href="https://www.gioriva.it/poitiracconto/patagonia2026">Patagonia <i>&amp;</i> Polinesia</a>
+  <a class="brand" href="https://www.gioriva.it/poitiracconto/patagonia2026"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true">
+      <defs><clipPath id="lg-c"><circle cx="20" cy="20" r="18"/></clipPath></defs>
+      <g clip-path="url(#lg-c)">
+        <rect width="40" height="40" fill="#0b2b46"/>
+        <polygon points="24,0 40,0 40,40 16,40" fill="#2fc9bd"/>
+        <circle cx="31" cy="15" r="4.2" fill="#ffd9a4"/>
+        <polygon points="0,30 7,20 12,27 17,18 22,29 22,40 0,40" fill="#061423"/>
+        <path d="M11 9 L12.1 12.4 L15.5 13.5 L12.1 14.6 L11 18 L9.9 14.6 L6.5 13.5 L9.9 12.4 Z" fill="#f3f1ea"/>
+        <line x1="24" y1="0" x2="16" y2="40" stroke="#f3f1ea" stroke-opacity="0.9" stroke-width="1"/>
+      </g>
+      <circle cx="20" cy="20" r="18" fill="none" stroke="#f3f1ea" stroke-width="1.4"/>
+    </svg><span>Patagonia <i>&amp;</i> Polinesia</span></a>
   <button class="burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Apri il menu"><span></span><span></span><span></span></button>
 </header>
 <div class="scrim" id="scrim"></div>
@@ -202,7 +216,7 @@
 <section class="tappa" id="ba" style="--tinta: rgba(74,143,176,0.12)">
   <div class="wrap">
     <div class="tappa-head">
-      <div class="tappa-num">I</div>
+      <div class="t-eti"><svg class="t-icona" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14.2 9.8 L22 12 L14.2 14.2 L12 22 L9.8 14.2 L2 12 L9.8 9.8 Z"/></svg><span>Argentina, prima tappa</span></div>
       <div><h2>Buenos Aires</h2><div class="quando">Dal 15 al 18 settembre, tre notti. Ci torneremo per una notte il 24.</div></div>
     </div>
     <p class="tappa-lede">La città dove l'Europa si specchia nel Sudamerica: palazzi eleganti, piazze monumentali, avenidas e tango.</p>
@@ -221,7 +235,7 @@
 <section class="tappa" id="calafate" style="--tinta: rgba(143,208,230,0.13)">
   <div class="wrap">
     <div class="tappa-head">
-      <div class="tappa-num">II</div>
+      <div class="t-eti"><svg class="t-icona" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14.2 9.8 L22 12 L14.2 14.2 L12 22 L9.8 14.2 L2 12 L9.8 9.8 Z"/></svg><span>Patagonia, seconda tappa</span></div>
       <div><h2>El Calafate</h2><div class="quando">Dal 18 al 22 settembre, quattro notti sul Lago Argentino.</div></div>
     </div>
     <p class="tappa-lede">La cittadina prende il nome dal calafate, una bacca simile al mirtillo. È la porta del Parco Nazionale Los Glaciares: seicentomila ettari e 356 ghiacciai.</p>
@@ -240,7 +254,7 @@
 <section class="tappa" id="ushuaia" style="--tinta: rgba(185,227,240,0.12)">
   <div class="wrap">
     <div class="tappa-head">
-      <div class="tappa-num">III</div>
+      <div class="t-eti"><svg class="t-icona" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14.2 9.8 L22 12 L14.2 14.2 L12 22 L9.8 14.2 L2 12 L9.8 9.8 Z"/></svg><span>Tierra del Fuego, terza tappa</span></div>
       <div><h2>Ushuaia</h2><div class="quando">Dal 22 al 24 settembre, due notti sul Canale di Beagle.</div></div>
     </div>
     <p class="tappa-lede">La città più australe del mondo. Il nome viene dalla lingua Yámana e significa "baia che penetra verso ponente". Case di legno e lamiera con i tetti spioventi per la neve, dipinte con gli avanzi delle vernici delle barche: così i marinai riconoscevano casa dal mare.</p>
@@ -259,7 +273,7 @@
 <section class="tappa volo" id="traversata" style="--tinta: rgba(255,217,164,0.10)">
   <div class="wrap">
     <div class="tappa-head">
-      <div class="tappa-num">✈</div>
+      <div class="t-eti"><svg class="t-icona" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12 L20 6 L14 12 L20 18 Z"/></svg><span>In volo sul Pacifico</span></div>
       <div><h2>La traversata</h2><div class="quando">Dal 25 al 27 settembre: tre continenti e tredici fusi orari inseguendo il sole.</div></div>
     </div>
     <p class="tappa-lede">Si parte da Buenos Aires un venerdì sera e si arriva in paradiso il sabato notte. In mezzo, Lima e Los Angeles.</p>
@@ -273,7 +287,7 @@
 <section class="tappa caldo" id="tahaa" style="--tinta: rgba(95,220,208,0.12)">
   <div class="wrap">
     <div class="tappa-head">
-      <div class="tappa-num">IV</div>
+      <div class="t-eti"><svg class="t-icona" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14.2 9.8 L22 12 L14.2 14.2 L12 22 L9.8 14.2 L2 12 L9.8 9.8 Z"/></svg><span>Polinesia, quarta tappa</span></div>
       <div><h2>Taha'a</h2><div class="quando">Dal 27 settembre al 1 ottobre, quattro notti sull'acqua.</div></div>
     </div>
     <p class="tappa-lede">Un isolotto di sabbia bianca sulla barriera corallina, a cinque minuti di barca dall'isola principale e trenta dall'aeroporto di Raiatea. Un mondo di bellezza immacolata, ispirato all'architettura polinesiana.</p>
@@ -291,7 +305,7 @@
 <section class="tappa caldo" id="borabora" style="--tinta: rgba(47,201,189,0.12)">
   <div class="wrap">
     <div class="tappa-head">
-      <div class="tappa-num">V</div>
+      <div class="t-eti"><svg class="t-icona" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14.2 9.8 L22 12 L14.2 14.2 L12 22 L9.8 14.2 L2 12 L9.8 9.8 Z"/></svg><span>Polinesia, quinta tappa</span></div>
       <div><h2>Bora Bora</h2><div class="quando">Dal 1 al 5 ottobre, quattro notti davanti al monte Otemanu.</div></div>
     </div>
     <p class="tappa-lede">La pace del Motu Tevairoa, a dieci minuti di barca veloce dall'aeroporto. Dal bungalow la vista è sul monte Otemanu, il rilievo verdissimo che domina l'orizzonte e che è il simbolo di questo angolo di paradiso.</p>
@@ -309,7 +323,7 @@
 <section class="tappa volo" id="ritorno" style="--tinta: rgba(255,190,140,0.10); border-bottom: none;">
   <div class="wrap">
     <div class="tappa-head">
-      <div class="tappa-num">✈</div>
+      <div class="t-eti"><svg class="t-icona" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12 L20 6 L14 12 L20 18 Z"/></svg><span>In volo verso casa</span></div>
       <div><h2>Il ritorno</h2><div class="quando">Dal 5 al 7 ottobre: Papeete, Los Angeles, Parigi, Milano.</div></div>
     </div>
     <div class="giorno"><div class="data">6<small>martedì</small></div><div><h3>Los Angeles</h3><p>Si atterra in California la mattina, e nel pomeriggio si riparte per Parigi con il volo notturno.</p></div></div>
