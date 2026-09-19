@@ -307,7 +307,7 @@ body.menu-open .wm { opacity: 0 !important; transition: opacity .5s; }
     let W, H, cx, cy, K, COLS, ROWS, XR, mobile;
     const cam_y = 0.75, cam_f = 1.55;
 
-    /* ── the sea: a slow swell, lit by the real sun over Como ── */
+    /* ── the sea: a dot-wave, warm, in the light of the day over Como ── */
     let waveA = 1, seaA = 0;
     const LAT = 45.81 * Math.PI / 180, LON = 9.09;
     const params = new URLSearchParams(location.search);
@@ -338,27 +338,22 @@ body.menu-open .wm { opacity: 0 !important; transition: opacity .5s; }
     let sun = sunNow();
     setInterval(() => { sun = sunNow(); }, 30000);
 
-    /* the sea: three long swells drifting slowly toward the shore, and a faint wavelet riding on them */
-    const HORIZON = 0.25;                                          /* mean height of the water at the far edge */
-    function relief(x, z, t) {
-      const f = Math.max(0, Math.min(1, (z - 3) / 5)), ff = f * f * (3 - 2 * f);
-      const calm = 1 - 1.0 * ff;                                 /* the swell settles toward the horizon */
-      return HORIZON + calm * (
-          0.55 * Math.sin(0.347 * x + 0.952 * z + 0.80 * t + 0.4 * Math.sin(0.16 * x - 0.05 * t))   /* main swell, coming in from the left, crests gently bent */
-        + 0.3 * Math.sin(-0.255 * x + 0.786 * z + 0.62 * t + 1.3)   /* a second train, from the right */
-        + 0.15 * Math.sin(0.334 * x + 0.300 * z + 0.40 * t + 2.6));  /* a long, slow ground swell across the field */
-    }
-    function horizonPx() { return cy - ((HORIZON * 0.34 - 0.12 - cam_y) / 10.4) * K; }
+    /* the sea: the dot-wave of gioriva.com. Three crossed waves; the far rows calm down and the nearest stay flat, so the bottom edge never opens */
+    const AMP = TOUCH ? 1.35 : 1;                                   /* on touch screens the wave is a little bolder */
     const pointer = { x: 0, z: 0, s: 0 };
-    let lastTouch = -1e9;
+    let ripple = 0, lastTouch = -1e9, nowMs = 0;
     function surface(x, z, t) {
-      /* the swell, a wavelet on top that fades with distance, and the soft print of the pointer */
+      const fr = (z - 0.6) / 9.4;
+      const amp = (0.95 - fr * 0.6) * AMP * Math.min(1, fr * 3.5);
+      let y = (Math.sin(x * 0.32 + t * 1.4) * 0.16
+             + Math.sin(z * 0.55 - t * 1.1) * 0.14
+             + Math.sin((x + z) * 0.22 + t * 0.7) * 0.10) * amp;
       const dx = x - pointer.x, dz = z - pointer.z, d = Math.sqrt(dx * dx + dz * dz);
-      const near = Math.max(0, Math.min(1, (8 - z) / 4));
-      return relief(x, z, t)
-        + 0.03 * near * Math.sin(3.6 * x + 2.4 * z + 0.9 * t)
-        - Math.exp(-d * d * 1.6) * 0.28 * pointer.s;
+      y += Math.exp(-d * d * 1.6) * 0.35 * pointer.s;                                 /* the soft rise under the pointer */
+      y += Math.sin(d * 6 - nowMs * 0.008) * Math.exp(-d * 0.9) * 0.12 * ripple;     /* and the ring of a touch */
+      return y;
     }
+    function horizonPx() { return cy - ((0 - cam_y) / 10.4) * K; }
     function light() {
       /* light direction in scene space: +x east, +z north (away), +y up */
       const alt = sun.alt, az = sun.az;
@@ -370,35 +365,30 @@ body.menu-open .wm { opacity: 0 !important; transition: opacity .5s; }
     }
     function cell(c, r, t) {
       const x = ((c / (COLS - 1)) - 0.5) * XR, z = 0.6 + (r / ROWS) * 9.4;
-      const y = surface(x, z, t) * 0.34 - 0.12;
+      const y = surface(x, z, t);
       const pz = z + 0.4;
-      return { sx: cx + (x / pz) * K, sy: cy - ((y - cam_y) / pz) * K, y, depth: 1 - r / ROWS, r, x, z };
+      return { sx: cx + (x / pz) * K, sy: cy - ((y - cam_y) / pz) * K, y, depth: 1 - r / ROWS, r };
     }
     function drawWave(t) {
       const L = light();
-      const e = 0.004, SHADE = 1.6;
+      const dayI = (0.5 + 0.5 * L.day) * waveA * seaA;             /* the whole sea dims a little at night */
+      const warm = L.day * L.golden * 0.45;                           /* and warms toward amber when the sun is low */
       const inkHi = [239, 230, 216], amb = [242, 179, 107];
+      const inkCol = [0, 1, 2].map(i => Math.round(inkHi[i] + (amb[i] - inkHi[i]) * warm)).join(',');
+      /* 16 levels of alpha per tint, as on gioriva.com: the far rows come out a touch brighter than the bare formula */
+      const LEVELS = 16, PAL_INK = [], PAL_ACC = [];
+      for (let i = 0; i < LEVELS; i++) { const al = ((i + 1) / LEVELS).toFixed(3); PAL_INK.push(`rgba(${inkCol},${al})`); PAL_ACC.push(`rgba(242,179,107,${al})`); }
       for (let r = ROWS - 1; r >= 0; r--) {
         for (let c = 0; c < COLS; c++) {
           const p = cell(c, r, t);
           if (p.sy < -10 || p.sy > H + 10 || p.sx < -10 || p.sx > W + 10) continue;
-          /* normal by finite differences */
-          const hx = surface(p.x + e, p.z, t) - surface(p.x - e, p.z, t);
-          const hz = surface(p.x, p.z + e, t) - surface(p.x, p.z - e, t);
-          let nx = -hx / (2 * e) * SHADE, ny = 1, nz = -hz / (2 * e) * SHADE;   /* the slopes are gentle: the light reads them a little steeper */
-          const nl = Math.sqrt(nx * nx + ny * ny + nz * nz); nx /= nl; ny /= nl; nz /= nl;
-          const lam = Math.max(0, nx * L.l[0] + ny * L.l[1] + nz * L.l[2]);
+          const lift = Math.max(0, p.y + 0.25);                       /* the crests shine */
           const far = Math.min(1, (1 - p.r / ROWS) * 4);
-          /* the crests catch the sky: a soft sheen that rises with the height of the swell */
-          const hc = Math.max(0, Math.min(1, ((p.y + 0.12) / 0.34 - HORIZON) / 0.45));
-          const crest = hc * hc * (3 - 2 * hc);
-          const dayI = 0.12 + 0.78 * lam, nightI = 0.09 + 0.24 * lam;
-          const inten = (nightI + (dayI - nightI) * L.day + crest * (0.05 + 0.13 * L.day)) * far * waveA * seaA;
-          if (inten < 0.035) continue;
-          const warm = L.day * L.golden * (lam + 0.3 * crest);
-          const col = [0, 1, 2].map(i => Math.round(inkHi[i] + (amb[i] - inkHi[i]) * Math.min(1, warm)));
-          const size = (0.6 + p.depth * 1.3 + lam * 0.5 + crest * 0.4) * DPR;
-          ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${Math.min(1, inten).toFixed(3)})`;
+          const a = (0.12 + p.depth * 0.45 + lift * 0.6) * far * dayI;
+          if (a < 0.04) continue;
+          const size = (0.6 + p.depth * 1.2 + lift * 1.0) * DPR;
+          const idx = Math.min(LEVELS - 1, (a * LEVELS) | 0);
+          ctx.fillStyle = lift > 0.42 ? PAL_ACC[idx] : PAL_INK[idx];
           ctx.fillRect(p.sx - size / 2, p.sy - size / 2, size, size);
         }
       }
@@ -431,12 +421,12 @@ body.menu-open .wm { opacity: 0 !important; transition: opacity .5s; }
     const NEARZ = 0.55;
     function seedSky() {
       sky = [];
-      const n = mobile ? 600 : 1280, XRS = W / H;
+      const n = mobile ? 450 : 950, XRS = W / H;
       for (let i = 0; i < n; i++) {
         const z = 0.25 + Math.pow(Math.random(), 1.6) * 2.9;
         sky.push({ x: (Math.random() * 2 - 1) * XRS * 1.6, y: -0.03 - Math.random() * 1.5, z,
           warm: Math.random() < 0.07, ph: Math.random() * 6.28, tw: 0.2 + Math.random() * 0.5,
-          vx: (0.010 + Math.random() * 0.006) * (Math.random() < 0.15 ? -1 : 1), vy: (Math.random() - 0.5) * 0.004 });
+          vx: (0.006 + Math.random() * 0.004) * (Math.random() < 0.15 ? -1 : 1), vy: (Math.random() - 0.5) * 0.0025 });
       }
     }
     let lastSky = 0;
@@ -452,14 +442,14 @@ body.menu-open .wm { opacity: 0 !important; transition: opacity .5s; }
         const sx = cx + (g.x / g.z) * K * 0.55, sy = cy + (g.y / g.z) * K * 0.55;
         if (sx < -20 || sx > W + 20 || sy < -20 || sy > horizonY - 6 * DPR) continue;
         const depth = 1 - (g.z - 0.25) / 2.9;
-        const tw = 0.75 + 0.25 * Math.sin(ts * 0.0004 * g.tw * 40 + g.ph);
-        const a = (0.09 + 0.66 * depth * depth) * tw * skyA * waveA;
+        const tw = 0.84 + 0.16 * Math.sin(ts * 0.00022 * g.tw * 40 + g.ph);
+        const a = (0.07 + 0.52 * depth * depth) * tw * skyA * waveA;
         const r = (0.5 + 2.4 * depth * depth) * DPR;
         const col = g.warm ? '242,179,107' : '239,230,216';
         const target = g.z < NEARZ ? ctx2 : ctx;
         if (g.z < NEARZ) {
           const gr = target.createRadialGradient(sx, sy, 0, sx, sy, r * 3.6);
-          gr.addColorStop(0, `rgba(${col},${(a * 0.46).toFixed(3)})`); gr.addColorStop(1, `rgba(${col},0)`);
+          gr.addColorStop(0, `rgba(${col},${(a * 0.36).toFixed(3)})`); gr.addColorStop(1, `rgba(${col},0)`);
           target.fillStyle = gr; target.beginPath(); target.arc(sx, sy, r * 3.6, 0, Math.PI * 2); target.fill();
         }
         target.fillStyle = `rgba(${col},${Math.min(1, a).toFixed(3)})`;
@@ -483,10 +473,15 @@ body.menu-open .wm { opacity: 0 !important; transition: opacity .5s; }
       pointer.x = nx * (z + 0.4); pointer.z = z; pointer.s = 1;
     }
     addEventListener('pointermove', e => { toScene(e.clientX, e.clientY); lastTouch = performance.now(); }, { passive: true });
-    addEventListener('pointerdown', e => { toScene(e.clientX, e.clientY); lastTouch = performance.now(); }, { passive: true });
+    addEventListener('pointerdown', e => { toScene(e.clientX, e.clientY); ripple = 1; lastTouch = performance.now(); }, { passive: true });
     function autoPointer(ts) {
+      /* without a pointer (or after 3 s without touches) a point of pressure wanders on its own, and now and then drops a ring */
       if (!TOUCH || ts - lastTouch < 3000) return;
-      pointer.x = Math.sin(ts * 0.00018) * XR * 0.35; pointer.z = 2.2 + Math.sin(ts * 0.00011) * 1.4; pointer.s = 0.8;
+      const k = ts * 0.00022;
+      pointer.x = Math.sin(k * 1.3) * (XR * 0.28);
+      pointer.z = 2.6 + (Math.sin(k * 0.9 + 1.7) * 0.5 + 0.5) * 3.5;
+      pointer.s += (0.9 - pointer.s) * 0.02;
+      if (Math.sin(k * 0.45) > 0.995 && ripple < 0.05) ripple = 1;
     }
 
     /* ── public hooks for the menu ── */
@@ -507,8 +502,7 @@ body.menu-open .wm { opacity: 0 !important; transition: opacity .5s; }
     /* ── the plotter: a luminous head writes the payoff, on every visit ── */
     const payEl = document.querySelector('.wm .payoff');
     const PAY = payEl ? payEl.textContent : '';
-    const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const WRITE = 1.5, FADE = 0.6, WAIT = 1.1;                      /* seconds: writing, head fading out, pause before it starts */
+    const WRITE = 2.2, FADE = 0.7, WAIT = 1.4;                      /* seconds: writing, head fading out, pause before it starts */
     let plotStart = null, writeStart = null, plotDone = false, fontsReady = false;
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { fontsReady = true; }); else fontsReady = true;
     let headPos = null;
@@ -516,11 +510,11 @@ body.menu-open .wm { opacity: 0 !important; transition: opacity .5s; }
     function drawHead() {
       if (!headPos) return;
       const { x, y, glow } = headPos;
-      const r = 14 * DPR;
+      const r = 17 * DPR;
       const g = ctx2.createRadialGradient(x, y, 0, x, y, r);
-      g.addColorStop(0, `rgba(242,179,107,${(0.55 * glow).toFixed(3)})`); g.addColorStop(1, 'rgba(242,179,107,0)');
+      g.addColorStop(0, `rgba(242,179,107,${(0.65 * glow).toFixed(3)})`); g.addColorStop(1, 'rgba(242,179,107,0)');
       ctx2.fillStyle = g; ctx2.beginPath(); ctx2.arc(x, y, r, 0, Math.PI * 2); ctx2.fill();
-      ctx2.fillStyle = `rgba(255,252,246,${glow.toFixed(3)})`; ctx2.beginPath(); ctx2.arc(x, y, 2.2 * DPR, 0, Math.PI * 2); ctx2.fill();
+      ctx2.fillStyle = `rgba(255,252,246,${glow.toFixed(3)})`; ctx2.beginPath(); ctx2.arc(x, y, 2.6 * DPR, 0, Math.PI * 2); ctx2.fill();
     }
     /* while it is being written, the line keeps its final layout: the letters still to come are laid out but invisible */
     let wSpan = null, uSpan = null;
@@ -538,7 +532,7 @@ body.menu-open .wm { opacity: 0 !important; transition: opacity .5s; }
     }
     function setupPlotter() {
       canvas2.width = W; canvas2.height = H;
-      if (!payEl || REDUCED) { finishPlot(); return; }
+      if (!payEl) { finishPlot(); return; }
       wSpan = document.createElement('span'); uSpan = document.createElement('span'); uSpan.className = 'u';
       payEl.textContent = ''; payEl.appendChild(wSpan); payEl.appendChild(uSpan);
       payWrite(0);
@@ -563,7 +557,6 @@ body.menu-open .wm { opacity: 0 !important; transition: opacity .5s; }
       }
       finishPlot();
     }
-    addEventListener('pointerdown', () => { if (!plotDone) finishPlot(); }, { passive: true });
     document.addEventListener('keydown', () => { if (!plotDone) finishPlot(); });
     window.__finishPlot = function () { if (!plotDone) finishPlot(); };
 
@@ -572,8 +565,10 @@ body.menu-open .wm { opacity: 0 !important; transition: opacity .5s; }
       const dt = Math.min(0.05, (ts - last) / 1000 || 0.016); last = ts;
       if (waveT0 === null) waveT0 = ts;
       const t = (ts - waveT0) * 0.00035;
+      nowMs = ts;
       autoPointer(ts);
       if (!TOUCH || ts - lastTouch < 3000) pointer.s *= 0.97;
+      ripple *= 0.985;
       ctx.fillStyle = '#0C0907'; ctx.fillRect(0, 0, W, H);
       ctx2.clearRect(0, 0, W, H);
       /* the sea and the sky come up softly on arrival */
