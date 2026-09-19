@@ -353,9 +353,9 @@
   .giornata.volo .g-icona { fill: var(--dawn); }
   .g-luogo { font-family: var(--display); font-size: clamp(32px, 6vw, 48px); line-height: 1.05; margin-top: 8px; }
   .g-sotto { font-family: var(--display); font-style: italic; font-size: clamp(18px, 3vw, 22px); color: var(--ivory-2); margin-top: 6px; }
-  .g-foto { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 0 14px; margin: 0 0 18px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .g-foto { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x proximity; padding: 4px 0 14px; margin: 0 0 18px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; overflow-anchor: none; }
   .g-foto a { flex: 0 0 auto; scroll-snap-align: start; }
-  .g-foto img { height: 230px; width: auto; max-width: 84vw; object-fit: cover; display: block; border-radius: 4px; background: var(--night-2); }
+  .g-foto img { height: 230px; width: auto; min-width: 150px; max-width: 84vw; object-fit: cover; display: block; border-radius: 4px; background: var(--night-2); }
   .g-more { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; height: 230px; width: 150px; border: 1px solid var(--line); border-radius: 4px; text-align: center; color: var(--ivory-2); transition: border-color 0.2s, color 0.2s; }
   .g-more:hover { border-color: var(--ivory-2); color: var(--ivory); }
   .g-more b { font-family: var(--display); font-weight: 400; font-size: 40px; line-height: 1; }
@@ -937,6 +937,10 @@
         a.href = src; img.src = src; img.alt = item.caption || 'Foto del giorno ' + item.day; img.loading = 'lazy';
         a.appendChild(img); a.addEventListener('click', function (e) { e.preventDefault(); openLb(src, item.caption); });
         box.appendChild(a); box.hidden = false;
+        /* finché nessuno tocca la fascia, resta ancorata alla prima foto anche mentre le immagini arrivano */
+        img.addEventListener('load', function () { if (!box.dataset.toccata) box.scrollLeft = 0; });
+        if (!box.dataset.ascolto) { box.dataset.ascolto = '1'; box.addEventListener('pointerdown', function () { box.dataset.toccata = '1'; }, { once: true }); box.addEventListener('wheel', function () { box.dataset.toccata = '1'; }, { once: true, passive: true }); }
+        box.scrollLeft = 0;
       });
       /* se ce ne sono altre, l'ultima tessera rimanda alla galleria */
       Object.keys(conteggio).forEach(function (day) {
