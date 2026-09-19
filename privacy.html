@@ -189,10 +189,11 @@ footer a:hover { color: var(--accent); }
       const now = new Date();
       let d = new Date(now);
       let utcHours = now.getUTCHours() + now.getUTCMinutes() / 60 + now.getUTCSeconds() / 3600;
-      if (HOUR_OVERRIDE !== null) {                           /* local hour -> utc (Como is UTC+1/+2) */
-        const off = -new Date().getTimezoneOffset() / 60;
-        utcHours = HOUR_OVERRIDE - (Intl.DateTimeFormat('it-IT', { timeZone: 'Europe/Rome', timeZoneName: 'short' })
-          .formatToParts(now).find(p => p.type === 'timeZoneName').value.includes('+2') ? 2 : 1);
+      if (HOUR_OVERRIDE !== null) {                           /* local hour -> utc: the offset of Europe/Rome right now (+1 or +2) */
+        const p = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Rome', hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).formatToParts(now);
+        const g = k => +p.find(q => q.type === k).value;
+        const off = Math.round((Date.UTC(g('year'), g('month') - 1, g('day'), g('hour'), g('minute')) - Math.floor(now.getTime() / 60000) * 60000) / 3600000);
+        utcHours = HOUR_OVERRIDE - off;
       }
       const start = Date.UTC(d.getUTCFullYear(), 0, 0);
       const doy = (Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) - start) / 86400000;
@@ -208,21 +209,25 @@ footer a:hover { color: var(--accent); }
     let sun = sunNow();
     setInterval(() => { sun = sunNow(); }, 30000);
 
-    function relief(x, z) {
-      const d1 = 1 - Math.abs(Math.sin(0.30 * x + 0.16 * z + 0.6 * Math.sin(0.28 * z)));
-      return 0.9 * Math.pow(d1, 1.5) + 0.22 * Math.sin(0.9 * x - 0.55 * z + 1.3) + 0.10 * Math.sin(2.1 * x + 1.6 * z);
+    /* the sea: three long swells drifting slowly toward the shore, and a faint wavelet riding on them */
+    const HORIZON = 0.25;                                          /* mean height of the water at the far edge */
+    function relief(x, z, t) {
+      const f = Math.max(0, Math.min(1, (z - 3) / 5)), ff = f * f * (3 - 2 * f);
+      const calm = 1 - 1.0 * ff;                                 /* the swell settles toward the horizon */
+      return HORIZON + calm * (
+          0.55 * Math.sin(0.347 * x + 0.952 * z + 0.80 * t + 0.4 * Math.sin(0.16 * x - 0.05 * t))   /* main swell, coming in from the left, crests gently bent */
+        + 0.3 * Math.sin(-0.255 * x + 0.786 * z + 0.62 * t + 1.3)   /* a second train, from the right */
+        + 0.15 * Math.sin(0.334 * x + 0.300 * z + 0.40 * t + 2.6));  /* a long, slow ground swell across the field */
     }
+    function horizonPx() { return cy - ((HORIZON * 0.34 - 0.12 - cam_y) / 10.4) * K; }
     const pointer = { x: 0, z: 0, s: 0 };
-    let ripple = 0, lastTouch = -1e9;
     function surface(x, z, t) {
-      /* the dune, plus a slow sand ripple and the soft print of the pointer */
+      /* the swell, a wavelet on top that fades with distance, and the soft print of the pointer */
       const dx = x - pointer.x, dz = z - pointer.z, d = Math.sqrt(dx * dx + dz * dz);
-      /* sand ripples that travel with the wind, and a slow breath of the dunes themselves */
-      return relief(x, z)
-        + 0.085 * Math.sin(3.6 * x + 2.4 * z + t * 0.55)
-        + 0.045 * Math.sin(5.1 * x - 1.7 * z - t * 0.8)
-        + 0.07 * Math.sin(0.7 * x - 0.35 * z + t * 0.22)
-        - Math.exp(-d * d * 1.6) * 0.32 * pointer.s;
+      const near = Math.max(0, Math.min(1, (8 - z) / 4));
+      return relief(x, z, t)
+        + 0.03 * near * Math.sin(3.6 * x + 2.4 * z + 0.9 * t)
+        - Math.exp(-d * d * 1.6) * 0.28 * pointer.s;
     }
     function light() {
       /* light direction in scene space: +x east, +z north (away), +y up */
@@ -241,7 +246,7 @@ footer a:hover { color: var(--accent); }
     }
     function drawWave(t) {
       const L = light();
-      const e = 0.004;
+      const e = 0.004, SHADE = 1.6;
       const inkHi = [239, 230, 216], amb = [242, 179, 107];
       for (let r = ROWS - 1; r >= 0; r--) {
         for (let c = 0; c < COLS; c++) {
@@ -250,16 +255,19 @@ footer a:hover { color: var(--accent); }
           /* normal by finite differences */
           const hx = surface(p.x + e, p.z, t) - surface(p.x - e, p.z, t);
           const hz = surface(p.x, p.z + e, t) - surface(p.x, p.z - e, t);
-          let nx = -hx / (2 * e), ny = 1, nz = -hz / (2 * e);
+          let nx = -hx / (2 * e) * SHADE, ny = 1, nz = -hz / (2 * e) * SHADE;   /* the slopes are gentle: the light reads them a little steeper */
           const nl = Math.sqrt(nx * nx + ny * ny + nz * nz); nx /= nl; ny /= nl; nz /= nl;
           const lam = Math.max(0, nx * L.l[0] + ny * L.l[1] + nz * L.l[2]);
           const far = Math.min(1, (1 - p.r / ROWS) * 4);
+          /* the crests catch the sky: a soft sheen that rises with the height of the swell */
+          const hc = Math.max(0, Math.min(1, ((p.y + 0.12) / 0.34 - HORIZON) / 0.45));
+          const crest = hc * hc * (3 - 2 * hc);
           const dayI = 0.12 + 0.78 * lam, nightI = 0.09 + 0.24 * lam;
-          const inten = (nightI + (dayI - nightI) * L.day) * far * waveA;
+          const inten = (nightI + (dayI - nightI) * L.day + crest * (0.05 + 0.13 * L.day)) * far * waveA;
           if (inten < 0.035) continue;
-          const warm = L.day * L.golden * lam;
-          const col = [0, 1, 2].map(i => Math.round(inkHi[i] + (amb[i] - inkHi[i]) * warm));
-          const size = (0.6 + p.depth * 1.3 + lam * 0.5) * DPR;
+          const warm = L.day * L.golden * (lam + 0.3 * crest);
+          const col = [0, 1, 2].map(i => Math.round(inkHi[i] + (amb[i] - inkHi[i]) * Math.min(1, warm)));
+          const size = (0.6 + p.depth * 1.3 + lam * 0.5 + crest * 0.4) * DPR;
           ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${Math.min(1, inten).toFixed(3)})`;
           ctx.fillRect(p.sx - size / 2, p.sy - size / 2, size, size);
         }
@@ -268,7 +276,7 @@ footer a:hover { color: var(--accent); }
       const glowI = (L.day * L.golden * 0.9 + (1 - L.day) * 0.08) ;
       if (glowI > 0.02) {
         const gx = cx + Math.sin(L.az) * W * 0.42;
-        const hy = cy - ((surface(0, 10, t) * 0.34 - 0.12 - cam_y) / 10.4) * K;
+        const hy = horizonPx();
         const g = ctx.createRadialGradient(gx, hy, 0, gx, hy, W * 0.36);
         g.addColorStop(0, `rgba(242,179,107,${(0.22 * glowI).toFixed(3)})`);
         g.addColorStop(1, 'rgba(242,179,107,0)');
