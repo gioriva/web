@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Patagonia & Polinesia 2026</title>
+<meta name="theme-color" content="#061423" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Ccircle cx='20' cy='20' r='18'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url%28%23c%29'%3E%3Crect width='40' height='40' fill='%230b2b46'/%3E%3Cpolygon points='24,0 40,0 40,40 16,40' fill='%232fc9bd'/%3E%3Ccircle cx='31' cy='15' r='4.2' fill='%23ffd9a4'/%3E%3Cpolygon points='0,30 7,20 12,27 17,18 22,29 22,40 0,40' fill='%23061423'/%3E%3Cpath d='M11 9 L12.1 12.4 L15.5 13.5 L12.1 14.6 L11 18 L9.9 14.6 L6.5 13.5 L9.9 12.4 Z' fill='%23f3f1ea'/%3E%3Cline x1='24' y1='0' x2='16' y2='40' stroke='%23f3f1ea' stroke-width='1'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='18' fill='none' stroke='%23f3f1ea' stroke-width='1.6'/%3E%3C/svg%3E" />
+
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1ZCCJ6QBR4');
+</script>
+
+<!-- Open Graph / anteprima social -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Nibepo Aike, un'estancia ai piedi dei ghiacciai" />
+<meta property="og:description" content="La storia di una famiglia dalmata arrivata alla fine del mondo, e di come si vive e si lavora in un'estancia patagonica." />
+<meta property="og:image" content="https://www.gioriva.it/poitiracconto/patagonia2026/og-viaggio.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://www.gioriva.it/poitiracconto/patagonia2026/estancia.html" />
+<meta property="og:locale" content="it_IT" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Nibepo Aike, un'estancia ai piedi dei ghiacciai" />
+<meta name="twitter:image" content="https://www.gioriva.it/poitiracconto/patagonia2026/og-viaggio.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #061423;
+    --night-2: #0b1d30;
+    --ivory: #f3f1ea;
+    --ivory-2: rgba(243,241,234,0.7);
+    --ivory-3: rgba(243,241,234,0.42);
+    --line: rgba(243,241,234,0.13);
+    --panel: rgba(243,241,234,0.045);
+    --glacier: #8fd0e6;
+    --lagoon: #2fc9bd;
+    --dawn: #ffbe8c;
+    --wool: #e8dcc4;
+    --display: 'Bodoni Moda', 'Didot', 'Bodoni 72', serif;
+    --sans: 'Jost', 'Futura', system-ui, sans-serif;
+    --head-h: 64px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--night);
+    color: var(--ivory);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--dawn); color: var(--night); }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--dawn); outline-offset: 4px; border-radius: 2px; }
+  button { font-family: inherit; }
+
+  /* ═══ HEADER ═══ */
+  header.bar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--head-h); z-index: 90;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px 0 22px;
+    transition: background 0.4s, border-color 0.4s;
+    border-bottom: 1px solid transparent;
+  }
+  header.bar.scrolled {
+    background: rgba(6,20,35,0.82);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom-color: var(--line);
+  }
+  .brand { font-family: var(--display); font-size: 21px; letter-spacing: 0.01em; color: var(--ivory); text-shadow: 0 1px 12px rgba(0,0,0,0.35); white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; }
+  .brand i { font-style: italic; }
+  .brand .logo { width: 30px; height: 30px; flex-shrink: 0; filter: drop-shadow(0 1px 6px rgba(0,0,0,0.35)); }
+  @media (max-width: 380px) { .brand .logo { width: 26px; height: 26px; } }
+  .burger {
+    width: 46px; height: 46px; border: 1px solid rgba(243,241,234,0.35);
+    background: rgba(6,20,35,0.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    border-radius: 50%; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+  }
+  .burger span { display: block; width: 18px; height: 1.5px; background: var(--ivory); border-radius: 1px; transition: transform 0.3s, opacity 0.3s; }
+  .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* ═══ DRAWER ═══ */
+  .scrim { position: fixed; inset: 0; background: rgba(2,8,16,0.6); z-index: 95; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+  .scrim.open { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: fixed; top: 0; right: 0; bottom: 0; width: min(340px, 86vw); z-index: 96;
+    background: var(--night-2); border-left: 1px solid var(--line);
+    transform: translateX(102%); transition: transform 0.4s cubic-bezier(.3,.8,.3,1);
+    display: flex; flex-direction: column; padding: 26px 0 22px; overflow-y: auto;
+  }
+  .drawer.open { transform: translateX(0); }
+  @media (prefers-reduced-motion: reduce) { .drawer, .scrim { transition: none; } }
+  .d-head { display: flex; justify-content: space-between; align-items: center; padding: 0 26px 18px; border-bottom: 1px solid var(--line); }
+  .d-head .t { font-size: 13px; color: var(--ivory-3); }
+  .d-close { background: none; border: none; color: var(--ivory); font-size: 26px; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; line-height: 1; }
+  .drawer nav { padding: 14px 0; flex-grow: 1; }
+  .d-link { display: block; padding: 16px 26px; border-left: 2px solid transparent; transition: background 0.2s, border-color 0.2s; }
+  .d-link:hover { background: var(--panel); }
+  .d-link.active { border-left-color: var(--dawn); background: var(--panel); }
+  .d-link .place { font-family: var(--display); font-size: 25px; display: block; line-height: 1.15; }
+  .d-link .sub { font-size: 13px; color: var(--ivory-3); display: block; margin-top: 2px; }
+  .d-link.d-home { padding: 12px 26px; }
+  .d-link.d-home .place { font-size: 18px; color: var(--ivory-2); }
+  .d-sep { margin: 10px 26px; border: none; border-top: 1px solid var(--line); }
+  .d-gruppo { display: block; padding: 10px 26px 4px; font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ivory-3); }
+  .d-link.d-sotto { padding: 12px 26px; }
+  .d-link.d-sotto .place { font-size: 21px; }
+  .d-foot { padding: 18px 26px 0; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ivory-3); line-height: 1.8; }
+
+  /* ═══ HERO · LA STEPPA ═══ */
+  .hero {
+    position: relative; height: 82vh; height: 82svh; min-height: 520px; max-height: 820px;
+    overflow: hidden; margin-top: 0;
+  }
+  .hero svg.scena { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero .testo {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 120px 24px 46px;
+    background: linear-gradient(to top, rgba(6,20,35,0.97) 0%, rgba(6,20,35,0.9) 28%, rgba(6,20,35,0) 100%);
+  }
+  .hero .testo .inner { max-width: 732px; margin: 0 auto; }
+  .hero h1 { margin-bottom: 0; max-width: 700px; }
+  .lede-mobile { padding-top: 26px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dawn); margin-bottom: 16px; }
+  .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--dawn); }
+  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(38px, 7.4vw, 74px); line-height: 0.98; margin: 0 0 18px; letter-spacing: -0.01em; }
+  h1 i, h2 i { font-style: italic; }
+  .lede { font-size: 18px; color: var(--ivory-2); max-width: 600px; margin: 0; }
+  @media (max-width: 640px) {
+    .hero { min-height: 520px; height: 70svh; }
+    .hero .testo { padding-bottom: 34px; padding-top: 90px; }
+  }
+
+  /* il molino gira, il vento passa */
+  .ruota { transform-box: view-box; transform-origin: 560px 214px; animation: gira 14s linear infinite; }
+  .vento { stroke-dasharray: 60 900; animation: soffia 7s linear infinite; }
+  .vento.v2 { animation-duration: 9s; animation-delay: -3s; }
+  .vento.v3 { animation-duration: 11s; animation-delay: -6s; }
+  @keyframes gira { to { transform: rotate(360deg); } }
+  @keyframes soffia { from { stroke-dashoffset: 960; } to { stroke-dashoffset: 0; } }
+  .stella { animation: brilla 4s ease-in-out infinite; }
+  .stella:nth-child(2n) { animation-delay: -1.3s; }
+  .stella:nth-child(3n) { animation-delay: -2.6s; }
+  @keyframes brilla { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .ruota, .vento, .stella { animation: none; } }
+
+  /* ═══ CONTENUTI ═══ */
+  main { padding-top: var(--head-h); }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+  section.blocco { padding: 72px 0 24px; position: relative; scroll-margin-top: calc(var(--head-h) + 14px); }
+  .marca-sep { display: flex; align-items: center; gap: 18px; margin: 0 0 34px; color: var(--ivory-3); font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .marca-sep::before, .marca-sep::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--line) 40%, var(--line) 60%, transparent); }
+  .marca-sep svg { width: 34px; height: 34px; flex-shrink: 0; }
+  h2 { font-family: var(--display); font-weight: 400; font-size: clamp(32px, 5.4vw, 48px); line-height: 1.02; margin: 0 0 22px; letter-spacing: -0.005em; }
+  h3 { font-family: var(--display); font-weight: 400; font-size: 24px; line-height: 1.15; margin: 34px 0 12px; }
+  p { font-size: 17.5px; line-height: 1.72; color: rgba(243,241,234,0.88); margin: 0 0 20px; max-width: 680px; }
+  p b { font-weight: 500; color: var(--ivory); }
+  p i { font-style: italic; }
+  .nota { font-size: 15px; color: var(--ivory-2); border-left: 2px solid var(--dawn); padding: 4px 0 4px 18px; margin: 26px 0; max-width: 640px; }
+  .nota b { color: var(--ivory); font-weight: 500; }
+
+  /* cifre */
+  .cifre { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding-top: 56px; padding-bottom: 26px; }
+  @media (max-width: 560px) { .cifre { grid-template-columns: repeat(2, 1fr); } }
+  .cifra .n { font-family: var(--display); font-size: clamp(38px, 6.6vw, 56px); line-height: 0.9; }
+  .cifra .l { font-size: 14px; color: var(--ivory-3); margin-top: 6px; line-height: 1.4; }
+  .cifra:nth-child(1) .n { color: var(--wool); } .cifra:nth-child(2) .n { color: var(--dawn); } .cifra:nth-child(3) .n { color: var(--glacier); } .cifra:nth-child(4) .n { color: var(--lagoon); }
+
+  /* la mappa dell'estancia: dove sono le cose */
+  .pianta { margin: 30px 0 10px; }
+  .pianta .scorri { overflow-x: auto; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .pianta svg { width: 100%; height: auto; display: block; }
+  @media (max-width: 640px) { .pianta svg { min-width: 640px; } .pianta .scorri::after { content: ''; } .pianta .suggerimento { display: block; } }
+  .pianta .suggerimento { display: none; font-size: 12.5px; color: var(--ivory-3); margin-top: 6px; }
+  .pianta .did { font-size: 13.5px; color: var(--ivory-3); margin-top: 10px; line-height: 1.5; }
+
+  /* i protagonisti */
+  .persone { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 30px 0 10px; }
+  @media (max-width: 680px) { .persone { grid-template-columns: 1fr; } }
+  .persona { border: 1px solid var(--line); border-radius: 6px; padding: 24px 20px 20px; background: var(--panel); position: relative; overflow: hidden; }
+  .persona { border-top: 2px solid var(--tinta); }
+  .persona .ini { width: 58px; height: 58px; border-radius: 50%; border: 1px solid var(--tinta); color: var(--tinta); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 22px; letter-spacing: 0.02em; margin-bottom: 16px; }
+  .persona .nome { font-family: var(--display); font-size: 23px; line-height: 1.1; margin: 0 0 4px; }
+  .persona .anni { font-size: 13px; color: var(--ivory-3); margin-bottom: 12px; letter-spacing: 0.04em; }
+  .persona p { font-size: 15px; line-height: 1.6; margin: 0; color: var(--ivory-2); }
+
+  /* l'alambrado: la cronologia come una recinzione */
+  .alambrado { position: relative; margin: 36px 0 10px; padding-left: 0; list-style: none; }
+  .alambrado::before, .alambrado::after {
+    content: ''; position: absolute; left: 18px; top: 8px; bottom: 8px; width: 1px;
+    background: repeating-linear-gradient(to bottom, rgba(232,220,196,0.55) 0 6px, transparent 6px 10px);
+  }
+  .alambrado::after { left: 23px; background: repeating-linear-gradient(to bottom, rgba(232,220,196,0.35) 0 6px, transparent 6px 10px); top: 14px; }
+  .palo { position: relative; padding: 0 0 30px 66px; }
+  .palo:last-child { padding-bottom: 6px; }
+  .palo::before { content: ''; position: absolute; left: 14px; top: 2px; width: 14px; height: 32px; background: var(--wool); border-radius: 2px 2px 1px 1px; transform: rotate(-3deg); box-shadow: 0 0 0 4px var(--night); }
+  .palo:nth-child(even)::before { transform: rotate(2.5deg); }
+  .palo.oggi::before { background: var(--dawn); }
+  .palo .anno { font-family: var(--display); font-size: 30px; line-height: 1; color: var(--ivory); display: block; margin-bottom: 6px; }
+  .palo.oggi .anno { color: var(--dawn); }
+  .palo .cosa { font-size: 16px; color: var(--ivory-2); line-height: 1.55; max-width: 560px; }
+  .palo .cosa b { color: var(--ivory); font-weight: 500; }
+
+  /* il nome */
+  .nome-box { display: flex; gap: 6px; flex-wrap: wrap; margin: 26px 0 24px; align-items: baseline; }
+  .sillaba { font-family: var(--display); font-size: clamp(38px, 8vw, 66px); line-height: 1; padding: 6px 14px 4px; border: 1px solid var(--line); border-radius: 6px; position: relative; }
+  .sillaba small { display: block; font-family: var(--sans); font-size: 12.5px; letter-spacing: 0.06em; color: var(--ivory-3); margin-top: 6px; }
+  .sillaba.a { color: var(--dawn); } .sillaba.b { color: var(--glacier); } .sillaba.c { color: var(--lagoon); } .sillaba.d { color: var(--wool); }
+
+  /* la produzione: la lana in numeri */
+  .lana { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 26px 0 10px; }
+  @media (max-width: 560px) { .lana { grid-template-columns: 1fr; } }
+  .lana .voce { border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; background: var(--panel); }
+  .lana .voce .t { font-family: var(--display); font-size: 21px; margin-bottom: 6px; }
+  .lana .voce p { font-size: 15px; margin: 0; color: var(--ivory-2); }
+
+  /* foto della giornata (dal manifest, giorno 7) */
+  .g-foto { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x proximity; padding: 4px 0 14px; margin: 26px 0 8px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; overflow-anchor: none; }
+  .g-foto a { flex: 0 0 auto; scroll-snap-align: start; }
+  .g-foto img { height: 230px; width: auto; min-width: 150px; max-width: 84vw; object-fit: cover; display: block; border-radius: 4px; background: var(--night-2); }
+  .g-more { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; height: 230px; width: 150px; border: 1px solid var(--line); border-radius: 4px; text-align: center; color: var(--ivory-2); transition: border-color 0.2s, color 0.2s; }
+  .g-more b { font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1; }
+  .g-more span { font-size: 13px; line-height: 1.35; }
+  .g-more:hover { border-color: var(--ivory-2); color: var(--ivory); }
+  @media (max-width: 560px) { .g-foto img { height: 190px; } .g-more { height: 190px; width: 130px; } .g-more b { font-size: 34px; } }
+
+  /* glossario */
+  .glossario { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 24px; margin: 26px 0 20px; }
+  @media (max-width: 600px) { .glossario { grid-template-columns: 1fr; } }
+  .voce-g { padding: 14px 0; border-top: 1px solid var(--line); }
+  .voce-g dt { font-family: var(--display); font-style: italic; font-size: 22px; margin: 0 0 4px; }
+  .voce-g dd { margin: 0; font-size: 15px; color: var(--ivory-2); line-height: 1.55; }
+
+  /* rimando */
+  .rimando { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 100px; padding: 10px 18px 10px 16px; font-size: 15px; color: var(--ivory-2); transition: border-color 0.2s, color 0.2s; margin-top: 6px; }
+  .rimando:hover { border-color: var(--ivory-2); color: var(--ivory); }
+  .rimando svg { width: 16px; height: 16px; }
+  .fine { padding: 40px 0 80px; }
+
+  /* lightbox */
+  .lightbox { position: fixed; inset: 0; background: rgba(6,20,35,0.96); z-index: 120; display: none; align-items: center; justify-content: center; padding: 28px; cursor: zoom-out; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 100%; max-height: 100%; }
+  .lb-close { position: absolute; top: 14px; right: 14px; background: none; border: none; color: var(--ivory); font-size: 34px; cursor: pointer; width: 46px; height: 46px; }
+
+  /* torna su */
+  .torna-su {
+    position: fixed; right: 18px; bottom: 22px; z-index: 80;
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 1px solid rgba(243,241,234,0.35); background: rgba(6,20,35,0.6);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    color: var(--ivory); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(12px); pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+  }
+  .torna-su svg { width: 20px; height: 20px; }
+  .torna-su.visibile { opacity: 1; transform: none; pointer-events: auto; }
+  .torna-su:hover { background: var(--ivory); color: var(--night); }
+  @media (prefers-reduced-motion: reduce) { .torna-su { transition: none; } }
+
+  /* ═══ FOOTER ═══ */
+  footer { border-top: 1px solid var(--line); padding: 32px 24px 44px; display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; }
+  footer a { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ivory-3); transition: color 0.2s; }
+  footer a:hover { color: var(--ivory); }
+  footer a svg { width: 15px; height: 15px; }
+</style>
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <a class="brand" href="https://www.gioriva.it/poitiracconto/patagonia2026"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true">
+      <defs><clipPath id="lg-c"><circle cx="20" cy="20" r="18"/></clipPath></defs>
+      <g clip-path="url(#lg-c)">
+        <rect width="40" height="40" fill="#0b2b46"/>
+        <polygon points="24,0 40,0 40,40 16,40" fill="#2fc9bd"/>
+        <circle cx="31" cy="15" r="4.2" fill="#ffd9a4"/>
+        <polygon points="0,30 7,20 12,27 17,18 22,29 22,40 0,40" fill="#061423"/>
+        <path d="M11 9 L12.1 12.4 L15.5 13.5 L12.1 14.6 L11 18 L9.9 14.6 L6.5 13.5 L9.9 12.4 Z" fill="#f3f1ea"/>
+        <line x1="24" y1="0" x2="16" y2="40" stroke="#f3f1ea" stroke-opacity="0.9" stroke-width="1"/>
+      </g>
+      <circle cx="20" cy="20" r="18" fill="none" stroke="#f3f1ea" stroke-width="1.4"/>
+    </svg><span>Patagonia <i>&amp;</i> Polinesia</span></a>
+  <button class="burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Apri il menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Menu">
+  <div class="d-head">
+    <span class="t">Indice</span>
+    <button class="d-close" id="dclose" aria-label="Chiudi il menu">×</button>
+  </div>
+  <nav>
+    <a class="d-link d-home" href="https://www.gioriva.it/poitiracconto/">
+      <span class="place">Home page</span>
+      <span class="sub">Tutti i viaggi, su gioriva.it</span>
+    </a>
+    <hr class="d-sep">
+    <a class="d-link" href="https://www.gioriva.it/poitiracconto/patagonia2026">
+      <span class="place">Diario di viaggio</span>
+      <span class="sub">Il racconto, tappa per tappa</span>
+    </a>
+    <a class="d-link" href="programma.html">
+      <span class="place">Programma</span>
+      <span class="sub">L'itinerario, giorno per giorno</span>
+    </a>
+    <a class="d-link" href="trasporti.html">
+      <span class="place">Trasporti</span>
+      <span class="sub">Voli, orari e trasferimenti</span>
+    </a>
+    <a class="d-link" href="galleria.html">
+      <span class="place">Galleria</span>
+      <span class="sub">Le foto del viaggio</span>
+    </a>
+    <hr class="d-sep">
+    <span class="d-gruppo">Curiosità</span>
+    <a class="d-link d-sotto active" href="estancia.html">
+      <span class="place">Nibepo Aike</span>
+      <span class="sub">Vita e storia di un'estancia</span>
+    </a>
+    <a class="d-link d-sotto" href="ghiacciai.html">
+      <span class="place">I ghiacciai</span>
+      <span class="sub">Perito Moreno, Upsala e Spegazzini</span>
+    </a>
+  </nav>
+  <div class="d-foot">Patagonia &amp; Polinesia 2026<br>Il viaggio di nozze di Giorgio e Lucrezia</div>
+</aside>
+
+<main>
+
+<!-- ═══ LA STEPPA ═══ -->
+<section class="hero" aria-label="La steppa patagonica al tramonto, con il mulino a vento e il galpón dell'estancia">
+  <svg class="scena" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#061423"/>
+        <stop offset="0.45" stop-color="#0b2236"/>
+        <stop offset="0.72" stop-color="#27354a"/>
+        <stop offset="0.86" stop-color="#7d5b55"/>
+        <stop offset="1" stop-color="#ffbe8c"/>
+      </linearGradient>
+      <linearGradient id="alone" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffbe8c" stop-opacity="0"/>
+        <stop offset="1" stop-color="#ffbe8c" stop-opacity="0.55"/>
+      </linearGradient>
+      <linearGradient id="terra" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#0b1d30"/>
+        <stop offset="1" stop-color="#061423"/>
+      </linearGradient>
+    </defs>
+
+    <!-- cielo e alone del tramonto -->
+    <rect width="1200" height="600" fill="url(#cielo)"/>
+    <ellipse cx="640" cy="440" rx="720" ry="200" fill="url(#alone)"/>
+
+    <!-- stelle -->
+    <g fill="#f3f1ea">
+      <circle class="stella" cx="110" cy="70" r="1.4"/><circle class="stella" cx="240" cy="130" r="1"/><circle class="stella" cx="380" cy="50" r="1.2"/>
+      <circle class="stella" cx="520" cy="110" r="0.9"/><circle class="stella" cx="690" cy="60" r="1.3"/><circle class="stella" cx="860" cy="120" r="1"/>
+      <circle class="stella" cx="990" cy="40" r="1.4"/><circle class="stella" cx="1110" cy="150" r="1"/><circle class="stella" cx="160" cy="210" r="0.9"/>
+      <circle class="stella" cx="620" cy="180" r="1.1"/><circle class="stella" cx="930" cy="200" r="0.9"/><circle class="stella" cx="1060" cy="90" r="1.1"/>
+      <circle class="stella" cx="450" cy="230" r="0.8"/><circle class="stella" cx="760" cy="150" r="0.8"/><circle class="stella" cx="60" cy="160" r="1"/>
+    </g>
+
+    <!-- la cordigliera, lontanissima, con un filo di neve -->
+    <path d="M0 400 L60 380 L120 392 L190 350 L240 372 L300 340 L360 366 L420 330 L470 356 L540 318 L600 350 L660 322 L720 348 L790 312 L850 344 L910 320 L980 346 L1050 316 L1120 342 L1200 326 L1200 470 L0 470 Z" fill="#132a42"/>
+    <path d="M190 350 L205 358 L222 352 L240 372 M420 330 L436 342 L452 336 L470 356 M540 318 L556 330 L572 326 L600 350 M790 312 L806 324 L822 318 L850 344 M1050 316 L1066 328 L1082 322 L1120 342" fill="none" stroke="#f3f1ea" stroke-opacity="0.55" stroke-width="1.6" stroke-linejoin="round"/>
+
+    <!-- il vento che passa -->
+    <g fill="none" stroke="#f3f1ea" stroke-opacity="0.35" stroke-width="1" stroke-linecap="round">
+      <path class="vento" d="M-40 300 C 200 290, 400 320, 700 300 S 1100 290, 1260 305"/>
+      <path class="vento v2" d="M-40 345 C 260 330, 520 360, 800 340 S 1150 335, 1260 348"/>
+      <path class="vento v3" d="M-40 262 C 180 258, 460 280, 720 262 S 1080 250, 1260 268"/>
+    </g>
+
+    <!-- la steppa, a strati -->
+    <path d="M0 440 C 150 420, 300 450, 460 432 S 760 410, 900 434 S 1120 420, 1200 428 L1200 600 L0 600 Z" fill="#0d2238"/>
+    <path d="M0 490 C 200 470, 380 500, 600 484 S 900 462, 1200 486 L1200 600 L0 600 Z" fill="url(#terra)"/>
+
+    <!-- il galpón de esquila, lungo e basso -->
+    <g fill="#061423">
+      <path d="M660 470 L660 426 L760 404 L860 426 L860 470 Z"/>
+      <rect x="860" y="442" width="90" height="28"/>
+      <rect x="834" y="406" width="8" height="18"/>
+    </g>
+    <g stroke="#f3f1ea" stroke-opacity="0.22" stroke-width="1" fill="none">
+      <path d="M660 426 L760 404 L860 426"/>
+      <path d="M860 442 L950 442"/>
+    </g>
+    <!-- finestrelle accese -->
+    <g fill="#ffbe8c" fill-opacity="0.75">
+      <rect x="692" y="447" width="9" height="7"/><rect x="730" y="447" width="9" height="7"/><rect x="812" y="447" width="9" height="7"/>
+    </g>
+
+    <!-- il molino de viento, il segno dell'estancia -->
+    <g stroke="#f3f1ea" stroke-opacity="0.72" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M560 218 L528 482 M560 218 L592 482 M532 446 L588 446 M538 400 L582 400 M544 354 L576 354 M550 308 L570 308 M556 264 L564 264"/>
+      <path d="M560 214 L614 208 L614 228 Z" fill="#f3f1ea" fill-opacity="0.5"/>
+    </g>
+    <g class="ruota" fill="none" stroke="#f3f1ea" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round">
+      <g id="pala"><path d="M560 214 L560 156"/><path d="M560 160 L552 181 L560 196 L568 181 Z" fill="#f3f1ea" fill-opacity="0.38" stroke="none"/></g>
+      <use href="#pala" transform="rotate(20 560 214)"/>
+      <use href="#pala" transform="rotate(40 560 214)"/>
+      <use href="#pala" transform="rotate(60 560 214)"/>
+      <use href="#pala" transform="rotate(80 560 214)"/>
+      <use href="#pala" transform="rotate(100 560 214)"/>
+      <use href="#pala" transform="rotate(120 560 214)"/>
+      <use href="#pala" transform="rotate(140 560 214)"/>
+      <use href="#pala" transform="rotate(160 560 214)"/>
+      <use href="#pala" transform="rotate(180 560 214)"/>
+      <use href="#pala" transform="rotate(200 560 214)"/>
+      <use href="#pala" transform="rotate(220 560 214)"/>
+      <use href="#pala" transform="rotate(240 560 214)"/>
+      <use href="#pala" transform="rotate(260 560 214)"/>
+      <use href="#pala" transform="rotate(280 560 214)"/>
+      <use href="#pala" transform="rotate(300 560 214)"/>
+      <use href="#pala" transform="rotate(320 560 214)"/>
+      <use href="#pala" transform="rotate(340 560 214)"/>
+      <circle cx="560" cy="214" r="60" stroke-width="1.1"/>
+      <circle cx="560" cy="214" r="5" fill="#f3f1ea" fill-opacity="0.9"/>
+    </g>
+
+    <!-- l'alambrado che se ne va verso l'orizzonte -->
+    <g stroke="#e8dcc4" stroke-opacity="0.55" stroke-width="2.4" stroke-linecap="round">
+      <path d="M40 560 L40 500 M120 552 L120 502 M195 545 L195 504 M262 539 L262 506 M322 534 L322 508 M376 530 L376 509 M424 527 L424 510 M466 524 L466 511 M502 522 L502 512 M534 520 L534 512"/>
+    </g>
+    <g stroke="#f3f1ea" stroke-opacity="0.32" stroke-width="1" fill="none">
+      <path d="M40 512 C 200 512, 400 514, 534 514"/>
+      <path d="M40 530 C 200 526, 400 520, 534 517"/>
+      <path d="M40 548 C 200 540, 400 526, 534 519"/>
+    </g>
+
+    <!-- ciuffi di coirón, l'erba della steppa -->
+    <g stroke="#061423" stroke-width="2" stroke-linecap="round" fill="none">
+      <path d="M980 560 L972 538 M984 560 L986 534 M990 560 L1000 540"/>
+      <path d="M1100 556 L1092 536 M1104 556 L1106 530 M1110 556 L1120 538"/>
+      <path d="M860 566 L854 548 M866 566 L868 542 M872 566 L880 550"/>
+      <path d="M150 580 L144 562 M156 580 L158 556 M162 580 L170 564"/>
+      <path d="M700 574 L694 556 M706 574 L708 550 M712 574 L720 558"/>
+    </g>
+  </svg>
+
+  <div class="testo">
+    <div class="inner">
+      <div class="eyebrow">Curiosità · Patagonia</div>
+      <h1>Nibepo Aike, <i>un'estancia</i> ai piedi dei ghiacciai</h1>
+    </div>
+  </div>
+</section>
+
+<div class="wrap lede-mobile"><p class="lede">Un giovane dalmata arrivato alla fine del mondo senza un soldo, una vedova che ha dovuto farsi riconoscere padrona in tribunale, un genero che ha inventato il turismo sul Lago Argentino. L'abbiamo visitata il settimo giorno di viaggio, a un'ora da El Calafate.</p></div>
+
+<div class="wrap cifre" aria-label="L'estancia in quattro numeri">
+  <div class="cifra"><div class="n">1910</div><div class="l">l'anno in cui Santiago Peso arriva qui</div></div>
+  <div class="cifra"><div class="n">70 km</div><div class="l">di recinzioni per dividere i campi</div></div>
+  <div class="cifra"><div class="n">13.600</div><div class="l">pecore nel 1937, l'anno del picco</div></div>
+  <div class="cifra"><div class="n">370 km</div><div class="l">di carro fino al porto di Río Gallegos</div></div>
+</div>
+
+<!-- ═══ COS'È UN'ESTANCIA ═══ -->
+<section class="blocco" id="estancia">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#ffbe8c" stroke-width="1.2"/><path d="M10 24 V10 L24 24 V10" fill="none" stroke="#ffbe8c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M8 6.5 H26" stroke="#ffbe8c" stroke-width="1.4" stroke-linecap="round"/></svg><span>Il mondo delle estancias</span></div>
+    <h2>Un'azienda grande come <i>una provincia</i></h2>
+    <p>In Argentina la parola <b>estancia</b> indica una grande tenuta rurale dedicata all'allevamento. Nella pampa vuol dire mucche e cavalli; in Patagonia, per quasi un secolo, ha voluto dire pecore. Tutto nasce da una scelta politica: la Costituzione del 1853 spalanca le porte agli stranieri e tra il 1880 e il 1914 entrano nel paese circa sei milioni di europei. L'Argentina diventa il secondo paese al mondo per immigrati ricevuti, dopo gli Stati Uniti.</p>
+    <p>Lo Stato aveva un problema pratico: esercitare la sovranità su un territorio enorme e quasi vuoto. La soluzione fu affidare la terra a chi era disposto a viverci. Così la provincia di Santa Cruz si popola di estancias, e le estancias si popolano di pecore, spinte da prezzi internazionali della lana molto favorevoli. La corsa dura fino al 1940, poi si ferma.</p>
+    <p>Un'estancia patagonica è un piccolo mondo autosufficiente, perché la città più vicina può stare a centinaia di chilometri di sterrato. Al centro c'è il <b>casco</b>, la casa padronale con intorno gli edifici di servizio; sparsi nei campi ci sono i <b>puestos</b>, avamposti con un riparo e un peón che sorveglia gli animali al pascolo; ovunque, chilometri di <b>alambrado</b>, la recinzione di pali e filo che divide i settori. Nibepo Aike è tutto questo, con una particolarità che rende la sua storia diversa dalle altre: sta dentro la riserva del Parco Nazionale Los Glaciares.</p>
+
+    <div class="pianta" aria-label="Sezione di un'estancia: dal lago al confine, cosa si incontra">
+      <div class="scorri"><svg viewBox="0 0 760 300" role="img" aria-label="Schema di un'estancia patagonica, dal lago alla cordigliera">
+        <defs>
+          <linearGradient id="acqua" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8fd0e6" stop-opacity="0.32"/><stop offset="1" stop-color="#8fd0e6" stop-opacity="0.08"/></linearGradient>
+        </defs>
+        <!-- la linea del terreno -->
+        <path d="M0 214 L150 214 C 200 212, 240 208, 300 208 L520 208 C 580 208, 620 190, 660 150 L700 96 L724 122 L760 70" fill="none" stroke="#e8dcc4" stroke-opacity="0.7" stroke-width="1.4" stroke-linejoin="round"/>
+        <!-- il lago -->
+        <path d="M0 214 L150 214 L150 250 L0 250 Z" fill="url(#acqua)"/>
+        <path d="M14 228 C 30 224, 46 232, 62 228 M80 238 C 96 234, 112 242, 128 238" fill="none" stroke="#8fd0e6" stroke-opacity="0.6" stroke-width="1"/>
+        <!-- la montagna, con la neve -->
+        <path d="M660 150 L700 96 L724 122 L760 70 L760 214 L620 214 Z" fill="#132a42"/>
+        <path d="M690 110 L700 96 L710 108 M744 92 L760 70" fill="none" stroke="#f3f1ea" stroke-opacity="0.6" stroke-width="1.4"/>
+        <!-- il casco: casa, galpón, club, molino -->
+        <g transform="translate(176 156)">
+          <path d="M0 52 V24 L20 8 L40 24 V52 Z" fill="#ffbe8c" fill-opacity="0.9"/>
+          <rect x="15" y="36" width="10" height="16" fill="#061423" fill-opacity="0.7"/>
+          <path d="M56 52 V30 L98 16 L140 30 V52 Z" fill="#e8dcc4" fill-opacity="0.9"/>
+          <rect x="154" y="34" width="34" height="18" fill="#8fd0e6" fill-opacity="0.9"/>
+          <path d="M214 52 L221 4 L228 52 M211 40 H231 M214 28 H228" fill="none" stroke="#e8dcc4" stroke-width="1.3" stroke-linecap="round"/>
+          <circle cx="221" cy="4" r="7" fill="none" stroke="#e8dcc4" stroke-width="1.2"/>
+          <path d="M221 -3 V11 M214 4 H228 M216 -1 L226 9 M226 -1 L216 9" stroke="#e8dcc4" stroke-width="0.9"/>
+        </g>
+        <!-- l'alambrado -->
+        <g stroke="#e8dcc4" stroke-opacity="0.8" stroke-width="1.6" stroke-linecap="round">
+          <path d="M430 208 V186 M462 208 V186 M494 208 V186 M526 207 V185 M558 200 V178 M590 190 V168"/>
+        </g>
+        <path d="M430 190 L526 189 L558 182 L590 172 M430 199 L526 198 L558 191 L590 181" fill="none" stroke="#e8dcc4" stroke-opacity="0.4" stroke-width="0.9"/>
+        <!-- gli animali al pascolo -->
+        <g fill="#f3f1ea" fill-opacity="0.75">
+          <ellipse cx="446" cy="203" rx="5" ry="3"/><ellipse cx="472" cy="205" rx="5" ry="3"/><ellipse cx="502" cy="202" rx="5" ry="3"/><ellipse cx="540" cy="204" rx="5" ry="3"/>
+          <ellipse cx="612" cy="160" rx="5" ry="3"/><ellipse cx="636" cy="150" rx="5" ry="3"/>
+        </g>
+        <!-- il puesto -->
+        <path d="M600 168 V156 L610 148 L620 156 V168 Z" fill="#2fc9bd" fill-opacity="0.9"/>
+        <!-- etichette grandi -->
+        <g font-family="Jost, sans-serif" font-size="12.5" letter-spacing="2" fill="#f3f1ea" fill-opacity="0.48">
+          <text x="10" y="278">LAGO ARGENTINO</text>
+          <text x="176" y="278">CASCO</text>
+          <text x="330" y="278">CAMPI E ALAMBRADO</text>
+          <text x="752" y="278" text-anchor="end">CORDÓN DE LOS BAGUALES</text>
+        </g>
+        <!-- etichette piccole -->
+        <g font-family="Jost, sans-serif" font-size="12" fill="#f3f1ea" fill-opacity="0.75">
+          <text x="176" y="238">casa 1919</text>
+          <text x="238" y="238">galpón 1917</text>
+          <text x="326" y="238">club 1916</text>
+          <text x="384" y="238">molino</text>
+          <text x="436" y="172">prima pecore, oggi Hereford</text>
+          <text x="578" y="140">puesto La Rosada, 1913</text>
+          <text x="626" y="60" text-anchor="start">confine con il Cile</text>
+        </g>
+        <path d="M676 64 L690 88" stroke="#f3f1ea" stroke-opacity="0.35" stroke-width="0.8"/>
+      </svg></div>
+      <div class="suggerimento">Scorri di lato per vedere tutta la sezione →</div>
+      <div class="did">Non è una mappa, è la sezione di un'estancia. A sinistra il lago, dove nel 1972 sarebbe arrivata la prima barca; al centro il casco con la casa, il galpón della tosatura, la casa dei dipendenti e il mulino; poi i campi divisi dall'alambrado, i puestos ai margini e in fondo il Cordón de los Baguales, che segna il confine con il Cile. Dall'altra parte del lago, i ghiacci continentali.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRIMA DELLE ESTANCIAS ═══ -->
+<section class="blocco" id="prima">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#8fd0e6" stroke-width="1.2"/><path d="M10 24 V10 L24 24 V10" fill="none" stroke="#8fd0e6" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M8 6.5 H26" stroke="#8fd0e6" stroke-width="1.4" stroke-linecap="round"/></svg><span>Prima delle estancias</span></div>
+    <h2>Chi c'era, <i>e chi è arrivato</i></h2>
+    <p>Undicimila anni prima delle pecore, in questa steppa camminavano gli <b>Aonikenk</b>, "gente del sud" nella loro lingua, che i coloni avrebbero chiamato <b>Tehuelche</b>. Erano arrivati a piedi da nord quando i ghiacci dell'ultima glaciazione si erano ritirati verso le cime. Nomadi, si spostavano tra la costa e la cordigliera seguendo i guanachi e i <i>choiques</i>, i piccoli struzzi della Patagonia.</p>
+    <p>Nel 1520 <b>Magellano</b>, esplorando queste coste per la corona spagnola, incontra gli Aonikenk e li chiama <i>Patagones</i>, colpito dalla misura dei loro piedi. Il nome resta attaccato alla regione. Tre secoli dopo, nel 1834, <b>Charles Darwin</b> a bordo del Beagle risale per primo il Río Santa Cruz e si avvicina al Lago Argentino. Nel 1859 il comandante <b>Luis Piedra Buena</b> si stabilisce alla foce dello stesso fiume, sull'isola Pavón, e per vent'anni tiene issata la bandiera argentina in un posto dove non c'era nessuno.</p>
+    <p>Quando i primi allevatori arrivano, i Tehuelche vedono i terreni di caccia trasformarsi in campi per le pecore. Iniziano a scambiare pelli e carne di guanaco con zucchero, farina, tabacco e vestiti, e si inseriscono nel commercio senza grandi conflitti, al contrario di quello che accade nella Terra del Fuoco, dove il rapporto con gli estancieros diventa violento.</p>
+
+    <div class="nota"><b>Perché il ghiacciaio si chiama Perito Moreno.</b> Francisco Pascasio Moreno fonda il suo primo museo a 14 anni, nel 1866, e nel 1876 risale i 340 km del Río Santa Cruz fino al Lago Argentino. Nel 1896 lo Stato lo nomina <i>perito</i>, cioè esperto, nella disputa di confine con il Cile: la sua tesi, che il confine dovesse seguire le alte cime e lo spartiacque delle Ande (il <i>Divortium Aquorum</i>), viene accolta dall'arbitrato inglese del 1902. "Perito" non è un nome, è un titolo. Per ricompensa riceve 7.500 leghe di terra vicino a Bariloche e le restituisce allo Stato a una condizione: che diventino una riserva. È il primo parco nazionale argentino, il terzo al mondo.</div>
+  </div>
+</section>
+
+<!-- ═══ LE PERSONE ═══ -->
+<section class="blocco" id="persone">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#e8dcc4" stroke-width="1.2"/><path d="M10 24 V10 L24 24 V10" fill="none" stroke="#e8dcc4" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M8 6.5 H26" stroke="#e8dcc4" stroke-width="1.4" stroke-linecap="round"/></svg><span>Tre generazioni</span></div>
+    <h2>Le persone che hanno fatto <i>Nibepo Aike</i></h2>
+    <p>La storia dell'estancia sta in tre persone e in due lingue: il croato di chi è partito e lo spagnolo di chi è rimasto. Santiago Peso ha costruito, María Martinic ha difeso, Juan Jansma ha aperto le porte.</p>
+
+    <div class="persone">
+      <div class="persona" style="--tinta: #e8dcc4">
+        <div class="ini">SP</div>
+        <div class="nome">Santiago Peso</div>
+        <div class="anni">1885, 1938 &nbsp;·&nbsp; Strmendolac, Dalmazia</div>
+        <p>A 21 anni parte da solo per i confini della terra, dopo che la fillossera ha distrutto le vigne della sua regione. Tenta Punta Arenas, poi Río Gallegos, e nel 1910 arriva qui. Senza capitale, si associa ai vicini Stipicic e Trutanic e fonda "La Jerónima". Costruisce tutto con le sue mani, un edificio all'anno.</p>
+      </div>
+      <div class="persona" style="--tinta: #ffbe8c">
+        <div class="ini">MM</div>
+        <div class="nome">María Martinic Galetovic</div>
+        <div class="anni">nata nel 1895 &nbsp;·&nbsp; Pučišća, isola di Brač</div>
+        <p>Lascia la sua isola nel 1924 con i fratelli, nel 1925 incontra Santiago a Río Gallegos e lo sposa. Quando lui muore, nel 1938, resta sola con tre figlie e un socio convinto che "le donne non hanno posto in questo genere di affari". Va in tribunale, vince, e nel 1947 compra la sua parte. Poi cambia il nome all'estancia.</p>
+      </div>
+      <div class="persona" style="--tinta: #8fd0e6">
+        <div class="ini">JJ</div>
+        <div class="nome">Juan Enrique Jansma</div>
+        <div class="anni">nato nel 1931 &nbsp;·&nbsp; Mendoza, figlio di olandesi</div>
+        <p>Il primo lavoro è tradurre dall'olandese per un'azienda di tulipani a Buenos Aires. Poi la Patagonia, da peón a capataz all'estancia Anita, a 30 km da qui. Nel 1955 conosce le vicine, la famiglia Peso, e l'anno dopo sposa Niní, la figlia maggiore. Nel 1972 porta i primi turisti da El Calafate e vara la prima barca privata del Lago Argentino.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ L'ALAMBRADO ═══ -->
+<section class="blocco" id="cronologia">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#ffbe8c" stroke-width="1.2"/><path d="M10 24 V10 L24 24 V10" fill="none" stroke="#ffbe8c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M8 6.5 H26" stroke="#ffbe8c" stroke-width="1.4" stroke-linecap="round"/></svg><span>Un palo alla volta</span></div>
+    <h2>La cronologia, <i>palo dopo palo</i></h2>
+    <p>Santiago Peso ha recintato l'estancia con settanta chilometri di alambrado. La sua storia si legge nello stesso modo: un palo per volta.</p>
+
+    <ol class="alambrado">
+      <li class="palo"><span class="anno">1885</span><div class="cosa">Nasce <b>Santiago Peso</b> a Strmendolac, in Dalmazia, allora Impero austro-ungarico, figlio di Simón Peso e Angela Caprcina.</div></li>
+      <li class="palo"><span class="anno">1906</span><div class="cosa">A ventun anni parte da solo. Dietro di sé lascia i vigneti rovinati dalla fillossera del 1900 e un'economia in ginocchio.</div></li>
+      <li class="palo"><span class="anno">1910</span><div class="cosa">Dopo Punta Arenas e Río Gallegos, arriva in questa zona e si associa ai compaesani Stipicic e Trutanic. Nasce l'estancia <b>La Jerónima</b>.</div></li>
+      <li class="palo"><span class="anno">1911</span><div class="cosa">La prima vera casa: tavole squadrate a colpi d'ascia e tetto di zinco, in un posto oggi chiamato <b>Laguna 3 de Abril</b>. Prima di allora viveva in una capanna di pali nella valle del Río Frías.</div></li>
+      <li class="palo"><span class="anno">1913</span><div class="cosa">Costruisce il puesto <b>La Rosada</b> ai piedi del Cordón de los Baguales, il confine sud con il Cile, dove gli animali pascolano d'estate. Nello stesso periodo il puesto <b>La Aurelia</b>, ai piedi del braccio sud del Lago Argentino, con alle spalle i ghiacci continentali.</div></li>
+      <li class="palo"><span class="anno">1916</span><div class="cosa">Il sito di Laguna 3 de Abril è troppo difficile da raggiungere via terra: si sposta dove oggi sorge il casco. Tira su <b>el Club</b>, la casa dei dipendenti.</div></li>
+      <li class="palo"><span class="anno">1917</span><div class="cosa">Il <b>galpón de esquila</b>, il capannone della tosatura. Poi la segheria, la scuderia, la casa del capataz.</div></li>
+      <li class="palo"><span class="anno">1919</span><div class="cosa">Per ultima, la sua casa. È l'edificio che oggi ospita l'<b>hostería</b>.</div></li>
+      <li class="palo"><span class="anno">1925</span><div class="cosa">In uno dei viaggi annuali a Río Gallegos per vendere la lana e comprare provviste, incontra <b>María Martinic</b>. Si sposano. Adolfo nasce nel 1926 e muore a tre anni; poi arrivano Radoslava, detta Niní, nel 1928, Ángela, detta Bebé, nel 1931, e María, detta Porota, nel 1933.</div></li>
+      <li class="palo"><span class="anno">1937</span><div class="cosa">Il picco della produzione: <b>13.600 pecore</b>. Nel 1938 Santiago si ammala e muore. María resta sola a mandare avanti tutto.</div></li>
+      <li class="palo"><span class="anno">1947</span><div class="cosa">Dopo anni di tensioni e una causa per farsi riconoscere legittima proprietaria, María compra la quota di Vladimiro Trutanic con un prestito dei fratelli. Resta l'unica padrona e cambia il nome: <b>Nibepo Aike</b>.</div></li>
+      <li class="palo"><span class="anno">1956</span><div class="cosa"><b>Juan Enrique Jansma</b> sposa Niní. Nel 1959 viene assunto all'estancia, ma con la suocera non va: dopo sei mesi si dimette e apre a Río Gallegos un negozio di prodotti agricoli, "La Sureña". Tornerà a lavorare qui part-time.</div></li>
+      <li class="palo"><span class="anno">1972</span><div class="cosa">Juan porta i primi piccoli gruppi di turisti da El Calafate e li accoglie con un agnello patagonico <i>al asador</i>. Poi vara la <b>Forever</b>, prima barca privata del Lago Argentino, per le escursioni ai ghiacciai Perito Moreno e Frías.</div></li>
+      <li class="palo oggi"><span class="anno">Oggi</span><div class="cosa">Le pecore hanno lasciato il posto ai bovini <b>Hereford</b>, la casa del 1919 accoglie gli ospiti, e la famiglia continua a viverci. Noi siamo arrivati il 21 settembre 2026.</div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══ IL NOME ═══ -->
+<section class="blocco" id="nome">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#2fc9bd" stroke-width="1.2"/><path d="M10 24 V10 L24 24 V10" fill="none" stroke="#2fc9bd" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M8 6.5 H26" stroke="#2fc9bd" stroke-width="1.4" stroke-linecap="round"/></svg><span>Il nome</span></div>
+    <h2>Tre figlie <i>e una parola tehuelche</i></h2>
+    <p>Quando nel 1947 María Martinic diventa l'unica proprietaria, la prima cosa che fa è togliere il nome scelto dai soci. Il nuovo è un nome composto, e ogni pezzo è una persona.</p>
+    <div class="nome-box" aria-label="Nibepo Aike, il nome spiegato">
+      <div class="sillaba a">Ni<small>Niní, 1928</small></div>
+      <div class="sillaba b">be<small>Bebé, 1931</small></div>
+      <div class="sillaba c">po<small>Porota, 1933</small></div>
+      <div class="sillaba d">Aike<small>"luogo", in aonikenk</small></div>
+    </div>
+    <p>Le prime sillabe dei soprannomi delle tre figlie, Radoslava, Ángela e María, e la parola con cui gli Aonikenk chiamavano un luogo, un accampamento. Un'estancia fondata da un croato, difesa da una croata, e battezzata nella lingua di chi era qui prima di tutti.</p>
+  </div>
+</section>
+
+<!-- ═══ LA PRODUZIONE ═══ -->
+<section class="blocco" id="lana">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#e8dcc4" stroke-width="1.2"/><path d="M10 24 V10 L24 24 V10" fill="none" stroke="#e8dcc4" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M8 6.5 H26" stroke="#e8dcc4" stroke-width="1.4" stroke-linecap="round"/></svg><span>La produzione</span></div>
+    <h2>Dalla lana <i>alle vacche</i></h2>
+    <p>Per tosare tredicimila pecore serve un capannone. All'inizio ci pensavano i lavoratori dell'estancia, pagati per ogni animale tosato. Verso la fine degli anni Venti compare la <b>comparsa</b>: squadre itineranti di tosatori che arrivano, tosano, incassano e passano all'estancia successiva. La lana viene pressata in balle di tela, sulle quali si dipingono a mano i chili e il tipo di lana, e parte per Río Gallegos sulle <b>chatas</b>, grandi carri tirati da cavalli. Trecentosettanta chilometri.</p>
+
+    <div class="lana">
+      <div class="voce"><div class="t">La tosatura</div><p>Nel galpón del 1917, una volta l'anno. Prima i peones della casa, poi le comparse in giro per la provincia.</p></div>
+      <div class="voce"><div class="t">Le balle</div><p>Tela, un numero dipinto sopra, chili e qualità. Ogni balla era un pezzo del reddito dell'anno.</p></div>
+      <div class="voce"><div class="t">Le chatas</div><p>Carri a cavalli fino al porto di Río Gallegos. Al ritorno, zucchero, farina, tabacco e tutto quello che qui non cresceva.</p></div>
+      <div class="voce"><div class="t">La riconversione</div><p>A un certo punto le pecore lasciano il posto ai bovini Hereford. Dentro la riserva del parco è una scelta anche ambientale: quando manca l'erba, la pecora è più aggressiva della vacca con l'ecosistema.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LA NOSTRA VISITA ═══ -->
+<section class="blocco" id="visita">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#ffbe8c" stroke-width="1.2"/><path d="M10 24 V10 L24 24 V10" fill="none" stroke="#ffbe8c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M8 6.5 H26" stroke="#ffbe8c" stroke-width="1.4" stroke-linecap="round"/></svg><span>Giorno 7</span></div>
+    <h2>Il giorno in cui <i>ci siamo stati</i></h2>
+    <p>Nibepo Aike sta sulle rive del Brazo Sur del Lago Argentino, a una cinquantina di chilometri da El Calafate, dentro la riserva del Parco Nazionale Los Glaciares. Gli ultimi venticinque chilometri sono di sterrato. Ci siamo arrivati il settimo giorno di viaggio, il 21 settembre, il primo giorno di primavera. Il racconto è nel diario.</p>
+    <div class="g-foto" id="foto-visita" hidden></div>
+    <a class="rimando" href="index.html#giorno-7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg>Leggi il giorno 7 nel diario</a>
+  </div>
+</section>
+
+<!-- ═══ GLOSSARIO ═══ -->
+<section class="blocco" id="glossario">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#8fd0e6" stroke-width="1.2"/><path d="M10 24 V10 L24 24 V10" fill="none" stroke="#8fd0e6" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M8 6.5 H26" stroke="#8fd0e6" stroke-width="1.4" stroke-linecap="round"/></svg><span>Piccolo glossario</span></div>
+    <h2>Le parole <i>dell'estancia</i></h2>
+    <dl class="glossario">
+      <div class="voce-g"><dt>estancia</dt><dd>Grande tenuta rurale dedicata all'allevamento. Chi la possiede è l'<i>estanciero</i>.</dd></div>
+      <div class="voce-g"><dt>casco</dt><dd>Il cuore dell'estancia: la casa padronale e gli edifici intorno.</dd></div>
+      <div class="voce-g"><dt>galpón de esquila</dt><dd>Il capannone della tosatura. A Nibepo Aike è del 1917.</dd></div>
+      <div class="voce-g"><dt>puesto</dt><dd>Avamposto lontano dal casco, con un riparo e un uomo che sorveglia gli animali al pascolo.</dd></div>
+      <div class="voce-g"><dt>peón</dt><dd>Il lavoratore dell'estancia. Il <i>capataz</i> è chi li dirige.</dd></div>
+      <div class="voce-g"><dt>comparsa</dt><dd>Squadra di tosatori itineranti, pagata a servizio, che passava da un'estancia all'altra.</dd></div>
+      <div class="voce-g"><dt>chata</dt><dd>Carro a cavalli, lungo e basso, per portare le balle di lana al porto.</dd></div>
+      <div class="voce-g"><dt>alambrado</dt><dd>La recinzione di pali e filo che divide i campi. Qui sono settanta chilometri.</dd></div>
+      <div class="voce-g"><dt>al asador</dt><dd>L'agnello patagonico cotto intero, aperto su una croce di ferro accanto alla brace.</dd></div>
+      <div class="voce-g"><dt>aike</dt><dd>"Luogo", "accampamento" nella lingua degli Aonikenk. Compare in molti nomi della zona.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<div class="wrap fine">
+  <a class="rimando" href="https://www.gioriva.it/poitiracconto/patagonia2026"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H4M10 6l-6 6 6 6"/></svg>Torna al diario</a>
+</div>
+
+</main>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Foto ingrandita">
+  <button class="lb-close" id="lbclose" aria-label="Chiudi">×</button>
+  <img id="lbimg" src="" alt="" />
+</div>
+
+<button class="torna-su" id="torna-su" aria-label="Torna a inizio pagina">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<footer>
+  <a href="https://www.gioriva.it" aria-label="Gio Riva">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 L12 3 L21 11 M5 10 V20 H19 V10"/></svg>
+    Gio Riva
+  </a>
+  <a href="https://www.gioriva.it/poitiracconto/privacy.html" aria-label="Privacy e Cookie">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L20 6 V11 C20 16.5 16.5 20 12 21.5 C7.5 20 4 16.5 4 11 V6 Z"/></svg>
+    Privacy &amp; Cookie
+  </a>
+  <a href="contatti.html" aria-label="Contatti">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 7.5 L12 13.5 L21 7.5"/></svg>
+    Contatti
+  </a>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── header ── */
+  var bar = document.getElementById('bar');
+  function onScrollBar() { bar.classList.toggle('scrolled', window.scrollY > 40); }
+  window.addEventListener('scroll', onScrollBar, { passive: true }); onScrollBar();
+
+  /* ── drawer ── */
+  var burger = document.getElementById('burger'),
+      drawer = document.getElementById('drawer'),
+      scrim = document.getElementById('scrim'),
+      dclose = document.getElementById('dclose');
+  function setDrawer(open) {
+    drawer.classList.toggle('open', open);
+    scrim.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', function () { setDrawer(!drawer.classList.contains('open')); });
+  dclose.addEventListener('click', function () { setDrawer(false); });
+  scrim.addEventListener('click', function () { setDrawer(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer.classList.contains('open')) setDrawer(false); });
+
+  /* ── torna su ── */
+  var su = document.getElementById('torna-su');
+  function checkSu() { su.classList.toggle('visibile', window.scrollY > window.innerHeight * 0.9); }
+  window.addEventListener('scroll', checkSu, { passive: true }); checkSu();
+  su.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+
+  /* ── lightbox ── */
+  var lb = document.getElementById('lightbox'), lbimg = document.getElementById('lbimg'), lbclose = document.getElementById('lbclose');
+  function openLb(src, alt) { lbimg.src = src; lbimg.alt = alt || 'Foto del viaggio'; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeLb() { lb.classList.remove('open'); lbimg.src = ''; document.body.style.overflow = ''; }
+  lb.addEventListener('click', closeLb); lbclose.addEventListener('click', closeLb);
+  lbimg.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb.classList.contains('open')) closeLb(); });
+
+  /* ── le foto della visita: il giorno 7 dal manifest dell'album ── */
+  var ALBUM_BASE = 'https://gioriva.github.io/album/patagonia2026/';
+  var GIORNO = 7, MAX = 5;
+  var box = document.getElementById('foto-visita');
+  fetch(ALBUM_BASE + 'manifest.json', { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw new Error('no manifest'); return r.json(); })
+    .then(function (data) {
+      var list = Array.isArray(data) ? data : (data.photos || []);
+      var mie = list.filter(function (it) { return it && typeof it !== 'string' && it.day === GIORNO && !it.solo_galleria; });
+      if (!mie.length) return;
+      mie.slice(0, MAX).forEach(function (item) {
+        var src = ALBUM_BASE + item.file, a = document.createElement('a'), img = document.createElement('img');
+        a.href = src; img.src = src; img.alt = item.caption || 'Foto della visita'; img.loading = 'lazy';
+        a.appendChild(img); a.addEventListener('click', function (e) { e.preventDefault(); openLb(src, item.caption); });
+        box.appendChild(a);
+        img.addEventListener('load', function () { if (!box.dataset.toccata) box.scrollLeft = 0; });
+      });
+      var extra = mie.length - MAX;
+      if (extra > 0) {
+        var a = document.createElement('a');
+        a.className = 'g-more'; a.href = 'galleria.html#giorno-' + GIORNO;
+        a.innerHTML = '<b>+' + extra + '</b><span>' + (extra === 1 ? 'altra foto' : 'altre foto') + '<br>in galleria</span>';
+        box.appendChild(a);
+      }
+      box.hidden = false; box.scrollLeft = 0;
+      box.addEventListener('pointerdown', function () { box.dataset.toccata = '1'; }, { once: true });
+      box.addEventListener('wheel', function () { box.dataset.toccata = '1'; }, { once: true, passive: true });
+    }).catch(function () {});
+})();
+</script>
+</body>
+</html>
