@@ -60,6 +60,7 @@ body { background: var(--bg); font-family: var(--font); color: var(--ink); -webk
 canvas#grid { position: fixed; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1.2s ease; }
 body.on canvas#grid { opacity: 1; }
 .vignette { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 85% 80% at 50% 50%, transparent 55%, rgba(0,0,0,0.55) 100%); }
+@media (max-width: 768px), (pointer: coarse) { .vignette { background: radial-gradient(ellipse 90% 85% at 50% 50%, transparent 60%, rgba(0,0,0,0.3) 100%); } }
 a:focus-visible, button:focus-visible { outline: 1px solid var(--acc); outline-offset: 4px; }
 
 /* the wordmark, drawn like a type designer's construction */
@@ -280,9 +281,17 @@ body.menu-open .menu-icons { opacity: 1; }
     const DPR = Math.min(2, devicePixelRatio || 1);
     const TOUCH = matchMedia('(pointer: coarse)').matches;
     let W = 0, H = 0;
-    const pointer = { x: -1e4, y: -1e4, on: false };
-    addEventListener('pointermove', e => { pointer.x = e.clientX; pointer.y = e.clientY; pointer.on = true; }, { passive: true });
+    const pointer = { x: -1e4, y: -1e4, on: false, touchedAt: -1e9 };
+    addEventListener('pointermove', e => { pointer.x = e.clientX; pointer.y = e.clientY; pointer.on = true; pointer.touchedAt = performance.now(); }, { passive: true });
+    addEventListener('pointerdown', e => { pointer.x = e.clientX; pointer.y = e.clientY; pointer.on = true; pointer.touchedAt = performance.now(); }, { passive: true });
     document.addEventListener('pointerout', e => { if (!e.relatedTarget) pointer.on = false; });
+    /* on a touch screen there is no cursor: a point of light wanders slowly over the sheet instead, and a finger takes over for a while */
+    function wake(now) {
+      if (!TOUCH) return pointer.on ? { x: pointer.x * DPR, y: pointer.y * DPR } : null;
+      if (now - pointer.touchedAt < 2500 && pointer.on) return { x: pointer.x * DPR, y: pointer.y * DPR };
+      const t = now * 0.00004;
+      return { x: W * (0.5 + 0.36 * Math.sin(t * 1.3 + 0.7)), y: H * (0.5 + 0.34 * Math.sin(t * 0.9 + 2.1) * Math.cos(t * 0.4)) };
+    }
     function resize() { W = grid.width = Math.round(innerWidth * DPR); H = grid.height = Math.round(innerHeight * DPR); }
     addEventListener('resize', resize); resize();
     /* the sheet: the dot grid, two very slow rings of ticks around the name, and now and then a sampling mark */
@@ -301,18 +310,18 @@ body.menu-open .menu-icons { opacity: 1; }
     }
     function drawSheet(now) {
       ctx.clearRect(0, 0, W, H);
-      const step = 22 * DPR, r = 0.75 * DPR, R = 150 * DPR;
-      const px = pointer.x * DPR, py = pointer.y * DPR;
+      const step = 22 * DPR, r = (TOUCH ? 0.9 : 0.75) * DPR, R = 150 * DPR;
       const ox = (W / 2) % step, oy = (H / 2) % step;
-      ctx.fillStyle = 'rgba(228,231,234,0.12)';
+      ctx.fillStyle = TOUCH ? 'rgba(228,231,234,0.2)' : 'rgba(228,231,234,0.13)';
       for (let y = oy; y < H; y += step) for (let x = ox; x < W; x += step) { ctx.fillRect(x - r, y - r, 2 * r, 2 * r); }
-      /* the rings, turning so slowly you would have to wait to be sure */
-      const cx = W / 2, cy = H / 2 - 0.03 * H, m = Math.min(W, H);
-      ring(cx, cy, m * 0.40, now * 0.00000175, 72, 6, 0.085);
-      ring(cx, cy, m * 0.58, -now * 0.0000011, 36, 3, 0.065);
+      /* the rings, turning so slowly you would have to wait to be sure; on a tall screen they are drawn on the width */
+      const cx = W / 2, cy = H / 2 - 0.03 * H, portrait = H > W * 1.1, m = portrait ? W : Math.min(W, H);
+      const ra = TOUCH ? 1.6 : 1;
+      ring(cx, cy, m * (portrait ? 0.46 : 0.40), now * 0.00000175, 72, 6, 0.085 * ra);
+      ring(cx, cy, m * (portrait ? 0.72 : 0.58), -now * 0.0000011, 36, 3, 0.065 * ra);
       /* the marks: a small cross settles on a grid point, then goes */
-      if (now > nextMark && marks.length < 4) {
-        nextMark = now + 1600 + Math.random() * 1800;
+      if (now > nextMark && marks.length < (TOUCH ? 6 : 4)) {
+        nextMark = now + (TOUCH ? 1100 : 1600) + Math.random() * 1800;
         const rb = wmEl.getBoundingClientRect();
         for (let k = 0; k < 12; k++) {
           const gx = ox + Math.floor(Math.random() * ((W - ox) / step)) * step, gy = oy + Math.floor(Math.random() * ((H - oy) / step)) * step;
@@ -327,16 +336,17 @@ body.menu-open .menu-icons { opacity: 1; }
         const a = age < 0.4 ? age / 0.4 : age < 1.6 ? 1 : Math.max(0, 1 - (age - 1.6) / 0.9);
         if (age > 2.5) { marks.splice(i, 1); continue; }
         const L = 6 * DPR;
-        ctx.strokeStyle = `rgba(138,198,255,${(0.4 * a).toFixed(3)})`; ctx.lineWidth = 1 * DPR;
+        ctx.strokeStyle = `rgba(138,198,255,${((TOUCH ? 0.55 : 0.4) * a).toFixed(3)})`; ctx.lineWidth = 1 * DPR;
         ctx.beginPath(); ctx.moveTo(mk.x - L, mk.y); ctx.lineTo(mk.x + L, mk.y); ctx.moveTo(mk.x, mk.y - L); ctx.lineTo(mk.x, mk.y + L); ctx.stroke();
       }
-      if (!pointer.on || TOUCH) return;
-      /* near the cursor the sheet wakes up */
+      const wk = wake(now); if (!wk) return;
+      /* near the cursor, or the wandering light, the sheet wakes up */
+      const px = wk.x, py = wk.y, RW = TOUCH ? 190 * DPR : R;
       for (let y = oy; y < H; y += step) {
-        if (Math.abs(y - py) > R) continue;
+        if (Math.abs(y - py) > RW) continue;
         for (let x = ox; x < W; x += step) {
-          const d = Math.hypot(x - px, y - py); if (d > R) continue;
-          const k = 1 - d / R;
+          const d = Math.hypot(x - px, y - py); if (d > RW) continue;
+          const k = 1 - d / RW;
           ctx.fillStyle = `rgba(138,198,255,${(0.42 * k * k).toFixed(3)})`;
           ctx.fillRect(x - r * 1.4, y - r * 1.4, 2.8 * r, 2.8 * r);
         }
