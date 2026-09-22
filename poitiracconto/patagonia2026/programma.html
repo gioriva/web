@@ -80,9 +80,19 @@
   .d-link.d-home { padding: 12px 26px; }
   .d-link.d-home .place { font-size: 18px; color: var(--ivory-2); }
   .d-sep { margin: 10px 26px; border: none; border-top: 1px solid var(--line); }
-  .d-gruppo { display: block; padding: 10px 26px 4px; font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ivory-3); }
-  .d-link.d-sotto { padding: 12px 26px; }
-  .d-link.d-sotto .place { font-size: 21px; }
+  /* "Curiosità": voce di primo livello non cliccabile, con le pagine sotto */
+  .d-voce { display: block; padding: 16px 26px; border-left: 2px solid transparent; }
+  .d-voce .place { font-family: var(--display); font-size: 25px; display: block; line-height: 1.15; }
+  .d-voce .sub { font-size: 13px; color: var(--ivory-3); display: block; margin-top: 2px; }
+  .d-sotto-lista { padding: 2px 0 8px; margin: 0 0 0 26px; border-left: 1px solid var(--line); }
+  .d-link.d-sotto { padding: 10px 16px 10px 18px; border-left: none; }
+  .d-link.d-sotto .place { font-size: 19px; color: var(--ivory-2); }
+  .d-link.d-sotto .sub { font-size: 12.5px; }
+  .d-link.d-sotto:hover .place { color: var(--ivory); }
+  .d-link.d-sotto.active { background: var(--panel); }
+  .d-link.d-sotto.active .place { color: var(--ivory); }
+  .d-link.d-sotto.active::before { content: ''; position: absolute; left: -1px; top: 10px; bottom: 10px; width: 2px; background: var(--dawn); }
+  .d-link.d-sotto { position: relative; }
   .d-foot { padding: 18px 26px 0; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ivory-3); line-height: 1.8; }
   footer { border-top: 1px solid var(--line); padding: 32px 24px 44px; display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; }
   footer a { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ivory-3); transition: color 0.2s; }
@@ -160,6 +170,68 @@
   .rimando .go { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--ivory-2); transition: background 0.25s, color 0.25s, border-color 0.25s; }
   .rimando:hover .go { background: var(--ivory); color: var(--night); border-color: var(--ivory); }
   .rimando .go svg { width: 18px; height: 18px; }
+
+  /* ═══ TRASPORTI (dentro il programma) ═══ */
+  #pannello-trasporti .cifre { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding-top: 8px; padding-bottom: 60px; border-bottom: 1px solid var(--line); }
+  @media (max-width: 560px) { #pannello-trasporti .cifre { grid-template-columns: repeat(2, 1fr); } }
+  #pannello-trasporti .cifra .n { font-family: var(--display); font-size: clamp(40px, 7vw, 60px); line-height: 0.9; }
+  #pannello-trasporti .cifra .l { font-size: 14px; color: var(--ivory-3); margin-top: 6px; }
+  #pannello-trasporti .cifra:nth-child(1) .n { color: var(--glacier); } #pannello-trasporti .cifra:nth-child(3) .n { color: var(--lagoon); } #pannello-trasporti .cifra:nth-child(4) .n { color: var(--dawn); }
+
+  #pannello-trasporti section { padding: 70px 0 60px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--head-h) + 14px); }
+  #pannello-trasporti section:last-of-type { border-bottom: none; }
+  #pannello-trasporti h2 { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 6vw, 58px); line-height: 1.0; margin: 0 0 12px; }
+  #pannello-trasporti .sub { font-size: 16px; color: var(--ivory-2); max-width: 600px; margin: 0 0 30px; }
+
+  #pannello-trasporti /* registro voli */
+  .gruppo { font-family: var(--display); font-style: italic; font-size: 22px; color: var(--ivory-2); padding: 26px 0 10px; }
+  #pannello-trasporti .gruppo:first-of-type { padding-top: 0; }
+  #pannello-trasporti .volo { display: grid; grid-template-columns: 68px 1fr auto; gap: 16px; align-items: baseline; padding: 14px 0; border-top: 1px solid var(--line); }
+  #pannello-trasporti .volo .d { font-family: var(--display); font-size: 30px; line-height: 0.9; }
+  #pannello-trasporti .volo .d small { display: block; font-family: var(--sans); font-size: 12px; color: var(--ivory-3); margin-top: 5px; }
+  #pannello-trasporti .volo .tr { font-size: 17px; }
+  #pannello-trasporti .volo .tr small { display: block; font-size: 14px; color: var(--ivory-3); margin-top: 2px; }
+  #pannello-trasporti .volo .hh { font-size: 17px; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  #pannello-trasporti .volo .hh small { display: block; font-size: 13px; color: var(--ivory-3); }
+  #pannello-trasporti .volo.notte .hh { color: var(--dawn); }
+  @media (max-width: 520px) { #pannello-trasporti .volo { grid-template-columns: 58px 1fr; } #pannello-trasporti .volo .hh { grid-column: 2; text-align: left; } #pannello-trasporti .volo .d { font-size: 26px; } }
+
+  #pannello-trasporti /* trasferimenti */
+  .tr-lista { border-top: 1px solid var(--line); }
+  #pannello-trasporti .tr-riga { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  #pannello-trasporti .tr-riga .dove { font-family: var(--display); font-size: 21px; line-height: 1.15; }
+  #pannello-trasporti .tr-riga .cosa { font-size: 15.5px; color: var(--ivory-2); }
+  #pannello-trasporti .tr-riga .cosa b { color: var(--ivory); font-weight: 400; }
+  @media (max-width: 520px) { #pannello-trasporti .tr-riga { grid-template-columns: 1fr; gap: 4px; } }
+
+  #pannello-trasporti /* note */
+  details { border-top: 1px solid var(--line); }
+  #pannello-trasporti details:last-of-type { border-bottom: 1px solid var(--line); }
+  #pannello-trasporti summary { list-style: none; cursor: pointer; padding: 20px 4px; display: flex; justify-content: space-between; align-items: center; font-family: var(--display); font-size: clamp(22px, 3.4vw, 28px); }
+  #pannello-trasporti summary::-webkit-details-marker { display: none; }
+  #pannello-trasporti summary .segno { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: var(--sans); font-size: 20px; color: var(--dawn); transition: transform 0.3s; font-weight: 300; flex-shrink: 0; }
+  #pannello-trasporti details[open] summary .segno { transform: rotate(45deg); }
+  #pannello-trasporti .corpo { padding: 0 4px 24px; font-size: 15.5px; color: var(--ivory-2); max-width: 620px; }
+  #pannello-trasporti .corpo b { color: var(--ivory); font-weight: 400; }
+  #pannello-trasporti .corpo ul { margin: 0; padding: 0; list-style: none; }
+  #pannello-trasporti .corpo li { padding: 9px 0; border-top: 1px solid var(--line); }
+  #pannello-trasporti .corpo li:first-child { border-top: none; }
+  /* ═══ SWITCH PROGRAMMA / TRASPORTI ═══ */
+  .switch-wrap { padding-top: 34px; }
+  .switch { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; border: 1px solid rgba(243,241,234,0.28); border-radius: 100px; padding: 4px; background: rgba(243,241,234,0.03); }
+  .switch button { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; gap: 9px; background: none; border: none; cursor: pointer; padding: 11px 24px; min-width: 150px; border-radius: 100px; font-size: 15.5px; letter-spacing: 0.02em; color: var(--ivory-2); transition: color 0.3s; }
+  .switch button svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+  .switch button[aria-selected="true"] { color: var(--night); }
+  .switch button:not([aria-selected="true"]):hover { color: var(--ivory); }
+  .switch .cursore { position: absolute; z-index: 0; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: 100px; background: var(--ivory); transition: transform 0.4s cubic-bezier(.3,.8,.3,1), background 0.4s; }
+  .switch[data-attivo="trasporti"] .cursore { transform: translateX(100%); background: var(--dawn); }
+  @media (max-width: 420px) { .switch { display: grid; width: 100%; } .switch button { min-width: 0; padding: 11px 12px; } }
+  @media (prefers-reduced-motion: reduce) { .switch .cursore { transition: none; } }
+  #pannello-trasporti .intro, #pannello-programma .intro { padding-top: 40px; }
+  [role="tabpanel"]:focus { outline: none; }
+  .pannello-in { animation: entra 0.45s ease-out; }
+  @keyframes entra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .pannello-in { animation: none; } }
 </style>
 </head>
 <body>
@@ -186,22 +258,35 @@
     <a class="d-link d-home" href="https://www.gioriva.it/poitiracconto/"><span class="place">Home page</span><span class="sub">Tutti i viaggi, su gioriva.it</span></a>
     <hr class="d-sep">
     <a class="d-link" href="https://www.gioriva.it/poitiracconto/patagonia2026"><span class="place">Diario di viaggio</span><span class="sub">Il racconto, tappa per tappa</span></a>
-    <a class="d-link active" href="programma.html"><span class="place">Programma</span><span class="sub">L'itinerario, giorno per giorno</span></a>
-    <a class="d-link" href="trasporti.html"><span class="place">Trasporti</span><span class="sub">Voli, orari e trasferimenti</span></a>
+    <a class="d-link active" href="programma.html"><span class="place">Programma</span><span class="sub">L'itinerario, i voli e i trasferimenti</span></a>
     <a class="d-link" href="galleria.html"><span class="place">Galleria</span><span class="sub">Le foto del viaggio</span></a>
     <hr class="d-sep">
-    <span class="d-gruppo">Curiosità</span>
-    <a class="d-link d-sotto" href="estancia.html"><span class="place">Nibepo Aike</span><span class="sub">Vita e storia di un'estancia</span></a>
-    <a class="d-link d-sotto" href="ghiacciai.html"><span class="place">I ghiacciai</span><span class="sub">Perito Moreno, Upsala e Spegazzini</span></a>
+    <span class="d-voce">
+      <span class="place">Curiosità</span>
+      <span class="sub">Approfondimenti dal viaggio</span>
+    </span>
+    <div class="d-sotto-lista">
+      <a class="d-link d-sotto" href="estancia.html"><span class="place">Nibepo Aike</span><span class="sub">Vita e storia di un'estancia</span></a>
+      <a class="d-link d-sotto" href="ghiacciai.html"><span class="place">I ghiacciai</span><span class="sub">Perito Moreno, Upsala e Spegazzini</span></a>
+    </div>
   </nav>
   <div class="d-foot">Patagonia &amp; Polinesia 2026<br>Il viaggio di nozze di Giorgio e Lucrezia</div>
 </aside>
 
 <main>
+<div class="wrap switch-wrap" id="switch-top">
+  <div class="switch" role="tablist" aria-label="Programma o trasporti" data-attivo="programma">
+    <span class="cursore" aria-hidden="true"></span>
+    <button type="button" role="tab" id="tab-programma" aria-controls="pannello-programma" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14.2 9.8 L22 12 L14.2 14.2 L12 22 L9.8 14.2 L2 12 L9.8 9.8 Z"/></svg>Programma</button>
+    <button type="button" role="tab" id="tab-trasporti" aria-controls="pannello-trasporti" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12 L4 6 L10 12 L4 18 Z"/></svg>Trasporti</button>
+  </div>
+</div>
+
+<div id="pannello-programma" role="tabpanel" aria-labelledby="tab-programma" tabindex="-1">
 
 <div class="wrap intro">
   <h1>Ventitré giorni, <i>otto tappe</i></h1>
-  <p class="lede">Da Milano alla fine del mondo, poi su fino alle Isole della Società. Questa è la rotta come l'abbiamo pensata: dove dormiamo, cosa facciamo, cosa aspettiamo di più. Orari di voli e trasferimenti sono nella pagina dei trasporti.</p>
+  <p class="lede">Da Milano alla fine del mondo, poi su fino alle Isole della Società. Questa è la rotta come l'abbiamo pensata: dove dormiamo, cosa facciamo, cosa aspettiamo di più. Orari di voli e trasferimenti sono nella scheda dei trasporti, qui sopra.</p>
 </div>
 
 <div class="wrap barra" aria-label="I ventitré giorni del viaggio in proporzione">
@@ -336,13 +421,121 @@
     <div class="giorno"><div class="data">6<small>martedì</small></div><div><h3>Los Angeles</h3><p>Si atterra in California la mattina, e nel pomeriggio si riparte per Parigi con il volo notturno.</p></div></div>
     <div class="giorno"><div class="data">7<small>mercoledì</small></div><div><h3>Casa</h3><p>Parigi in tarda mattinata, Linate alle 13:55. Ventitré giorni dopo.</p></div></div>
 
-    <a class="rimando" href="trasporti.html">
-      <div><div class="t">Tutti i trasporti</div><div class="s">Quattordici voli con orari e compagnie, i trasferimenti, le barche per i resort, i bagagli e i documenti: sono nella pagina dedicata.</div></div>
+    <a class="rimando" href="#trasporti" data-vai="trasporti">
+      <div><div class="t">Tutti i trasporti</div><div class="s">Quattordici voli con orari e compagnie, i trasferimenti, le barche per i resort, i bagagli e i documenti: sono nella scheda dei trasporti.</div></div>
       <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </a>
   </div>
 </section>
 
+</div>
+
+<div id="pannello-trasporti" role="tabpanel" aria-labelledby="tab-trasporti" tabindex="-1" hidden>
+
+<div class="wrap intro">
+  <h1>Tutti <i>gli spostamenti</i></h1>
+  <p class="lede">La parte tecnica del viaggio: voli con orari e compagnie, trasferimenti, barche per i resort, bagagli e documenti. Gli orari sono sempre quelli locali.</p>
+</div>
+
+<div class="wrap cifre">
+  <div class="cifra"><div class="n">14</div><div class="l">voli</div></div>
+  <div class="cifra"><div class="n">68</div><div class="l">ore in volo</div></div>
+  <div class="cifra"><div class="n">6</div><div class="l">compagnie aeree</div></div>
+  <div class="cifra"><div class="n">4</div><div class="l">traversate in barca</div></div>
+</div>
+
+<!-- VOLI -->
+<section id="voli">
+  <div class="wrap">
+    <h2>I voli</h2>
+    <p class="sub">Quattordici tratte. Quelle in arancio sono notturne e atterrano il giorno dopo. I tre voli tra le isole sono sull'Air Pass di Air Tahiti, con i biglietti che si ritirano all'arrivo a Papeete.</p>
+
+    <div class="gruppo">Andata</div>
+    <div class="volo"><div class="d">15<small>mar, settembre</small></div><div class="tr">Milano Linate, Parigi Charles de Gaulle<small>AF 1733, Air France · Airbus A220-100 · 1 h 40 · arrivo al Terminal 2F</small></div><div class="hh">06:25 – 08:05</div></div>
+    <div class="volo"><div class="d">15<small>mar, settembre</small></div><div class="tr">Parigi Charles de Gaulle, Buenos Aires Ezeiza<small>AF 0556, Air France · Airbus A350-900 · 13 h 40 · dal Terminal 2E al Terminal A</small></div><div class="hh">10:10 – 18:50</div></div>
+
+    <div class="gruppo">Dentro l'Argentina</div>
+    <div class="volo"><div class="d">18<small>ven, settembre</small></div><div class="tr">Buenos Aires Aeroparque, El Calafate<small>AR 1896, Aerolíneas Argentinas · Boeing 737-800 · 3 h 20</small></div><div class="hh">09:35 – 12:55</div></div>
+    <div class="volo"><div class="d">22<small>mar, settembre</small></div><div class="tr">El Calafate, Ushuaia<small>AR 1894, Aerolíneas Argentinas · Boeing 737 MAX · 1 h 20</small></div><div class="hh">14:30 – 15:50</div></div>
+    <div class="volo"><div class="d">24<small>gio, settembre</small></div><div class="tr">Ushuaia, Buenos Aires Aeroparque<small>AR 1881, Aerolíneas Argentinas · Boeing 737 MAX · 3 h 30</small></div><div class="hh">12:30 – 16:00</div></div>
+
+    <div class="gruppo">La traversata del Pacifico</div>
+    <div class="volo"><div class="d">25<small>ven, settembre</small></div><div class="tr">Buenos Aires Aeroparque, Lima<small>LA 2381, LATAM · Airbus A320 · 4 h 45</small></div><div class="hh">17:35 – 20:20</div></div>
+    <div class="volo notte"><div class="d">26<small>sab, settembre</small></div><div class="tr">Lima, Los Angeles<small>LA 2478, LATAM · Boeing 767 · 9 h 10 · arrivo al Terminal B</small></div><div class="hh">00:40 – 07:50</div></div>
+    <div class="volo"><div class="d">26<small>sab, settembre</small></div><div class="tr">Los Angeles, Papeete<small>TN 7, Air Tahiti Nui · Boeing 787-9 · 8 h 10 · dal Terminal B al Terminal 1</small></div><div class="hh">16:40 – 21:50</div></div>
+
+    <div class="gruppo">Tra le isole, con l'Air Pass</div>
+    <div class="volo"><div class="d">27<small>dom, settembre</small></div><div class="tr">Papeete, Raiatea<small>VT 311, Air Tahiti · 45 minuti</small></div><div class="hh">10:35 – 11:20</div></div>
+    <div class="volo"><div class="d">1<small>gio, ottobre</small></div><div class="tr">Raiatea, Bora Bora<small>VT 4804, Air Tahiti · 20 minuti</small></div><div class="hh">17:25 – 17:45</div></div>
+    <div class="volo"><div class="d">5<small>lun, ottobre</small></div><div class="tr">Bora Bora, Papeete<small>VT 477, Air Tahiti · 50 minuti</small></div><div class="hh">18:20 – 19:10</div></div>
+
+    <div class="gruppo">Ritorno</div>
+    <div class="volo notte"><div class="d">5<small>lun, ottobre</small></div><div class="tr">Papeete, Los Angeles<small>TN 2, Air Tahiti Nui · Boeing 787-9 · 7 h 50 · dal Terminal 1 al Terminal B</small></div><div class="hh">22:30 – 09:20<small>arrivo il 6 ottobre</small></div></div>
+    <div class="volo notte"><div class="d">6<small>mar, ottobre</small></div><div class="tr">Los Angeles, Parigi Charles de Gaulle<small>AF 23, Air France · Boeing 777-300 · 10 h 55 · dal Terminal B al Terminal 2E</small></div><div class="hh">15:15 – 11:10<small>arrivo il 7 ottobre</small></div></div>
+    <div class="volo"><div class="d">7<small>mer, ottobre</small></div><div class="tr">Parigi Charles de Gaulle, Milano Linate<small>AF 1012, Air France · Airbus A220-100 · 1 h 35 · dal Terminal 2F</small></div><div class="hh">12:20 – 13:55</div></div>
+  </div>
+</section>
+
+<!-- TRASFERIMENTI -->
+<section id="trasferimenti">
+  <div class="wrap">
+    <h2>Trasferimenti e barche</h2>
+    <p class="sub">Chi ci viene a prendere e come si arriva in hotel, in ogni tappa.</p>
+    <div class="tr-lista">
+      <div class="tr-riga"><div class="dove">Buenos Aires</div><div class="cosa"><b>Arrivo a Ezeiza</b> il 15 settembre: trasferimento privato con guida in italiano. <b>Partenza</b> il 18: privato con autista. <b>Ritorno da Ushuaia</b> il 24: auto privata dall'aeroporto all'hotel, e il 25 dall'hotel all'aeroporto.</div></div>
+      <div class="tr-riga"><div class="dove">El Calafate</div><div class="cosa"><b>Arrivo</b> il 18 settembre: trasferimento privato con guida in italiano. <b>Partenza</b> il 22: privato con autista.</div></div>
+      <div class="tr-riga"><div class="dove">Ushuaia</div><div class="cosa"><b>Arrivo</b> il 22 settembre: trasferimento privato con guida in italiano. <b>Partenza</b> il 24: privato con autista.</div></div>
+      <div class="tr-riga"><div class="dove">Papeete</div><div class="cosa"><b>Arrivo</b> il 26 settembre: accoglienza in aeroporto con la collana di fiori e bus collettivo fino al Kon Tiki Tahiti. Stesso bus il 27 per tornare in aeroporto.</div></div>
+      <div class="tr-riga"><div class="dove">Taha'a</div><div class="cosa"><b>Barca collettiva</b> del resort dall'aeroporto di Raiatea al Motu Tautau e ritorno, trenta minuti. Opera solo per arrivi tra le 07:30 e le 17:30 e partenze tra le 09:00 e le 18:30: i nostri voli sono compatibili.</div></div>
+      <div class="tr-riga"><div class="dove">Bora Bora</div><div class="cosa"><b>Barca collettiva</b> del resort dall'aeroporto al Motu Tevairoa e ritorno, dieci minuti di barca veloce.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTE -->
+<section id="note">
+  <div class="wrap">
+    <h2>Bagagli, documenti, scali</h2>
+    <p class="sub">Le cose da sapere prima di partire.</p>
+
+    <details>
+      <summary>Bagagli e franchigie <span class="segno">+</span></summary>
+      <div class="corpo"><ul>
+        <li><b>Air France</b>, i quattro voli tra Milano, Parigi, Buenos Aires e Los Angeles: un bagaglio a mano e uno in stiva a testa.</li>
+        <li><b>Air Tahiti Nui</b>, Los Angeles e Papeete andata e ritorno: un bagaglio a mano da dieci chili entro 115 centimetri di somma dei lati, più un accessorio personale da tre chili; in stiva un collo da ventitré chili entro 158 centimetri (mai oltre i trentadue).</li>
+        <li><b>Aerolíneas Argentinas e LATAM</b>, i tre voli interni e la traversata verso Lima e Los Angeles: un bagaglio in stiva a testa da ventitré chili. Il biglietto non riporta un bagaglio a mano incluso: da verificare sul sito della compagnia prima di partire.</li>
+        <li><b>Air Tahiti</b>, tra le isole: ventitré chili in stiva a persona (somma dei tre lati entro 157 centimetri, massimo venticinque chili a collo) e cinque chili a mano entro 55 per 35 per 25 centimetri. La compagnia è rigida e gli extra costano: con più di dieci chili in eccesso il check-in va fatto almeno novanta minuti prima. Conviene estendere la franchigia per uno dei due, oppure lasciare l'eccedenza al deposito bagagli di Papeete, appena fuori dall'aerostazione nazionale.</li>
+        <li><b>A Los Angeles</b> le valigie vanno ritirate e reimbarcate, all'andata e al ritorno.</li>
+      </ul></div>
+    </details>
+    <details>
+      <summary>Documenti <span class="segno">+</span></summary>
+      <div class="corpo"><ul>
+        <li><b>Passaporto</b> con almeno sei mesi di validità residua e pagine libere per i timbri, integro in ogni sua parte.</li>
+        <li><b>ESTA</b> per il transito negli Stati Uniti, da richiedere prima della partenza su esta.cbp.dhs.gov.</li>
+        <li><b>Assicurazione</b> stampata: in Argentina va mostrata all'Immigrazione insieme al biglietto di uscita e alle prenotazioni degli alloggi.</li>
+        <li><b>Formulario doganale</b> argentino: si compila all'arrivo e si restituisce all'uscita.</li>
+        <li><b>Carta di credito</b> per le cauzioni al check-in di ogni hotel.</li>
+      </ul></div>
+    </details>
+    <details>
+      <summary>Scali e avvertenze <span class="segno">+</span></summary>
+      <div class="corpo"><ul>
+        <li><b>Per i voli verso gli Stati Uniti</b> conviene presentarsi con tre ore e mezza di anticipo, per il controllo di sicurezza aggiuntivo.</li>
+        <li><b>I voli Air Tahiti</b> possono cambiare orario fino al giorno della partenza; i biglietti elettronici si ritirano all'arrivo a Papeete.</li>
+        <li><b>Tasse di soggiorno e resort fee</b> possono essere richieste in hotel, da pagare in loco.</li>
+        <li><b>Febbre gialla</b>: vaccinazione raccomandata, non obbligatoria, per chi transita da aree a rischio. Da verificare per tempo.</li>
+      </ul></div>
+    </details>
+
+    <a class="rimando" href="#programma" data-vai="programma">
+      <div><div class="t">Torna al programma</div><div class="s">L'itinerario raccontato giorno per giorno, senza orari e sigle.</div></div>
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+  </div>
+</section>
+
+</div>
 </main>
 
 <footer>
@@ -365,6 +558,52 @@
   dclose.addEventListener('click', function () { setDrawer(false); });
   scrim.addEventListener('click', function () { setDrawer(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer.classList.contains('open')) setDrawer(false); });
+
+  /* ── switch programma / trasporti ── */
+  var sw = document.querySelector('.switch'),
+      tabs = { programma: document.getElementById('tab-programma'), trasporti: document.getElementById('tab-trasporti') },
+      pannelli = { programma: document.getElementById('pannello-programma'), trasporti: document.getElementById('pannello-trasporti') },
+      IDS_TRASPORTI = ['trasporti', 'voli', 'trasferimenti', 'note'];
+  function attiva(quale, opz) {
+    opz = opz || {};
+    Object.keys(tabs).forEach(function (k) {
+      var on = k === quale;
+      tabs[k].setAttribute('aria-selected', on ? 'true' : 'false');
+      tabs[k].tabIndex = on ? 0 : -1;
+      pannelli[k].hidden = !on;
+      pannelli[k].classList.toggle('pannello-in', on && !!opz.anima);
+    });
+    sw.setAttribute('data-attivo', quale);
+    if (opz.hash !== false) {
+      var h = quale === 'trasporti' ? '#trasporti' : location.pathname + location.search;
+      try { history.replaceState(null, '', h); } catch (e) {}
+    }
+    if (opz.su) {
+      var top = document.getElementById('switch-top').getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+    }
+  }
+  tabs.programma.addEventListener('click', function () { attiva('programma', { anima: true }); });
+  tabs.trasporti.addEventListener('click', function () { attiva('trasporti', { anima: true }); });
+  sw.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    var prossimo = sw.getAttribute('data-attivo') === 'programma' ? 'trasporti' : 'programma';
+    attiva(prossimo, { anima: true }); tabs[prossimo].focus(); e.preventDefault();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-vai]'), function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); attiva(a.getAttribute('data-vai'), { anima: true, su: true }); });
+  });
+  function daHash() {
+    var h = (location.hash || '').replace('#', '');
+    if (IDS_TRASPORTI.indexOf(h) !== -1) {
+      attiva('trasporti', { hash: false });
+      if (h !== 'trasporti') { var el = document.getElementById(h); if (el) setTimeout(function () { el.scrollIntoView(); }, 30); }
+    } else if (h === 'programma') {
+      attiva('programma');
+    }
+  }
+  window.addEventListener('hashchange', daHash);
+  daHash();
 })();
 </script>
 </body>

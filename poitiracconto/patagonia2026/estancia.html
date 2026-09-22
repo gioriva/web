@@ -122,9 +122,19 @@
   .d-link.d-home { padding: 12px 26px; }
   .d-link.d-home .place { font-size: 18px; color: var(--ivory-2); }
   .d-sep { margin: 10px 26px; border: none; border-top: 1px solid var(--line); }
-  .d-gruppo { display: block; padding: 10px 26px 4px; font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ivory-3); }
-  .d-link.d-sotto { padding: 12px 26px; }
-  .d-link.d-sotto .place { font-size: 21px; }
+  /* "Curiosità": voce di primo livello non cliccabile, con le pagine sotto */
+  .d-voce { display: block; padding: 16px 26px; border-left: 2px solid transparent; }
+  .d-voce .place { font-family: var(--display); font-size: 25px; display: block; line-height: 1.15; }
+  .d-voce .sub { font-size: 13px; color: var(--ivory-3); display: block; margin-top: 2px; }
+  .d-sotto-lista { padding: 2px 0 8px; margin: 0 0 0 26px; border-left: 1px solid var(--line); }
+  .d-link.d-sotto { padding: 10px 16px 10px 18px; border-left: none; }
+  .d-link.d-sotto .place { font-size: 19px; color: var(--ivory-2); }
+  .d-link.d-sotto .sub { font-size: 12.5px; }
+  .d-link.d-sotto:hover .place { color: var(--ivory); }
+  .d-link.d-sotto.active { background: var(--panel); }
+  .d-link.d-sotto.active .place { color: var(--ivory); }
+  .d-link.d-sotto.active::before { content: ''; position: absolute; left: -1px; top: 10px; bottom: 10px; width: 2px; background: var(--dawn); }
+  .d-link.d-sotto { position: relative; }
   .d-foot { padding: 18px 26px 0; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ivory-3); line-height: 1.8; }
 
   /* ═══ HERO · LA STEPPA ═══ */
@@ -323,26 +333,27 @@
     </a>
     <a class="d-link" href="programma.html">
       <span class="place">Programma</span>
-      <span class="sub">L'itinerario, giorno per giorno</span>
-    </a>
-    <a class="d-link" href="trasporti.html">
-      <span class="place">Trasporti</span>
-      <span class="sub">Voli, orari e trasferimenti</span>
+      <span class="sub">L'itinerario, i voli e i trasferimenti</span>
     </a>
     <a class="d-link" href="galleria.html">
       <span class="place">Galleria</span>
       <span class="sub">Le foto del viaggio</span>
     </a>
     <hr class="d-sep">
-    <span class="d-gruppo">Curiosità</span>
-    <a class="d-link d-sotto active" href="estancia.html">
-      <span class="place">Nibepo Aike</span>
-      <span class="sub">Vita e storia di un'estancia</span>
-    </a>
-    <a class="d-link d-sotto" href="ghiacciai.html">
-      <span class="place">I ghiacciai</span>
-      <span class="sub">Perito Moreno, Upsala e Spegazzini</span>
-    </a>
+    <span class="d-voce">
+      <span class="place">Curiosità</span>
+      <span class="sub">Approfondimenti dal viaggio</span>
+    </span>
+    <div class="d-sotto-lista">
+      <a class="d-link d-sotto active" href="estancia.html">
+        <span class="place">Nibepo Aike</span>
+        <span class="sub">Vita e storia di un'estancia</span>
+      </a>
+      <a class="d-link d-sotto" href="ghiacciai.html">
+        <span class="place">I ghiacciai</span>
+        <span class="sub">Perito Moreno, Upsala e Spegazzini</span>
+      </a>
+    </div>
   </nav>
   <div class="d-foot">Patagonia &amp; Polinesia 2026<br>Il viaggio di nozze di Giorgio e Lucrezia</div>
 </aside>
