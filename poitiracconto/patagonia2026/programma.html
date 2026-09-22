@@ -172,62 +172,66 @@
   .rimando .go svg { width: 18px; height: 18px; }
 
   /* ═══ TRASPORTI (dentro il programma) ═══ */
-  #pannello-trasporti .cifre { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding-top: 8px; padding-bottom: 60px; border-bottom: 1px solid var(--line); }
-  @media (max-width: 560px) { #pannello-trasporti .cifre { grid-template-columns: repeat(2, 1fr); } }
-  #pannello-trasporti .cifra .n { font-family: var(--display); font-size: clamp(40px, 7vw, 60px); line-height: 0.9; }
-  #pannello-trasporti .cifra .l { font-size: 14px; color: var(--ivory-3); margin-top: 6px; }
-  #pannello-trasporti .cifra:nth-child(1) .n { color: var(--glacier); } #pannello-trasporti .cifra:nth-child(3) .n { color: var(--lagoon); } #pannello-trasporti .cifra:nth-child(4) .n { color: var(--dawn); }
+  :is(#pannello-trasporti, #pannello-note) .cifre { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding-top: 8px; padding-bottom: 60px; border-bottom: 1px solid var(--line); }
+  @media (max-width: 560px) { :is(#pannello-trasporti, #pannello-note) .cifre { grid-template-columns: repeat(2, 1fr); } }
+  :is(#pannello-trasporti, #pannello-note) .cifra .n { font-family: var(--display); font-size: clamp(40px, 7vw, 60px); line-height: 0.9; }
+  :is(#pannello-trasporti, #pannello-note) .cifra .l { font-size: 14px; color: var(--ivory-3); margin-top: 6px; }
+  :is(#pannello-trasporti, #pannello-note) .cifra:nth-child(1) .n { color: var(--glacier); } :is(#pannello-trasporti, #pannello-note) .cifra:nth-child(3) .n { color: var(--lagoon); } :is(#pannello-trasporti, #pannello-note) .cifra:nth-child(4) .n { color: var(--dawn); }
 
-  #pannello-trasporti section { padding: 70px 0 60px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--head-h) + 14px); }
-  #pannello-trasporti section:last-of-type { border-bottom: none; }
-  #pannello-trasporti h2 { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 6vw, 58px); line-height: 1.0; margin: 0 0 12px; }
-  #pannello-trasporti .sub { font-size: 16px; color: var(--ivory-2); max-width: 600px; margin: 0 0 30px; }
+  :is(#pannello-trasporti, #pannello-note) section { padding: 70px 0 60px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--head-h) + 14px); }
+  :is(#pannello-trasporti, #pannello-note) section:last-of-type { border-bottom: none; }
+  :is(#pannello-trasporti, #pannello-note) h2 { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 6vw, 58px); line-height: 1.0; margin: 0 0 12px; }
+  :is(#pannello-trasporti, #pannello-note) .sub { font-size: 16px; color: var(--ivory-2); max-width: 600px; margin: 0 0 30px; }
 
-  #pannello-trasporti /* registro voli */
+  :is(#pannello-trasporti, #pannello-note) /* registro voli */
   .gruppo { font-family: var(--display); font-style: italic; font-size: 22px; color: var(--ivory-2); padding: 26px 0 10px; }
-  #pannello-trasporti .gruppo:first-of-type { padding-top: 0; }
-  #pannello-trasporti .volo { display: grid; grid-template-columns: 68px 1fr auto; gap: 16px; align-items: baseline; padding: 14px 0; border-top: 1px solid var(--line); }
-  #pannello-trasporti .volo .d { font-family: var(--display); font-size: 30px; line-height: 0.9; }
-  #pannello-trasporti .volo .d small { display: block; font-family: var(--sans); font-size: 12px; color: var(--ivory-3); margin-top: 5px; }
-  #pannello-trasporti .volo .tr { font-size: 17px; }
-  #pannello-trasporti .volo .tr small { display: block; font-size: 14px; color: var(--ivory-3); margin-top: 2px; }
-  #pannello-trasporti .volo .hh { font-size: 17px; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
-  #pannello-trasporti .volo .hh small { display: block; font-size: 13px; color: var(--ivory-3); }
-  #pannello-trasporti .volo.notte .hh { color: var(--dawn); }
-  @media (max-width: 520px) { #pannello-trasporti .volo { grid-template-columns: 58px 1fr; } #pannello-trasporti .volo .hh { grid-column: 2; text-align: left; } #pannello-trasporti .volo .d { font-size: 26px; } }
+  :is(#pannello-trasporti, #pannello-note) .gruppo:first-of-type { padding-top: 0; }
+  :is(#pannello-trasporti, #pannello-note) .volo { display: grid; grid-template-columns: 68px 1fr auto; gap: 16px; align-items: baseline; padding: 14px 0; border-top: 1px solid var(--line); }
+  :is(#pannello-trasporti, #pannello-note) .volo .d { font-family: var(--display); font-size: 30px; line-height: 0.9; }
+  :is(#pannello-trasporti, #pannello-note) .volo .d small { display: block; font-family: var(--sans); font-size: 12px; color: var(--ivory-3); margin-top: 5px; }
+  :is(#pannello-trasporti, #pannello-note) .volo .tr { font-size: 17px; }
+  :is(#pannello-trasporti, #pannello-note) .volo .tr small { display: block; font-size: 14px; color: var(--ivory-3); margin-top: 2px; }
+  :is(#pannello-trasporti, #pannello-note) .volo .hh { font-size: 17px; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  :is(#pannello-trasporti, #pannello-note) .volo .hh small { display: block; font-size: 13px; color: var(--ivory-3); }
+  :is(#pannello-trasporti, #pannello-note) .volo.notte .hh { color: var(--dawn); }
+  @media (max-width: 520px) { :is(#pannello-trasporti, #pannello-note) .volo { grid-template-columns: 58px 1fr; } :is(#pannello-trasporti, #pannello-note) .volo .hh { grid-column: 2; text-align: left; } :is(#pannello-trasporti, #pannello-note) .volo .d { font-size: 26px; } }
 
-  #pannello-trasporti /* trasferimenti */
+  :is(#pannello-trasporti, #pannello-note) /* trasferimenti */
   .tr-lista { border-top: 1px solid var(--line); }
-  #pannello-trasporti .tr-riga { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line); }
-  #pannello-trasporti .tr-riga .dove { font-family: var(--display); font-size: 21px; line-height: 1.15; }
-  #pannello-trasporti .tr-riga .cosa { font-size: 15.5px; color: var(--ivory-2); }
-  #pannello-trasporti .tr-riga .cosa b { color: var(--ivory); font-weight: 400; }
-  @media (max-width: 520px) { #pannello-trasporti .tr-riga { grid-template-columns: 1fr; gap: 4px; } }
+  :is(#pannello-trasporti, #pannello-note) .tr-riga { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  :is(#pannello-trasporti, #pannello-note) .tr-riga .dove { font-family: var(--display); font-size: 21px; line-height: 1.15; }
+  :is(#pannello-trasporti, #pannello-note) .tr-riga .cosa { font-size: 15.5px; color: var(--ivory-2); }
+  :is(#pannello-trasporti, #pannello-note) .tr-riga .cosa b { color: var(--ivory); font-weight: 400; }
+  @media (max-width: 520px) { :is(#pannello-trasporti, #pannello-note) .tr-riga { grid-template-columns: 1fr; gap: 4px; } }
 
-  #pannello-trasporti /* note */
+  :is(#pannello-trasporti, #pannello-note) /* note */
   details { border-top: 1px solid var(--line); }
-  #pannello-trasporti details:last-of-type { border-bottom: 1px solid var(--line); }
-  #pannello-trasporti summary { list-style: none; cursor: pointer; padding: 20px 4px; display: flex; justify-content: space-between; align-items: center; font-family: var(--display); font-size: clamp(22px, 3.4vw, 28px); }
-  #pannello-trasporti summary::-webkit-details-marker { display: none; }
-  #pannello-trasporti summary .segno { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: var(--sans); font-size: 20px; color: var(--dawn); transition: transform 0.3s; font-weight: 300; flex-shrink: 0; }
-  #pannello-trasporti details[open] summary .segno { transform: rotate(45deg); }
-  #pannello-trasporti .corpo { padding: 0 4px 24px; font-size: 15.5px; color: var(--ivory-2); max-width: 620px; }
-  #pannello-trasporti .corpo b { color: var(--ivory); font-weight: 400; }
-  #pannello-trasporti .corpo ul { margin: 0; padding: 0; list-style: none; }
-  #pannello-trasporti .corpo li { padding: 9px 0; border-top: 1px solid var(--line); }
-  #pannello-trasporti .corpo li:first-child { border-top: none; }
+  :is(#pannello-trasporti, #pannello-note) details:last-of-type { border-bottom: 1px solid var(--line); }
+  :is(#pannello-trasporti, #pannello-note) summary { list-style: none; cursor: pointer; padding: 20px 4px; display: flex; justify-content: space-between; align-items: center; font-family: var(--display); font-size: clamp(22px, 3.4vw, 28px); }
+  :is(#pannello-trasporti, #pannello-note) summary::-webkit-details-marker { display: none; }
+  :is(#pannello-trasporti, #pannello-note) summary .segno { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: var(--sans); font-size: 20px; color: var(--dawn); transition: transform 0.3s; font-weight: 300; flex-shrink: 0; }
+  :is(#pannello-trasporti, #pannello-note) details[open] summary .segno { transform: rotate(45deg); }
+  :is(#pannello-trasporti, #pannello-note) .corpo { padding: 0 4px 24px; font-size: 15.5px; color: var(--ivory-2); max-width: 620px; }
+  :is(#pannello-trasporti, #pannello-note) .corpo b { color: var(--ivory); font-weight: 400; }
+  :is(#pannello-trasporti, #pannello-note) .corpo ul { margin: 0; padding: 0; list-style: none; }
+  :is(#pannello-trasporti, #pannello-note) .corpo li { padding: 9px 0; border-top: 1px solid var(--line); }
+  :is(#pannello-trasporti, #pannello-note) .corpo li:first-child { border-top: none; }
   /* ═══ SWITCH PROGRAMMA / TRASPORTI ═══ */
   .switch-wrap { padding-top: 34px; }
-  .switch { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; border: 1px solid rgba(243,241,234,0.28); border-radius: 100px; padding: 4px; background: rgba(243,241,234,0.03); }
+  .switch { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr 1fr; border: 1px solid rgba(243,241,234,0.28); border-radius: 100px; padding: 4px; background: rgba(243,241,234,0.03); }
   .switch button { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; gap: 9px; background: none; border: none; cursor: pointer; padding: 11px 24px; min-width: 150px; border-radius: 100px; font-size: 15.5px; letter-spacing: 0.02em; color: var(--ivory-2); transition: color 0.3s; }
   .switch button svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
   .switch button[aria-selected="true"] { color: var(--night); }
   .switch button:not([aria-selected="true"]):hover { color: var(--ivory); }
-  .switch .cursore { position: absolute; z-index: 0; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: 100px; background: var(--ivory); transition: transform 0.4s cubic-bezier(.3,.8,.3,1), background 0.4s; }
+  .switch .cursore { position: absolute; z-index: 0; top: 4px; bottom: 4px; left: 4px; width: calc((100% - 8px) / 3); border-radius: 100px; background: var(--ivory); transition: transform 0.4s cubic-bezier(.3,.8,.3,1), background 0.4s; }
   .switch[data-attivo="trasporti"] .cursore { transform: translateX(100%); background: var(--dawn); }
-  @media (max-width: 420px) { .switch { display: grid; width: 100%; } .switch button { min-width: 0; padding: 11px 12px; } }
+  .switch[data-attivo="note"] .cursore { transform: translateX(200%); background: var(--glacier); }
+  .switch button { min-width: 138px; }
+  @media (max-width: 520px) { .switch { display: grid; width: 100%; } .switch button { min-width: 0; padding: 11px 6px; font-size: 14.5px; gap: 7px; } }
+  @media (max-width: 380px) { .switch button svg { display: none; } }
   @media (prefers-reduced-motion: reduce) { .switch .cursore { transition: none; } }
-  #pannello-trasporti .intro, #pannello-programma .intro { padding-top: 40px; }
+  :is(#pannello-trasporti, #pannello-note) .intro, #pannello-programma .intro { padding-top: 40px; }
+  #pannello-note section { padding-top: 16px; }
   [role="tabpanel"]:focus { outline: none; }
   .pannello-in { animation: entra 0.45s ease-out; }
   @keyframes entra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -275,10 +279,11 @@
 
 <main>
 <div class="wrap switch-wrap" id="switch-top">
-  <div class="switch" role="tablist" aria-label="Programma o trasporti" data-attivo="programma">
+  <div class="switch" role="tablist" aria-label="Programma, trasporti, cose da sapere" data-attivo="programma">
     <span class="cursore" aria-hidden="true"></span>
     <button type="button" role="tab" id="tab-programma" aria-controls="pannello-programma" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14.2 9.8 L22 12 L14.2 14.2 L12 22 L9.8 14.2 L2 12 L9.8 9.8 Z"/></svg>Programma</button>
     <button type="button" role="tab" id="tab-trasporti" aria-controls="pannello-trasporti" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12 L4 6 L10 12 L4 18 Z"/></svg>Trasporti</button>
+    <button type="button" role="tab" id="tab-note" aria-controls="pannello-note" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3 H15 V6 H20 V20 H4 V6 H9 Z M11 5 V6 H13 V5 Z" fill-rule="evenodd"/></svg>Da sapere</button>
   </div>
 </div>
 
@@ -489,14 +494,26 @@
       <div class="tr-riga"><div class="dove">Taha'a</div><div class="cosa"><b>Barca collettiva</b> del resort dall'aeroporto di Raiatea al Motu Tautau e ritorno, trenta minuti. Opera solo per arrivi tra le 07:30 e le 17:30 e partenze tra le 09:00 e le 18:30: i nostri voli sono compatibili.</div></div>
       <div class="tr-riga"><div class="dove">Bora Bora</div><div class="cosa"><b>Barca collettiva</b> del resort dall'aeroporto al Motu Tevairoa e ritorno, dieci minuti di barca veloce.</div></div>
     </div>
+
+    <a class="rimando" href="#bagagli" data-vai="note">
+      <div><div class="t">Bagagli, documenti, scali</div><div class="s">Franchigie volo per volo, i documenti per l'Argentina e gli Stati Uniti, le avvertenze sugli scali.</div></div>
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
   </div>
 </section>
 
-<!-- NOTE -->
+
+
+</div>
+
+<div id="pannello-note" role="tabpanel" aria-labelledby="tab-note" tabindex="-1" hidden>
+<div class="wrap intro">
+  <h1>Prima <i>di partire</i></h1>
+  <p class="lede">Le cose da sapere: quanto si può portare in valigia su ogni volo, i documenti per l'Argentina e per il transito negli Stati Uniti, e qualche avvertenza sugli scali.</p>
+</div>
+
 <section id="note">
   <div class="wrap">
-    <h2>Bagagli, documenti, scali</h2>
-    <p class="sub">Le cose da sapere prima di partire.</p>
 
     <details>
       <summary>Bagagli e franchigie <span class="segno">+</span></summary>
@@ -534,7 +551,6 @@
     </a>
   </div>
 </section>
-
 </div>
 </main>
 
@@ -561,9 +577,11 @@
 
   /* ── switch programma / trasporti ── */
   var sw = document.querySelector('.switch'),
-      tabs = { programma: document.getElementById('tab-programma'), trasporti: document.getElementById('tab-trasporti') },
-      pannelli = { programma: document.getElementById('pannello-programma'), trasporti: document.getElementById('pannello-trasporti') },
-      IDS_TRASPORTI = ['trasporti', 'voli', 'trasferimenti', 'note'];
+      tabs = { programma: document.getElementById('tab-programma'), trasporti: document.getElementById('tab-trasporti'), note: document.getElementById('tab-note') },
+      pannelli = { programma: document.getElementById('pannello-programma'), trasporti: document.getElementById('pannello-trasporti'), note: document.getElementById('pannello-note') },
+      ORDINE = ['programma', 'trasporti', 'note'],
+      HASH = { trasporti: '#trasporti', note: '#bagagli' },
+      PER_ID = { trasporti: 'trasporti', voli: 'trasporti', trasferimenti: 'trasporti', bagagli: 'note', note: 'note', programma: 'programma' };
   function attiva(quale, opz) {
     opz = opz || {};
     Object.keys(tabs).forEach(function (k) {
@@ -575,7 +593,7 @@
     });
     sw.setAttribute('data-attivo', quale);
     if (opz.hash !== false) {
-      var h = quale === 'trasporti' ? '#trasporti' : location.pathname + location.search;
+      var h = HASH[quale] || (location.pathname + location.search);
       try { history.replaceState(null, '', h); } catch (e) {}
     }
     if (opz.su) {
@@ -585,21 +603,22 @@
   }
   tabs.programma.addEventListener('click', function () { attiva('programma', { anima: true }); });
   tabs.trasporti.addEventListener('click', function () { attiva('trasporti', { anima: true }); });
+  tabs.note.addEventListener('click', function () { attiva('note', { anima: true }); });
   sw.addEventListener('keydown', function (e) {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-    var prossimo = sw.getAttribute('data-attivo') === 'programma' ? 'trasporti' : 'programma';
+    var i = ORDINE.indexOf(sw.getAttribute('data-attivo')) + (e.key === 'ArrowRight' ? 1 : -1);
+    var prossimo = ORDINE[(i + ORDINE.length) % ORDINE.length];
     attiva(prossimo, { anima: true }); tabs[prossimo].focus(); e.preventDefault();
   });
   Array.prototype.forEach.call(document.querySelectorAll('[data-vai]'), function (a) {
     a.addEventListener('click', function (e) { e.preventDefault(); attiva(a.getAttribute('data-vai'), { anima: true, su: true }); });
   });
   function daHash() {
-    var h = (location.hash || '').replace('#', '');
-    if (IDS_TRASPORTI.indexOf(h) !== -1) {
-      attiva('trasporti', { hash: false });
-      if (h !== 'trasporti') { var el = document.getElementById(h); if (el) setTimeout(function () { el.scrollIntoView(); }, 30); }
-    } else if (h === 'programma') {
-      attiva('programma');
+    var h = (location.hash || '').replace('#', ''), quale = PER_ID[h];
+    if (!quale) return;
+    attiva(quale, { hash: false });
+    if (['trasporti', 'bagagli', 'programma'].indexOf(h) === -1) {
+      var el = document.getElementById(h); if (el) setTimeout(function () { el.scrollIntoView(); }, 30);
     }
   }
   window.addEventListener('hashchange', daHash);
