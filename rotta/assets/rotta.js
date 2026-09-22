@@ -476,6 +476,9 @@
     $("strip").classList.add("in");
     requestAnimationFrame(function () { buildMap(m, p); });
 
+    // solo le ricerche andate a buon fine entrano tra le recenti
+    remember(lastQuery || clean(m.code), m);
+
     var d = new Date();
     $("r-updated").textContent = "aggiornato alle " + pad2(d.getHours()) + ":" +
       pad2(d.getMinutes()) + ":" + pad2(d.getSeconds()) + " · " +
@@ -493,6 +496,74 @@
     $("note-title").textContent = title;
     $("note-body").innerHTML = body;
     show("note");
+  }
+
+  /* ══════════ RICERCHE RECENTI ══════════
+     Restano solo nel browser di chi visita (localStorage),
+     non vengono inviate a nessun server. */
+  var K_RECENT = "rotta:recenti";
+  var MAX_RECENT = 6;
+  var lastQuery = null;
+
+  function readRecent() {
+    try {
+      var v = JSON.parse(window.localStorage.getItem(K_RECENT) || "[]");
+      return Array.isArray(v) ? v.filter(function (r) {
+        return r && /^[A-Z0-9]{3,8}$/.test(r.c);
+      }) : [];
+    } catch (e) { return []; }
+  }
+  function writeRecent(list) {
+    try { window.localStorage.setItem(K_RECENT, JSON.stringify(list)); } catch (e) {}
+  }
+  function remember(code, m) {
+    var iata = function (s) { return /^[A-Z0-9]{3}$/.test(s || "") ? s : null; };
+    var voce = { c: code, d: iata(m.dep.iata), a: iata(m.arr.iata) };
+    var list = readRecent().filter(function (r) { return r.c !== code; });
+    list.unshift(voce);
+    writeRecent(list.slice(0, MAX_RECENT));
+    drawRecent();
+  }
+  function drawRecent() {
+    var box = $("examples");
+    if (!box) return;
+    var list = readRecent();
+    box.innerHTML = "";
+    box.hidden = !list.length;
+    if (!list.length) return;
+
+    var lab = document.createElement("span");
+    lab.className = "lab";
+    lab.textContent = "recenti";
+    box.appendChild(lab);
+
+    list.forEach(function (r) {
+      var b = document.createElement("button");
+      b.className = "chip";
+      b.type = "button";
+      var code = document.createElement("span");
+      code.textContent = r.c;
+      b.appendChild(code);
+      if (r.d && r.a) {
+        var rt = document.createElement("small");
+        rt.textContent = r.d + " → " + r.a;
+        b.appendChild(rt);
+        b.setAttribute("aria-label", r.c + ", da " + r.d + " a " + r.a);
+      }
+      b.addEventListener("click", function () { $("q").value = r.c; lookup(r.c); });
+      box.appendChild(b);
+    });
+
+    var x = document.createElement("button");
+    x.className = "chip-x";
+    x.type = "button";
+    x.textContent = "cancella";
+    x.setAttribute("aria-label", "Cancella le ricerche recenti");
+    x.addEventListener("click", function () {
+      try { window.localStorage.removeItem(K_RECENT); } catch (e) {}
+      drawRecent();
+    });
+    box.appendChild(x);
   }
 
   /* ══════════ RICERCA ══════════ */
@@ -513,6 +584,8 @@
         "Serve il codice IATA del volo: due lettere della compagnia più il numero, per esempio <code>AZ610</code>.");
       return;
     }
+    lastQuery = c;
+    $("q").value = c;
     show("loading");
 
     if (!RAPIDAPI_KEY && !PROXY_URL) {
@@ -592,14 +665,7 @@
     lookup(q.value || $("r-code").textContent);
   });
 
-  ["AZ610", "LH1922", "NH209", "FR8623", "SQ355", "VY6412"].forEach(function (code) {
-    var b = document.createElement("button");
-    b.className = "chip";
-    b.type = "button";
-    b.textContent = code;
-    b.addEventListener("click", function () { q.value = code; lookup(code); });
-    $("examples").appendChild(b);
-  });
+  drawRecent();
 
   var kt = $("keytoggle");
   if (kt && (RAPIDAPI_KEY || PROXY_URL)) {
