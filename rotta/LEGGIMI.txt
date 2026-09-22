@@ -70,6 +70,10 @@ e niente indirizzi IP che escono verso terzi senza consenso.
 GA4 parte solo dopo Accetta: prima della scelta lo script non viene caricato.
 La scelta si rifà dal pulsante in fondo alla pagina privacy.
 
+Sotto il campo compaiono le ultime sei ricerche riuscite (chiave locale
+rotta:recenti, solo nel browser di chi visita; su mobile se ne vedono quattro).
+Il pulsante "cancella" le azzera.
+
 Il pannello "collega i dati reali" sotto la ricerca resta nascosto finché
 PROXY_URL o RAPIDAPI_KEY sono valorizzati. Torna visibile solo se svuoti
 entrambi, cioè in modalità dimostrativa.
