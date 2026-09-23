@@ -409,7 +409,6 @@ body.menu-open .menu-icons { opacity: 1; }
           const code = (a > v ? 8 : 0) | (b > v ? 4 : 0) | (c > v ? 2 : 0) | (d > v ? 1 : 0);
           if (code === 0 || code === 15) continue;
           const x0 = i * cell, y0 = j * cell;
-          const ex = (x0 + cell / 2 - m.x) / m.rx, ey = (y0 + cell / 2 - m.y) / m.ry; if (ex * ex + ey * ey < 1) continue;
           const t = (p, q) => (v - p) / (q - p);
           const top = [x0 + cell * t(a, b), y0], right = [x0 + cell, y0 + cell * t(b, c)], bottom = [x0 + cell * t(d, c), y0 + cell], left = [x0, y0 + cell * t(a, d)];
           const seg = (p, q) => { ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); if (index && refresh) accSegs.push([p[0], p[1], q[0], q[1]]); };
@@ -455,6 +454,16 @@ body.menu-open .menu-icons { opacity: 1; }
           ctx.fillStyle = 'rgba(200,230,255,0.9)'; ctx.beginPath(); ctx.arc(head[0], head[1], 1.3 * DPR, 0, Math.PI * 2); ctx.fill();
           ctx.lineWidth = 0.7 * DPR;
         }
+      }
+      /* around the name the map thins out softly, with no edge: the lines are still there, just fainter behind the letters */
+      if (m.rx > 2) {
+        ctx.save(); ctx.globalCompositeOperation = 'destination-out';
+        ctx.translate(m.x, m.y); ctx.scale(1, m.ry / m.rx);
+        const R = m.rx * 1.6;
+        const g = ctx.createRadialGradient(0, 0, 0, 0, 0, R);
+        g.addColorStop(0, 'rgba(0,0,0,0.8)'); g.addColorStop(0.4, 'rgba(0,0,0,0.62)'); g.addColorStop(0.75, 'rgba(0,0,0,0.22)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, R, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
       }
     }
 
