@@ -144,6 +144,22 @@
   .lightbox img { max-width: 100%; max-height: 100%; }
   .lb-close { position: absolute; top: 14px; right: 14px; background: none; border: none; color: var(--ivory); font-size: 34px; cursor: pointer; width: 46px; height: 46px; }
   .album-nota { max-width: 560px; font-size: 15px; color: var(--ivory-3); margin: -40px 0 70px; }
+
+  /* torna su */
+  .torna-su {
+    position: fixed; right: 18px; bottom: 22px; z-index: 85;
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 1px solid rgba(243,241,234,0.35); background: rgba(6,20,35,0.6);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    color: var(--ivory); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(12px); pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+  }
+  .torna-su svg { width: 20px; height: 20px; }
+  .torna-su.visibile { opacity: 1; transform: none; pointer-events: auto; }
+  .torna-su:hover { background: var(--ivory); color: var(--night); }
+  @media (prefers-reduced-motion: reduce) { .torna-su { transition: none; } }
 </style>
 </head>
 <body>
@@ -208,6 +224,10 @@
   <div id="grid" hidden></div>
 </div>
 </main>
+
+<button class="torna-su" id="torna-su" aria-label="Torna a inizio pagina">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
 
 <footer>
   <a href="https://www.gioriva.it" aria-label="Gio Riva"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 L12 3 L21 11 M5 10 V20 H19 V10"/></svg>Gio Riva</a>
@@ -306,6 +326,13 @@
     .then(function (r) { if (!r.ok) throw new Error('no manifest'); return r.json(); })
     .then(function (d) { render(Array.isArray(d) ? d : d.photos); })
     .catch(function () {});
+
+  /* ── torna su ── */
+  var su = document.getElementById('torna-su');
+  var riduci = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function checkSu() { su.classList.toggle('visibile', window.scrollY > window.innerHeight * 0.9); }
+  window.addEventListener('scroll', checkSu, { passive: true }); checkSu();
+  su.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: riduci ? 'auto' : 'smooth' }); });
 })();
 </script>
 </body>
