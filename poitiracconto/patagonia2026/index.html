@@ -336,10 +336,29 @@
 
   /* il diario */
   #diario { padding: 64px 0 40px; }
-  .fusi { display: flex; flex-wrap: wrap; gap: 6px 0; margin: -6px 0 22px; font-size: 14.5px; color: var(--ivory-3); }
-  .fusi span { padding-right: 14px; margin-right: 14px; border-right: 1px solid var(--line); white-space: nowrap; }
-  .fusi span:last-child { border-right: none; margin-right: 0; padding-right: 0; }
-  .fusi b { font-weight: 400; color: var(--ivory-2); font-variant-numeric: tabular-nums; margin-left: 5px; }
+  /* le tre ore del nostro mondo: tre quadranti */
+  .orologi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 0 0 44px; }
+  .orologio { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 22px 10px 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+  .orologio svg { width: 92px; height: 92px; display: block; margin-bottom: 14px; }
+  .orologio .quadrante { fill: var(--night); stroke: var(--tinta); stroke-opacity: 0.55; stroke-width: 1.2; }
+  .orologio .tacca { stroke: var(--ivory); stroke-opacity: 0.35; stroke-width: 1; }
+  .orologio .tacca.grande { stroke: var(--tinta); stroke-opacity: 0.9; stroke-width: 1.6; }
+  .orologio .ore { stroke: var(--ivory); stroke-width: 3; stroke-linecap: round; }
+  .orologio .minuti { stroke: var(--tinta); stroke-width: 2; stroke-linecap: round; }
+  .orologio .perno { fill: var(--tinta); }
+  .orologio .ore, .orologio .minuti { transform-box: view-box; transform-origin: 50px 50px; transition: transform 0.6s cubic-bezier(.3,.8,.3,1); }
+  .orologio .citta { font-family: var(--display); font-size: 19px; line-height: 1.1; color: var(--ivory); }
+  .orologio .ora { font-size: 14px; color: var(--ivory-2); font-variant-numeric: tabular-nums; margin-top: 4px; display: inline-flex; align-items: center; gap: 6px; }
+  .orologio .ora svg { width: 12px; height: 12px; margin: 0; fill: var(--tinta); color: var(--tinta); }
+  .orologio .ora .luna { display: none; } .orologio.notte .ora .luna { display: block; } .orologio.notte .ora .sole { display: none; }
+  .orologio.notte .quadrante { fill: #030b14; }
+  .orologio.notte .stellina { fill: var(--ivory); opacity: 0.55; }
+  .orologio:not(.notte) .stellina { display: none; }
+  @media (max-width: 560px) { .orologi { gap: 8px; margin-bottom: 36px; } .orologio { padding: 16px 6px 14px; } .orologio svg { width: 74px; height: 74px; margin-bottom: 10px; } .orologio .citta { font-size: 16px; } .orologio .ora { font-size: 13px; } }
+  @media (prefers-reduced-motion: reduce) { .orologio .ore, .orologio .minuti { transition: none; } }
+  /* due righe di presentazione, prima dei giorni */
+  .diario-intro { font-family: var(--display); font-size: clamp(19px, 2.9vw, 24px); line-height: 1.5; color: var(--ivory-2); max-width: none; margin: 0 0 30px; text-align: justify; hyphens: auto; -webkit-hyphens: auto; text-wrap: pretty; }
+  .diario-intro i { color: var(--ivory); }
   .diario-nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 8px; }
   .diario-nav a { font-size: 14px; color: var(--ivory-2); border: 1px solid var(--line); border-radius: 100px; padding: 6px 13px; transition: color 0.2s, border-color 0.2s; }
   .diario-nav a:hover { color: var(--ivory); border-color: var(--ivory-2); }
@@ -708,8 +727,25 @@
 <!-- ═══ IL DIARIO ═══ -->
 <section id="diario">
   <div class="wrap">
+    <div class="orologi" aria-label="Che ore sono adesso a Como, Buenos Aires e Papeete">
+      <div class="orologio" id="oro-como" style="--tinta: var(--dawn)">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="quadrante" cx="50" cy="50" r="46"/><line class="tacca grande" x1="50" y1="6" x2="50" y2="12" transform="rotate(0 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(30 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(60 50 50)"/><line class="tacca grande" x1="50" y1="6" x2="50" y2="12" transform="rotate(90 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(120 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(150 50 50)"/><line class="tacca grande" x1="50" y1="6" x2="50" y2="12" transform="rotate(180 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(210 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(240 50 50)"/><line class="tacca grande" x1="50" y1="6" x2="50" y2="12" transform="rotate(270 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(300 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(330 50 50)"/><circle class="stellina" cx="30" cy="34" r="0.9"/><circle class="stellina" cx="68" cy="28" r="0.7"/><circle class="stellina" cx="64" cy="66" r="0.8"/><circle class="stellina" cx="34" cy="64" r="0.6"/><line class="ore" x1="50" y1="52" x2="50" y2="28"/><line class="minuti" x1="50" y1="54" x2="50" y2="16"/><circle class="perno" cx="50" cy="50" r="2.4"/></svg>
+        <div class="citta">Como</div>
+        <div class="ora"><svg viewBox="0 0 24 24" class="sole" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg><svg viewBox="0 0 24 24" class="luna" aria-hidden="true"><path d="M14 3a9 9 0 1 0 7 14.5A8 8 0 0 1 14 3z"/></svg><b id="clk-como">–:–</b></div>
+      </div>
+      <div class="orologio" id="oro-ba" style="--tinta: var(--glacier)">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="quadrante" cx="50" cy="50" r="46"/><line class="tacca grande" x1="50" y1="6" x2="50" y2="12" transform="rotate(0 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(30 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(60 50 50)"/><line class="tacca grande" x1="50" y1="6" x2="50" y2="12" transform="rotate(90 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(120 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(150 50 50)"/><line class="tacca grande" x1="50" y1="6" x2="50" y2="12" transform="rotate(180 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(210 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(240 50 50)"/><line class="tacca grande" x1="50" y1="6" x2="50" y2="12" transform="rotate(270 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(300 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(330 50 50)"/><circle class="stellina" cx="30" cy="34" r="0.9"/><circle class="stellina" cx="68" cy="28" r="0.7"/><circle class="stellina" cx="64" cy="66" r="0.8"/><circle class="stellina" cx="34" cy="64" r="0.6"/><line class="ore" x1="50" y1="52" x2="50" y2="28"/><line class="minuti" x1="50" y1="54" x2="50" y2="16"/><circle class="perno" cx="50" cy="50" r="2.4"/></svg>
+        <div class="citta">Buenos Aires</div>
+        <div class="ora"><svg viewBox="0 0 24 24" class="sole" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg><svg viewBox="0 0 24 24" class="luna" aria-hidden="true"><path d="M14 3a9 9 0 1 0 7 14.5A8 8 0 0 1 14 3z"/></svg><b id="clk-ba">–:–</b></div>
+      </div>
+      <div class="orologio" id="oro-ppt" style="--tinta: var(--lagoon)">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="quadrante" cx="50" cy="50" r="46"/><line class="tacca grande" x1="50" y1="6" x2="50" y2="12" transform="rotate(0 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(30 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(60 50 50)"/><line class="tacca grande" x1="50" y1="6" x2="50" y2="12" transform="rotate(90 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(120 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(150 50 50)"/><line class="tacca grande" x1="50" y1="6" x2="50" y2="12" transform="rotate(180 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(210 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(240 50 50)"/><line class="tacca grande" x1="50" y1="6" x2="50" y2="12" transform="rotate(270 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(300 50 50)"/><line class="tacca" x1="50" y1="7" x2="50" y2="10" transform="rotate(330 50 50)"/><circle class="stellina" cx="30" cy="34" r="0.9"/><circle class="stellina" cx="68" cy="28" r="0.7"/><circle class="stellina" cx="64" cy="66" r="0.8"/><circle class="stellina" cx="34" cy="64" r="0.6"/><line class="ore" x1="50" y1="52" x2="50" y2="28"/><line class="minuti" x1="50" y1="54" x2="50" y2="16"/><circle class="perno" cx="50" cy="50" r="2.4"/></svg>
+        <div class="citta">Papeete</div>
+        <div class="ora"><svg viewBox="0 0 24 24" class="sole" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg><svg viewBox="0 0 24 24" class="luna" aria-hidden="true"><path d="M14 3a9 9 0 1 0 7 14.5A8 8 0 0 1 14 3z"/></svg><b id="clk-ppt">–:–</b></div>
+      </div>
+    </div>
     <h2>Il diario, <i>giorno per giorno</i></h2>
-    <p class="fusi"><span>Como <b id="clk-como">–:–</b></span><span>Buenos Aires <b id="clk-ba">–:–</b></span><span>Papeete <b id="clk-ppt">–:–</b></span></p>
+    <p class="diario-intro">Ci piace girare il mondo e raccontarlo con parole nostre: magari non perfette, di sicuro autentiche. Questa è la nostra luna di miele, e stiamo vivendo un sogno. <i>Proveremo a portarvi con noi, giorno per giorno.</i></p>
     <nav class="diario-nav" aria-label="Salta al giorno">
       <a href="#giorno-1">15 settembre</a>
       <a href="#giorno-2">16 settembre</a>
@@ -1067,14 +1103,23 @@
   su.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
 
   /* ── le tre ore ── */
-  function fmt(tz) {
-    try { return new Intl.DateTimeFormat('it-IT', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date()); }
-    catch (e) { return '–:–'; }
+  function oraIn(tz) {
+    try {
+      var parti = new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date());
+      var h = 0, m = 0; parti.forEach(function (p) { if (p.type === 'hour') h = parseInt(p.value, 10) % 24; if (p.type === 'minute') m = parseInt(p.value, 10); });
+      return { h: h, m: m };
+    } catch (e) { return null; }
   }
+  var OROLOGI = [['como', 'Europe/Rome'], ['ba', 'America/Argentina/Buenos_Aires'], ['ppt', 'Pacific/Tahiti']];
   function clocks() {
-    document.getElementById('clk-como').textContent = fmt('Europe/Rome');
-    document.getElementById('clk-ba').textContent = fmt('America/Argentina/Buenos_Aires');
-    document.getElementById('clk-ppt').textContent = fmt('Pacific/Tahiti');
+    OROLOGI.forEach(function (o) {
+      var box = document.getElementById('oro-' + o[0]), t = oraIn(o[1]);
+      if (!box || !t) return;
+      box.querySelector('#clk-' + o[0]).textContent = (t.h < 10 ? '0' : '') + t.h + ':' + (t.m < 10 ? '0' : '') + t.m;
+      box.querySelector('.ore').style.transform = 'rotate(' + ((t.h % 12) * 30 + t.m * 0.5) + 'deg)';
+      box.querySelector('.minuti').style.transform = 'rotate(' + (t.m * 6) + 'deg)';
+      box.classList.toggle('notte', t.h < 7 || t.h >= 20);
+    });
   }
   clocks(); setInterval(clocks, 15000);
 
