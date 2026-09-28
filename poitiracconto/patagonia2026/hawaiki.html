@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Patagonia & Polinesia 2026</title>
+<meta name="theme-color" content="#061423" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Ccircle cx='20' cy='20' r='18'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url%28%23c%29'%3E%3Crect width='40' height='40' fill='%230b2b46'/%3E%3Cpolygon points='24,0 40,0 40,40 16,40' fill='%232fc9bd'/%3E%3Ccircle cx='31' cy='15' r='4.2' fill='%23ffd9a4'/%3E%3Cpolygon points='0,30 7,20 12,27 17,18 22,29 22,40 0,40' fill='%23061423'/%3E%3Cpath d='M11 9 L12.1 12.4 L15.5 13.5 L12.1 14.6 L11 18 L9.9 14.6 L6.5 13.5 L9.9 12.4 Z' fill='%23f3f1ea'/%3E%3Cline x1='24' y1='0' x2='16' y2='40' stroke='%23f3f1ea' stroke-width='1'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='18' fill='none' stroke='%23f3f1ea' stroke-width='1.6'/%3E%3C/svg%3E" />
+
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1ZCCJ6QBR4');
+</script>
+
+<!-- Open Graph / anteprima social -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Hawaiki, l'isola da cui tutto è partito" />
+<meta property="og:description" content="La leggenda dell'isola d'origine dei polinesiani, il triangolo, le piroghe senza bussola e il marae di Raiatea, che vediamo dalla nostra spiaggia." />
+<meta property="og:image" content="https://www.gioriva.it/poitiracconto/patagonia2026/og-viaggio.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://www.gioriva.it/poitiracconto/patagonia2026/hawaiki.html" />
+<meta property="og:locale" content="it_IT" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Hawaiki, l'isola da cui tutto è partito" />
+<meta name="twitter:image" content="https://www.gioriva.it/poitiracconto/patagonia2026/og-viaggio.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #061423;
+    --night-2: #0b1d30;
+    --ivory: #f3f1ea;
+    --ivory-2: rgba(243,241,234,0.7);
+    --ivory-3: rgba(243,241,234,0.42);
+    --line: rgba(243,241,234,0.13);
+    --panel: rgba(243,241,234,0.045);
+    --glacier: #8fd0e6;
+    --lagoon: #2fc9bd;
+    --dawn: #ffbe8c;
+    --wool: #e8dcc4;
+    --display: 'Bodoni Moda', 'Didot', 'Bodoni 72', serif;
+    --sans: 'Jost', 'Futura', system-ui, sans-serif;
+    --head-h: 64px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--night);
+    color: var(--ivory);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--dawn); color: var(--night); }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--dawn); outline-offset: 4px; border-radius: 2px; }
+  button { font-family: inherit; }
+
+  /* ═══ HEADER ═══ */
+  header.bar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--head-h); z-index: 90;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px 0 22px;
+    transition: background 0.4s, border-color 0.4s;
+    border-bottom: 1px solid transparent;
+  }
+  header.bar.scrolled {
+    background: rgba(6,20,35,0.82);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom-color: var(--line);
+  }
+  .brand { font-family: var(--display); font-size: 21px; letter-spacing: 0.01em; color: var(--ivory); text-shadow: 0 1px 12px rgba(0,0,0,0.35); white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; }
+  .brand i { font-style: italic; }
+  .brand .logo { width: 30px; height: 30px; flex-shrink: 0; filter: drop-shadow(0 1px 6px rgba(0,0,0,0.35)); }
+  @media (max-width: 380px) { .brand .logo { width: 26px; height: 26px; } }
+  .burger {
+    width: 46px; height: 46px; border: 1px solid rgba(243,241,234,0.35);
+    background: rgba(6,20,35,0.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    border-radius: 50%; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+  }
+  .burger span { display: block; width: 18px; height: 1.5px; background: var(--ivory); border-radius: 1px; transition: transform 0.3s, opacity 0.3s; }
+  .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* ═══ DRAWER ═══ */
+  .scrim { position: fixed; inset: 0; background: rgba(2,8,16,0.6); z-index: 95; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+  .scrim.open { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: fixed; top: 0; right: 0; bottom: 0; width: min(340px, 86vw); z-index: 96;
+    background: var(--night-2); border-left: 1px solid var(--line);
+    transform: translateX(102%); transition: transform 0.4s cubic-bezier(.3,.8,.3,1);
+    display: flex; flex-direction: column; padding: 26px 0 22px; overflow-y: auto;
+  }
+  .drawer.open { transform: translateX(0); }
+  @media (prefers-reduced-motion: reduce) { .drawer, .scrim { transition: none; } }
+  .d-head { display: flex; justify-content: space-between; align-items: center; padding: 0 26px 18px; border-bottom: 1px solid var(--line); }
+  .d-head .t { font-size: 13px; color: var(--ivory-3); }
+  .d-close { background: none; border: none; color: var(--ivory); font-size: 26px; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; line-height: 1; }
+  .drawer nav { padding: 14px 0; flex-grow: 1; }
+  .d-link { display: block; padding: 16px 26px; border-left: 2px solid transparent; transition: background 0.2s, border-color 0.2s; }
+  .d-link:hover { background: var(--panel); }
+  .d-link.active { border-left-color: var(--dawn); background: var(--panel); }
+  .d-link .place { font-family: var(--display); font-size: 25px; display: block; line-height: 1.15; }
+  .d-link .sub { font-size: 13px; color: var(--ivory-3); display: block; margin-top: 2px; }
+  .d-link.d-home { padding: 12px 26px; }
+  .d-link.d-home .place { font-size: 18px; color: var(--ivory-2); }
+  .d-sep { margin: 10px 26px; border: none; border-top: 1px solid var(--line); }
+  /* "Curiosità": voce di primo livello non cliccabile, con le pagine sotto */
+  .d-voce { display: block; padding: 16px 26px; border-left: 2px solid transparent; }
+  .d-voce .place { font-family: var(--display); font-size: 25px; display: block; line-height: 1.15; }
+  .d-voce .sub { font-size: 13px; color: var(--ivory-3); display: block; margin-top: 2px; }
+  .d-sotto-lista { padding: 2px 0 8px; margin: 0 0 0 26px; border-left: 1px solid var(--line); }
+  .d-link.d-sotto { padding: 10px 16px 10px 18px; border-left: none; }
+  .d-link.d-sotto .place { font-size: 19px; color: var(--ivory-2); }
+  .d-link.d-sotto .sub { font-size: 12.5px; }
+  .d-link.d-sotto:hover .place { color: var(--ivory); }
+  .d-link.d-sotto.active { background: var(--panel); }
+  .d-link.d-sotto.active .place { color: var(--ivory); }
+  .d-link.d-sotto.active::before { content: ''; position: absolute; left: -1px; top: 10px; bottom: 10px; width: 2px; background: var(--dawn); }
+  .d-link.d-sotto { position: relative; }
+  .d-foot { padding: 18px 26px 0; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ivory-3); line-height: 1.8; }
+
+  /* ═══ HERO · LA TRAVERSATA ═══ */
+  .hero { position: relative; height: 84vh; height: 84svh; min-height: 540px; max-height: 840px; overflow: hidden; }
+  .hero svg.scena { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero .testo { position: absolute; left: 0; right: 0; bottom: 0; padding: 120px 24px 46px; background: linear-gradient(to top, rgba(6,20,35,0.97) 0%, rgba(6,20,35,0.9) 28%, rgba(6,20,35,0) 100%); }
+  .hero .testo .inner { max-width: 732px; margin: 0 auto; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lagoon); margin-bottom: 16px; }
+  .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--lagoon); }
+  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(38px, 7.4vw, 74px); line-height: 0.98; margin: 0; letter-spacing: -0.01em; max-width: 700px; }
+  h1 i, h2 i { font-style: italic; }
+  .lede { font-size: 18px; color: var(--ivory-2); max-width: 600px; margin: 0; }
+  .lede-mobile { padding-top: 26px; }
+  @media (max-width: 640px) { .hero { min-height: 520px; height: 72svh; } .hero .testo { padding-bottom: 34px; padding-top: 90px; } }
+
+  /* la pirogа dondola, le stelle girano piano, il mare respira */
+  .vaa { transform-box: view-box; transform-origin: 600px 320px; animation: dondola 6s ease-in-out infinite; }
+  @keyframes dondola { 0%, 100% { transform: rotate(-1.2deg) translateY(0); } 50% { transform: rotate(1.2deg) translateY(4px); } }
+  .cielo-stelle { transform-box: view-box; transform-origin: 600px 750px; animation: ruota 240s linear infinite; }
+  @keyframes ruota { to { transform: rotate(-8deg); } }
+  .stella { animation: brilla 4s ease-in-out infinite; }
+  .stella:nth-child(2n) { animation-delay: -1.3s; } .stella:nth-child(3n) { animation-delay: -2.6s; }
+  @keyframes brilla { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+  .onda { animation: scorre 12s linear infinite; }
+  .onda.o2 { animation-duration: 17s; animation-delay: -5s; }
+  @keyframes scorre { from { transform: translateX(0); } to { transform: translateX(-120px); } }
+  .cadente { stroke-dasharray: 60 2000; animation: cade 14s linear infinite; opacity: 0.8; }
+  @keyframes cade { 0%, 86% { stroke-dashoffset: 60; opacity: 0; } 88% { opacity: 0.9; } 100% { stroke-dashoffset: -260; opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .vaa, .cielo-stelle, .stella, .onda, .cadente { animation: none; } .cadente { opacity: 0; } }
+
+  /* ═══ CONTENUTI ═══ */
+  main { padding-top: var(--head-h); }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+  section.blocco { padding: 72px 0 24px; position: relative; scroll-margin-top: calc(var(--head-h) + 14px); }
+  .marca-sep { display: flex; align-items: center; gap: 18px; margin: 0 0 34px; color: var(--ivory-3); font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .marca-sep::before, .marca-sep::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--line) 40%, var(--line) 60%, transparent); }
+  .marca-sep svg { width: 34px; height: 34px; flex-shrink: 0; }
+  h2 { font-family: var(--display); font-weight: 400; font-size: clamp(32px, 5.4vw, 48px); line-height: 1.02; margin: 0 0 22px; letter-spacing: -0.005em; }
+  h3 { font-family: var(--display); font-weight: 400; font-size: 24px; line-height: 1.15; margin: 34px 0 12px; }
+  p { font-size: 17.5px; line-height: 1.72; color: rgba(243,241,234,0.88); margin: 0 0 20px; max-width: 680px; }
+  p b { font-weight: 500; color: var(--ivory); }
+  p i { font-style: italic; }
+  .nota { font-size: 15px; color: var(--ivory-2); border-left: 2px solid var(--lagoon); padding: 4px 0 4px 18px; margin: 26px 0; max-width: 640px; }
+  .nota b { color: var(--ivory); font-weight: 500; }
+  .did { font-size: 13.5px; color: var(--ivory-3); margin-top: 10px; line-height: 1.5; }
+
+  /* la leggenda, scritta come una leggenda */
+  .leggenda { font-family: var(--display); font-size: clamp(22px, 3.6vw, 30px); line-height: 1.35; color: var(--ivory); max-width: 640px; margin: 10px 0 30px; font-style: italic; }
+  .leggenda b { font-style: normal; font-weight: 400; color: var(--lagoon); }
+
+  .cifre { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding-top: 56px; padding-bottom: 26px; }
+  @media (max-width: 560px) { .cifre { grid-template-columns: repeat(2, 1fr); } }
+  .cifra .n { font-family: var(--display); font-size: clamp(38px, 6.6vw, 56px); line-height: 0.9; }
+  .cifra .l { font-size: 14px; color: var(--ivory-3); margin-top: 6px; line-height: 1.4; }
+  .cifra:nth-child(1) .n { color: var(--lagoon); } .cifra:nth-child(2) .n { color: var(--ivory); } .cifra:nth-child(3) .n { color: var(--dawn); } .cifra:nth-child(4) .n { color: var(--glacier); }
+
+  /* il triangolo polinesiano */
+  .mappa { margin: 30px 0 6px; }
+  .mappa .scorri { overflow-x: auto; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .mappa svg { width: 100%; height: auto; display: block; }
+  @media (max-width: 640px) { .mappa svg { min-width: 600px; } }
+  .rotta { stroke-dasharray: 5 7; animation: naviga 30s linear infinite; }
+  @keyframes naviga { to { stroke-dashoffset: -600; } }
+  .pulsa { transform-box: fill-box; transform-origin: center; animation: pulsa 3s ease-out infinite; }
+  @keyframes pulsa { 0% { transform: scale(0.4); opacity: 0.8; } 100% { transform: scale(2.6); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .rotta, .pulsa { animation: none; } .pulsa { opacity: 0; } }
+
+  /* i nomi di Hawaiki */
+  .nomi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 26px 0 8px; }
+  @media (max-width: 640px) { .nomi { grid-template-columns: repeat(2, 1fr); } }
+  .nome { border: 1px solid var(--line); border-radius: 6px; padding: 18px 16px 16px; background: var(--panel); position: relative; }
+  .nome .n { font-family: var(--display); font-size: clamp(26px, 4vw, 34px); line-height: 1; color: var(--ivory); margin-bottom: 8px; }
+  .nome .dove { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--lagoon); margin-bottom: 6px; }
+  .nome .c { font-size: 14px; color: var(--ivory-2); line-height: 1.5; }
+  .nome.madre { border-color: rgba(47,201,189,0.5); }
+  .nome.madre .n { color: var(--lagoon); }
+
+  /* la bussola delle stelle */
+  .bussola { display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: center; margin: 30px 0 10px; }
+  @media (max-width: 680px) { .bussola { grid-template-columns: 1fr; } .bussola svg { max-width: 300px; margin: 0 auto; } }
+  .bussola svg { width: 100%; height: auto; display: block; }
+  .bussola ul { list-style: none; margin: 0; padding: 0; }
+  .bussola li { padding: 12px 0; border-top: 1px solid var(--line); font-size: 15.5px; color: var(--ivory-2); line-height: 1.55; }
+  .bussola li:last-child { border-bottom: 1px solid var(--line); }
+  .bussola li b { color: var(--ivory); font-weight: 500; font-family: var(--display); font-size: 19px; display: block; margin-bottom: 2px; }
+  .ago { transform-box: view-box; transform-origin: 150px 150px; animation: cerca 9s ease-in-out infinite; }
+  @keyframes cerca { 0%, 100% { transform: rotate(-14deg); } 50% { transform: rotate(11deg); } }
+  @media (prefers-reduced-motion: reduce) { .ago { animation: none; } }
+
+  /* la pianta del marae */
+  .pianta { margin: 30px 0 6px; }
+  .pianta .scorri { overflow-x: auto; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .pianta svg { width: 100%; height: auto; display: block; }
+  @media (max-width: 640px) { .pianta svg { min-width: 600px; } }
+
+  /* le figlie di Taputapuātea */
+  .figlie { position: relative; margin: 30px 0 10px; padding-left: 0; list-style: none; }
+  .figlie::before { content: ''; position: absolute; left: 11px; top: 14px; bottom: 14px; width: 1px; background: linear-gradient(to bottom, var(--lagoon), var(--line)); }
+  .figlia { position: relative; padding: 0 0 22px 40px; }
+  .figlia:last-child { padding-bottom: 4px; }
+  .figlia::before { content: ''; position: absolute; left: 6px; top: 8px; width: 11px; height: 11px; border-radius: 50%; background: var(--night); border: 1.5px solid var(--lagoon); }
+  .figlia.madre::before { background: var(--lagoon); box-shadow: 0 0 0 4px rgba(47,201,189,0.18); }
+  .figlia .d { font-family: var(--display); font-size: 22px; line-height: 1.1; }
+  .figlia .c { font-size: 15px; color: var(--ivory-2); line-height: 1.5; margin-top: 3px; }
+
+  /* glossario */
+  .glossario { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 24px; margin: 26px 0 20px; }
+  @media (max-width: 600px) { .glossario { grid-template-columns: 1fr; } }
+  .voce-g { padding: 14px 0; border-top: 1px solid var(--line); }
+  .voce-g dt { font-family: var(--display); font-style: italic; font-size: 22px; margin: 0 0 4px; }
+  .voce-g dd { margin: 0; font-size: 15px; color: var(--ivory-2); line-height: 1.55; }
+
+  .rimando { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 100px; padding: 10px 18px 10px 16px; font-size: 15px; color: var(--ivory-2); transition: border-color 0.2s, color 0.2s; margin: 6px 8px 0 0; }
+  .rimando:hover { border-color: var(--ivory-2); color: var(--ivory); }
+  .rimando svg { width: 16px; height: 16px; }
+  .fine { padding: 40px 0 80px; }
+
+  /* lightbox */
+  .lightbox { position: fixed; inset: 0; background: rgba(6,20,35,0.96); z-index: 120; display: none; align-items: center; justify-content: center; padding: 28px; cursor: zoom-out; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 100%; max-height: 100%; }
+  .lb-close { position: absolute; top: 14px; right: 14px; background: none; border: none; color: var(--ivory); font-size: 34px; cursor: pointer; width: 46px; height: 46px; }
+
+  /* torna su */
+  .torna-su {
+    position: fixed; right: 18px; bottom: 22px; z-index: 80;
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 1px solid rgba(243,241,234,0.35); background: rgba(6,20,35,0.6);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    color: var(--ivory); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(12px); pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+  }
+  .torna-su svg { width: 20px; height: 20px; }
+  .torna-su.visibile { opacity: 1; transform: none; pointer-events: auto; }
+  .torna-su:hover { background: var(--ivory); color: var(--night); }
+  @media (prefers-reduced-motion: reduce) { .torna-su { transition: none; } }
+
+  /* ═══ FOOTER ═══ */
+  footer { border-top: 1px solid var(--line); padding: 32px 24px 44px; display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; }
+  footer a { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ivory-3); transition: color 0.2s; }
+  footer a:hover { color: var(--ivory); }
+  footer a svg { width: 15px; height: 15px; }
+</style>
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <a class="brand" href="https://www.gioriva.it/poitiracconto/patagonia2026"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true">
+      <defs><clipPath id="lg-c"><circle cx="20" cy="20" r="18"/></clipPath></defs>
+      <g clip-path="url(#lg-c)">
+        <rect width="40" height="40" fill="#0b2b46"/>
+        <polygon points="24,0 40,0 40,40 16,40" fill="#2fc9bd"/>
+        <circle cx="31" cy="15" r="4.2" fill="#ffd9a4"/>
+        <polygon points="0,30 7,20 12,27 17,18 22,29 22,40 0,40" fill="#061423"/>
+        <path d="M11 9 L12.1 12.4 L15.5 13.5 L12.1 14.6 L11 18 L9.9 14.6 L6.5 13.5 L9.9 12.4 Z" fill="#f3f1ea"/>
+        <line x1="24" y1="0" x2="16" y2="40" stroke="#f3f1ea" stroke-opacity="0.9" stroke-width="1"/>
+      </g>
+      <circle cx="20" cy="20" r="18" fill="none" stroke="#f3f1ea" stroke-width="1.4"/>
+    </svg><span>Patagonia <i>&amp;</i> Polinesia</span></a>
+  <button class="burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Apri il menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Menu">
+  <div class="d-head">
+    <span class="t">Indice</span>
+    <button class="d-close" id="dclose" aria-label="Chiudi il menu">×</button>
+  </div>
+  <nav>
+    <a class="d-link d-home" href="https://www.gioriva.it/poitiracconto/">
+      <span class="place">Home page</span>
+      <span class="sub">Tutti i viaggi, su gioriva.it</span>
+    </a>
+    <hr class="d-sep">
+    <a class="d-link" href="https://www.gioriva.it/poitiracconto/patagonia2026">
+      <span class="place">Diario di viaggio</span>
+      <span class="sub">Il racconto, tappa per tappa</span>
+    </a>
+    <a class="d-link" href="programma.html">
+      <span class="place">Programma</span>
+      <span class="sub">L'itinerario, i voli e i trasferimenti</span>
+    </a>
+    <a class="d-link" href="galleria.html">
+      <span class="place">Galleria</span>
+      <span class="sub">Le foto del viaggio</span>
+    </a>
+    <hr class="d-sep">
+    <span class="d-voce">
+      <span class="place">Curiosità</span>
+      <span class="sub">Approfondimenti dal viaggio</span>
+    </span>
+    <div class="d-sotto-lista">
+      <a class="d-link d-sotto" href="estancia.html">
+        <span class="place">Nibepo Aike</span>
+        <span class="sub">Vita e storia di un'estancia</span>
+      </a>
+      <a class="d-link d-sotto" href="ghiacciai.html">
+        <span class="place">I ghiacciai</span>
+        <span class="sub">Perito Moreno, Upsala e Spegazzini</span>
+      </a>
+      <a class="d-link d-sotto active" href="hawaiki.html">
+        <span class="place">Hawaiki</span>
+        <span class="sub">L'isola mitica dei polinesiani</span>
+      </a>
+    </div>
+  </nav>
+  <div class="d-foot">Patagonia &amp; Polinesia 2026<br>Il viaggio di nozze di Giorgio e Lucrezia</div>
+</aside>
+
+<main>
+
+<!-- ═══ LA TRAVERSATA ═══ -->
+<section class="hero" aria-label="Una piroga a doppio scafo naviga di notte verso l'orizzonte, guidata dalle stelle">
+  <svg class="scena" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#061423"/><stop offset="0.62" stop-color="#0b2236"/><stop offset="0.9" stop-color="#153a4e"/><stop offset="1" stop-color="#1f6a76"/>
+      </linearGradient>
+      <linearGradient id="mare" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#1c6d7a"/><stop offset="0.35" stop-color="#0f3d4c"/><stop offset="1" stop-color="#061423"/>
+      </linearGradient>
+      <linearGradient id="scia" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2fc9bd" stop-opacity="0.55"/><stop offset="1" stop-color="#2fc9bd" stop-opacity="0"/>
+      </linearGradient>
+      <radialGradient id="alone-luna" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0" stop-color="#f3f1ea" stop-opacity="0.35"/><stop offset="1" stop-color="#f3f1ea" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <rect width="1200" height="600" fill="url(#cielo)"/>
+
+    <g transform="translate(0 -150)">
+    <!-- il cielo che gira, piano, intorno al polo sud celeste -->
+    <g class="cielo-stelle" fill="#f3f1ea">
+      <circle class="stella" cx="80" cy="90" r="1.4"/><circle class="stella" cx="170" cy="200" r="1"/><circle class="stella" cx="260" cy="60" r="1.2"/>
+      <circle class="stella" cx="330" cy="150" r="0.9"/><circle class="stella" cx="420" cy="40" r="1.4"/><circle class="stella" cx="500" cy="120" r="1"/>
+      <circle class="stella" cx="590" cy="70" r="1.1"/><circle class="stella" cx="660" cy="180" r="0.9"/><circle class="stella" cx="740" cy="50" r="1.3"/>
+      <circle class="stella" cx="830" cy="130" r="1"/><circle class="stella" cx="910" cy="80" r="1.5"/><circle class="stella" cx="990" cy="170" r="0.9"/>
+      <circle class="stella" cx="1080" cy="60" r="1.2"/><circle class="stella" cx="1150" cy="140" r="1"/><circle class="stella" cx="130" cy="290" r="0.8"/>
+      <circle class="stella" cx="380" cy="250" r="0.8"/><circle class="stella" cx="560" cy="220" r="0.9"/><circle class="stella" cx="760" cy="260" r="0.8"/>
+      <circle class="stella" cx="940" cy="230" r="0.9"/><circle class="stella" cx="1110" cy="270" r="0.8"/><circle class="stella" cx="220" cy="130" r="0.7"/>
+      <circle class="stella" cx="470" cy="190" r="0.7"/><circle class="stella" cx="700" cy="110" r="0.7"/><circle class="stella" cx="1030" cy="110" r="0.7"/>
+      <!-- la Croce del Sud, la stella guida dell'emisfero australe -->
+      <g fill="#8fd0e6">
+        <circle cx="880" cy="200" r="2.4"/><circle cx="912" cy="248" r="2"/><circle cx="862" cy="262" r="2.2"/><circle cx="895" cy="290" r="2.8"/><circle cx="923" cy="272" r="1.4"/>
+      </g>
+      <path d="M880 200 L895 290 M862 262 L912 248" stroke="#8fd0e6" stroke-opacity="0.25" stroke-width="0.8"/>
+    </g>
+    <!-- una stella cadente, ogni tanto -->
+    <path class="cadente" d="M300 60 L520 200" stroke="#f3f1ea" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+
+    <!-- la luna bassa e il suo alone -->
+    <circle cx="240" cy="330" r="90" fill="url(#alone-luna)"/>
+    <circle cx="240" cy="330" r="26" fill="#f3f1ea" fill-opacity="0.92"/>
+    <circle cx="252" cy="322" r="24" fill="#0c2537"/>
+
+    <!-- l'isola all'orizzonte: la sagoma che si cerca da giorni -->
+    <path d="M700 402 L760 380 L820 358 L860 372 L900 346 L950 366 L1010 356 L1060 380 L1120 372 L1200 392 L1200 410 L700 410 Z" fill="#0b2236"/>
+    <path d="M840 372 L860 360 L880 372" fill="none" stroke="#f3f1ea" stroke-opacity="0.18" stroke-width="1"/>
+    <!-- il riflesso della luna sull'acqua -->
+    <g fill="#f3f1ea" fill-opacity="0.16">
+      <rect x="226" y="418" width="28" height="2"/><rect x="220" y="428" width="40" height="2"/><rect x="230" y="440" width="22" height="2"/><rect x="216" y="454" width="48" height="2"/><rect x="228" y="470" width="26" height="2"/>
+    </g>
+
+    <!-- il mare -->
+    <path d="M0 410 L1200 410 L1200 800 L0 800 Z" fill="url(#mare)"/>
+    <g fill="none" stroke="#8fd0e6" stroke-opacity="0.25" stroke-width="1">
+      <g class="onda"><path d="M-120 440 C -80 434, -40 446, 0 440 S 80 434, 120 440 S 200 446, 240 440 S 320 434, 360 440 S 440 446, 480 440 S 560 434, 600 440 S 680 446, 720 440 S 800 434, 840 440 S 920 446, 960 440 S 1040 434, 1080 440 S 1160 446, 1200 440 S 1280 434, 1320 440"/></g>
+      <g class="onda o2"><path d="M-120 500 C -70 492, -20 508, 30 500 S 130 492, 180 500 S 280 508, 330 500 S 430 492, 480 500 S 580 508, 630 500 S 730 492, 780 500 S 880 508, 930 500 S 1030 492, 1080 500 S 1180 508, 1230 500 S 1330 492, 1380 500"/></g>
+      <g class="onda"><path d="M-120 560 C -80 554, -40 566, 0 560 S 80 554, 120 560 S 200 566, 240 560 S 320 554, 360 560 S 440 566, 480 560 S 560 554, 600 560 S 680 566, 720 560 S 800 554, 840 560 S 920 566, 960 560 S 1040 554, 1080 560 S 1160 566, 1200 560 S 1280 554, 1320 560"/></g>
+    </g>
+    <!-- la scia luminosa, il plancton che si accende -->
+    <path d="M540 486 L600 476 L660 486 L640 700 L560 700 Z" fill="url(#scia)"/>
+
+    <!-- la va'a, la piroga a doppio scafo -->
+    <g class="vaa">
+      <!-- vela a chela di granchio -->
+      <path d="M600 470 L600 250 C 660 300, 700 380, 690 470 Z" fill="#e8dcc4" fill-opacity="0.92"/>
+      <path d="M600 470 L600 250 C 560 320, 545 400, 556 470 Z" fill="#c9bfa4" fill-opacity="0.85"/>
+      <path d="M600 250 L600 474" stroke="#061423" stroke-width="2.4"/>
+      <path d="M600 250 C 660 300, 700 380, 690 470" fill="none" stroke="#061423" stroke-width="1.6"/>
+      <path d="M600 250 C 560 320, 545 400, 556 470" fill="none" stroke="#061423" stroke-width="1.6"/>
+      <!-- piattaforma e figure -->
+      <rect x="520" y="468" width="160" height="6" fill="#061423"/>
+      <g fill="#061423"><circle cx="560" cy="452" r="5"/><rect x="555" y="456" width="10" height="14" rx="2"/><circle cx="640" cy="452" r="5"/><rect x="635" y="456" width="10" height="14" rx="2"/></g>
+      <!-- i due scafi -->
+      <path d="M500 476 C 520 494, 680 494, 700 476 L712 470 L688 488 C 660 500, 540 500, 512 488 Z" fill="#061423" stroke="#f3f1ea" stroke-opacity="0.45" stroke-width="1"/>
+      <path d="M470 486 C 500 506, 700 506, 730 486 L744 480 L716 500 C 680 514, 520 514, 484 500 Z" fill="#061423" stroke="#f3f1ea" stroke-opacity="0.45" stroke-width="1"/>
+      <path d="M500 476 L712 470 M470 486 L744 480" stroke="#f3f1ea" stroke-opacity="0.35" stroke-width="0.8"/>
+    </g>
+    </g>
+  </svg>
+
+  <div class="testo">
+    <div class="inner">
+      <div class="eyebrow">Curiosità · Polinesia</div>
+      <h1>Hawaiki, l'isola <i>da cui tutto</i> è partito</h1>
+    </div>
+  </div>
+</section>
+
+<div class="wrap lede-mobile"><p class="lede">Ogni popolo del Pacifico racconta di un'isola d'origine, da cui i suoi antenati sono salpati e a cui il suo spirito tornerà. Nessuno sa dire dove sia. Molti dicono che sia qui, a pochi chilometri da dove dormiamo. Questa pagina è per chi, come noi, se lo è chiesto guardando la laguna.</p></div>
+
+<div class="wrap cifre" aria-label="Il triangolo polinesiano in quattro numeri">
+  <div class="cifra"><div class="n">3</div><div class="l">vertici: Hawaii, Aotearoa, Rapa Nui</div></div>
+  <div class="cifra"><div class="n">7.000 km</div><div class="l">circa, per ogni lato del triangolo</div></div>
+  <div class="cifra"><div class="n">1.000</div><div class="l">anni di civiltà mā'ohi a Taputapuātea</div></div>
+  <div class="cifra"><div class="n">2017</div><div class="l">il marae diventa patrimonio UNESCO</div></div>
+</div>
+
+<!-- ═══ LA LEGGENDA ═══ -->
+<section class="blocco" id="leggenda">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#2fc9bd" stroke-width="1.2"/><path d="M17 8 L17 24 M17 8 C 22 12, 25 18, 24 24 Z" fill="none" stroke="#2fc9bd" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 25 C 12 23, 22 23, 25 25" fill="none" stroke="#2fc9bd" stroke-width="1.6" stroke-linecap="round"/></svg><span>La leggenda</span></div>
+    <h2>Un'isola che <i>nessuno ha mai trovato</i></h2>
+    <p class="leggenda">Da <b>Hawaiki</b> partirono le prime piroghe. A <b>Hawaiki</b> tornano gli spiriti dei morti. In mezzo, tutto l'oceano.</p>
+    <p>Dalla Nuova Zelanda alle Hawaii, fino a Rapa Nui, tutti i popoli polinesiani conservano lo stesso racconto: c'è un'isola, da qualche parte, da cui i loro antenati sono salpati per popolare il Pacifico. Ha nomi diversi in ogni lingua e non compare su nessuna carta. Non è un paradiso perduto e non è nemmeno un aldilà: è una patria. Un luogo che sta insieme all'inizio e alla fine di ogni vita, perché secondo le leggende lo spirito di ogni polinesiano, dopo la morte, fa il viaggio a ritroso e torna lì.</p>
+    <p>Per secoli gli europei hanno pensato che fosse solo un mito. Poi gli scavi archeologici hanno raccontato un'altra storia: i polinesiani hanno davvero attraversato l'oceano su piroghe a doppio scafo, e le isole più lontane hanno continuato a scambiarsi oggetti, pietre e persone per generazioni. La leggenda di Hawaiki è la memoria di una migrazione reale, tramandata a voce per mille anni.</p>
+  </div>
+</section>
+
+<!-- ═══ IL TRIANGOLO ═══ -->
+<section class="blocco" id="triangolo">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#8fd0e6" stroke-width="1.2"/><path d="M17 8 L17 24 M17 8 C 22 12, 25 18, 24 24 Z" fill="none" stroke="#8fd0e6" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 25 C 12 23, 22 23, 25 25" fill="none" stroke="#8fd0e6" stroke-width="1.6" stroke-linecap="round"/></svg><span>Il triangolo polinesiano</span></div>
+    <h2>Tre vertici, <i>un solo popolo</i></h2>
+    <p>Prendi una carta del Pacifico e unisci le Hawaii a nord, la Nuova Zelanda a sud-ovest e Rapa Nui, l'isola di Pasqua, a sud-est: dentro quel triangolo, grande quasi come un continente, vivono popoli che parlano lingue sorelle e raccontano la stessa storia d'origine. Al centro ci sono le isole della Polinesia francese. È lì, dicono i racconti, che andrebbe cercata Hawaiki.</p>
+
+    <div class="mappa" aria-label="Il triangolo polinesiano, con Raiatea al centro">
+      <div class="scorri">
+      <svg viewBox="0 0 760 460" role="img" aria-label="Mappa del triangolo polinesiano">
+        <defs>
+          <linearGradient id="oceano" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b2236"/><stop offset="1" stop-color="#0d3444"/></linearGradient>
+        </defs>
+        <rect width="760" height="460" rx="6" fill="url(#oceano)"/>
+        <!-- graticola -->
+        <g stroke="#f3f1ea" stroke-opacity="0.06" stroke-width="1">
+          <path d="M0 115 H760 M0 230 H760 M0 345 H760 M190 0 V460 M380 0 V460 M570 0 V460"/>
+        </g>
+        <text x="8" y="226" font-family="Jost, sans-serif" font-size="10.5" fill="#f3f1ea" fill-opacity="0.35">equatore</text>
+        <!-- il triangolo -->
+        <path d="M470 60 L120 380 L690 330 Z" fill="#2fc9bd" fill-opacity="0.07" stroke="#2fc9bd" stroke-opacity="0.7" stroke-width="1.2"/>
+        <!-- le rotte, tratteggiate, che partono dal centro -->
+        <g fill="none" stroke="#f3f1ea" stroke-opacity="0.45" stroke-width="1.2" class="rotta">
+          <path d="M450 262 C 470 200, 470 120, 470 68"/>
+          <path d="M450 262 C 360 310, 220 355, 130 374"/>
+          <path d="M450 262 C 540 290, 620 310, 682 328"/>
+          <path d="M450 262 C 430 240, 400 210, 370 190"/>
+          <path d="M450 262 C 500 260, 560 250, 600 230"/>
+        </g>
+        <!-- le isole -->
+        <g>
+          <circle cx="470" cy="60" r="4" fill="#ffbe8c"/><text x="482" y="56" font-family="Bodoni Moda, serif" font-size="17" fill="#f3f1ea">Hawaii</text><text x="482" y="72" font-family="Jost, sans-serif" font-size="11" fill="#f3f1ea" fill-opacity="0.55">Kahiki, la terra d'origine</text>
+          <circle cx="120" cy="380" r="4" fill="#ffbe8c"/><text x="70" y="404" font-family="Bodoni Moda, serif" font-size="17" fill="#f3f1ea">Aotearoa</text><text x="70" y="420" font-family="Jost, sans-serif" font-size="11" fill="#f3f1ea" fill-opacity="0.55">Nuova Zelanda: Hawaiki</text>
+          <circle cx="690" cy="330" r="4" fill="#ffbe8c"/><text x="606" y="356" font-family="Bodoni Moda, serif" font-size="17" fill="#f3f1ea">Rapa Nui</text><text x="606" y="372" font-family="Jost, sans-serif" font-size="11" fill="#f3f1ea" fill-opacity="0.55">Isola di Pasqua</text>
+          <circle cx="370" cy="190" r="2.6" fill="#f3f1ea" fill-opacity="0.7"/><text x="300" y="182" font-family="Jost, sans-serif" font-size="11.5" fill="#f3f1ea" fill-opacity="0.7">Samoa, Savai'i</text>
+          <circle cx="600" cy="230" r="2.6" fill="#f3f1ea" fill-opacity="0.7"/><text x="610" y="226" font-family="Jost, sans-serif" font-size="11.5" fill="#f3f1ea" fill-opacity="0.7">Marchesi</text>
+          <circle cx="380" cy="330" r="2.6" fill="#f3f1ea" fill-opacity="0.7"/><text x="300" y="348" font-family="Jost, sans-serif" font-size="11.5" fill="#f3f1ea" fill-opacity="0.7">Isole Cook, 'Avaiki</text>
+          <circle cx="500" cy="268" r="2.6" fill="#f3f1ea" fill-opacity="0.7"/><text x="510" y="284" font-family="Jost, sans-serif" font-size="11.5" fill="#f3f1ea" fill-opacity="0.7">Tahiti</text>
+        </g>
+        <!-- Raiatea, il centro che pulsa -->
+        <circle class="pulsa" cx="450" cy="262" r="10" fill="none" stroke="#2fc9bd" stroke-width="1.2"/>
+        <circle cx="450" cy="262" r="5" fill="#2fc9bd"/>
+        <text x="438" y="288" font-family="Bodoni Moda, serif" font-size="19" fill="#2fc9bd" text-anchor="end">Raiatea</text>
+        <text x="438" y="302" font-family="Jost, sans-serif" font-size="11" fill="#2fc9bd" fill-opacity="0.8" text-anchor="end">Havai'i, l'antico nome</text>
+        <!-- e noi -->
+        <circle cx="458" cy="250" r="2" fill="#ffbe8c"/><path d="M458 250 L440 226" stroke="#ffbe8c" stroke-opacity="0.5" stroke-width="0.8"/><text x="436" y="222" font-family="Jost, sans-serif" font-size="10.5" fill="#ffbe8c" text-anchor="end">Taha'a e Bora Bora, dove siamo noi</text>
+      </svg>
+      </div>
+      <div class="did">Le posizioni sono indicative. Sotto ogni vertice c'è il nome che Hawaiki prende in quella lingua. Il puntino verde che pulsa è Raiatea, l'isola che nella tradizione tahitiana si chiamava Havai'i: da Taha'a la si vede a occhio nudo, condivide con noi la stessa laguna.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ I NOMI ═══ -->
+<section class="blocco" id="nomi">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#ffbe8c" stroke-width="1.2"/><path d="M17 8 L17 24 M17 8 C 22 12, 25 18, 24 24 Z" fill="none" stroke="#ffbe8c" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 25 C 12 23, 22 23, 25 25" fill="none" stroke="#ffbe8c" stroke-width="1.6" stroke-linecap="round"/></svg><span>Una parola, tante isole</span></div>
+    <h2>Lo stesso nome, <i>pronunciato in sei modi</i></h2>
+    <p>Le lingue polinesiane sono sorelle strette: cambiano una consonante, perdono una h, e la parola resta riconoscibile da un capo all'altro dell'oceano. Hawaiki è l'esempio più bello, perché la parola ha viaggiato con le piroghe e in alcuni posti si è fermata sulla carta, diventando il nome di un'isola vera.</p>
+    <div class="nomi">
+      <div class="nome madre"><div class="dove">Tahiti e Raiatea</div><div class="n">Havai'i</div><div class="c">L'antico nome di Raiatea, l'isola che vediamo dalla nostra spiaggia.</div></div>
+      <div class="nome"><div class="dove">Nuova Zelanda, Māori</div><div class="n">Hawaiki</div><div class="c">La forma più conosciuta: la terra da cui partì la grande flotta.</div></div>
+      <div class="nome"><div class="dove">Hawaii</div><div class="n">Kahiki</div><div class="c">La terra lontana da cui vennero gli dèi e i primi capi. E il nome stesso dell'arcipelago, Hawai'i, viene da qui.</div></div>
+      <div class="nome"><div class="dove">Isole Cook</div><div class="n">'Avaiki</div><div class="c">La patria degli antenati e, insieme, il mondo di sotto dove vanno gli spiriti.</div></div>
+      <div class="nome"><div class="dove">Samoa</div><div class="n">Savai'i</div><div class="c">Qui la parola è diventata un'isola in carne e ossa: la più grande di Samoa.</div></div>
+      <div class="nome"><div class="dove">Marchesi</div><div class="n">Havaiki</div><div class="c">Il regno dei morti sotto il mare, da cui i vivi sono venuti e a cui tornano.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LE PIROGHE ═══ -->
+<section class="blocco" id="piroghe">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#8fd0e6" stroke-width="1.2"/><path d="M17 8 L17 24 M17 8 C 22 12, 25 18, 24 24 Z" fill="none" stroke="#8fd0e6" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 25 C 12 23, 22 23, 25 25" fill="none" stroke="#8fd0e6" stroke-width="1.6" stroke-linecap="round"/></svg><span>Come hanno fatto</span></div>
+    <h2>Senza bussola, <i>senza carte</i></h2>
+    <p>Migliaia di chilometri di oceano aperto, su piroghe a doppio scafo costruite con legno, fibra di cocco e vele di foglie di pandano intrecciate. Nessuno strumento. Eppure le isole più remote del pianeta sono state raggiunte, e non per caso: gli scavi mostrano scambi regolari tra arcipelaghi distanti centinaia di chilometri, andati avanti per secoli. I navigatori leggevano il cielo e l'acqua come noi leggiamo una mappa.</p>
+
+    <div class="bussola">
+      <svg viewBox="0 0 300 300" role="img" aria-label="La bussola delle stelle dei navigatori polinesiani">
+        <circle cx="150" cy="150" r="140" fill="none" stroke="#f3f1ea" stroke-opacity="0.18" stroke-width="1"/>
+        <circle cx="150" cy="150" r="118" fill="none" stroke="#f3f1ea" stroke-opacity="0.1" stroke-width="1"/>
+        <!-- le "case" delle stelle: dove sorgono e dove tramontano -->
+        <g stroke="#8fd0e6" stroke-opacity="0.7" stroke-width="1.2">
+          <path d="M150 10 V24 M150 276 V290 M10 150 H24 M276 150 H290"/>
+        </g>
+        <g stroke="#f3f1ea" stroke-opacity="0.4" stroke-width="1">
+          <path d="M51 51 L61 61 M249 51 L239 61 M51 249 L61 239 M249 249 L239 239"/>
+          <path d="M96 20 L100 33 M204 20 L200 33 M96 280 L100 267 M204 280 L200 267 M20 96 L33 100 M20 204 L33 200 M280 96 L267 100 M280 204 L267 200"/>
+          <path d="M23 123 L36 126 M23 177 L36 174 M277 123 L264 126 M277 177 L264 174 M123 23 L126 36 M177 23 L174 36 M123 277 L126 264 M177 277 L174 264"/>
+        </g>
+        <g font-family="Jost, sans-serif" font-size="10.5" fill="#f3f1ea" fill-opacity="0.6" text-anchor="middle" letter-spacing="1">
+          <text x="150" y="44">NORD</text><text x="150" y="266">SUD</text><text x="44" y="154">O</text><text x="256" y="154">E</text>
+        </g>
+        <!-- le stelle che sorgono a est e tramontano a ovest -->
+        <g fill="#f3f1ea"><circle cx="262" cy="118" r="2.2"/><circle cx="270" cy="150" r="2.6"/><circle cx="262" cy="182" r="2.2"/><circle cx="38" cy="118" r="2.2"/><circle cx="30" cy="150" r="2.6"/><circle cx="38" cy="182" r="2.2"/></g>
+        <path d="M270 150 C 240 60, 60 60, 30 150" fill="none" stroke="#f3f1ea" stroke-opacity="0.3" stroke-width="1" stroke-dasharray="3 4"/>
+        <!-- le onde lunghe, che arrivano sempre dalla stessa parte -->
+        <g fill="none" stroke="#2fc9bd" stroke-opacity="0.5" stroke-width="1.2">
+          <path d="M92 214 C 104 206, 116 222, 128 214 S 152 206, 164 214"/>
+          <path d="M104 230 C 116 222, 128 238, 140 230 S 164 222, 176 230"/>
+        </g>
+        <!-- la piroga al centro, che cerca la rotta -->
+        <g class="ago">
+          <path d="M150 96 L142 160 L158 160 Z" fill="#ffbe8c"/>
+          <path d="M150 96 L150 176" stroke="#ffbe8c" stroke-width="1.4"/>
+          <path d="M138 172 C 144 180, 156 180, 162 172" fill="none" stroke="#f3f1ea" stroke-width="1.6"/>
+        </g>
+        <circle cx="150" cy="150" r="3" fill="#f3f1ea"/>
+      </svg>
+      <ul>
+        <li><b>Le stelle</b>Ogni stella sorge e tramonta sempre nello stesso punto dell'orizzonte. Il navigatore ne conosceva a memoria decine, e le seguiva una dopo l'altra nel corso della notte come i gradini di una scala.</li>
+        <li><b>Le onde lunghe</b>Il mare aperto porta onde generate lontanissimo, che arrivano da direzioni costanti. Sentirle sotto lo scafo, anche a occhi chiusi, diceva dove stava la prua.</li>
+        <li><b>Gli uccelli e le nuvole</b>Le sterne al tramonto volano verso terra. Una nuvola ferma sopra l'orizzonte vuoto, o la laguna riflessa di verde sul suo fondo, tradisce un'isola ancora invisibile.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ IL MARAE ═══ -->
+<section class="blocco" id="marae">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#2fc9bd" stroke-width="1.2"/><path d="M17 8 L17 24 M17 8 C 22 12, 25 18, 24 24 Z" fill="none" stroke="#2fc9bd" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 25 C 12 23, 22 23, 25 25" fill="none" stroke="#2fc9bd" stroke-width="1.6" stroke-linecap="round"/></svg><span>Taputapuātea</span></div>
+    <h2>Il tempio <i>a cielo aperto</i></h2>
+    <p>Se Hawaiki è Raiatea, il suo cuore è a Opoa, sulla costa orientale dell'isola, dove sorge il <b>marae Taputapuātea</b>. Un marae è un tempio senza tetto: un cortile pavimentato di pietre, delimitato da lastre piantate in verticale, con in fondo una piattaforma rialzata, l'<b>ahu</b>, che era il posto degli dèi e degli antenati. Qui, per mille anni, si sono svolti i riti politici e religiosi che tenevano insieme la civiltà mā'ohi. Il complesso guarda dritto verso la <b>Te Ava Mo'a</b>, la passa sacra nella barriera corallina da cui entravano le piroghe.</p>
+
+    <div class="pianta" aria-label="Pianta schematica del marae Taputapuātea">
+      <div class="scorri">
+      <svg viewBox="0 0 760 320" role="img" aria-label="Il marae visto dall'alto, con i cortili, l'ahu e la passa sacra">
+        <!-- la laguna e la passa -->
+        <rect x="0" y="0" width="760" height="320" rx="6" fill="#0b2236"/>
+        <path d="M600 0 L760 0 L760 320 L600 320 Z" fill="#2fc9bd" fill-opacity="0.12"/>
+        <path d="M600 0 L600 320" stroke="#2fc9bd" stroke-opacity="0.5" stroke-width="1"/>
+        <!-- la barriera, con la passa aperta -->
+        <path d="M700 0 V110 M700 210 V320" stroke="#e8dcc4" stroke-opacity="0.7" stroke-width="3" stroke-dasharray="4 5"/>
+        <text x="708" y="164" font-family="Jost, sans-serif" font-size="11" fill="#2fc9bd" transform="rotate(90 708 164)" text-anchor="middle">Te Ava Mo'a, la passa sacra</text>
+        <!-- la costa -->
+        <path d="M0 0 H600 V320 H0 Z" fill="none"/>
+        <text x="618" y="30" font-family="Jost, sans-serif" font-size="11" fill="#f3f1ea" fill-opacity="0.45">laguna</text>
+        <!-- i cortili pavimentati -->
+        <g stroke="#e8dcc4" stroke-opacity="0.8" stroke-width="1.4" fill="#e8dcc4" fill-opacity="0.06">
+          <rect x="60" y="60" width="300" height="200"/>
+          <rect x="380" y="90" width="180" height="140"/>
+        </g>
+        <!-- il selciato: pietre -->
+        <g fill="#e8dcc4" fill-opacity="0.25">
+          <circle cx="100" cy="100" r="3"/><circle cx="140" cy="130" r="3"/><circle cx="190" cy="95" r="3"/><circle cx="230" cy="150" r="3"/><circle cx="120" cy="200" r="3"/><circle cx="270" cy="110" r="3"/><circle cx="300" cy="200" r="3"/><circle cx="180" cy="230" r="3"/><circle cx="250" cy="220" r="3"/><circle cx="330" cy="150" r="3"/>
+          <circle cx="410" cy="130" r="3"/><circle cx="450" cy="180" r="3"/><circle cx="490" cy="120" r="3"/><circle cx="520" cy="200" r="3"/>
+        </g>
+        <!-- le lastre verticali sul bordo -->
+        <g fill="#e8dcc4" fill-opacity="0.85">
+          <rect x="70" y="56" width="5" height="9"/><rect x="130" y="56" width="5" height="9"/><rect x="190" y="56" width="5" height="9"/><rect x="250" y="56" width="5" height="9"/><rect x="310" y="56" width="5" height="9"/>
+          <rect x="70" y="255" width="5" height="9"/><rect x="130" y="255" width="5" height="9"/><rect x="190" y="255" width="5" height="9"/><rect x="250" y="255" width="5" height="9"/><rect x="310" y="255" width="5" height="9"/>
+        </g>
+        <!-- l'ahu: la piattaforma in fondo, lato mare -->
+        <rect x="322" y="70" width="30" height="180" fill="#ffbe8c" fill-opacity="0.85"/>
+        <rect x="524" y="98" width="28" height="124" fill="#ffbe8c" fill-opacity="0.85"/>
+        <!-- la pietra in piedi -->
+        <rect x="336" y="150" width="4" height="22" fill="#061423"/>
+        <!-- etichette -->
+        <g font-family="Jost, sans-serif" font-size="12" fill="#f3f1ea" fill-opacity="0.8">
+          <text x="70" y="288">il cortile grande, per le cerimonie</text>
+          <text x="380" y="258">un cortile minore</text>
+          <text x="322" y="46" text-anchor="start">ahu</text>
+          <text x="76" y="164" font-size="11" fill-opacity="0.5">i vivi stavano qui</text>
+          <text x="316" y="164" font-size="11" fill-opacity="0.5" text-anchor="end">gli dèi e gli antenati là</text>
+        </g>
+        <!-- la freccia della direzione: verso la passa -->
+        <path d="M200 300 H560" stroke="#2fc9bd" stroke-opacity="0.6" stroke-width="1"/>
+        <path d="M560 300 L550 295 L550 305 Z" fill="#2fc9bd" fill-opacity="0.8"/>
+        <text x="380" y="314" font-family="Jost, sans-serif" font-size="11" fill="#2fc9bd" text-anchor="middle">il marae guarda la passa da cui arrivavano le piroghe</text>
+      </svg>
+      </div>
+      <div class="did">Uno schema, non un rilievo: cortili pavimentati di forma quadrangolare, di misure diverse, ciascuno con la sua piattaforma in fondo. Gli ahu sono in arancio, le lastre in piedi lungo i bordi in avorio. Tutto orientato verso la laguna e la passa nel reef.</div>
+    </div>
+
+    <p style="margin-top: 26px">Taputapuātea era dedicato a <b>'Oro</b>, dio della guerra, e le sue cerimonie avevano una risonanza su tutta la Polinesia: qui arrivavano capi, guerrieri e sacerdoti da isole lontanissime, e da qui partiva un'alleanza politica e religiosa che teneva insieme buona parte del triangolo. Nel luglio del 2017 l'UNESCO lo ha iscritto nel patrimonio dell'umanità, insieme alla valle di Opoa e al tratto di laguna e di oceano davanti: 2.124 ettari in tutto, "testimonianza eccezionale di mille anni di civiltà mā'ohi".</p>
+    <div class="nota"><b>Ci si arriva ancora oggi, per lo stesso motivo.</b> Māori dalla Nuova Zelanda, hawaiani, abitanti delle Cook: ogni anno vengono a raccogliersi sul marae, perché lo considerano il luogo da cui sono partiti i loro antenati. Non è turismo, è un ritorno.</div>
+  </div>
+</section>
+
+<!-- ═══ LE FIGLIE ═══ -->
+<section class="blocco" id="figlie">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#ffbe8c" stroke-width="1.2"/><path d="M17 8 L17 24 M17 8 C 22 12, 25 18, 24 24 Z" fill="none" stroke="#ffbe8c" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 25 C 12 23, 22 23, 25 25" fill="none" stroke="#ffbe8c" stroke-width="1.6" stroke-linecap="round"/></svg><span>Una pietra in ogni piroga</span></div>
+    <h2>Il marae <i>che ha fatto figli</i></h2>
+    <p>Taputapuātea non è rimasto fermo a Raiatea. Secondo la tradizione, quando una piroga partiva per fondare una nuova comunità portava con sé una pietra del marae madre, e con quella pietra si posava la prima lastra del marae nuovo, che prendeva lo stesso nome. Così Taputapuātea si è moltiplicato per tutto il Pacifico, e ciascuno dei suoi figli è rimasto collegato all'originale.</p>
+    <ol class="figlie">
+      <li class="figlia madre"><div class="d">Raiatea, Opoa</div><div class="c">Il marae originale, sulla riva della laguna davanti alla Te Ava Mo'a.</div></li>
+      <li class="figlia"><div class="d">Isole Cook</div><div class="c">A Rarotonga esiste un marae Taputapuātea, sul lato dell'isola rivolto verso Raiatea.</div></li>
+      <li class="figlia"><div class="d">Isole Australi</div><div class="c">Anche qui, a sud di Tahiti, il nome si ritrova su un marae fondato dalla casa madre.</div></li>
+      <li class="figlia"><div class="d">Tuamotu</div><div class="c">Negli atolli a est, dove la pietra scarseggia, il marae porta comunque il nome di Raiatea.</div></li>
+      <li class="figlia"><div class="d">Hawaii</div><div class="c">A quattromila chilometri di oceano: la traccia più lontana della rete che partiva da qui.</div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══ IL RITORNO ═══ -->
+<section class="blocco" id="ritorno">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#2fc9bd" stroke-width="1.2"/><path d="M17 8 L17 24 M17 8 C 22 12, 25 18, 24 24 Z" fill="none" stroke="#2fc9bd" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 25 C 12 23, 22 23, 25 25" fill="none" stroke="#2fc9bd" stroke-width="1.6" stroke-linecap="round"/></svg><span>Il ritorno</span></div>
+    <h2>Dove vanno <i>gli spiriti</i></h2>
+    <p class="leggenda">Chi nasce nel triangolo sa da dove viene. E sa dove andrà: lo stesso posto, per la stessa rotta, <b>a ritroso</b>.</p>
+    <p>C'è un'ultima parte della leggenda che la rende diversa da tutte le storie d'origine che conosciamo. Hawaiki non è solo il punto di partenza: è anche il punto di arrivo. Secondo i racconti, dopo la morte lo spirito di ogni polinesiano lascia la sua isola e rifà il viaggio degli antenati al contrario, fino a tornare a casa. In Nuova Zelanda i Māori dicono che parta da Capo Reinga, la punta più a nord dell'isola, e si tuffi nel mare da un albero di pōhutukawa. Nelle Cook e alle Marchesi la stessa parola indica insieme la patria e il mondo di sotto.</p>
+    <p>Per questo Raiatea, per chi ci crede, non è un'isola qualsiasi. È il posto dove si chiude il cerchio. E per questo, forse, la si guarda in un modo diverso, dalla spiaggia di Taha'a, quando il sole scende dietro le sue montagne.</p>
+  </div>
+</section>
+
+<!-- ═══ GLOSSARIO ═══ -->
+<section class="blocco" id="glossario">
+  <div class="wrap">
+    <div class="marca-sep"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#8fd0e6" stroke-width="1.2"/><path d="M17 8 L17 24 M17 8 C 22 12, 25 18, 24 24 Z" fill="none" stroke="#8fd0e6" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 25 C 12 23, 22 23, 25 25" fill="none" stroke="#8fd0e6" stroke-width="1.6" stroke-linecap="round"/></svg><span>Piccolo glossario</span></div>
+    <h2>Le parole <i>di Hawaiki</i></h2>
+    <dl class="glossario">
+      <div class="voce-g"><dt>marae</dt><dd>Il tempio a cielo aperto: un cortile di pietra con una piattaforma in fondo. Il centro della vita religiosa e politica.</dd></div>
+      <div class="voce-g"><dt>ahu</dt><dd>La piattaforma rialzata in fondo al marae, riservata agli dèi e agli antenati.</dd></div>
+      <div class="voce-g"><dt>va'a</dt><dd>La piroga. Quelle da traversata avevano due scafi uniti da una piattaforma e una vela a chela di granchio.</dd></div>
+      <div class="voce-g"><dt>mā'ohi</dt><dd>Il popolo polinesiano delle Isole della Società e la sua civiltà, vecchia di mille anni.</dd></div>
+      <div class="voce-g"><dt>'Oro</dt><dd>Il dio della guerra a cui era dedicato Taputapuātea. Il suo culto partì da Raiatea e si diffuse nelle isole.</dd></div>
+      <div class="voce-g"><dt>Te Ava Mo'a</dt><dd>"La passa sacra": l'apertura nella barriera corallina davanti al marae, da cui entravano le piroghe.</dd></div>
+      <div class="voce-g"><dt>tupuna</dt><dd>Gli antenati. Nel marae il confine tra loro e i vivi diventava sottile.</dd></div>
+      <div class="voce-g"><dt>tapu</dt><dd>Sacro, e per questo proibito. Da qui la parola "tabù" che usiamo anche noi.</dd></div>
+      <div class="voce-g"><dt>mana</dt><dd>La forza spirituale che sta nelle persone, nei luoghi e negli oggetti. Un marae ne era carico.</dd></div>
+      <div class="voce-g"><dt>Hawaiki</dt><dd>L'isola d'origine e l'isola del ritorno. Forse Raiatea, forse nessun posto. Forse tutti.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<div class="wrap fine">
+  <a class="rimando" href="estancia.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg>Nibepo Aike</a>
+  <a class="rimando" href="ghiacciai.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg>I ghiacciai</a>
+  <a class="rimando" href="https://www.gioriva.it/poitiracconto/patagonia2026"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H4M10 6l-6 6 6 6"/></svg>Torna al diario</a>
+</div>
+
+</main>
+
+
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Foto ingrandita">
+  <button class="lb-close" id="lbclose" aria-label="Chiudi">×</button>
+  <img id="lbimg" src="" alt="" />
+</div>
+
+<button class="torna-su" id="torna-su" aria-label="Torna a inizio pagina">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<footer>
+  <a href="https://www.gioriva.it" aria-label="Gio Riva">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 L12 3 L21 11 M5 10 V20 H19 V10"/></svg>
+    Gio Riva
+  </a>
+  <a href="https://www.gioriva.it/poitiracconto/privacy.html" aria-label="Privacy e Cookie">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L20 6 V11 C20 16.5 16.5 20 12 21.5 C7.5 20 4 16.5 4 11 V6 Z"/></svg>
+    Privacy &amp; Cookie
+  </a>
+  <a href="contatti.html" aria-label="Contatti">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 7.5 L12 13.5 L21 7.5"/></svg>
+    Contatti
+  </a>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── header ── */
+  var bar = document.getElementById('bar');
+  function onScrollBar() { bar.classList.toggle('scrolled', window.scrollY > 40); }
+  window.addEventListener('scroll', onScrollBar, { passive: true }); onScrollBar();
+
+  /* ── drawer ── */
+  var burger = document.getElementById('burger'),
+      drawer = document.getElementById('drawer'),
+      scrim = document.getElementById('scrim'),
+      dclose = document.getElementById('dclose');
+  function setDrawer(open) {
+    drawer.classList.toggle('open', open);
+    scrim.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', function () { setDrawer(!drawer.classList.contains('open')); });
+  dclose.addEventListener('click', function () { setDrawer(false); });
+  scrim.addEventListener('click', function () { setDrawer(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer.classList.contains('open')) setDrawer(false); });
+
+  /* ── torna su ── */
+  var su = document.getElementById('torna-su');
+  function checkSu() { su.classList.toggle('visibile', window.scrollY > window.innerHeight * 0.9); }
+  window.addEventListener('scroll', checkSu, { passive: true }); checkSu();
+  su.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+
+  /* ── lightbox ── */
+  var lb = document.getElementById('lightbox'), lbimg = document.getElementById('lbimg'), lbclose = document.getElementById('lbclose');
+  function openLb(src, alt) { lbimg.src = src; lbimg.alt = alt || 'Foto del viaggio'; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeLb() { lb.classList.remove('open'); lbimg.src = ''; document.body.style.overflow = ''; }
+  lb.addEventListener('click', closeLb); lbclose.addEventListener('click', closeLb);
+  lbimg.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb.classList.contains('open')) closeLb(); });
+
+})();
+</script>
+</body>
+</html>

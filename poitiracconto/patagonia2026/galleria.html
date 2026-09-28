@@ -160,6 +160,14 @@
   .torna-su.visibile { opacity: 1; transform: none; pointer-events: auto; }
   .torna-su:hover { background: var(--ivory); color: var(--night); }
   @media (prefers-reduced-motion: reduce) { .torna-su { transition: none; } }
+  .puntini::after { content: ''; animation: puntini 1.5s steps(4, end) infinite; }
+  @keyframes puntini { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
+  .riprova { font-family: inherit; font-size: 15px; color: var(--ivory); background: none; border: 1px solid var(--ivory-2); border-radius: 100px; padding: 8px 18px; cursor: pointer; margin-left: 8px; }
+  .riprova:hover { background: var(--ivory); color: var(--night); }
+  #empty.attesa .cornice { animation: respira 2.4s ease-in-out infinite; }
+  #empty.attesa .cornice:nth-child(2n) { animation-delay: -0.8s; } #empty.attesa .cornice:nth-child(3n) { animation-delay: -1.6s; }
+  @keyframes respira { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .puntini::after, #empty.attesa .cornice { animation: none; } }
 </style>
 </head>
 <body>
@@ -196,6 +204,7 @@
     <div class="d-sotto-lista">
       <a class="d-link d-sotto" href="estancia.html"><span class="place">Nibepo Aike</span><span class="sub">Vita e storia di un'estancia</span></a>
       <a class="d-link d-sotto" href="ghiacciai.html"><span class="place">I ghiacciai</span><span class="sub">Perito Moreno, Upsala e Spegazzini</span></a>
+      <a class="d-link d-sotto" href="hawaiki.html"><span class="place">Hawaiki</span><span class="sub">L'isola mitica dei polinesiani</span></a>
     </div>
   </nav>
   <div class="d-foot">Patagonia &amp; Polinesia 2026<br>Il viaggio di nozze di Giorgio e Lucrezia</div>
@@ -204,11 +213,12 @@
 <main>
 <div class="wrap">
   <div class="intro">
-    <h1 id="g-h1">Le foto <i>arriveranno</i></h1>
-    <p class="lede" id="g-lede">Qui finiranno il Perito Moreno, il faro della fine del mondo e la laguna di Bora Bora. Le prime dal 15 settembre, caricate direttamente dal viaggio.</p>
+    <h1 id="g-h1">Le foto, <i>giorno per giorno</i></h1>
+    <p class="lede" id="g-lede">Sto caricando l'album del viaggio<span class="puntini" aria-hidden="true"></span></p>
+    <p class="lede" id="g-errore" hidden>Non riesco a raggiungere l'album in questo momento. <button type="button" class="riprova" id="riprova">Riprova</button></p>
   </div>
 
-  <div class="cornici" id="empty">
+  <div class="cornici attesa" id="empty">
     <div class="cornice" style="--tinta: linear-gradient(160deg,#0b2b46,#15405f)"><div class="foto"></div><div class="did">Buenos Aires<small>dal 15 al 18 settembre</small></div></div>
     <div class="cornice" style="--tinta: linear-gradient(160deg,#0f3a52,#8fc7dc)"><div class="foto"></div><div class="did">El Calafate<small>il Perito Moreno</small></div></div>
     <div class="cornice" style="--tinta: linear-gradient(160deg,#04111d,#0f3049)"><div class="foto"></div><div class="did">Ushuaia<small>la fine del mondo</small></div></div>
@@ -218,7 +228,7 @@
     <div class="cornice" style="--tinta: linear-gradient(160deg,#0d7f90,#ffb37e)"><div class="foto"></div><div class="did">Bora Bora<small>il monte Otemanu</small></div></div>
     <div class="cornice" style="--tinta: linear-gradient(160deg,#ffb37e,#f3f1ea)"><div class="foto"></div><div class="did">La via di casa<small>dal 5 al 7 ottobre</small></div></div>
   </div>
-  <p class="album-nota" id="empty-note">Le foto caricate nell'album del viaggio compariranno qui da sole, senza toccare questa pagina.</p>
+  <p class="album-nota" id="empty-note">Le foto arrivano dall'album del viaggio: se la connessione è lenta, qualche secondo di pazienza.</p>
 
   <nav class="giorni-nav" id="giorni-nav" aria-label="Vai al giorno" hidden></nav>
   <div id="grid" hidden></div>
@@ -322,10 +332,34 @@
       if (location.hash) { var target = document.querySelector(location.hash); if (target) setTimeout(function () { target.scrollIntoView(); }, 50); }
     }
   }
-  fetch(ALBUM_BASE + 'manifest.json', { cache: 'no-store' })
-    .then(function (r) { if (!r.ok) throw new Error('no manifest'); return r.json(); })
-    .then(function (d) { render(Array.isArray(d) ? d : d.photos); })
-    .catch(function () {});
+  /* ── caricamento del manifest: più tentativi, mai la cache, ripresa quando si torna sulla pagina ── */
+  var caricato = false, tentativo = 0, errore = document.getElementById('g-errore'), lede = document.getElementById('g-lede'), riprova = document.getElementById('riprova');
+  function carica() {
+    if (caricato) return;
+    tentativo += 1;
+    errore.hidden = true; lede.hidden = false; empty.classList.add('attesa');
+    var url = ALBUM_BASE + 'manifest.json?v=' + Date.now();
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 12000) : null;
+    fetch(url, { cache: 'no-store', signal: ctrl ? ctrl.signal : undefined })
+      .then(function (r) { if (!r.ok) throw new Error('manifest ' + r.status); return r.json(); })
+      .then(function (d) {
+        if (timer) clearTimeout(timer);
+        var list = Array.isArray(d) ? d : (d.photos || []);
+        if (!list.length) throw new Error('manifest vuoto');
+        caricato = true; render(list);
+      })
+      .catch(function () {
+        if (timer) clearTimeout(timer);
+        if (tentativo < 3) { setTimeout(carica, 1500 * tentativo); return; }
+        empty.classList.remove('attesa'); lede.hidden = true; errore.hidden = false;
+      });
+  }
+  riprova.addEventListener('click', function () { tentativo = 0; carica(); });
+  carica();
+  /* se la pagina torna dalla cache del browser (tasto indietro) o l'app torna in primo piano senza foto, riprova */
+  window.addEventListener('pageshow', function (e) { if (e.persisted && !caricato) { tentativo = 0; carica(); } });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden && !caricato) { tentativo = 0; carica(); } });
 
   /* ── torna su ── */
   var su = document.getElementById('torna-su');
