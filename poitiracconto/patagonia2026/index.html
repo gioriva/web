@@ -359,9 +359,25 @@
   /* due righe di presentazione, prima dei giorni */
   .diario-intro { font-size: 17.5px; line-height: 1.72; color: rgba(243,241,234,0.88); max-width: none; margin: 0 0 30px; text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
   .diario-intro i { font-style: italic; }
-  .diario-nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 8px; }
-  .diario-nav a { font-size: 14px; color: var(--ivory-2); border: 1px solid var(--line); border-radius: 100px; padding: 6px 13px; transition: color 0.2s, border-color 0.2s; }
-  .diario-nav a:hover { color: var(--ivory); border-color: var(--ivory-2); }
+  /* ═══ il calendario dei giorni ═══ */
+  .cal { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; margin: 0 0 8px; }
+  @media (max-width: 640px) { .cal { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 5px; } }
+  .cal a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; aspect-ratio: 1 / 1.08; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); position: relative; text-decoration: none; transition: border-color 0.2s, background 0.2s, color 0.2s; color: var(--ivory); }
+  .cal a::before { content: ''; position: absolute; top: 0; left: 18%; right: 18%; height: 2px; border-radius: 0 0 2px 2px; background: var(--tinta, var(--glacier)); opacity: 0.85; }
+  .cal a.volo { --tinta: var(--dawn); }
+  .cal a.caldo { --tinta: var(--lagoon); }
+  .cal a.doppio .n { font-size: 0.74em; letter-spacing: -0.02em; }
+  .cal a.doppio .g { font-size: 8.5px; letter-spacing: 0.02em; }
+  .cal a { overflow: hidden; }
+  .cal .g { font-size: 9.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ivory-3); line-height: 1; white-space: nowrap; }
+  .cal .n { font-family: var(--display); font-size: clamp(22px, 5.2vw, 27px); line-height: 1; margin-top: 4px; }
+  .cal .m { font-size: 11px; color: var(--ivory-3); line-height: 1; margin-top: 3px; }
+  .cal a:hover { border-color: var(--ivory-2); background: rgba(243,241,234,0.08); }
+  .cal a.attivo { background: var(--ivory); border-color: var(--ivory); color: var(--night); }
+  .cal a.attivo .g, .cal a.attivo .m { color: rgba(6,20,35,0.6); }
+  .cal a.attivo::before { opacity: 1; }
+  .cal .corto { display: none; }
+  @media (max-width: 640px) { .cal .lungo { display: none; } .cal .corto { display: inline; } .cal .g { font-size: 9.5px; } }
   .giornata { padding: 40px 0 40px; scroll-margin-top: calc(var(--head-h) + 16px); position: relative; }
   .giornata + .giornata { padding-top: 96px; }
   /* stacco tra un giorno e l'altro: filetti che sfumano e la stella del giorno al centro */
@@ -746,26 +762,26 @@
     </div>
     <h2>Il diario, <i>giorno per giorno</i></h2>
     <p class="diario-intro">Ci piace girare il mondo e raccontarlo con parole nostre: magari non perfette, di sicuro autentiche. Questa è la nostra luna di miele, e stiamo vivendo un sogno. <i>Proveremo a portarvi con noi, giorno per giorno.</i></p>
-    <nav class="diario-nav" aria-label="Salta al giorno">
-      <a href="#giorno-1">15 settembre</a>
-      <a href="#giorno-2">16 settembre</a>
-      <a href="#giorno-3">17 settembre</a>
-      <a href="#giorno-4">18 settembre</a>
-      <a href="#giorno-5">19 settembre</a>
-      <a href="#giorno-6">20 settembre</a>
-      <a href="#giorno-7">21 settembre</a>
-      <a href="#giorno-8">22 settembre</a>
-      <a href="#giorno-9">23 settembre</a>
-      <a href="#giorno-10">24 e 25 settembre</a>
-      <a href="#giorno-12">26 settembre</a>
-      <a href="#giorno-13">27 settembre</a>
-      <a href="#giorno-14">28 settembre</a>
-      <a href="#giorno-15">29 settembre</a>
-      <a href="#giorno-16">30 settembre</a>
-      <a href="#giorno-17">1 ottobre</a>
-      <a href="#giorno-18">2 ottobre</a>
-      <a href="#giorno-19">3 ottobre</a>
-      <a href="#giorno-20">4 ottobre</a>
+    <nav class="cal" aria-label="Salta al giorno">
+      <a href="#giorno-1" class="volo"><span class="g">Giorno 1</span><span class="n">15</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-2"><span class="g">Giorno 2</span><span class="n">16</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-3"><span class="g">Giorno 3</span><span class="n">17</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-4"><span class="g">Giorno 4</span><span class="n">18</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-5"><span class="g">Giorno 5</span><span class="n">19</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-6"><span class="g">Giorno 6</span><span class="n">20</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-7"><span class="g">Giorno 7</span><span class="n">21</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-8" class="volo"><span class="g">Giorno 8</span><span class="n">22</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-9"><span class="g">Giorno 9</span><span class="n">23</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-10" class="volo doppio"><span class="g">Giorni 10-11</span><span class="n">24·25</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-12" class="volo"><span class="g">Giorno 12</span><span class="n">26</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-13" class="caldo"><span class="g">Giorno 13</span><span class="n">27</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-14" class="caldo"><span class="g">Giorno 14</span><span class="n">28</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-15" class="caldo"><span class="g">Giorno 15</span><span class="n">29</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-16" class="caldo"><span class="g">Giorno 16</span><span class="n">30</span><span class="m"><span class="lungo">settembre</span><span class="corto">set</span></span></a>
+      <a href="#giorno-17" class="caldo volo"><span class="g">Giorno 17</span><span class="n">1</span><span class="m"><span class="lungo">ottobre</span><span class="corto">ott</span></span></a>
+      <a href="#giorno-18" class="caldo"><span class="g">Giorno 18</span><span class="n">2</span><span class="m"><span class="lungo">ottobre</span><span class="corto">ott</span></span></a>
+      <a href="#giorno-19" class="caldo"><span class="g">Giorno 19</span><span class="n">3</span><span class="m"><span class="lungo">ottobre</span><span class="corto">ott</span></span></a>
+      <a href="#giorno-20" class="caldo"><span class="g">Giorno 20</span><span class="n">4</span><span class="m"><span class="lungo">ottobre</span><span class="corto">ott</span></span></a>
     </nav>
 
     <article class="giornata volo" id="giorno-1" data-day="1">
