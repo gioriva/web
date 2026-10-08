@@ -30,6 +30,7 @@
 <meta name="twitter:title" content="Nibepo Aike, un'estancia ai piedi dei ghiacciai" />
 <meta name="twitter:image" content="https://www.gioriva.it/poitiracconto/patagonia2026/og-viaggio.png" />
 
+<link rel="preconnect" href="https://gioriva.github.io">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -758,7 +759,17 @@
 
   /* ── lightbox ── */
   var lb = document.getElementById('lightbox'), lbimg = document.getElementById('lbimg'), lbclose = document.getElementById('lbclose');
-  function openLb(src, alt) { lbimg.src = src; lbimg.alt = alt || 'Foto del viaggio'; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  /* ── miniature: -s.jpg per strisce e griglie, il file pieno solo nel lightbox; se la miniatura manca si usa il pieno ── */
+  function miniDi(src) { return src.replace(/\.jpg$/i, '-s.jpg'); }
+  function imgMini(img, src) {
+    img.src = miniDi(src); img.decoding = 'async';
+    img.addEventListener('error', function () { if (!img.dataset.pieno) { img.dataset.pieno = '1'; img.src = src; } });
+  }
+  function openLb(src, alt) {
+    /* prima la miniatura, già in cache, poi il file pieno appena arriva */
+    lbimg.src = miniDi(src); lbimg.alt = alt || 'Foto del viaggio'; lb.classList.add('open'); document.body.style.overflow = 'hidden';
+    var pieno = new Image(); pieno.onload = function () { if (lb.classList.contains('open')) lbimg.src = src; }; pieno.src = src;
+  }
   function closeLb() { lb.classList.remove('open'); lbimg.src = ''; document.body.style.overflow = ''; }
   lb.addEventListener('click', closeLb); lbclose.addEventListener('click', closeLb);
   lbimg.addEventListener('click', function (e) { e.stopPropagation(); });
@@ -776,7 +787,7 @@
       if (!mie.length) return;
       mie.slice(0, MAX).forEach(function (item) {
         var src = ALBUM_BASE + item.file, a = document.createElement('a'), img = document.createElement('img');
-        a.href = src; img.src = src; img.alt = item.caption || 'Foto della visita'; img.loading = 'lazy';
+        a.href = src; imgMini(img, src); img.alt = item.caption || 'Foto della visita'; img.loading = 'lazy';
         a.appendChild(img); a.addEventListener('click', function (e) { e.preventDefault(); openLb(src, item.caption); });
         box.appendChild(a);
         img.addEventListener('load', function () { if (!box.dataset.toccata) box.scrollLeft = 0; });
