@@ -247,6 +247,22 @@
   /* foto della giornata (dal manifest, giorno 7) */
   .g-foto { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x proximity; padding: 4px 0 14px; margin: 26px 0 8px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; overflow-anchor: none; }
   .g-foto a { flex: 0 0 auto; scroll-snap-align: start; }
+  /* strisce di foto: niente barra di scorrimento; su desktop due frecce ai lati e una sfumatura sul bordo */
+  .g-foto { scrollbar-width: none; }
+  .g-foto::-webkit-scrollbar { display: none; }
+  .g-strip { position: relative; }
+  .g-strip::before, .g-strip::after { content: ''; position: absolute; top: 4px; bottom: 14px; width: 56px; pointer-events: none; opacity: 0; transition: opacity 0.25s; z-index: 2; }
+  .g-strip::before { left: 0; background: linear-gradient(to right, var(--night), transparent); }
+  .g-strip::after { right: 0; background: linear-gradient(to left, var(--night), transparent); }
+  .g-strip.ha-prima::before, .g-strip.ha-dopo::after { opacity: 1; }
+  .g-frec { position: absolute; top: 50%; transform: translateY(-60%); z-index: 3; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(243,241,234,0.4); background: rgba(6,20,35,0.78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); color: var(--ivory); cursor: pointer; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.25s, background 0.2s; }
+  .g-frec svg { width: 18px; height: 18px; }
+  .g-frec.prev { left: 8px; } .g-frec.next { right: 8px; }
+  .g-frec:hover { background: var(--ivory); color: var(--night); }
+  @media (hover: hover) and (pointer: fine) {
+    .g-frec { display: flex; }
+    .g-strip:hover .g-frec.prev.on, .g-strip:hover .g-frec.next.on, .g-frec:focus-visible { opacity: 1; }
+  }
   .g-foto img { height: 230px; width: auto; min-width: 150px; max-width: 84vw; object-fit: cover; display: block; border-radius: 4px; background: var(--night-2); }
   .g-more { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; height: 230px; width: 150px; border: 1px solid var(--line); border-radius: 4px; text-align: center; color: var(--ivory-2); transition: border-color 0.2s, color 0.2s; }
   .g-more b { font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1; }
@@ -759,6 +775,32 @@
 
   /* ── lightbox ── */
   var lb = document.getElementById('lightbox'), lbimg = document.getElementById('lbimg'), lbclose = document.getElementById('lbclose');
+  /* ── frecce e sfumature sulle strisce di foto, per chi usa il mouse ── */
+  function attrezzaStriscia(box) {
+    if (box.dataset.frecce || box.hidden) return;
+    box.dataset.frecce = '1';
+    var wrap = document.createElement('div'); wrap.className = 'g-strip';
+    box.parentNode.insertBefore(wrap, box); wrap.appendChild(box);
+    var ICONA = { prev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>', next: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>' };
+    var frecce = {};
+    ['prev', 'next'].forEach(function (k) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'g-frec ' + k; b.innerHTML = ICONA[k];
+      b.setAttribute('aria-label', k === 'prev' ? 'Foto precedenti' : 'Foto successive');
+      b.addEventListener('click', function () { box.dataset.toccata = '1'; box.scrollBy({ left: (k === 'prev' ? -1 : 1) * Math.round(box.clientWidth * 0.8), behavior: 'smooth' }); });
+      wrap.appendChild(b); frecce[k] = b;
+    });
+    function stato() {
+      var max = box.scrollWidth - box.clientWidth - 2;
+      var prima = box.scrollLeft > 2, dopo = box.scrollLeft < max;
+      wrap.classList.toggle('ha-prima', prima); wrap.classList.toggle('ha-dopo', dopo);
+      frecce.prev.classList.toggle('on', prima); frecce.next.classList.toggle('on', dopo);
+    }
+    box.addEventListener('scroll', stato, { passive: true });
+    window.addEventListener('resize', stato);
+    Array.prototype.forEach.call(box.querySelectorAll('img'), function (im) { im.addEventListener('load', stato); });
+    stato();
+  }
+  function attrezzaStrisce() { Array.prototype.forEach.call(document.querySelectorAll('.g-foto'), attrezzaStriscia); }
   /* ── miniature: -s.jpg per strisce e griglie, il file pieno solo nel lightbox; se la miniatura manca si usa il pieno ── */
   function miniDi(src) { return src.replace(/\.jpg$/i, '-s.jpg'); }
   function imgMini(img, src) {
@@ -800,6 +842,7 @@
         box.appendChild(a);
       }
       box.hidden = false; box.scrollLeft = 0;
+      attrezzaStriscia(box);
       box.addEventListener('pointerdown', function () { box.dataset.toccata = '1'; }, { once: true });
       box.addEventListener('wheel', function () { box.dataset.toccata = '1'; }, { once: true, passive: true });
     }).catch(function () {});
