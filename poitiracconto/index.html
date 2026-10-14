@@ -424,6 +424,48 @@
       color:var(--tenue);
     }
 
+    /* ── diari di famiglia ── */
+    .famiglia { margin-top:4.2rem; padding-top:2.6rem; border-top:1px solid var(--bordo); }
+    .famiglia .etichetta-sezione { margin-bottom:.5rem; }
+    .famiglia-sotto {
+      font-size:.92rem; font-weight:300; color:var(--grigio);
+      max-width:56ch; margin-bottom:1.6rem;
+    }
+    .griglia-famiglia {
+      display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:1.4rem;
+    }
+    .firmato {
+      --c: var(--rosso);
+      display:grid; grid-template-columns:132px minmax(0,1fr);
+      text-decoration:none;
+      background:#fffdf8;
+      border:1px solid var(--bordo); border-radius:5px;
+      overflow:hidden;
+      box-shadow:0 2px 4px rgba(35,32,28,.04), 0 8px 20px rgba(35,32,28,.06);
+      transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .35s;
+    }
+    .firmato:hover, .firmato:focus-visible { transform:translateY(-4px); border-color:var(--c); box-shadow:0 4px 8px rgba(35,32,28,.06), 0 18px 36px rgba(35,32,28,.12); }
+    .firmato:focus-visible { outline:2px solid var(--c); outline-offset:6px; }
+    .firmato .poster { border-radius:0; box-shadow:none; }
+    .firmato .scena { aspect-ratio:auto; height:100%; min-height:132px; }
+    .firmato .anno {
+      width:42px; height:42px; top:.6rem; left:.6rem;
+      font-size:.9rem;
+    }
+    .firmato .firma {
+      position:absolute; left:0; right:0; bottom:0;
+      padding:.35rem .6rem;
+      background:rgba(255,253,248,.88);
+      font-size:.58rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--c);
+      border-top:1px solid var(--bordo);
+    }
+    .firmato .piede { border-top:none; border-left:3px solid var(--c); padding:.95rem 1.1rem 1rem; display:flex; flex-direction:column; justify-content:center; }
+    .firmato .piede h3 { font-size:1.4rem; }
+    .firmato .piede .frase { font-size:.95rem; margin-bottom:.5rem; }
+    .firmato .piede .tappe { font-size:.74rem; padding-top:.5rem; }
+
     /* comparsa progressiva */
     .rivela { opacity:0; transform:translateY(22px); }
     .rivela.dentro {
@@ -535,6 +577,10 @@
       }
       .rivela { opacity:1 !important; transform:none !important; }
 
+      .griglia-famiglia { grid-template-columns:1fr; }
+      .firmato { grid-template-columns:110px minmax(0,1fr); }
+      .firmato .scena { min-height:110px; }
+      .famiglia { margin-top:2.6rem; padding-top:2rem; }
       .sfoglia, .sfoglia-nota { display:flex; }
       .sfoglia-nota { display:block; }
       .cookie { grid-template-columns:1fr; left:0; right:0; bottom:0; border-radius:0; padding:1.4rem 1.2rem; }
@@ -874,29 +920,6 @@
         </div>
       </a>
 
-      <a class="manifesto rivela" style="--c:var(--c-messico)" href="https://www.gioriva.it/poitiracconto/messico2026" target="_blank" rel="noopener">
-        <div class="poster">
-          <span class="anno">2026</span>
-          <div class="scena">
-            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="240" cy="88" r="38" fill="currentColor" opacity=".3"/>
-              <path d="M240 34v-18M240 160v-18M294 88h18M168 88h18M280 48l12-12M200 128l-12 12M280 128l12 12M200 48l-12-12" stroke="currentColor" stroke-width="6" stroke-linecap="round" opacity=".5"/>
-              <path d="M36 344h44v-42h30v-42h30v-42h40v42h30v42h30v42h44v22H36z" fill="currentColor" opacity=".6"/>
-              <path d="M140 218h40v-30h-40z" fill="currentColor"/>
-              <path d="M152 344l8-104 8 104z" fill="#fffdf8" opacity=".65"/>
-              <path d="M50 366h220v10H50z" fill="currentColor"/>
-              <path d="M22 376c0-30 6-48 16-52 8-4 14 4 14 20v32z" fill="currentColor" opacity=".8"/>
-              <path d="M0 384h320v16H0z" fill="currentColor" opacity=".25"/>
-            </svg>
-          </div>
-        </div>
-        <div class="piede">
-          <h3>Messico</h3>
-          <p class="frase">Colori e civiltà</p>
-          <p class="tappe">Da Playa del Carmen a Isla Contoy, tra cenote, rovine Maya e tacos leggendari</p>
-        </div>
-      </a>
-
       <a class="manifesto rivela" style="--c:var(--c-hkbali)" href="https://www.gioriva.it/poitiracconto/indonesia2025" target="_blank" rel="noopener">
         <div class="poster">
           <span class="anno">2025</span>
@@ -962,9 +985,43 @@
         </div>
       </a>
 
-      <a class="manifesto rivela" style="--c:var(--c-singapore)" href="https://www.gioriva.it/poitiracconto/singapore2012" target="_blank" rel="noopener">
+    </div>
+
+    <div class="sfoglia" id="sfoglia" aria-hidden="true"></div>
+    <p class="sfoglia-nota">Scorri di lato per gli altri viaggi</p>
+
+    <section class="famiglia" aria-labelledby="famiglia-titolo">
+      <p class="etichetta-sezione" id="famiglia-titolo">Diari di famiglia</p>
+      <p class="famiglia-sotto">Due viaggi raccontati dalle mie sorelle, ospitati qui perché meritavano un posto in bacheca.</p>
+      <div class="griglia-famiglia">
+      <a class="firmato rivela" style="--c:var(--c-messico)" href="https://www.gioriva.it/poitiracconto/messico2026" target="_blank" rel="noopener">
+        <div class="poster">
+          <span class="anno">2026</span>
+            <span class="firma">raccontato da Stefania</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="240" cy="88" r="38" fill="currentColor" opacity=".3"/>
+              <path d="M240 34v-18M240 160v-18M294 88h18M168 88h18M280 48l12-12M200 128l-12 12M280 128l12 12M200 48l-12-12" stroke="currentColor" stroke-width="6" stroke-linecap="round" opacity=".5"/>
+              <path d="M36 344h44v-42h30v-42h30v-42h40v42h30v42h30v42h44v22H36z" fill="currentColor" opacity=".6"/>
+              <path d="M140 218h40v-30h-40z" fill="currentColor"/>
+              <path d="M152 344l8-104 8 104z" fill="#fffdf8" opacity=".65"/>
+              <path d="M50 366h220v10H50z" fill="currentColor"/>
+              <path d="M22 376c0-30 6-48 16-52 8-4 14 4 14 20v32z" fill="currentColor" opacity=".8"/>
+              <path d="M0 384h320v16H0z" fill="currentColor" opacity=".25"/>
+            </svg>
+          </div>
+        </div>
+        <div class="piede">
+          <h3>Messico</h3>
+          <p class="frase">Colori e civiltà</p>
+          <p class="tappe">Da Playa del Carmen a Isla Contoy, tra cenote, rovine Maya e tacos leggendari</p>
+        </div>
+      </a>
+
+      <a class="firmato rivela" style="--c:var(--c-singapore)" href="https://www.gioriva.it/poitiracconto/singapore2012" target="_blank" rel="noopener">
         <div class="poster">
           <span class="anno">2012</span>
+            <span class="firma">raccontato da Roberta</span>
           <div class="scena">
             <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <circle cx="228" cy="96" r="40" fill="currentColor" opacity=".22"/>
@@ -982,11 +1039,8 @@
           <p class="tappe">Grattacieli sull'acqua e orchidee ai bordi delle strade: diario di un'avventura in Asia</p>
         </div>
       </a>
-
-    </div>
-
-    <div class="sfoglia" id="sfoglia" aria-hidden="true"></div>
-    <p class="sfoglia-nota">Scorri di lato per gli altri viaggi</p>
+      </div>
+    </section>
   </main>
 
   <!-- ══ footer ══ -->
