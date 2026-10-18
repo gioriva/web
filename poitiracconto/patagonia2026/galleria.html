@@ -336,7 +336,7 @@
       var d = new Date(Date.UTC(2026, 8, 15 + (day - 1)));
       var mese = MESI[d.getUTCMonth()];
       var fase = (day >= 13) ? 'caldo' : '';
-      if ([1, 8, 10, 11, 12, 17].indexOf(Number(day)) !== -1) fase += ' volo';
+      if ([1, 8, 10, 11, 12, 17, 21].indexOf(Number(day)) !== -1) fase += ' volo';
       a.className = fase.trim();
       a.innerHTML = '<span class="g">Giorno ' + day + '</span><span class="n">' + d.getUTCDate() + '</span><span class="m"><span class="lungo">' + mese + '</span><span class="corto">' + mese.slice(0, 3) + '</span></span>';
       a.addEventListener('click', function (e) { e.preventDefault(); var t = document.getElementById('giorno-' + day); if (t) { t.scrollIntoView({ behavior: 'smooth' }); history.replaceState(null, '', '#giorno-' + day); } });
