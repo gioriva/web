@@ -1,0 +1,20 @@
+gioriva.it, tema Lario: file da pubblicare
+==========================================
+
+Copia questi file nella cartella principale del repository GitHub Pages,
+sovrascrivendo quelli con lo stesso nome:
+
+  index.html            la home (il volo notturno sul lago)
+  contatti.html         il modulo di contatto (Formspree)
+  privacy.html          privacy e cookie policy
+  404.html              la pagina per gli indirizzi sbagliati (GitHub Pages la usa da sola)
+  og-image.png          l'anteprima per WhatsApp, LinkedIn e gli altri social
+  favicon.svg           l'icona del sito (la sagoma del lago)
+  favicon-32.png        la stessa icona per i browser che non leggono gli svg
+  apple-touch-icon.png  l'icona per la schermata home di iPhone e iPad
+
+Le icone hanno il numero di versione 9 e l'anteprima social il numero 17,
+così i browser e Cloudflare scaricano i file nuovi senza usare quelli in cache.
+
+Non serve toccare altro: CNAME, Google Analytics e il modulo Formspree
+restano gli stessi di prima.
