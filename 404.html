@@ -522,8 +522,9 @@ footer a { color: var(--ink); text-decoration: none; } footer a:hover { color: v
       requestAnimationFrame(frame);
       if (!bufs || document.hidden) return;
       if (start === null) start = now;
-      const s = T0 + (now - start) / 1000 * (REDUCED ? 0.5 : 1);   /* with reduced motion the flight only slows down */
       const portrait = W < H, WAY = portrait ? WAY_P : WAY_L;
+      /* with reduced motion the flight only slows down; on a tall screen it opens above Como, with the branch running up to the fork */
+      const s = T0 + (portrait ? 22.5 : 0) + (now - start) / 1000 * (REDUCED ? 0.5 : 1);
       const u = s / PERIOD * WAY.length;
       const eye0 = spline(WAY, 0, u), at0 = spline(WAY, 1, u);
       if (INNER) eye0[2] += portrait ? 3 : 5.5;
