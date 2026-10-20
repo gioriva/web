@@ -518,9 +518,9 @@ footer a { color: var(--ink); text-decoration: none; } footer a:hover { color: v
       [[33, 12, 7.4], [16, 22, 0.4]],
       [[22, -2, 8.5], [19, 22, 0.4]],
     ];
-    /* on a tall screen the drone circles high over the south shore and keeps the whole lake in the frame, north up */
-    const ORBIT = [[23, -1, 10.5], [36, 1, 10.0], [41, 8, 9.5], [35, 15, 10.0], [23, 18, 11.5], [11, 15, 10.5], [5, 8, 9.5], [10, 1, 10.0]];
-    const WAY_P = ORBIT.map(([x, y, z]) => [[x, y, z], [x + 0.55 * (23 - x), y + 0.55 * (31 - y), 0.4]]);
+    /* on a tall screen the drone circles high over the south shore, west first so the Como branch comes close early, and keeps the lake in the frame, north up */
+    const ORBIT = [[23, -1, 10.5], [10, 1, 10.0], [5, 8, 9.5], [11, 15, 10.5], [23, 18, 11.5], [35, 15, 10.0], [41, 8, 9.5], [36, 1, 10.0]];
+    const WAY_P = ORBIT.map(([x, y, z]) => [[x, y, z], [x + 0.55 * (21.5 - x), y + 0.55 * (30.5 - y), 0.4]]);
     const PERIOD = INNER ? 260 : 150;   /* seconds for the loop */
     function cr(p0, p1, p2, p3, t) { const t2 = t * t, t3 = t2 * t; return 0.5 * ((2 * p1) + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t2 + (-p0 + 3 * p1 - 3 * p2 + p3) * t3); }
     function spline(WAY, idx, u) {
