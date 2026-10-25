@@ -4,24 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#04060A">
-<title>gioriva.it</title>
+<title>Giorgio Riva | Freedom is a state of mind</title>
 
 <meta name="description" content="Freedom is a state of mind.">
-<meta property="og:title" content="gioriva.it">
+<meta property="og:title" content="Giorgio Riva">
 <meta property="og:description" content="Freedom is a state of mind.">
-<meta property="og:image" content="https://www.gioriva.it/og-image.png?v=17">
+<meta property="og:image" content="https://www.gioriva.it/og-image.png?v=18">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.gioriva.it/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="gioriva.it">
+<meta name="twitter:title" content="Giorgio Riva">
 <meta name="twitter:description" content="Freedom is a state of mind.">
-<meta name="twitter:image" content="https://www.gioriva.it/og-image.png?v=17">
+<meta name="twitter:image" content="https://www.gioriva.it/og-image.png?v=18">
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=9">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=9">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=9">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=10">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=10">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
 
 <!-- Google Analytics + Consent Mode -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
@@ -72,28 +72,19 @@ body.ready .payoff { opacity: 1; }
 .tele { position: fixed; right: 1.8rem; bottom: 1.6rem; z-index: 3; text-align: right; font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); line-height: 1.9; pointer-events: none; opacity: 0; transition: opacity 1.2s ease 3.4s; font-variant-numeric: tabular-nums; }
 body.on .tele { opacity: 1; }
 .tele b { font-weight: 400; color: var(--ink); }
-/* the trigger: a beacon, a point of light inside a thin ring that pulses every few seconds, with its name beside it */
-#trig { position: fixed; top: 1.1rem; right: 1.3rem; z-index: 10005; height: 48px; display: flex; align-items: center; gap: 0.85rem; padding: 0 0 0 0.6rem;
-  background: none; border: none; cursor: pointer; color: var(--ink); opacity: 0; transition: opacity .8s ease 3s; -webkit-tap-highlight-color: transparent; }
+/* the trigger: two thin lines, the lower one shorter; they cross when the menu is open */
+#trig { position: fixed; top: 1rem; right: 1.1rem; z-index: 10005; width: 48px; height: 48px; display: grid; place-items: center;
+  background: none; border: none; padding: 0; cursor: pointer; opacity: 0; transition: opacity .8s ease 3s; -webkit-tap-highlight-color: transparent; }
 body.ready #trig { opacity: 1; }
-#trig .lbl { font-family: var(--font); font-size: 0.58rem; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(233,242,255,0.6); padding-left: 0.32em; transition: color .3s, opacity .3s; }
-#trig:hover .lbl { color: var(--ink); }
-#trig .ring { position: relative; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(138,208,255,0.5); background: rgba(4,6,10,0.35); display: grid; place-items: center;
-  transition: border-color .3s, box-shadow .3s, background .3s; }
-#trig .ring > * { grid-area: 1 / 1; }
-#trig .ring::before { content: ""; position: absolute; inset: -1px; border-radius: 50%; border: 1px solid rgba(138,208,255,0.7); opacity: 0; animation: ping 4.5s ease-out 3.5s infinite; }
-@keyframes ping { 0% { transform: scale(1); opacity: 0.6; } 55% { transform: scale(1.85); opacity: 0; } 100% { transform: scale(1.85); opacity: 0; } }
-#trig:hover .ring, #trig:focus-visible .ring { border-color: var(--acc); box-shadow: 0 0 18px rgba(138,208,255,0.28), inset 0 0 14px rgba(138,208,255,0.1); }
-#trig .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 10px var(--glow), 0 0 22px rgba(138,208,255,0.3); transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .3s, opacity .3s; }
-#trig:hover .dot { transform: scale(1.35); }
-#trig .x { width: 16px; height: 1px; background: var(--ink); opacity: 0; transition: transform .5s cubic-bezier(.2,.8,.2,1), opacity .3s; }
-#trig .x.a { transform: rotate(45deg) scaleX(0); } #trig .x.b { transform: rotate(-45deg) scaleX(0); }
-body.menu-open #trig .dot { transform: scale(0); opacity: 0; }
-body.menu-open #trig .x { opacity: 1; }
-body.menu-open #trig .x.a { transform: rotate(45deg) scaleX(1); } body.menu-open #trig .x.b { transform: rotate(-45deg) scaleX(1); }
-body.menu-open #trig .lbl { opacity: 0; }
-body.menu-open #trig .ring::before { animation: none; }
-@media (prefers-reduced-motion: reduce) { #trig .ring::before { animation: none; } }
+#trig .bars { position: relative; width: 24px; height: 14px; }
+#trig .bars span { position: absolute; right: 0; height: 1.5px; border-radius: 1px; background: rgba(233,242,255,0.92); box-shadow: 0 0 6px rgba(138,208,255,0.25);
+  transform-origin: center; transition: transform .5s cubic-bezier(.2,.8,.2,1), width .35s ease, top .35s ease, background .3s; }
+#trig .bars .a { top: 0; width: 24px; }
+#trig .bars .b { top: 12px; width: 15px; }
+#trig:hover .bars span, #trig:focus-visible .bars span { background: var(--acc); }
+#trig:hover .bars .b { width: 24px; }
+body.menu-open #trig .bars .a { top: 6px; width: 24px; transform: rotate(45deg); }
+body.menu-open #trig .bars .b { top: 6px; width: 24px; transform: rotate(-45deg); }
 /* the menu: the drone climbs, the lake appears whole, the entries stand on the right */
 #menu { position: fixed; inset: 0; z-index: 10000; visibility: hidden; opacity: 0; background: linear-gradient(270deg, rgba(4,6,10,0.78) 0%, rgba(4,6,10,0.45) 45%, rgba(4,6,10,0.15) 100%); transition: opacity .6s ease, visibility 0s .6s; }
 body.menu-open #menu { visibility: visible; opacity: 1; transition: opacity .6s ease; }
@@ -134,7 +125,7 @@ body.flat .payoff { margin-left: 0; }
 @media (max-width: 768px) {
   .title { left: 7vw; bottom: 13vh; width: 50vw; } .payoff { font-size: 0.6rem; letter-spacing: 0.16em; }
   .tele { right: 1.1rem; bottom: 1.2rem; font-size: 0.52rem; }
-  #trig { top: 0.55rem; right: 0.6rem; } #trig .ring { width: 40px; height: 40px; } #trig .lbl { font-size: 0.55rem; }
+  #trig { top: 0.45rem; right: 0.45rem; }
   .lines { right: 7vw; } .line { padding: 0.7rem 1.3rem 0.7rem 0; } .line::after { right: 1.3rem; } .menu-icons { margin: 1.4rem 1.3rem 0 0; gap: 1.4rem; }
   #cookie-banner { flex-direction: column; align-items: stretch; bottom: 12px; padding: 1.1rem 1.2rem; gap: 0.9rem; } .cookie-text { flex: 0 0 auto; } .cookie-actions { justify-content: stretch; } .cookie-btn { flex: 1; }
 }
@@ -153,8 +144,7 @@ body.flat .payoff { margin-left: 0; }
 
 <!-- Menu -->
 <button id="trig" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu">
-  <span class="lbl" aria-hidden="true">menu</span>
-  <span class="ring" aria-hidden="true"><span class="dot"></span><span class="x a"></span><span class="x b"></span></span>
+  <span class="bars" aria-hidden="true"><span class="a"></span><span class="b"></span></span>
 </button>
 
 <nav id="menu" aria-label="Menu principale">
